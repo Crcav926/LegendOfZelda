@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +13,17 @@ namespace LegendOfZelda
     {
         private Dictionary<Keys, ICommand> controllerMappings;
         Game1 myGame;
+        private List<Keys> alrPressed = new List<Keys>();
         // constructor
         public KeyboardCont(Game1 game)
         {
-            controllerMappings = new Dictionary<Keys, ICommand >();
+            controllerMappings = new Dictionary<Keys, ICommand>();
             myGame = game;
-            
+
             // set up teh table
             ICommand c = new CommQuit(game);
+
+            
             RegisterCommand(Keys.D0, c);
 
         }
@@ -35,10 +38,26 @@ namespace LegendOfZelda
 
             foreach (Keys key in pressedKeys)
             {
-                //myGame.Exit();
+
                 if (controllerMappings.ContainsKey(key))
                 {
-                    controllerMappings[key].Execute();
+                    if (!alrPressed.Contains(key))
+                    {
+                        controllerMappings[key].Execute();
+                        alrPressed.Add(key);
+                    }
+
+                }
+            }
+            // remove unpressed keys
+           int len = alrPressed.Count;
+            
+
+            for (int i = 0; i < len; i++)
+            {
+                if (!pressedKeys.Contains(alrPressed[i]))
+                {
+                    alrPressed.Remove(alrPressed[i]);
                 }
             }
         }
