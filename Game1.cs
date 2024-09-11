@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,6 +9,7 @@ namespace LegendOfZelda
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private IController controllerK;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -19,7 +20,7 @@ namespace LegendOfZelda
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            controllerK = new KeyboardCont(this);
             base.Initialize();
         }
 
@@ -36,7 +37,7 @@ namespace LegendOfZelda
                 Exit();
 
             // TODO: Add your update logic here
-
+            controllerK.Update();
             base.Update(gameTime);
         }
 
