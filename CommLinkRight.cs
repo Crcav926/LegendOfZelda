@@ -15,7 +15,13 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            myGame.LinkCharacter.sprite = new RightLinkSprite(myGame.linkTexture);
+            int flipped = 0;
+            if (flipped == 0)
+            {
+                myGame.LinkCharacter.sprite = new RightLinkSprite(myGame.linkTexture);
+                flipped = 1;
+            }
+            myGame.LinkCharacter.xCord += 1;
         }
     }
 }

@@ -25,7 +25,9 @@ namespace LegendOfZelda
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkLeft(game);
             ICommand d = new CommLinkRight(game);
+            ICommand quit = new CommQuit(game);
 
+            RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.Q, c);
