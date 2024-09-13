@@ -14,6 +14,7 @@ namespace LegendOfZelda
         private Dictionary<Keys, ICommand> controllerMappings;
         Game1 myGame;
         private List<Keys> alrPressed = new List<Keys>();
+        private List<Keys> unPressList = new List<Keys>();
         // constructor
         public KeyboardCont(Game1 game)
         {
@@ -22,9 +23,13 @@ namespace LegendOfZelda
 
             // set up teh table
             ICommand c = new CommQuit(game);
+            ICommand a = new CommLinkLeft(game);
+            ICommand d = new CommLinkRight(game);
 
-            
-            RegisterCommand(Keys.D0, c);
+            RegisterCommand(Keys.A, a);
+            RegisterCommand(Keys.D, d);
+            RegisterCommand(Keys.Q, c);
+
 
         }
         public void RegisterCommand(Keys key, ICommand command)
@@ -50,15 +55,19 @@ namespace LegendOfZelda
                 }
             }
             // remove unpressed keys
+           
            int len = alrPressed.Count;
             
-
-            for (int i = 0; i < len; i++)
+            foreach (Keys key in alrPressed)
             {
-                if (!pressedKeys.Contains(alrPressed[i]))
+                if (!pressedKeys.Contains(key))
                 {
-                    alrPressed.Remove(alrPressed[i]);
+                    unPressList.Add(key);
                 }
+            }
+            foreach (Keys key in unPressList)
+            {
+                alrPressed.Remove(key);
             }
         }
     }
