@@ -17,7 +17,7 @@ namespace LegendOfZelda
         public void Execute()
         {
             int flipped = 0;
-            if (flipped == 0{
+            if (flipped == 0){
                 myGame.LinkCharacter.sprite = new LeftLinkSprite(myGame.linkTexture);
                 flipped = 1;
             }
