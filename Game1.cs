@@ -13,11 +13,12 @@ namespace LegendOfZelda
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        public ISprite linkSprite;
-        public Texture2D linkTexture;
+        public ISprite linkSprite, blockSprite;
+        public Texture2D linkTexture, blockTexture;
         public Rectangle sourceRectangle;
         public Rectangle destinationRectangle;
         public Link LinkCharacter;
+        public Block BlockCharacter;
 
         private IController controllerK;
         public Game1()
@@ -42,6 +43,9 @@ namespace LegendOfZelda
             // TODO: use this.Content to load your game content here
             linkSprite = new LeftLinkSprite(linkTexture);
             LinkCharacter = new Link(linkSprite);
+            blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
+            blockSprite = new BlockSprite(blockTexture);
+            BlockCharacter = new Block(blockSprite);
 
         }
 
@@ -54,6 +58,7 @@ namespace LegendOfZelda
             controllerK.Update();
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
+            BlockCharacter.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -64,6 +69,7 @@ namespace LegendOfZelda
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             LinkCharacter.Draw(_spriteBatch);
+            BlockCharacter.Draw(_spriteBatch);
             _spriteBatch.End();
 
 
