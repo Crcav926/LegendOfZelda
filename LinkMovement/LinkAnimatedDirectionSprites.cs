@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LegendOfZelda
 {
-    public class LinkBasicMovement: ISprite
+    public class LinkBasicAnimation: ISprite
     {
         Texture2D linkTexture;
         List<Rectangle> spriteFrames;
@@ -14,7 +14,7 @@ namespace LegendOfZelda
         double timeElapsed = 0;
         int currentDirection;
 
-        public LinkBasicMovement(Texture2D texture,int direction)
+        public LinkBasicAnimation(Texture2D texture,int direction)
         {
             linkTexture = texture;
             currentDirection = direction;

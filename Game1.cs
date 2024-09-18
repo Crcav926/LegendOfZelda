@@ -35,9 +35,8 @@ namespace LegendOfZelda
 
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
             // TODO: use this.Content to load your game content here
-            // Have 0 to be the default facing left.
-            linkSprite = new LinkBasicMovement(linkTexture, 2);
-            LinkCharacter = new Link(linkSprite);
+            // Have 0 to be the default facing left
+            LinkCharacter = new Link(linkTexture);
 
         }
 

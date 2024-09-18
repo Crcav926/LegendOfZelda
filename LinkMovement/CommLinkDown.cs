@@ -14,10 +14,12 @@ namespace LegendOfZelda
         {
             myGame = game;
         }
+
+
         public void Execute()
         {
             myGame.LinkCharacter.yCord += 2;
-            myGame.LinkCharacter.sprite = new LinkBasicMovement(myGame.linkTexture,2);
+            myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, 2);
         }
     }
 }

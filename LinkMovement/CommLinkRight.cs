@@ -16,7 +16,7 @@ namespace LegendOfZelda
         public void Execute()
         {
             myGame.LinkCharacter.xCord += 2;
-            myGame.LinkCharacter.sprite = new LinkBasicMovement(myGame.linkTexture,1);
+            myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, 1);
         }
     }
 }

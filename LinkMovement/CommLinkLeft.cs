@@ -1,11 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LegendOfZelda
+﻿namespace LegendOfZelda
 {
     internal class CommLinkLeft : ICommand
     {
@@ -13,15 +6,15 @@ namespace LegendOfZelda
         public CommLinkLeft(Game1 game)
         {
             myGame = game;
-            sprite = myGame.LinkCharacter.sprite;
-            myGame.LinkCharacter.sprite = new LinkBasicMovement(myGame.linkTexture, 0);
-            
-            
+
+
+
         }
         public void Execute()
         {
             myGame.LinkCharacter.xCord -= 2;
-            
+            myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, 0);
         }
+
     }
 }

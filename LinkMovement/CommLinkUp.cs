@@ -10,14 +10,17 @@ namespace LegendOfZelda
     internal class CommLinkUp : ICommand
     {
         Game1 myGame;
+
         public CommLinkUp(Game1 game)
         {
             myGame = game;
+            
         }
         public void Execute()
         {
             myGame.LinkCharacter.yCord -= 2;
-            myGame.LinkCharacter.sprite = new LinkBasicMovement(myGame.linkTexture, 3);
+            myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, 3);
+
         }
     }
 }
