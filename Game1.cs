@@ -47,9 +47,9 @@ namespace LegendOfZelda
             // TODO: use this.Content to load your game content here
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture);
-            items = new ClassItems(itemSprite);
             // items uses the same spritesheet as link character.
             itemSprite = new SpriteItem(linkTexture);
+            items = new ClassItems(itemSprite);
 
         }
 

@@ -42,5 +42,14 @@ namespace LegendOfZelda
         { 
             spriteBatch.Draw(linkTexture, destination, spriteFrames[currentFrame], Color.White);
         }
+
+        public void SetSprite(int i)
+        {
+
+        }
+        public int GetSprite()
+        {
+            return 0;
+        }
     }
 }

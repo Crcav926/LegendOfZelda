@@ -17,6 +17,15 @@ namespace LegendOfZelda
         {
             myGame.LinkCharacter.xCord += 2;
             myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, 1);
+            
+            // Left commented in case of need.
+            //int flipped = 0;
+            //if (flipped == 0)
+            //{
+            //    myGame.LinkCharacter.sprite = new LeftLinkSprite(myGame.linkTexture);
+            //    flipped = 1;
+            //}
+            //myGame.LinkCharacter.xCord -= 1;
         }
     }
 }

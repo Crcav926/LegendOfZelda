@@ -1,5 +1,4 @@
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
+ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +12,43 @@ namespace LegendOfZelda
     internal class KeyboardCont : IController
     {
         private Dictionary<Keys, ICommand> controllerMappings;
+        private Dictionary<Keys, ICommand> heldDownMappings;
+        private Dictionary<Keys, ICommand> releaseMappings;
         Game1 myGame;
-        private List<Keys> alrPressed = new List<Keys>();
-        private List<Keys> unPressList = new List<Keys>();
+        private List<Keys> alrPressed;
+        private List<Keys> unPressList;
         // constructor
         public KeyboardCont(Game1 game)
         {
             controllerMappings = new Dictionary<Keys, ICommand>();
-            myGame = game;
+            heldDownMappings = new Dictionary<Keys, ICommand>();
+            releaseMappings = new Dictionary<Keys, ICommand>();
 
+            myGame = game;
+            alrPressed = new List<Keys>();
+            
             // set up teh table
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkLeft(game);
             ICommand d = new CommLinkRight(game);
             ICommand w = new CommLinkUp(game);
             ICommand s = new CommLinkDown(game);
+            ICommand quit = new CommQuit(game);
+            ICommand arrow = new ArrowComm(game);
+            ICommand boomerang =new BoomerangComm(game);
+            ICommand nextItem = new NextItemComm(game);
+            ICommand lastItem = new LastItemComm(game);
 
+            RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
             RegisterCommand(Keys.S, s);
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.Q, c);
+            RegisterCommand(Keys.D1, arrow);
+            RegisterCommand(Keys.D2 , boomerang);
+            RegisterCommand(Keys.I, nextItem);
+            RegisterCommand(Keys.U, lastItem);
 
 
         }
@@ -60,9 +75,8 @@ namespace LegendOfZelda
                 }
             }
             // remove unpressed keys
-           
-           int len = alrPressed.Count;
-            
+
+            unPressList = new List<Keys>();
             foreach (Keys key in alrPressed)
             {
                 if (!pressedKeys.Contains(key))

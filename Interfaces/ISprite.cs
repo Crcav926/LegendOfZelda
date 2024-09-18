@@ -19,5 +19,7 @@ namespace LegendOfZelda
          */
         void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle);
 
+        void SetSprite(int i);
+        int GetSprite();
     }
 }
