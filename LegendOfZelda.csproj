@@ -11,6 +11,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="LinkMovement\DownLinkSprite.cs" />
+    <Compile Remove="LinkMovement\RightLinkSprite.cs" />
+    <Compile Remove="LinkMovement\UpLinkSprite.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

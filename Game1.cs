@@ -21,8 +21,8 @@ namespace LegendOfZelda
         public Rectangle destinationRectangle;
         public Link LinkCharacter;
         public ClassItems items;
-
         public ISprite itemSprite;
+
 
         private IController controllerK;
         public Game1()
@@ -44,16 +44,12 @@ namespace LegendOfZelda
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
-
             // TODO: use this.Content to load your game content here
-            linkSprite = new LeftLinkSprite(linkTexture);
-
+            // Have 0 to be the default facing left
+            LinkCharacter = new Link(linkTexture);
+            items = new ClassItems(itemSprite);
             // items uses the same spritesheet as link character.
             itemSprite = new SpriteItem(linkTexture);
-
-            LinkCharacter = new Link(linkSprite);
-            items = new ClassItems(itemSprite);
-
 
         }
 
@@ -61,12 +57,11 @@ namespace LegendOfZelda
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             // TODO: Add your update logic here
             controllerK.Update();
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
-
             items.Update(gameTime);
         }
 
@@ -78,6 +73,7 @@ namespace LegendOfZelda
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             LinkCharacter.Draw(_spriteBatch);
+            
             items.Draw(_spriteBatch);
             _spriteBatch.End();
 
