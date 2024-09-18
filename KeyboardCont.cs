@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework.Input;
+ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,9 @@ namespace LegendOfZelda
         public KeyboardCont(Game1 game)
         {
             controllerMappings = new Dictionary<Keys, ICommand>();
+            heldDownMappings = new Dictionary<Keys, ICommand>();
+            releaseMappigs = new Dictionary<Keys, ICommand>();
+
             myGame = game;
             alrPressed = new List<Keys>();
             
