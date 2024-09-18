@@ -19,5 +19,9 @@ namespace LegendOfZelda
          */
         void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle);
 
+        //chooses a source rectangle from a list based on index
+        void SetSprite(int i);
+        int GetSprite();
+
     }
 }

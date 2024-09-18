@@ -13,24 +13,33 @@ namespace LegendOfZelda
     {
         private Dictionary<Keys, ICommand> controllerMappings;
         Game1 myGame;
-        private List<Keys> alrPressed = new List<Keys>();
-        private List<Keys> unPressList = new List<Keys>();
+        private List<Keys> alrPressed;
+        private List<Keys> unPressList;
         // constructor
         public KeyboardCont(Game1 game)
         {
             controllerMappings = new Dictionary<Keys, ICommand>();
             myGame = game;
-
+            alrPressed = new List<Keys>();
+            
             // set up teh table
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkLeft(game);
             ICommand d = new CommLinkRight(game);
             ICommand quit = new CommQuit(game);
+            ICommand arrow = new ArrowComm(game);
+            ICommand boomerang =new BoomerangComm(game);
+            ICommand nextItem = new NextItemComm(game);
+            ICommand lastItem = new LastItemComm(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.Q, c);
+            RegisterCommand(Keys.D1, arrow);
+            RegisterCommand(Keys.D2 , boomerang);
+            RegisterCommand(Keys.I, nextItem);
+            RegisterCommand(Keys.U, lastItem);
 
 
         }
@@ -57,9 +66,8 @@ namespace LegendOfZelda
                 }
             }
             // remove unpressed keys
-           
-           int len = alrPressed.Count;
-            
+
+            unPressList = new List<Keys>();
             foreach (Keys key in alrPressed)
             {
                 if (!pressedKeys.Contains(key))

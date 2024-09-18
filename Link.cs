@@ -14,6 +14,7 @@ namespace LegendOfZelda
         public Rectangle destinationRectangle;
         public int xCord;
         public int yCord;
+        public int direction = 0;
         public Link(ISprite LinkSprite)
         {
             sprite = LinkSprite;

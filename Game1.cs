@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 
 namespace LegendOfZelda
@@ -18,6 +20,9 @@ namespace LegendOfZelda
         public Rectangle sourceRectangle;
         public Rectangle destinationRectangle;
         public Link LinkCharacter;
+        public ClassItems items;
+
+        public ISprite itemSprite;
 
         private IController controllerK;
         public Game1()
@@ -39,9 +44,16 @@ namespace LegendOfZelda
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
+
             // TODO: use this.Content to load your game content here
             linkSprite = new LeftLinkSprite(linkTexture);
+
+            // items uses the same spritesheet as link character.
+            itemSprite = new SpriteItem(linkTexture);
+
             LinkCharacter = new Link(linkSprite);
+            items = new ClassItems(itemSprite);
+
 
         }
 
@@ -54,6 +66,8 @@ namespace LegendOfZelda
             controllerK.Update();
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
+
+            items.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -64,6 +78,7 @@ namespace LegendOfZelda
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             LinkCharacter.Draw(_spriteBatch);
+            items.Draw(_spriteBatch);
             _spriteBatch.End();
 
 
