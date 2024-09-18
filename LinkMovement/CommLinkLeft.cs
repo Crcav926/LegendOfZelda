@@ -13,12 +13,15 @@ namespace LegendOfZelda
         public CommLinkLeft(Game1 game)
         {
             myGame = game;
+            sprite = myGame.LinkCharacter.sprite;
+            myGame.LinkCharacter.sprite = new LinkBasicMovement(myGame.linkTexture, 0);
+            
             
         }
         public void Execute()
         {
             myGame.LinkCharacter.xCord -= 2;
-            myGame.LinkCharacter.sprite = new LinkBasicMovement(myGame.linkTexture, 0);
+            
         }
     }
 }

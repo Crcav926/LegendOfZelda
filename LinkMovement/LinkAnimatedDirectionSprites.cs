@@ -21,6 +21,7 @@ namespace LegendOfZelda
             spriteFrames = SpriteRectangleData.GetRectangleData(currentDirection);
             totalFrames = spriteFrames.Count;
         }
+
         public void Update(GameTime gameTime)
         {
 
