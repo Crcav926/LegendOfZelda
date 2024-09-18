@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    public class Link : ILink
+      public class Link : ILink
     {
         public ISprite linkSprite;
         public ILink linkState;
@@ -43,7 +43,6 @@ namespace LegendOfZelda
             linkSprite.Update(gameTime);
             destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             linkSprite.Draw(spriteBatch, destinationRectangle);
