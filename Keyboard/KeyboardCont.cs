@@ -51,6 +51,20 @@ namespace LegendOfZelda
             RegisterCommand(Keys.U, lastItem);
 
 
+            // set up held down table
+
+            ICommand left = new CommLinkLeftM(game);
+            ICommand right = new CommLinkRightM(game);
+            ICommand up = new CommLinkUpM(game);
+            ICommand down = new CommLinkDownM(game);
+
+            heldDownMappings.Add(Keys.A, left);
+            heldDownMappings.Add(Keys.D, right);
+            heldDownMappings.Add(Keys.W, up);
+            heldDownMappings.Add(Keys.S, down);
+
+
+
         }
         public void RegisterCommand(Keys key, ICommand command)
         {
@@ -73,6 +87,10 @@ namespace LegendOfZelda
                     }
 
                 }
+                if (heldDownMappings.ContainsKey(key))
+                {
+                    heldDownMappings[key].Execute();
+                }
             }
             // remove unpressed keys
 
@@ -86,6 +104,11 @@ namespace LegendOfZelda
             }
             foreach (Keys key in unPressList)
             {
+                // This executes the command on key release
+                if (releaseMappings.ContainsKey(key))
+                {
+                    releaseMappings[key].Execute();
+                }
                 alrPressed.Remove(key);
             }
         }
