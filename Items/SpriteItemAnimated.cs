@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using Sytstem.Diagnostics;
+using System.Diagnostics;
 
 namespace LegendOfZelda
 {
@@ -19,8 +19,6 @@ namespace LegendOfZelda
         {
             itemTexture = texture;
             index = sIndex;
-            // this line has unhandled exception
-            Debug.WriteLine("Index is %i", index);
             spriteFrames = SpriteItemData.GetRectangleData(index);
             totalFrames = spriteFrames.Count;
         }

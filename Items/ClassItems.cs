@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sytstem.Diagnostics;
+using System.Diagnostics;
 
 namespace LegendOfZelda
 {
@@ -44,7 +44,7 @@ namespace LegendOfZelda
                 }
                 else if (direction == 2)
                 {
-                   // xCord++;
+                   //xCord++;
                 }
                 destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
             }
@@ -53,7 +53,7 @@ namespace LegendOfZelda
             
             
         }
-        public void SetSprite(int i) { sprite = new SpriteItemAnimated(itemTex, i); }
+        public void SetSprite(int i) { spriteIndex = i;  sprite = new SpriteItemAnimated(itemTex, spriteIndex); }
 
         public int GetSprite() { return spriteIndex; }
 

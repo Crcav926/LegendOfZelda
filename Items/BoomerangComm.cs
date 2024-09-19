@@ -16,6 +16,7 @@ namespace LegendOfZelda
         public void Execute()
         {
             myGame.items.SetSprite(3);
+            myGame.items.direction = 2;
             
         }
     }

@@ -15,16 +15,10 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            // later i need to make this based on what direction link is facing
-            if (myGame.LinkCharacter.direction == 0)
-            {
-                // create an arrow moving up
-                int i = 1;
-                // sets sprite 
-                myGame.items.SetSprite(i);
-                //sets movement direction to vertical
-                myGame.items.direction = 1;
-            }
+           myGame.items.SetSprite(1);
+           myGame.items.direction = 1;
+            
+       
         }
     }
 }
