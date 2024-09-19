@@ -36,6 +36,7 @@ namespace LegendOfZelda
         {
             // TODO: Add your initialization logic here
             controllerK = new KeyboardCont(this);
+            
             base.Initialize();
         }
 
@@ -48,8 +49,7 @@ namespace LegendOfZelda
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture);
             // items uses the same spritesheet as link character.
-            itemSprite = new SpriteItem(linkTexture);
-            items = new ClassItems(itemSprite);
+            items = new ClassItems(linkTexture);
 
         }
 

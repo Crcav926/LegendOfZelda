@@ -15,16 +15,8 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            // later i need to make this based on what direction link is facing
-            if (myGame.LinkCharacter.direction == 0)
-            {
-                // create boomering moving sideways
-                int i = 3;
-                // sets sprite 
-                myGame.items.SetSprite(i);
-                //sets movement direction to horizontal
-                myGame.items.direction = 2;
-            }
+            myGame.items.SetSprite(3);
+            
         }
     }
 }

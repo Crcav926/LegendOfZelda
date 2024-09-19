@@ -5,20 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sytstem.Diagnostics;
 
 namespace LegendOfZelda
 {
     public class ClassItems
     {
         public ISprite sprite;
+        public int spriteIndex;
         public Rectangle destinationRectangle;
         public int xCord;
         public int yCord;
 
+        Texture2D itemTex;
+
         public int direction;
-        public ClassItems(ISprite ItemSprite)
+        public ClassItems(Texture2D ItemTexture)
         {
-            sprite = ItemSprite;
+            itemTex = ItemTexture;
+            spriteIndex = 0;
+            // when first initialized get a new animated sprite object from itemTex sprite sheet with index 0.
+            sprite = new SpriteItemAnimated(itemTex, spriteIndex);
             // set starting position
             // 0 is stationary 1 is vertical 2 is horizontal
             direction = 0;
@@ -41,17 +48,14 @@ namespace LegendOfZelda
                 }
                 destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
             }
-            // animate the sprite if needed this is temporary b/c this is a bad way to do it.
-            int fr = 3;
-            int loop = 0;
-            // if we're at the boomerang
-           
+
             sprite.Update(gameTime);
             
             
         }
-        public void SetSprite(int i) { sprite.SetSprite(i); }
-        public int GetSprite() { return sprite.GetSprite(); }
+        public void SetSprite(int i) { sprite = new SpriteItemAnimated(itemTex, i); }
+
+        public int GetSprite() { return spriteIndex; }
 
 
         public void Draw(SpriteBatch spriteBatch)
