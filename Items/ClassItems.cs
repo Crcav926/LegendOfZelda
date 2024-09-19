@@ -17,6 +17,7 @@ namespace LegendOfZelda
         public int xCord;
         public int yCord;
 
+
         Texture2D itemTex;
 
         public int direction;
