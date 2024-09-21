@@ -38,6 +38,8 @@ namespace LegendOfZelda
             ICommand boomerang =new BoomerangComm(game);
             ICommand nextItem = new NextItemComm(game);
             ICommand lastItem = new LastItemComm(game);
+            ICommand nextBlock = new NextBlockComm(game);
+            ICommand lastBlock = new LastBlockComm(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
@@ -49,6 +51,8 @@ namespace LegendOfZelda
             RegisterCommand(Keys.D2 , boomerang);
             RegisterCommand(Keys.I, nextItem);
             RegisterCommand(Keys.U, lastItem);
+            RegisterCommand(Keys.T, lastBlock);
+            RegisterCommand(Keys.Y, nextBlock);
 
 
             // set up held down table

@@ -16,11 +16,12 @@ namespace LegendOfZelda
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         public ISprite linkSprite;
-        public Texture2D linkTexture;
+        public Texture2D linkTexture, blockTexture;
         public Rectangle sourceRectangle;
         public Rectangle destinationRectangle;
         public Link LinkCharacter;
         public ClassItems items;
+        public Block block;
         public ISprite itemSprite;
 
 
@@ -45,11 +46,13 @@ namespace LegendOfZelda
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
+            blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
             // TODO: use this.Content to load your game content here
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture);
             // items uses the same spritesheet as link character.
             items = new ClassItems(linkTexture);
+            block = new Block(blockTexture);
 
         }
 
@@ -63,6 +66,7 @@ namespace LegendOfZelda
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
             items.Update(gameTime);
+            block.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -75,6 +79,7 @@ namespace LegendOfZelda
             LinkCharacter.Draw(_spriteBatch);
             
             items.Draw(_spriteBatch);
+            block.Draw(_spriteBatch);
             _spriteBatch.End();
 
 

@@ -7,17 +7,30 @@ namespace LegendOfZelda;
 public class BlockSprite : ISprite
 {
     Texture2D blockTexture;
+    int index;
     Rectangle sourceRectangle;
-    Rectangle destinationRectangle;
 
-    public BlockSprite(Texture2D texture)
+    public BlockSprite(Texture2D texture, int spriteIndex)
     {
         blockTexture = texture;
-        sourceRectangle = new Rectangle(984, 11, 16, 16);
+        index = spriteIndex;
+        sourceRectangle = SpriteBlockData.GetRectangleData(spriteIndex);
     }
     public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle)
     {
         spriteBatch.Draw(blockTexture, destinationRectangle, sourceRectangle, Color.White);
+    }
+
+    public int GetSprite()
+    {
+        //as of now, should never be called.
+        throw new NotImplementedException();
+    }
+
+    public void SetSprite(int i)
+    {
+        //as of now, should never be called.
+        throw new NotImplementedException();
     }
 
     public void Update(GameTime gameTime)

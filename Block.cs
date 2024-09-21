@@ -7,12 +7,16 @@ namespace LegendOfZelda;
 public class Block
 {
         public ISprite sprite;
+        public Texture2D blockTexture;
         public Rectangle destinationRectangle;
+        public int spriteIndex;
         public int xCord;
         public int yCord;
-        public Block(ISprite BlockSprite)
+        public Block(Texture2D texture)
         {
-            sprite = BlockSprite;
+            blockTexture = texture;
+            spriteIndex = 0;
+            sprite = new BlockSprite(texture, spriteIndex); //add index support
             xCord = 100;
             yCord = 300;
             //arbitrary numbers, can change to where we want to put it.
@@ -27,5 +31,15 @@ public class Block
     {
         sprite.Update(gameTime);
         destinationRectangle = new Rectangle(xCord, yCord, 32, 32);
+    }
+
+    public void SetSprite(int i)
+    { 
+        spriteIndex = i;
+        sprite = new BlockSprite(blockTexture, spriteIndex);
+    }
+    internal int GetSprite()
+    {
+        return spriteIndex;
     }
 }
