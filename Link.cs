@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda.LinkMovement;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -15,33 +16,28 @@ namespace LegendOfZelda
         public Rectangle destinationRectangle;
         public int xCord;
         public int yCord;
-        public int direction; // 0 = left ; 1 = right ; 2 = up ; 3 = down
+        public Vector2 position;
+        public Vector2 direction;
+        public Boolean animated;
+        // public int direction; // 0 = left ; 1 = right ; 2 = up ; 3 = down
         public Link(Texture2D linkTexture)
         {
+            animated = false;
             xCord = 400;
             yCord = 200;
-            direction = 0;
-            linkSprite = new LinkBasicAnimation(linkTexture, direction);
+            position = new Vector2(400, 200);
+            direction = new Vector2(0, -1);
+            linkSprite = new LinkIdleSprite(linkTexture, direction);
         }
-        public void MoveUp()
+        public void Move(Vector2 newDirection)
         {
-            linkState.MoveUp();
-        }
-        public void MoveDown()
-        {
+            position += newDirection;
 
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
         }
         public void Update(GameTime gameTime)
         {
             linkSprite.Update(gameTime);
-            destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
         }
         public void Draw(SpriteBatch spriteBatch)
         {

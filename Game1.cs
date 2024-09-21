@@ -68,8 +68,6 @@ namespace LegendOfZelda
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            sourceRectangle = new Rectangle(103, 11, 16, 16);
-            destinationRectangle = new Rectangle(400, 200, 60, 60);
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             LinkCharacter.Draw(_spriteBatch);
