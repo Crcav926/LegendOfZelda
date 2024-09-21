@@ -10,18 +10,16 @@ using LegendOfZelda;
 
 namespace LegendOfZelda
 {
-    public class RightLinkSprite: ISprite
+    public class DownLinkSprite: ISprite
     {
         Texture2D linkTexture;
-        SpriteBatch spriteBatch;
         Rectangle sourceRectangle;
-        Rectangle destinationRectangle;
 
 
-        public RightLinkSprite(Texture2D texture)
+        public DownLinkSprite(Texture2D texture)
         {
             linkTexture = texture;
-            sourceRectangle = new Rectangle(35, 11, 16, 16);
+            sourceRectangle = new Rectangle(1, 11, 16, 16);
         }
         public void Update(GameTime gameTime)
         {

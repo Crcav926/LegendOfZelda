@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 
 namespace LegendOfZelda
@@ -13,12 +15,14 @@ namespace LegendOfZelda
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        public ISprite linkSprite, blockSprite;
-        public Texture2D linkTexture, blockTexture;
+        public ISprite linkSprite;
+        public Texture2D linkTexture;
         public Rectangle sourceRectangle;
         public Rectangle destinationRectangle;
         public Link LinkCharacter;
-        public Block BlockCharacter;
+        public ClassItems items;
+        public ISprite itemSprite;
+
 
         private IController controllerK;
         public Game1()
@@ -32,6 +36,7 @@ namespace LegendOfZelda
         {
             // TODO: Add your initialization logic here
             controllerK = new KeyboardCont(this);
+        
             base.Initialize();
         }
 
@@ -41,11 +46,10 @@ namespace LegendOfZelda
 
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
             // TODO: use this.Content to load your game content here
-            linkSprite = new LeftLinkSprite(linkTexture);
-            LinkCharacter = new Link(linkSprite);
-            blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
-            blockSprite = new BlockSprite(blockTexture);
-            BlockCharacter = new Block(blockSprite);
+            // Have 0 to be the default facing left
+            LinkCharacter = new Link(linkTexture);
+            // items uses the same spritesheet as link character.
+            items = new ClassItems(linkTexture);
 
         }
 
@@ -53,12 +57,12 @@ namespace LegendOfZelda
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             // TODO: Add your update logic here
             controllerK.Update();
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
-            BlockCharacter.Update(gameTime);
+            items.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -69,7 +73,8 @@ namespace LegendOfZelda
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             LinkCharacter.Draw(_spriteBatch);
-            BlockCharacter.Draw(_spriteBatch);
+            
+            items.Draw(_spriteBatch);
             _spriteBatch.End();
 
 

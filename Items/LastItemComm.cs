@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    internal class CommLinkRight : ICommand
+    internal class LastItemComm : ICommand
     {
         Game1 myGame;
-        public CommLinkRight(Game1 game)
+        int maxIndex;
+        public LastItemComm(Game1 game)
         {
             myGame = game;
+            maxIndex = SpriteItemData.ListLength();
         }
         public void Execute()
         {
-            int flipped = 0;
-            if (flipped == 0)
+            int i = myGame.items.GetSprite();
+            i--;
+            if (i < maxIndex && i >= 0)
             {
-                myGame.LinkCharacter.sprite = new RightLinkSprite(myGame.linkTexture);
-                flipped = 1;
+                myGame.items.SetSprite(i);
             }
-            myGame.LinkCharacter.xCord += 1;
         }
     }
 }
