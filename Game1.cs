@@ -21,6 +21,7 @@ namespace LegendOfZelda
         public Rectangle destinationRectangle;
         public Link LinkCharacter;
         public ClassItems items;
+        public ClassItems item2;
         public ISprite itemSprite;
 
 
@@ -49,7 +50,10 @@ namespace LegendOfZelda
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture);
             // items uses the same spritesheet as link character.
-            items = new ClassItems(linkTexture);
+            // format is texture sheet, x cord, y cord.
+            items = new ClassItems(linkTexture, 600,200);
+            //So uh, somehow items are locked to cardinality 1, help.
+            //item2 = new ClassItems(linkTexture, 200, 200);
 
         }
 
@@ -63,6 +67,7 @@ namespace LegendOfZelda
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
             items.Update(gameTime);
+            //item2.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -75,6 +80,7 @@ namespace LegendOfZelda
             LinkCharacter.Draw(_spriteBatch);
             
             items.Draw(_spriteBatch);
+            //item2.Draw(_spriteBatch);
             _spriteBatch.End();
 
 
