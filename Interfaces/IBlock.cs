@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    // honestly have no idea why this is separate from ISprite, but at least it's consistent with IItems.
+    // Currently does effectively nothing, but may allow for collision stuff later.
+    // It's already here, I'm just keeping it until we figure out what we're doing for collision.
     public interface IBlock
     {
         public void Update(GameTime gametime) { }

@@ -6,9 +6,9 @@ namespace LegendOfZelda;
 
 public class BlockSprite : ISprite
 {
-    Texture2D blockTexture;
-    int index;
-    Rectangle sourceRectangle;
+    private Texture2D blockTexture;
+    private int index;
+    private Rectangle sourceRectangle;
 
     public BlockSprite(Texture2D texture, int spriteIndex)
     {
@@ -35,6 +35,7 @@ public class BlockSprite : ISprite
 
     public void Update(GameTime gameTime)
     {
-
+        //I don't think anything needs to be here?
+        //Blocks don't really move so nothing should update.
     }
 }
