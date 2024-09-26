@@ -62,7 +62,7 @@ namespace LegendOfZelda
         public static List<Rectangle> boomerang  = new List<Rectangle> { new Rectangle(128, 0, 8, 16) };
         public static List<Rectangle> boomerangBlue  = new List<Rectangle> { new Rectangle(128, 16, 8, 16) };
 
-        public static List<Rectangle> bomb = new List<Rectangle> { new Rectangle(124, 35, 8, 18), new Rectangle(135, 35, 16, 18), new Rectangle(152, 35, 16, 18), new Rectangle(169, 35, 16, 18) };
+        public static List<Rectangle> bomb = new List<Rectangle> { new Rectangle(124, 35, 11, 18), new Rectangle(135, 35, 16, 18), new Rectangle(152, 35, 16, 18), new Rectangle(169, 35, 16, 18) };
 
         public static List<Rectangle> candle = new List<Rectangle> { new Rectangle(160,0,8,16) };
         public static List<Rectangle> candleBlue= new List<Rectangle> { new Rectangle(160,16,8,16) };
@@ -89,8 +89,8 @@ namespace LegendOfZelda
 
 
 
-    public static List<List<Rectangle>> SpriteFrames = new List<List<Rectangle>> { noItem,upArrow, rightArrow, boomer, boomerBlue,, downArrow, leftArrow,bomb,upBArrow,downBArrow, rightBArrow, leftBArrow, bow, leekUp, leekDown
-        leekRight, leekLeft, fire, tornado, ,heartRed, halfHeart, emptyHeart,
+    public static List<List<Rectangle>> SpriteFrames = new List<List<Rectangle>> { noItem,upArrow, rightArrow, boomer, boomerBlue, downArrow, leftArrow,bomb,upBArrow,downBArrow, rightBArrow, leftBArrow, bow, leekUp, leekDown,
+        leekRight, leekLeft, fire, tornado,heartRed, halfHeart, emptyHeart,
         heartBlue, heartBig, fairy, clock, jewelOrange, jewelBlue, potionRed, potionBlue,scroll, scrollBlue, meat, sword, swordBlue, swordFancy, shield, boomerang, boomerangBlue, candle, candleBlue, ring, ringBlue, ringIsh, chain, logs, 
     ladder, wand , healthPack, key, key2, compass, triforce, triforceBlue};
 
