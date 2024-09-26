@@ -86,4 +86,8 @@ public class Zol : DynamicSprite
         spriteBatch.Draw(textures, destinationRectangle, sourceRectangle[currentFrame], Color.White);
         spriteBatch.End();
     }
+
+    public override void takendamage() { }
+
+    public override void attack() { }
 }

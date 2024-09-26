@@ -6,9 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface ISprite
+public interface IEnemy
 {
     void Update(GameTime gameTime);
     void Draw();
+
+    void takendamage();
+
+    void attack();
 }
 

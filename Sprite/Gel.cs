@@ -13,10 +13,11 @@ public class Gel : DynamicSprite
     private float jumpSpeed = 50f;   // Speed of the jump
     private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
-    private Random random = new Random(); 
+    private Random random = new Random();
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
-    public Gel(SpriteBatch spriteBatch, Vector2 position, Texture2D textures, List<Rectangle> sourceRectangle) : base(spriteBatch, position, textures, sourceRectangle) {
+    public Gel(SpriteBatch spriteBatch, Vector2 position, Texture2D textures, List<Rectangle> sourceRectangle) : base(spriteBatch, position, textures, sourceRectangle)
+    {
         // Set the initial target position
         targetPosition = position;
     }
@@ -49,7 +50,7 @@ public class Gel : DynamicSprite
             {
                 // Set a new target position in a small area around the current position
                 // I limit the jump to a small range (50 pixels) 
-                float jumpRange = 50f; 
+                float jumpRange = 50f;
                 targetPosition = new Vector2(
                     position.X + random.Next(-(int)jumpRange, (int)jumpRange),
                     position.Y + random.Next(-(int)jumpRange, (int)jumpRange)
@@ -86,4 +87,8 @@ public class Gel : DynamicSprite
         spriteBatch.Draw(textures, destinationRectangle, sourceRectangle[currentFrame], Color.White);
         spriteBatch.End();
     }
+
+    public override void takendamage() { }
+
+    public override void attack() { }
 }

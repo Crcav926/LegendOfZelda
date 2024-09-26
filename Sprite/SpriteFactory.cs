@@ -14,7 +14,7 @@ public class SpriteFactory
     }
 
     // Load the Gel sprite
-    public ISprite CreateGel()
+    public IEnemy CreateGel()
     {
         List<Rectangle> gelFrames = new List<Rectangle>
         {
@@ -37,7 +37,7 @@ public class SpriteFactory
     }
 
     // Load the Zol sprite
-    public ISprite CreateZol()
+    public IEnemy CreateZol()
     {
         List<Rectangle> zolFrames = new List<Rectangle>
         {
@@ -56,7 +56,7 @@ public class SpriteFactory
     }
 
     // Load the Keese sprite
-    public ISprite CreateKeese()
+    public IEnemy CreateKeese()
     {
         List<Rectangle> keeseFrames = new List<Rectangle>
         {
@@ -69,7 +69,7 @@ public class SpriteFactory
     }
 
     // Load the Stalfol sprite
-    public ISprite CreateStalfol()
+    public IEnemy CreateStalfol()
     {
         List<Rectangle> stalfolFrames = new List<Rectangle>
         {
@@ -90,7 +90,7 @@ public class SpriteFactory
     }
 
 
-    public ISprite CreateGoriya()
+    public IEnemy CreateGoriya()
     {
         List<Rectangle> upFrames = new List<Rectangle>
     {
@@ -106,10 +106,10 @@ public class SpriteFactory
 
         List<Rectangle> leftFrames = new List<Rectangle>
     {
-        new Rectangle(255, 11, 16, 16),
-        new Rectangle(255, 28, 16, 16),
-        new Rectangle(272, 11, 16, 16),
-        new Rectangle(272, 28, 16, 16),
+        new Rectangle(370, 146, 16, 16),
+        new Rectangle(370, 163, 16, 16),
+        new Rectangle(387, 146, 16, 16),
+        new Rectangle(387, 163, 16, 16),
     };
 
         List<Rectangle> rightFrames = new List<Rectangle>
@@ -131,12 +131,12 @@ public class SpriteFactory
     }
 
     // Load the Wallmaster sprite
-    public ISprite CreateWallmaster()
+    public IEnemy CreateWallmaster()
     {
         List<Rectangle> gelFrames = new List<Rectangle>
         {
-            new Rectangle(392, 11, 16, 16),
-            new Rectangle(409, 11, 16, 16),
+            new Rectangle(392, 11, 17, 19),
+            new Rectangle(410, 11, 17, 19),
         };
         return new Gel(spriteBatch, new Vector2(300, 200), texture, gelFrames);
     }

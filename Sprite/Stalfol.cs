@@ -19,8 +19,8 @@ public class Stalfol : DynamicSprite
     private float swordFrameTimer = 0f;  // Timer for sword animation
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
-        private float frameTime = 0.1f; 
-        private float frameTimer = 0f;  
+    private float frameTime = 0.1f;
+    private float frameTimer = 0f;
 
     public Stalfol(SpriteBatch spriteBatch, Vector2 position, Texture2D textures, List<Rectangle> sourceRectangle, List<Rectangle> swordFrames) : base(spriteBatch, position, textures, sourceRectangle)
     {
@@ -28,8 +28,8 @@ public class Stalfol : DynamicSprite
         this.swordFrames = swordFrames;
 
         // Set the initial sword offset
-       
-        swordOffset = new Vector2(10, 0); 
+
+        swordOffset = new Vector2(10, 0);
         ChangeDirection();
     }
 
@@ -40,25 +40,25 @@ public class Stalfol : DynamicSprite
 
         switch (direction)
         {
-            case 0: 
+            case 0:
                 velocity = new Vector2(0, -speed);
                 // swings upward
-                swordOffset = new Vector2(0, -60); 
+                swordOffset = new Vector2(0, -60);
                 break;
-            case 1: 
+            case 1:
                 velocity = new Vector2(0, speed);
                 // swings downward
-                swordOffset = new Vector2(0, 60); 
+                swordOffset = new Vector2(0, 60);
                 break;
-            case 2: 
+            case 2:
                 velocity = new Vector2(-speed, 0);
                 // swings left
-                swordOffset = new Vector2(-60, 0); 
+                swordOffset = new Vector2(-60, 0);
                 break;
-            case 3: 
+            case 3:
                 velocity = new Vector2(speed, 0);
                 // swings right
-                swordOffset = new Vector2(60, 0); 
+                swordOffset = new Vector2(60, 0);
                 break;
         }
     }
@@ -102,7 +102,7 @@ public class Stalfol : DynamicSprite
         // Update position based on velocity
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         //angle need caculate
-         //if the skull hits the screen edges and reflect its direction?????
+        //if the skull hits the screen edges and reflect its direction?????
         if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reflect on the X axis
@@ -129,9 +129,13 @@ public class Stalfol : DynamicSprite
         spriteBatch.Draw(textures, destinationRectangle, sourceRectangle[currentFrame], Color.White);
         // Position the sword relative to the skull
         Rectangle swordRectangle = new Rectangle(
-        (int)(position.X + swordOffset.X),   
+        (int)(position.X + swordOffset.X),
         (int)(position.Y + swordOffset.Y), swordFrames[currentSwordFrame].Width * 3, swordFrames[currentSwordFrame].Height * 3);
         spriteBatch.Draw(textures, swordRectangle, swordFrames[currentSwordFrame], Color.White);
         spriteBatch.End();
     }
+
+    public override void takendamage() { }
+
+    public override void attack() { }
 }

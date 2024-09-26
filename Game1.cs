@@ -14,12 +14,12 @@ namespace Sprite2Enemy
         private KeyboardController keyboardController;
         public ArrayList sprites;
         ArrayList controllerList;
-        ISprite Gel;
-        ISprite Zol;
-        ISprite Keese;
-        ISprite Stalfol;
-        ISprite Goriya;
-        ISprite Wallmaster;
+        IEnemy Gel;
+        IEnemy Zol;
+        IEnemy Keese;
+        IEnemy Stalfol;
+        IEnemy Goriya;
+        IEnemy Wallmaster;
         List<Rectangle> EnemyGel;
         List<Rectangle> EnemyZol;
         List<Rectangle> EnemyKeese;
@@ -70,7 +70,7 @@ namespace Sprite2Enemy
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load the texture for the sprite sheet
-            Texture2D texture = Content.Load<Texture2D>("MonsterList1");
+            Texture2D texture = Content.Load<Texture2D>("enemySpriteSheetNew");
 
             SpriteFactory spriteFactory = new SpriteFactory(_spriteBatch, texture);
 
@@ -108,7 +108,7 @@ namespace Sprite2Enemy
                 controller.Update();
             }
 
-            ISprite current = (ISprite)sprites[currentSprite];
+            IEnemy current = (IEnemy)sprites[currentSprite];
             current.Update(gameTime);
             current.Draw();
 
@@ -120,7 +120,7 @@ namespace Sprite2Enemy
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            ISprite current = (ISprite)sprites[currentSprite];
+            IEnemy current = (IEnemy)sprites[currentSprite];
             current.Draw();
             base.Draw(gameTime);
         }

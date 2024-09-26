@@ -11,7 +11,7 @@ public class Keese : DynamicSprite
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
     private Vector2 velocity;  // direction and speed
-    private float speed = 100f; 
+    private float speed = 100f;
     private Random random = new Random();
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
@@ -20,12 +20,12 @@ public class Keese : DynamicSprite
         // Set the initial target position (I dont know so I randomlzie it here
         targetPosition = position;
         velocity = new Vector2(
-            (float)(random.NextDouble() * 2 - 1),  
-            (float)(random.NextDouble() * 2 - 1)   
+            (float)(random.NextDouble() * 2 - 1),
+            (float)(random.NextDouble() * 2 - 1)
         );
         // Normalize to ensure consistent speed in all directions
-        velocity.Normalize(); 
-        velocity *= speed;    
+        velocity.Normalize();
+        velocity *= speed;
     }
 
     public override void Update(GameTime gameTime)
@@ -75,4 +75,8 @@ public class Keese : DynamicSprite
         spriteBatch.Draw(textures, destinationRectangle, sourceRectangle[currentFrame], Color.White);
         spriteBatch.End();
     }
+
+    public override void takendamage() { }
+
+    public override void attack() { }
 }

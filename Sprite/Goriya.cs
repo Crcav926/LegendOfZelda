@@ -163,4 +163,8 @@ public class Goriya : DynamicSprite
 
         spriteBatch.End();
     }
+
+    public override void takendamage() { }
+
+    public override void attack() { }
 }

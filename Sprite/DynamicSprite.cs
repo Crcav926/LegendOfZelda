@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-public abstract class DynamicSprite : ISprite {
+public abstract class DynamicSprite : IEnemy
+{
     public int currentFrame;
     public int totalFrames;
     public SpriteBatch spriteBatch;
@@ -28,4 +29,10 @@ public abstract class DynamicSprite : ISprite {
     public abstract void Update(GameTime gameTime);
 
     public abstract void Draw();
+
+    public abstract void takendamage();
+
+    public abstract void attack();
+
+
 }
