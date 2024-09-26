@@ -12,7 +12,7 @@ namespace LegendOfZelda
         List<Rectangle> spriteFrames;
         int currentFrame = 0;
         int totalFrames;
-        double timePerFrame = 0.35; // Adjustable data
+        double timePerFrame = 0.3; // Adjustable data
         double timeElapsed = 0;
         int index;
         private int width;

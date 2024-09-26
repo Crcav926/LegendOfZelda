@@ -17,11 +17,14 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            int i = myGame.items.GetSprite();
-            i--;
-            if (i < maxIndex && i >= 0)
+            foreach (ClassItems item in myGame.staticItems)
             {
-                myGame.items.SetSprite(i);
+                int i = item.GetSprite();
+                i--;
+                if (i < maxIndex && i >= 0)
+                {
+                    item.SetSprite(i);
+                }
             }
         }
     }

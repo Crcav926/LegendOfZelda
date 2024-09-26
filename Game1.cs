@@ -15,13 +15,12 @@ namespace LegendOfZelda
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        public ISprite linkSprite;
         public Texture2D linkTexture;
-        public Rectangle sourceRectangle;
-        public Rectangle destinationRectangle;
         public Link LinkCharacter;
-        public ClassItems items;
-        public ISprite itemSprite;
+        public List<ClassItems> items = new List<ClassItems>();
+        public List<ClassItems> staticItems = new List<ClassItems>();
+        private ClassItems item1;
+        private ClassItems item2;
 
 
         private IController controllerK;
@@ -44,12 +43,20 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //load texture sheets
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
+            Texture2D itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             // TODO: use this.Content to load your game content here
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture);
-            // items uses the same spritesheet as link character.
-            items = new ClassItems(linkTexture);
+            
+            // format is texture sheet, x cord, y cord.
+            item1 = new ClassItems(itemTexture, 600,200);
+            item2 = new ClassItems(itemTexture, 200, 200);
+
+            //add the items to the item collection
+            staticItems.Add(item1);
+            items.Add(item2);
 
         }
 
@@ -62,7 +69,8 @@ namespace LegendOfZelda
             controllerK.Update();
             base.Update(gameTime);
             LinkCharacter.Update(gameTime);
-            items.Update(gameTime);
+            item1.Update(gameTime);
+            item2.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -72,7 +80,8 @@ namespace LegendOfZelda
             _spriteBatch.Begin();
             LinkCharacter.Draw(_spriteBatch);
             
-            items.Draw(_spriteBatch);
+            item1.Draw(_spriteBatch);
+            item2.Draw(_spriteBatch);
             _spriteBatch.End();
 
 
