@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    internal class SpriteItemData2
+    internal class SpriteItemData
     {
         //vert arrow is 1, horiz arrow is 2, boomerang is 3
         // rectangle goes x pos y xpos x to the right y down
@@ -26,8 +26,8 @@ namespace LegendOfZelda
         public static List<Rectangle> leftBArrow = new List<Rectangle> { new Rectangle(45, 65, 18, 8) };
         public static List<Rectangle> bow = new List<Rectangle> { new Rectangle(144, 0, 9, 16) };
 
-        public static List<Rectangle> leekUp = new List<Rectangle> { new Rectangle(0,54,9,18) };
-        public static List<Rectangle> leekDown = new List<Rectangle> { new Rectangle(0,74,9,18) };
+        public static List<Rectangle> leekUp = new List<Rectangle> { new Rectangle(0,54,10,20) };
+        public static List<Rectangle> leekDown = new List<Rectangle> { new Rectangle(0,74,10,20) };
         public static List<Rectangle> leekRight = new List<Rectangle> { new Rectangle(11,61,17,9) };
         public static List<Rectangle> leekLeft = new List<Rectangle> { new Rectangle(11, 79, 17, 9) };
 
@@ -50,7 +50,7 @@ namespace LegendOfZelda
         public static List<Rectangle> potionBlue = new List<Rectangle> { new Rectangle(80, 16, 8, 16) };
 
         public static List<Rectangle> scroll = new List<Rectangle> { new Rectangle(87, 0, 8, 16) };
-        public static List<Rectangle> scrollBlue = new List<Rectangle> { new Rectangle(87, 16, 8, 16) };
+        public static List<Rectangle> scrollBlue = new List<Rectangle> { new Rectangle(88, 16, 8, 16) };
 
         public static List<Rectangle> meat = new List<Rectangle> { new Rectangle(88, 0, 8, 16) };
 
