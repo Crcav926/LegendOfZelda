@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//update to Ienemy
 public interface IEnemy
 {
     void Update(GameTime gameTime);
