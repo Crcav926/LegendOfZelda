@@ -36,10 +36,11 @@ namespace LegendOfZelda
         }
         public void Update(GameTime gameTime)
         {
+            // this move section should probably be separated out.
             // only move the arrow when we're in bounds.
             if (xCord < 800 || xCord>0 ||yCord < 400 || yCord >0 )
             {
-                // this moves the arrow sprite across the screen.
+                // this moves the arrow/boomerang sprite across the screen.
                 if (direction == 1)
                 {
                     yCord--;
