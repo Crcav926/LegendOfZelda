@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-      public class Link : ILink
+      public class Link
     {
         public ISprite linkSprite;
-        public ILink linkState;
         private Rectangle destinationRectangle;
         public Vector2 position;
         public Vector2 direction;
@@ -21,7 +20,7 @@ namespace LegendOfZelda
         private List<IItems> items;
         // TODO: Find a way to make items work without having to do this
         private GameTime linkGameTime;
-        // public int direction; // 0 = left ; 1 = right ; 2 = up ; 3 = down
+        private DamageAnimation damageEffect;
         public Link(Texture2D linkTexture, Texture2D itemTexture)
         {
             // Set up boolean to check if Link's sprite is moving and needs to animate
@@ -33,7 +32,10 @@ namespace LegendOfZelda
             // Sets link's sprite for when he is spawned in
             linkSprite = new LinkIdleSprite(linkTexture, direction);
             item = new Boomerang(itemTexture, direction, position);
+            damageEffect = new DamageAnimation();
         }
+
+        // Grouped in Link class for future ease to swap to state machine.
         public void Move(Vector2 newDirection)
         {
             // Sets direction to link's current movement direction
@@ -45,6 +47,11 @@ namespace LegendOfZelda
         {
 
         }
+
+        public void TakeDamage()
+        {
+            damageEffect.StartDamageEffect();
+        }
         public void UseItem(SpriteBatch spriteBatch)
         {
 
@@ -53,6 +60,7 @@ namespace LegendOfZelda
         public void Update(GameTime gameTime)
         {
             item.Update(gameTime);
+            damageEffect.Update(gameTime);
             linkGameTime = gameTime;
             // Updates / Animates link's sprite
             linkSprite.Update(gameTime);
@@ -63,7 +71,7 @@ namespace LegendOfZelda
         {
             // Draws link Sprite based on where he is after update
             item.Draw(spriteBatch);
-            linkSprite.Draw(spriteBatch, destinationRectangle);
+            linkSprite.Draw(spriteBatch, destinationRectangle, damageEffect.GetCurrentColor());
         }
     }
 }

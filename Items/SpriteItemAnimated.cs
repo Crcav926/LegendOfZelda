@@ -44,11 +44,11 @@ namespace LegendOfZelda
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Rectangle destination)
+        public void Draw(SpriteBatch spriteBatch, Rectangle destination, Color color)
         {
             //create a new destination rectangle of the appropriate size
             Rectangle dest = new Rectangle(destination.X, destination.Y, width, height);
-            spriteBatch.Draw(itemTexture, dest, spriteFrames[currentFrame], Color.White);
+            spriteBatch.Draw(itemTexture, dest, spriteFrames[currentFrame], color);
         }
 
         public void SetSprite(int i)
