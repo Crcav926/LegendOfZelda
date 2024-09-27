@@ -38,8 +38,8 @@ namespace LegendOfZelda
             ICommand boomerang =new BoomerangComm(game);
             ICommand nextItem = new NextItemComm(game);
             ICommand lastItem = new LastItemComm(game);
-            ICommand nextBlock = new NextBlockComm(game);
-            ICommand lastBlock = new LastBlockComm(game);
+            ICommand nextBlock = new CommNextBlock(game);
+            ICommand lastBlock = new CommLastBlock(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
