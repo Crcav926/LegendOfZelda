@@ -20,6 +20,7 @@ namespace Sprite2Enemy
         IEnemy Stalfol;
         IEnemy Goriya;
         IEnemy Wallmaster;
+        IEnemy BladeTrap;
         List<Rectangle> EnemyGel;
         List<Rectangle> EnemyZol;
         List<Rectangle> EnemyKeese;
@@ -31,6 +32,7 @@ namespace Sprite2Enemy
         List<Rectangle> EnemyGoriyaright;
         List<Rectangle> EnemyProjectile;
         List<Rectangle> EnemyWallmaster;
+        List<Rectangle> EnemyBladeTrap;
         public int currentSprite { get; set; }
         Vector2 EnemyPosition;
 
@@ -55,6 +57,7 @@ namespace Sprite2Enemy
             EnemyGoriyaright = new List<Rectangle>();
             EnemyProjectile = new List<Rectangle>();
             EnemyWallmaster = new List<Rectangle>();
+            EnemyBladeTrap = new List<Rectangle>();
 
             controllerList = new ArrayList();
             sprites = new ArrayList();
@@ -81,6 +84,7 @@ namespace Sprite2Enemy
             Stalfol = spriteFactory.CreateStalfol();
             Goriya = spriteFactory.CreateGoriya();
             Wallmaster = spriteFactory.CreateWallmaster();
+            BladeTrap = spriteFactory.CreateBladeTrap();
 
             sprites.Add(Gel);
             sprites.Add(Zol);
@@ -88,6 +92,7 @@ namespace Sprite2Enemy
             sprites.Add(Stalfol);
             sprites.Add(Goriya);
             sprites.Add(Wallmaster);
+            sprites.Add(BladeTrap);
             // TODO: use this.Content to load your game content here
 
             keyboardController.RegisterCommand(Keys.O, new PreviousSpriteCommand(this));

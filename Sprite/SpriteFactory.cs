@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 public class SpriteFactory
 {
@@ -139,6 +140,17 @@ public class SpriteFactory
             new Rectangle(410, 11, 17, 19),
         };
         return new Gel(spriteBatch, new Vector2(300, 200), texture, gelFrames);
+    }
+
+
+    // Load the BladeTrap sprite
+    public IEnemy CreateBladeTrap()
+    {
+        List<Rectangle> bladeTrapFrames = new List<Rectangle>
+    {
+        new Rectangle(162, 59, 20, 20)
+    };
+        return new BladeTrap(spriteBatch, new Vector2(300, 200), texture, bladeTrapFrames, spriteBatch.GraphicsDevice);
     }
 
 }
