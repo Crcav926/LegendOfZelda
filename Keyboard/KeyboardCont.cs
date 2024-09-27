@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LegendOfZelda.LinkMovement;
+using LegendOfZelda.LinkItems;
 
 namespace LegendOfZelda
 {
@@ -32,20 +33,22 @@ namespace LegendOfZelda
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkMove(game, new Vector2(-1, 0));
             ICommand d = new CommLinkMove(game, new Vector2(1, 0));
-            // I don't know why, but sometimes up is + 1 and sometimes up is -1, it makes 0 sense
             ICommand w = new CommLinkMove(game, new Vector2(0, -1));
             ICommand s = new CommLinkMove(game, new Vector2(0, 1));
+            ICommand throwBoomerang = new CommThrowBoomerang(game);
             ICommand quit = new CommQuit(game);
             ICommand arrow = new ArrowComm(game);
             ICommand boomerang = new BoomerangComm(game);
             ICommand nextItem = new NextItemComm(game);
             ICommand lastItem = new LastItemComm(game);
 
+
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
             RegisterCommand(Keys.S, s);
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
+            RegisterCommand(Keys.D3, throwBoomerang);
             RegisterCommand(Keys.Q, c);
             RegisterCommand(Keys.D1, arrow);
             RegisterCommand(Keys.D2 , boomerang);
