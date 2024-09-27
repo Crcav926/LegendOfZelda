@@ -6,6 +6,8 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using LegendOfZelda.LinkMovement;
+using LegendOfZelda.LinkItems;
 
 namespace LegendOfZelda
 {
@@ -27,23 +29,28 @@ namespace LegendOfZelda
             myGame = game;
             alrPressed = new List<Keys>();
             
-            // set up teh table
+            // set up the table
             ICommand c = new CommQuit(game);
-            ICommand a = new CommLinkLeft(game);
-            ICommand d = new CommLinkRight(game);
-            ICommand w = new CommLinkUp(game);
-            ICommand s = new CommLinkDown(game);
+            ICommand a = new CommLinkMove(game, new Vector2(-1, 0));
+            ICommand d = new CommLinkMove(game, new Vector2(1, 0));
+            ICommand w = new CommLinkMove(game, new Vector2(0, -1));
+            ICommand s = new CommLinkMove(game, new Vector2(0, 1));
+            ICommand throwBoomerang = new CommThrowBoomerang(game);
+            ICommand e = new CommLinkDamaged(game);
             ICommand quit = new CommQuit(game);
             ICommand arrow = new ArrowComm(game);
-            ICommand boomerang =new BoomerangComm(game);
+            ICommand boomerang = new BoomerangComm(game);
             ICommand nextItem = new NextItemComm(game);
             ICommand lastItem = new LastItemComm(game);
+
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
             RegisterCommand(Keys.S, s);
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
+            RegisterCommand(Keys.E, e);
+            RegisterCommand(Keys.D3, throwBoomerang);
             RegisterCommand(Keys.Q, c);
             RegisterCommand(Keys.D1, arrow);
             RegisterCommand(Keys.D2 , boomerang);
@@ -53,15 +60,27 @@ namespace LegendOfZelda
 
             // set up held down table
 
-            ICommand left = new CommLinkLeftM(game);
-            ICommand right = new CommLinkRightM(game);
-            ICommand up = new CommLinkUpM(game);
-            ICommand down = new CommLinkDownM(game);
+            ICommand left = new CommMoveHeldDown(game, new Vector2(-1, 0));
+            ICommand right = new CommMoveHeldDown(game, new Vector2(1, 0));
+            ICommand up = new CommMoveHeldDown(game, new Vector2(0, -1));
+            ICommand down = new CommMoveHeldDown(game, new Vector2(0, 1));
 
             heldDownMappings.Add(Keys.A, left);
             heldDownMappings.Add(Keys.D, right);
             heldDownMappings.Add(Keys.W, up);
             heldDownMappings.Add(Keys.S, down);
+
+            ICommand leftStop = new CommStopMoving(game, new Vector2(-1, 0));
+            ICommand rightStop = new CommStopMoving(game, new Vector2(1, 0));
+            ICommand upStop = new CommStopMoving(game, new Vector2(0, -1));
+            ICommand downStop = new CommStopMoving(game, new Vector2(0, 1));
+
+            releaseMappings.Add(Keys.A, leftStop);
+            releaseMappings.Add(Keys.D, rightStop);
+            releaseMappings.Add(Keys.W, upStop);
+            releaseMappings.Add(Keys.S, downStop);
+
+
 
 
 
@@ -74,7 +93,6 @@ namespace LegendOfZelda
         public void Update()
         {
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-
             foreach (Keys key in pressedKeys)
             {
 

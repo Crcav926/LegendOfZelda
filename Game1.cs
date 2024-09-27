@@ -15,13 +15,13 @@ namespace LegendOfZelda
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        public ISprite linkSprite;
         public Texture2D linkTexture;
-        public Rectangle sourceRectangle;
-        public Rectangle destinationRectangle;
+        public Texture2D itemTexture;
         public Link LinkCharacter;
-        public ClassItems items;
-        public ISprite itemSprite;
+        public List<ClassItems> items = new List<ClassItems>();
+        public List<ClassItems> staticItems = new List<ClassItems>();
+        private ClassItems item1;
+        private ClassItems item2;
 
 
         private IController controllerK;
@@ -34,8 +34,9 @@ namespace LegendOfZelda
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // Initializes keyboard controller
             controllerK = new KeyboardCont(this);
+        
             base.Initialize();
         }
 
@@ -43,13 +44,19 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //load texture sheets
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
-            // TODO: use this.Content to load your game content here
+            itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             // Have 0 to be the default facing left
-            LinkCharacter = new Link(linkTexture);
-            // items uses the same spritesheet as link character.
-            itemSprite = new SpriteItem(linkTexture);
-            items = new ClassItems(itemSprite);
+            LinkCharacter = new Link(linkTexture, itemTexture);
+            
+            // format is texture sheet, x cord, y cord.
+            item1 = new ClassItems(itemTexture, 600,200);
+            item2 = new ClassItems(itemTexture, 200, 200);
+
+            //add the items to the item collection
+            staticItems.Add(item1);
+            items.Add(item2);
 
         }
 
@@ -61,20 +68,23 @@ namespace LegendOfZelda
             // TODO: Add your update logic here
             controllerK.Update();
             base.Update(gameTime);
+            // Calls link update, which updates his Sprite and Items
             LinkCharacter.Update(gameTime);
-            items.Update(gameTime);
+            // Updates sprites in Item classes
+            item1.Update(gameTime);
+            item2.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            sourceRectangle = new Rectangle(103, 11, 16, 16);
-            destinationRectangle = new Rectangle(400, 200, 60, 60);
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
+            // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
             
-            items.Draw(_spriteBatch);
+            item1.Draw(_spriteBatch);
+            item2.Draw(_spriteBatch);
             _spriteBatch.End();
 
 

@@ -14,18 +14,6 @@ namespace LegendOfZelda
         /*
          * Updates Link to move up
          */
-        public void MoveUp();
-        /*
-         * Updates Link to move down
-         */
-        public void MoveDown();
-        /*
-        * Updates Link to move left
-        */
-        public void MoveLeft();
-        /*
-         * Updates Link to move right
-         */
-        public void MoveRight();
+        public void Move(Vector2 direction);
     }
 }

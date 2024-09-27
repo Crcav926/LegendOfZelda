@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,16 +16,18 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            // later i need to make this based on what direction link is facing
-            if (myGame.LinkCharacter.direction == 0)
+            // creates moving item
+            foreach (ClassItems item in myGame.items)
             {
-                // create an arrow moving up
-                int i = 1;
-                // sets sprite 
-                myGame.items.SetSprite(i);
-                //sets movement direction to vertical
-                myGame.items.direction = 1;
+                item.SetSprite(1);
+                item.direction = 1;
             }
+            //creates stationary item, maybe temporary since it's mostly for sprint 2
+            foreach (ClassItems item in myGame.staticItems)
+            {
+                item.SetSprite(1);
+            }
+
         }
     }
 }

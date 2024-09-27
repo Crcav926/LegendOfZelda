@@ -15,16 +15,18 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            // later i need to make this based on what direction link is facing
-            if (myGame.LinkCharacter.direction == 0)
+            // creates moving item
+            foreach (ClassItems item in myGame.items)
             {
-                // create boomering moving sideways
-                int i = 3;
-                // sets sprite 
-                myGame.items.SetSprite(i);
-                //sets movement direction to horizontal
-                myGame.items.direction = 2;
+                item.SetSprite(3);
+                item.direction = 2;
             }
+            //creates stationary item, maybe temporary since it's mostly for sprint 2
+            foreach (ClassItems item in myGame.staticItems)
+            {
+                item.SetSprite(3);
+            }
+
         }
     }
 }
