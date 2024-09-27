@@ -1,3 +1,3 @@
 ﻿
-using var game = new Sprite2Enemy.Game1();
+using var game = new LegendOfZelda.Game1();
 game.Run();

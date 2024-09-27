@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Sprite2Enemy
+namespace LegendOfZelda
 {
     public class Game1 : Game
     {
@@ -21,20 +21,12 @@ namespace Sprite2Enemy
         IEnemy Goriya;
         IEnemy Wallmaster;
         IEnemy BladeTrap;
-        List<Rectangle> EnemyGel;
-        List<Rectangle> EnemyZol;
-        List<Rectangle> EnemyKeese;
-        List<Rectangle> EnemyStalfol;
-        List<Rectangle> StalfosSword;
-        List<Rectangle> EnemyGoriyaup;
-        List<Rectangle> EnemyGoriyadown;
-        List<Rectangle> EnemyGoriyaleft;
-        List<Rectangle> EnemyGoriyaright;
-        List<Rectangle> EnemyProjectile;
-        List<Rectangle> EnemyWallmaster;
-        List<Rectangle> EnemyBladeTrap;
+        IEnemy Aquamentus;
+
+
+
+
         public int currentSprite { get; set; }
-        Vector2 EnemyPosition;
 
         public Game1()
         {
@@ -45,25 +37,10 @@ namespace Sprite2Enemy
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            EnemyGel = new List<Rectangle>();
-            EnemyZol = new List<Rectangle>();
-            EnemyKeese = new List<Rectangle>();
-            EnemyStalfol = new List<Rectangle>();
-            StalfosSword = new List<Rectangle>();
-            EnemyGoriyaup = new List<Rectangle>();
-            EnemyGoriyadown = new List<Rectangle>();
-            EnemyGoriyaleft = new List<Rectangle>();
-            EnemyGoriyaright = new List<Rectangle>();
-            EnemyProjectile = new List<Rectangle>();
-            EnemyWallmaster = new List<Rectangle>();
-            EnemyBladeTrap = new List<Rectangle>();
 
             controllerList = new ArrayList();
             sprites = new ArrayList();
             // Need discuss where to initialize
-            EnemyPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2 + 100,
-                                  _graphics.PreferredBackBufferHeight / 2);
             keyboardController = new KeyboardController();
             base.Initialize();
         }
@@ -74,8 +51,11 @@ namespace Sprite2Enemy
 
             // Load the texture for the sprite sheet
             Texture2D texture = Content.Load<Texture2D>("enemySpriteSheetNew");
+            Texture2D Bossture = Content.Load<Texture2D>("boss");
+
 
             SpriteFactory spriteFactory = new SpriteFactory(_spriteBatch, texture);
+            SpriteFactory spriteFactory2 = new SpriteFactory(_spriteBatch, Bossture);
 
             // Use the factory to create the sprites
             Gel = spriteFactory.CreateGel();
@@ -85,7 +65,7 @@ namespace Sprite2Enemy
             Goriya = spriteFactory.CreateGoriya();
             Wallmaster = spriteFactory.CreateWallmaster();
             BladeTrap = spriteFactory.CreateBladeTrap();
-
+            Aquamentus = spriteFactory2.CreateAquamentus();
             sprites.Add(Gel);
             sprites.Add(Zol);
             sprites.Add(Keese);
@@ -93,6 +73,7 @@ namespace Sprite2Enemy
             sprites.Add(Goriya);
             sprites.Add(Wallmaster);
             sprites.Add(BladeTrap);
+            sprites.Add(Aquamentus);
             // TODO: use this.Content to load your game content here
 
             keyboardController.RegisterCommand(Keys.O, new PreviousSpriteCommand(this));
@@ -101,8 +82,6 @@ namespace Sprite2Enemy
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             // Let the keyboard controller handle input
             keyboardController.Update();
@@ -127,6 +106,7 @@ namespace Sprite2Enemy
             // TODO: Add your drawing code here
             IEnemy current = (IEnemy)sprites[currentSprite];
             current.Draw();
+
             base.Draw(gameTime);
         }
     }

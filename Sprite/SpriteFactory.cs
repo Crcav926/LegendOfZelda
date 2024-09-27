@@ -14,6 +14,20 @@ public class SpriteFactory
         this.texture = texture;
     }
 
+    public static SpriteFactory Instance
+    {
+        get
+        {
+            return Instance;
+        }
+    }
+
+    public SpriteFactory()
+    {
+    }
+
+
+
     // Load the Gel sprite
     public IEnemy CreateGel()
     {
@@ -151,6 +165,30 @@ public class SpriteFactory
         new Rectangle(162, 59, 20, 20)
     };
         return new BladeTrap(spriteBatch, new Vector2(300, 200), texture, bladeTrapFrames, spriteBatch.GraphicsDevice);
+    }
+
+    public IEnemy CreateAquamentus()
+    {
+
+        List<Rectangle> AquamentusFrames = new List<Rectangle>
+    {
+        new Rectangle(1, 11, 24, 32),
+        new Rectangle(26, 11, 24, 32),
+        new Rectangle(51, 11, 24, 32),
+        new Rectangle(76, 11, 24, 32)
+
+    };
+
+        List<Rectangle> fireball = new List<Rectangle>
+    {
+        new Rectangle(101, 11, 8, 16),
+        new Rectangle(110, 11, 8, 16),
+        new Rectangle(119, 11, 8, 16),
+        new Rectangle(128, 11, 8, 16)
+
+    };
+
+        return new Aquamentus(spriteBatch, new Vector2(400, 200), texture, AquamentusFrames, fireball);
     }
 
 }
