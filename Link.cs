@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda.LinkMovement;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,44 +9,70 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-      public class Link : ILink
+
+      public class Link
     {
         public ISprite linkSprite;
-        public ILink linkState;
-        public Rectangle destinationRectangle;
-        public int xCord;
-        public int yCord;
-        public int direction; // 0 = left ; 1 = right ; 2 = up ; 3 = down
-        public Link(Texture2D linkTexture)
+        private Rectangle destinationRectangle;
+        public Vector2 position;
+        public Vector2 direction;
+        public Boolean animated;
+        public ILinkItem item;
+        private List<IItems> items;
+        // TODO: Find a way to make items work without having to do this
+        private GameTime linkGameTime;
+        private DamageAnimation damageEffect;
+        public Link(Texture2D linkTexture, Texture2D itemTexture)
         {
-            xCord = 400;
-            yCord = 200;
-            direction = 0;
-            linkSprite = new LinkBasicAnimation(linkTexture, direction);
+            // Set up boolean to check if Link's sprite is moving and needs to animate
+            animated = false;
+            // Sets up link's starting position
+            position = new Vector2(400, 200);
+            // Sets up the direction Link will face when spawned in
+            direction = new Vector2(0, -1);
+            // Sets link's sprite for when he is spawned in
+            linkSprite = new LinkIdleSprite(linkTexture, direction);
+            item = new Boomerang(itemTexture, direction, position);
+            damageEffect = new DamageAnimation();
         }
-        public void MoveUp()
+
+        // Grouped in Link class for future ease to swap to state machine.
+        public void Move(Vector2 newDirection)
         {
-            linkState.MoveUp();
+            // Sets direction to link's current movement direction
+            direction = newDirection;
+            // Moves link in direction based on command, allows for diagonal movement
+            position += newDirection;
         }
-        public void MoveDown()
+        public void ChangeItem()
         {
 
         }
-        public void MoveLeft()
+
+        public void TakeDamage()
+        {
+            damageEffect.StartDamageEffect();
+        }
+        public void UseItem(SpriteBatch spriteBatch)
         {
 
         }
-        public void MoveRight()
-        {
-        }
+        // TODO: Add "ChangeDirection" class so Link controls his own sprite data
         public void Update(GameTime gameTime)
         {
+            item.Update(gameTime);
+            damageEffect.Update(gameTime);
+            linkGameTime = gameTime;
+            // Updates / Animates link's sprite
             linkSprite.Update(gameTime);
-            destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
+            // Updates Links position
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            linkSprite.Draw(spriteBatch, destinationRectangle);
+            // Draws link Sprite based on where he is after update
+            item.Draw(spriteBatch);
+            linkSprite.Draw(spriteBatch, destinationRectangle, damageEffect.GetCurrentColor());
         }
     }
 }

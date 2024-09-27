@@ -21,7 +21,8 @@ namespace LegendOfZelda
         Texture2D itemTex;
 
         public int direction;
-        public ClassItems(Texture2D ItemTexture)
+        public ClassItems(Texture2D ItemTexture, int x, int y) //fix this
+
         {
             itemTex = ItemTexture;
             spriteIndex = 0;
@@ -30,22 +31,24 @@ namespace LegendOfZelda
             // set starting position
             // 0 is stationary 1 is vertical 2 is horizontal
             direction = 0;
-            xCord = 600;
-            yCord = 200;
+
+            xCord = x;
+            yCord = y;
         }
         public void Update(GameTime gameTime)
         {
+            // this move section should probably be separated out.
             // only move the arrow when we're in bounds.
             if (xCord < 800 || xCord>0 ||yCord < 400 || yCord >0 )
             {
-                // this moves the arrow sprite across the screen.
+                // this moves the arrow/boomerang sprite across the screen.
                 if (direction == 1)
                 {
-                    //yCord--;
+                    yCord--;
                 }
                 else if (direction == 2)
                 {
-                   //xCord++;
+                   xCord++;
                 }
                 destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
             }
@@ -61,7 +64,7 @@ namespace LegendOfZelda
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, destinationRectangle);
+            sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
     }
 }

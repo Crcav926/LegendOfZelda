@@ -12,7 +12,7 @@ namespace LegendOfZelda
         List<Rectangle> spriteFrames;
         int currentFrame = 0;
         int totalFrames;
-        double timePerFrame = 0.35; // Adjustable data
+        double timePerFrame = 0.3; // Adjustable data
         double timeElapsed = 0;
         int index;
         private int width;
@@ -44,11 +44,11 @@ namespace LegendOfZelda
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Rectangle destination)
+        public void Draw(SpriteBatch spriteBatch, Rectangle destination, Color color)
         {
             //create a new destination rectangle of the appropriate size
             Rectangle dest = new Rectangle(destination.X, destination.Y, width, height);
-            spriteBatch.Draw(itemTexture, dest, spriteFrames[currentFrame], Color.White);
+            spriteBatch.Draw(itemTexture, dest, spriteFrames[currentFrame], color);
         }
 
         public void SetSprite(int i)
