@@ -27,7 +27,7 @@ public class Wallmaster : DynamicSprite
         // Update the frame timer
         frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        // Only update the frame if enough time has passed (based on frameTime)
+        // Only update the frame if enough time has passed (based on frameTime )
         if (frameTimer >= frameTime)
         {
             // Move to the next frame in the animation

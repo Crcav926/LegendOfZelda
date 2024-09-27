@@ -24,7 +24,7 @@ public class Stalfol : DynamicSprite
 
     public Stalfol(SpriteBatch spriteBatch, Vector2 position, Texture2D textures, List<Rectangle> sourceRectangle, List<Rectangle> swordFrames) : base(spriteBatch, position, textures, sourceRectangle)
     {
-        // Set the initial target position (I dont know so I randomlzie it here
+        // Set the initial target position (it should be random)
         this.swordFrames = swordFrames;
 
         // Set the initial sword offset
@@ -71,8 +71,9 @@ public class Stalfol : DynamicSprite
         // If it's time to change direction
         if (directionChangeTimer >= directionChangeCooldown)
         {
-            ChangeDirection(); // Choose a new random direction
-            directionChangeTimer = 0f; // Reset the timer
+            // Choose a new random direction and reset the timer
+            ChangeDirection(); 
+            directionChangeTimer = 0f; 
         }
 
         // Animate the sword swing

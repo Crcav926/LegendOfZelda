@@ -59,7 +59,7 @@ public class Keese : DynamicSprite
             velocity.Y *= -1; // Reverse Y direction
         }
 
-        // Ensure the sprite stays within screen bounds (optional)
+        // Ensure the sprite stays within screen bounds
         position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
         position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
     }

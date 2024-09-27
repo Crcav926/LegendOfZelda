@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
+//This projectile is for Goriya
 public class Projectile
 {
     private Vector2 position;
@@ -58,8 +59,8 @@ public class Projectile
             Rectangle destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                (int)(sourceRectangle.Width * 3),  // Scale the width
-                (int)(sourceRectangle.Height * 3)  // Scale the height
+                (int)(sourceRectangle.Width * 3),  
+                (int)(sourceRectangle.Height * 3)  
             );
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

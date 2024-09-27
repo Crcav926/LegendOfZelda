@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Should have the same movement as Gel
 public class Zol : DynamicSprite
 
 {
@@ -49,7 +50,7 @@ public class Zol : DynamicSprite
             if (jumpTimer >= jumpCooldown)
             {
                 // Set a new target position in a small area around the current position
-                float jumpRange = 50f; // Limit the jump to a small range (50 pixels)
+                float jumpRange = 50f; // Limit the jump to a small range
                 targetPosition = new Vector2(
                     position.X + random.Next(-(int)jumpRange, (int)jumpRange),
                     position.Y + random.Next(-(int)jumpRange, (int)jumpRange)

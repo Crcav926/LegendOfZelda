@@ -24,7 +24,7 @@ public class Goriya : DynamicSprite
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
 
     public Goriya(SpriteBatch spriteBatch, Vector2 position, Texture2D texture, List<Rectangle> upFrames, List<Rectangle> downFrames, List<Rectangle> leftFrames, List<Rectangle> rightFrames, List<Rectangle> projectileFrames)
-        : base(spriteBatch, position, texture, upFrames)  // Use upFrames as the default
+        : base(spriteBatch, position, texture, upFrames)  // Use upFrames as the default for Goriyaa
     {
         this.upFrames = upFrames;
         this.downFrames = downFrames;
@@ -37,9 +37,10 @@ public class Goriya : DynamicSprite
         ChangeDirection();
     }
 
+    //Change the direction of Goriya itself
     private void ChangeDirection()
     {
-        // Choose a random direction (up, down, left, right)
+        // Chose a random direction (up, down, left, right)
         int direction = random.Next(0, 4);
 
         switch (direction)
@@ -106,7 +107,7 @@ public class Goriya : DynamicSprite
             currentFrame++;
             if (currentFrame >= currentFrames.Count)
             {
-                currentFrame = 0;  // Loop back to the first frame in the current direction
+                currentFrame = 0;  
             }
             frameTimer = 0f;
         }
