@@ -26,6 +26,7 @@ namespace LegendOfZelda
         public Sword sword;
         public Bomb bomb;
         private List<ILinkItem> inventory;
+        private DamageAnimation damageEffect;
         // public int direction; // 0 = left ; 1 = right ; 2 = up ; 3 = down
         public Link(Texture2D linkTexture, Texture2D itemTexture)
         {
@@ -73,9 +74,9 @@ namespace LegendOfZelda
         // TODO: Add "ChangeDirection" class so Link controls his own sprite data
         public void Update(GameTime gameTime)
         {
-            item.Update(gameTime);
+            // This is unneeded and doesn't work right now
+            //item.Update(gameTime);
             damageEffect.Update(gameTime);
-            linkGameTime = gameTime;
             arrow.Update(gameTime);
             boomerang.Update(gameTime);
             fire.Update(gameTime);
@@ -91,7 +92,8 @@ namespace LegendOfZelda
             fire.Draw(spriteBatch);
             Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
             // Draws link Sprite based on where he is after update
-            item.Draw(spriteBatch);
+            // This is unneeded and doesn't work right now
+            //item.Draw(spriteBatch);
             boomerang.Draw(spriteBatch);
             sword.Draw(spriteBatch);
             bomb.Draw(spriteBatch);

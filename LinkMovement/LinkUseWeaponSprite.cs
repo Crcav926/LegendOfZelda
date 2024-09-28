@@ -31,7 +31,7 @@ namespace LegendOfZelda.LinkMovement
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Rectangle destination)
+        public void Draw(SpriteBatch spriteBatch, Rectangle destination, Color color)
         {
             spriteBatch.Draw(linkTexture, destination, spriteFrames[currentFrame], Color.White);
         }
