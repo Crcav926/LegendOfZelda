@@ -29,8 +29,11 @@ namespace LegendOfZelda
         public void Update(GameTime gameTime)
         {
             // change the destination rectangle size if needed.
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+            // sprites are really small so I'm scaling them up by 4x
+            int scale = 4;
+            width = spriteFrames[currentFrame].Width * scale;
+            height = spriteFrames[currentFrame].Height * scale;
+
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > timePerFrame)
             {
@@ -47,16 +50,19 @@ namespace LegendOfZelda
         public void Draw(SpriteBatch spriteBatch, Rectangle destination, Color color)
         {
             //create a new destination rectangle of the appropriate size
+            // thats why ClassItems created a 60x60 because it gets replaced anyway.
             Rectangle dest = new Rectangle(destination.X, destination.Y, width, height);
             spriteBatch.Draw(itemTexture, dest, spriteFrames[currentFrame], color);
         }
 
         public void SetSprite(int i)
         {
-
+            // this doesn't do anything right now.
         }
         public int GetSprite()
         {
+            //this is here, but no one calls it
+            // this only returns index because it needs to return something for syntax reasons.
             return index;
         }
     }

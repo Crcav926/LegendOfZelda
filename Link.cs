@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
+
       public class Link
     {
         public ISprite linkSprite;
