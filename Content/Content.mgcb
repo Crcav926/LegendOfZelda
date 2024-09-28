@@ -13,6 +13,8 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin boss.png
+=======
 #begin itemSpriteFinal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -23,8 +25,10 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:boss.png
+#begin enemySpriteSheetNew.png
+=======
 /build:itemSpriteFinal.png
-
 #begin LinkSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -35,5 +39,20 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:enemySpriteSheetNew.png
+
+#begin MonsterList1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MonsterList1.png
+=======
 /build:LinkSpriteSheet.png
+
 
