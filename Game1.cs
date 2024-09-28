@@ -32,6 +32,8 @@ namespace LegendOfZelda
         public int currentSprite { get; set; }
         public Texture2D linkTexture;
         public Texture2D itemTexture;
+        public Texture2D blockTexture;
+        public Block block;
         public Link LinkCharacter;
 
         // items was mostly for testing, static items is the stationary cyclable item.
@@ -95,6 +97,8 @@ namespace LegendOfZelda
             
             //load texture sheets
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
+            blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
+            block = new Block(blockTexture);
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture, itemTexture);
@@ -131,6 +135,7 @@ namespace LegendOfZelda
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
             LinkCharacter.Update(gameTime);
+            block.Update(gameTime);
             // Updates sprites in Item classes
             foreach (ClassItems item in items)
             {
@@ -153,8 +158,7 @@ namespace LegendOfZelda
             _spriteBatch.Begin();
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
-
-            //draws all items in item lists
+             //draws all items in item lists
             foreach (ClassItems item in items)
             {
                 item.Draw(_spriteBatch);
@@ -163,6 +167,8 @@ namespace LegendOfZelda
             {
                 item.Draw(_spriteBatch);
             }
+            block.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

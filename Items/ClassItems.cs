@@ -25,8 +25,7 @@ namespace LegendOfZelda
         Texture2D itemTex;
 
         public int direction;
-
-        public ClassItems(Texture2D ItemTexture, int x, int y)
+       public ClassItems(Texture2D ItemTexture, int x, int y)
         {
             // get the texture sheet
             itemTex = ItemTexture;
@@ -37,6 +36,7 @@ namespace LegendOfZelda
             
             // 0 is stationary 1 is vertical 2 is horizontal
             direction = 0;
+
 
             // set starting position
             xCord = x;

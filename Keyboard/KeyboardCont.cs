@@ -32,7 +32,9 @@ namespace LegendOfZelda
             //keeps track of keys that were already pressed down to detect transition.
             alrPressed = new List<Keys>();
             
+
             // set up the table which can be later moved to a content loader
+
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkMove(game, new Vector2(-1, 0));
             ICommand d = new CommLinkMove(game, new Vector2(1, 0));
@@ -45,7 +47,8 @@ namespace LegendOfZelda
             ICommand boomerang = new BoomerangComm(game);
             ICommand nextItem = new NextItemComm(game);
             ICommand lastItem = new LastItemComm(game);
-
+            ICommand nextBlock = new CommNextBlock(game);
+            ICommand lastBlock = new CommLastBlock(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
@@ -59,6 +62,8 @@ namespace LegendOfZelda
             RegisterCommand(Keys.D2 , boomerang);
             RegisterCommand(Keys.I, nextItem);
             RegisterCommand(Keys.U, lastItem);
+            RegisterCommand(Keys.T, lastBlock);
+            RegisterCommand(Keys.Y, nextBlock);
 
             ICommand pSC = new PreviousSpriteCommand(game);
             ICommand nSC = new NextSpriteCommand(game);
@@ -102,6 +107,7 @@ namespace LegendOfZelda
         {
             // get the keys that are currently pressed
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+
             foreach (Keys key in pressedKeys)
             {
                 // if the key has an on transition command mapped to it
