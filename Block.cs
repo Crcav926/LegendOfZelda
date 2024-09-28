@@ -24,7 +24,7 @@ public class Block : IBlock //IBlock currently does nothing, but depending on wh
     
     public void Draw(SpriteBatch spriteBatch)
     {
-       sprite.Draw(spriteBatch, destinationRectangle);
+       sprite.Draw(spriteBatch, destinationRectangle, Color.White);
     }
 
     public void Update(GameTime gameTime)

@@ -144,13 +144,13 @@ namespace LegendOfZelda
 
             foreach(ILinkItem item in inventory)
 
-            foreach (ClassItems item in items)
+            foreach (ClassItems itemM in items)
             {
-                item.Update(gameTime);
+                itemM.Update(gameTime);
             }
-            foreach (ClassItems item in staticItems)
+            foreach (ClassItems itemS in staticItems)
             {
-                item.Update(gameTime);
+                itemS.Update(gameTime);
             }
         }
 

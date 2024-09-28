@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LegendOfZelda
 {
-    internal class SpriteRectangleData
+    internal class SpriteRectangleData2
     {
         public static Dictionary<int, List<Rectangle>> SpriteFrames = new Dictionary<int, List<Rectangle>>()
     {

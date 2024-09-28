@@ -16,7 +16,7 @@ public class BlockSprite : ISprite
         index = spriteIndex;
         sourceRectangle = SpriteBlockData.GetRectangleData(spriteIndex);
     }
-    public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle)
+    public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color)
     {
         spriteBatch.Draw(blockTexture, destinationRectangle, sourceRectangle, Color.White);
     }
