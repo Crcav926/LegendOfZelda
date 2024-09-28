@@ -3,10 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections;
 using System.Collections.Generic;
-=======
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -17,7 +14,7 @@ namespace LegendOfZelda
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        <public Texture2D texture;
+        public Texture2D texture;
         private KeyboardController keyboardController;
         public ArrayList sprites;
         ArrayList controllerList;
@@ -62,8 +59,8 @@ namespace LegendOfZelda
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
  // Load the texture for the sprite sheet
-            Texture2D texture = Content.Load<Texture2D>("enemySpriteSheetNew");
-            Texture2D Bossture = Content.Load<Texture2D>("boss");
+            Texture2D texture = Content.Load<Texture2D>("enemySpriteSheet");
+            Texture2D Bossture = Content.Load<Texture2D>("bossSpriteSheet");
 
 
             SpriteFactory spriteFactory = new SpriteFactory(_spriteBatch, texture);
@@ -137,9 +134,9 @@ namespace LegendOfZelda
             // TODO: Add your drawing code here
             
             IEnemy current = (IEnemy)sprites[currentSprite];
-            
+            current.Draw();
+
             _spriteBatch.Begin();
-             current.Draw();
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
             
