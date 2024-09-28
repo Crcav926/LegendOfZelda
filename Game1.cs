@@ -18,6 +18,8 @@ namespace LegendOfZelda
         private KeyboardController keyboardController;
         public ArrayList sprites;
         ArrayList controllerList;
+
+        // Later these enemies will be moved out to level loader.
         IEnemy Gel;
         IEnemy Zol;
         IEnemy Keese;
@@ -31,11 +33,15 @@ namespace LegendOfZelda
         public Texture2D linkTexture;
         public Texture2D itemTexture;
         public Link LinkCharacter;
+
+        // items was mostly for testing, static items is the stationary cyclable item.
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
         private ClassItems item1;
         private ClassItems item2;
+
         private IController controllerK;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -58,7 +64,7 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
- // Load the texture for the sprite sheet
+            // Load the texture for the sprite sheet
             Texture2D texture = Content.Load<Texture2D>("enemySpriteSheet");
             Texture2D Bossture = Content.Load<Texture2D>("bossSpriteSheet");
 
@@ -66,6 +72,7 @@ namespace LegendOfZelda
             SpriteFactory spriteFactory = new SpriteFactory(_spriteBatch, texture);
             SpriteFactory spriteFactory2 = new SpriteFactory(_spriteBatch, Bossture);
 
+            //All this sprite loading will be moved later to either the level loader or an enemy manager
             // Use the factory to create the sprites
             Gel = spriteFactory.CreateGel();
             Zol = spriteFactory.CreateZol();
@@ -85,9 +92,7 @@ namespace LegendOfZelda
             sprites.Add(Aquamentus);
             // TODO: use this.Content to load your game content here
 
-            keyboardController.RegisterCommand(Keys.O, new PreviousSpriteCommand(this));
-            keyboardController.RegisterCommand(Keys.P, new NextSpriteCommand(this));
-
+            
             //load texture sheets
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
@@ -114,18 +119,27 @@ namespace LegendOfZelda
                 controller.Update();
             }
 
+            //Update the current enemy to have the correct sprite and draw it
+            // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
             IEnemy current = (IEnemy)sprites[currentSprite];
             current.Update(gameTime);
             current.Draw();
             
             // TODO: Add your update logic here
+            //Update the keyboard controller
             controllerK.Update();
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
             LinkCharacter.Update(gameTime);
             // Updates sprites in Item classes
-            item1.Update(gameTime);
-            item2.Update(gameTime);
+            foreach (ClassItems item in items)
+            {
+                item.Update(gameTime);
+            }
+            foreach (ClassItems item in staticItems)
+            {
+                item.Update(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -139,9 +153,16 @@ namespace LegendOfZelda
             _spriteBatch.Begin();
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
-            
-            item1.Draw(_spriteBatch);
-            item2.Draw(_spriteBatch);
+
+            //draws all items in item lists
+            foreach (ClassItems item in items)
+            {
+                item.Draw(_spriteBatch);
+            }
+            foreach (ClassItems item in staticItems)
+            {
+                item.Draw(_spriteBatch);
+            }
             _spriteBatch.End();
 
             base.Draw(gameTime);
