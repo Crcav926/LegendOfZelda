@@ -10,10 +10,6 @@ namespace LegendOfZelda
 {
     public interface ILink
     {
-
-        /*
-         * Updates Link to move up
-         */
         public void Move(Vector2 direction);
     }
 }

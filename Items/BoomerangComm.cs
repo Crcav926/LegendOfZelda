@@ -26,7 +26,6 @@ namespace LegendOfZelda
             {
                 item.SetSprite(3);
             }
-
         }
     }
 }

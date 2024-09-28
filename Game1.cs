@@ -30,6 +30,8 @@ namespace LegendOfZelda
         public int currentSprite { get; set; }
         public Texture2D linkTexture;
         public Texture2D itemTexture;
+        public Texture2D blockTexture;
+        public Block block;
         public Link LinkCharacter;
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
@@ -90,6 +92,8 @@ namespace LegendOfZelda
 
             //load texture sheets
             linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
+            blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
+            block = new Block(blockTexture);
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             // Have 0 to be the default facing left
             LinkCharacter = new Link(linkTexture, itemTexture);
@@ -123,6 +127,7 @@ namespace LegendOfZelda
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
             LinkCharacter.Update(gameTime);
+            block.Update(gameTime);
             // Updates sprites in Item classes
             item1.Update(gameTime);
             item2.Update(gameTime);
@@ -140,8 +145,9 @@ namespace LegendOfZelda
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
             
+            block.Draw(_spriteBatch);
             item1.Draw(_spriteBatch);
-            item2.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

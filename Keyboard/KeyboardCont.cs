@@ -29,6 +29,8 @@ namespace LegendOfZelda
             myGame = game;
             alrPressed = new List<Keys>();
             
+
+            
             // set up the table
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkMove(game, new Vector2(-1, 0));
@@ -42,7 +44,8 @@ namespace LegendOfZelda
             ICommand boomerang = new BoomerangComm(game);
             ICommand nextItem = new NextItemComm(game);
             ICommand lastItem = new LastItemComm(game);
-
+            ICommand nextBlock = new CommNextBlock(game);
+            ICommand lastBlock = new CommLastBlock(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
@@ -56,6 +59,8 @@ namespace LegendOfZelda
             RegisterCommand(Keys.D2 , boomerang);
             RegisterCommand(Keys.I, nextItem);
             RegisterCommand(Keys.U, lastItem);
+            RegisterCommand(Keys.T, lastBlock);
+            RegisterCommand(Keys.Y, nextBlock);
 
 
             // set up held down table
@@ -93,6 +98,7 @@ namespace LegendOfZelda
         public void Update()
         {
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+
             foreach (Keys key in pressedKeys)
             {
 

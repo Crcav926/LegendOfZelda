@@ -21,8 +21,8 @@ namespace LegendOfZelda
         Texture2D itemTex;
 
         public int direction;
-
         public ClassItems(Texture2D ItemTexture, int x, int y) //fix this
+
         {
             itemTex = ItemTexture;
             spriteIndex = 0;
@@ -31,6 +31,7 @@ namespace LegendOfZelda
             // set starting position
             // 0 is stationary 1 is vertical 2 is horizontal
             direction = 0;
+
             xCord = x;
             yCord = y;
         }
