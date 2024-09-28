@@ -36,6 +36,7 @@ namespace LegendOfZelda
             ICommand w = new CommLinkMove(game, new Vector2(0, -1));
             ICommand s = new CommLinkMove(game, new Vector2(0, 1));
             ICommand throwBoomerang = new CommThrowBoomerang(game);
+            ICommand e = new CommLinkDamaged(game);
             ICommand quit = new CommQuit(game);
             ICommand arrow = new ArrowComm(game);
             ICommand boomerang = new BoomerangComm(game);
@@ -48,6 +49,7 @@ namespace LegendOfZelda
             RegisterCommand(Keys.S, s);
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
+            RegisterCommand(Keys.E, e);
             RegisterCommand(Keys.D1, throwBoomerang);
             RegisterCommand(Keys.D2, new CommShootArrow(game));
             RegisterCommand(Keys.D3, new CommShootFire(game));

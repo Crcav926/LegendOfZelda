@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-      public class Link : ILink
+      public class Link
     {
         public ISprite linkSprite;
         public ILink linkState;
@@ -41,7 +41,10 @@ namespace LegendOfZelda
             fire = new Fire(itemTexture, direction, position, false);
             sword = new Sword(itemTexture, direction, position, false);
             bomb = new Bomb(itemTexture, direction, position, false);
+            damageEffect = new DamageAnimation();
         }
+
+        // Grouped in Link class for future ease to swap to state machine.
         public void Move(Vector2 newDirection)
         {
             // Sets direction to link's current movement direction
@@ -53,7 +56,12 @@ namespace LegendOfZelda
         {
 
         }
-        public void UseItem()
+
+        public void TakeDamage()
+        {
+            damageEffect.StartDamageEffect();
+        }
+        public void UseItem(SpriteBatch spriteBatch)
         {
             
         }
@@ -64,6 +72,9 @@ namespace LegendOfZelda
         // TODO: Add "ChangeDirection" class so Link controls his own sprite data
         public void Update(GameTime gameTime)
         {
+            item.Update(gameTime);
+            damageEffect.Update(gameTime);
+            linkGameTime = gameTime;
             arrow.Update(gameTime);
             boomerang.Update(gameTime);
             fire.Update(gameTime);
@@ -79,10 +90,11 @@ namespace LegendOfZelda
             fire.Draw(spriteBatch);
             Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
             // Draws link Sprite based on where he is after update
+            item.Draw(spriteBatch);
             boomerang.Draw(spriteBatch);
             sword.Draw(spriteBatch);
             bomb.Draw(spriteBatch);
-            linkSprite.Draw(spriteBatch, destinationRectangle);
+            linkSprite.Draw(spriteBatch, destinationRectangle, damageEffect.GetCurrentColor());
         }
     }
 }
