@@ -1,45 +1,38 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LegendOfZelda
+namespace LegendOfZelda.LinkMovement
 {
-    public class LinkBasicAnimation: ISprite
+    internal class LinkUseWeaponSprite : ISprite
     {
         Texture2D linkTexture;
         List<Rectangle> spriteFrames;
         int currentFrame = 0;
         int totalFrames;
-        double timePerFrame = 0.15; // Adjustable data
+        double timePerFrame = 0.35; // Adjustable data
         double timeElapsed = 0;
         Vector2 currentDirection;
 
-        public LinkBasicAnimation(Texture2D texture, Vector2 direction)
+        public LinkUseWeaponSprite(Texture2D texture, Vector2 direction)
         {
             linkTexture = texture;
             currentDirection = direction;
-            spriteFrames = SpriteRectangleData.GetRectangleData(currentDirection);
+            spriteFrames = AttackRectangleData.GetRectangleData(currentDirection);
             totalFrames = spriteFrames.Count;
         }
 
         public void Update(GameTime gameTime)
         {
 
-            timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timePerFrame)
-            {
-                currentFrame++;
-
-                if (currentFrame >= totalFrames)
-                {
-                    currentFrame = 0;
-                }
-                timeElapsed = 0;
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch, Rectangle destination)
-        { 
+        {
             spriteBatch.Draw(linkTexture, destination, spriteFrames[currentFrame], Color.White);
         }
 

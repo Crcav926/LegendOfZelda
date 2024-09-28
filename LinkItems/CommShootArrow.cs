@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfZelda.LinkItems
 {
-    internal class CommThrowBoomerang: ICommand
+    internal class CommShootArrow : ICommand
     {
             Game1 myGame;
             Vector2 linkDirection;
-            public CommThrowBoomerang(Game1 game)
+            public CommShootArrow(Game1 game)
             {
                 myGame = game;
             }
@@ -20,7 +20,7 @@ namespace LegendOfZelda.LinkItems
             {
                 linkDirection = myGame.LinkCharacter.direction;
                 myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
-                myGame.LinkCharacter.boomerang = new Boomerang(myGame.itemTexture, linkDirection, myGame.LinkCharacter.position, true);
+                myGame.LinkCharacter.arrow = new Arrow(myGame.itemTexture, linkDirection, myGame.LinkCharacter.position, true);
             }
     }
 }

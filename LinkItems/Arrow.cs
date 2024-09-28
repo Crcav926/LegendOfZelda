@@ -6,12 +6,12 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Boomerang : ILinkItem
+    public class Arrow : ILinkItem
     {
         Texture2D itemTexture;
         //list of rectangles that contains the frames
         List<Rectangle> spriteFrames;
-        int currentFrame = 0;
+        int currentFrame;
         int totalFrames;
         double timePerFrame = 0.05; // Adjustable data
         double timeElapsed = 0;
@@ -21,23 +21,25 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 speed = new Vector2(10, 10);
+        private Vector2 speed = new Vector2(5, 5);
         // Adjustable Distance vector
         private Vector2 maxDistance = new Vector2(150, 150);
         private Rectangle destination;
         private Boolean exists;
+        // private ISprite itemSprite;
 
-        public Boomerang(Texture2D texture, Vector2 boomerangDirection, Vector2 linkPosition, Boolean appear)
+        public Arrow(Texture2D texture, Vector2 arrowDirection, Vector2 linkPosition, Boolean appear)
         {
             exists = appear;
-            maxDistance *= boomerangDirection;
+            maxDistance *= arrowDirection;
             maxDistance += linkPosition;
             itemPosition = linkPosition;
             origin = linkPosition;
             itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Boomerang2");
+            spriteFrames = LinkItemDictionary.GetRectangleData("Arrow");
             totalFrames = spriteFrames.Count;
-            direction = boomerangDirection;
+            direction = arrowDirection;
+            currentFrame = SpriteDirectionData.GetDirection(direction);
         }
 
         public void Use()
@@ -50,25 +52,18 @@ namespace LegendOfZelda
             width = spriteFrames[currentFrame].Width * 4;
             height = spriteFrames[currentFrame].Height * 4;
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timePerFrame)
+            itemPosition += direction * speed;
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
+            if(direction == new Vector2(0, 0))
             {
-                currentFrame++;
-                itemPosition += direction * speed;
-                if(itemPosition == maxDistance)
-                {
-                    direction *= new Vector2(-1, -1);
-                }
-                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
-                if (itemPosition == origin)
-                {
-                    // If the Boomerang reached its max distance, get rid of it
-                    exists = false;
-                }
-                if (currentFrame >= totalFrames)
-                {
-                    currentFrame = 0;
-                }
-                timeElapsed = 0;
+                // Get rid of impact frame
+                exists = false;
+            }
+            if (itemPosition == maxDistance)
+            {
+                // Once arrow reaches its destination, switch to impact frame
+                currentFrame = totalFrames-1;
+                direction = new Vector2(0, 0);
             }
         }
 

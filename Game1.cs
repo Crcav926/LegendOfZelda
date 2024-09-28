@@ -20,8 +20,10 @@ namespace LegendOfZelda
         public Link LinkCharacter;
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
+        private List<ILinkItem> inventory = new List<ILinkItem>();
         private ClassItems item1;
         private ClassItems item2;
+        private Boomerang boomerang;
 
 
         private IController controllerK;
@@ -57,14 +59,13 @@ namespace LegendOfZelda
             //add the items to the item collection
             staticItems.Add(item1);
             items.Add(item2);
+            // inventory.Add();
 
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            
+
             // TODO: Add your update logic here
             controllerK.Update();
             base.Update(gameTime);
@@ -73,12 +74,15 @@ namespace LegendOfZelda
             // Updates sprites in Item classes
             item1.Update(gameTime);
             item2.Update(gameTime);
+            foreach(ILinkItem item in inventory)
+            {
+                item.Update(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);

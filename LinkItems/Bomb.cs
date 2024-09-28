@@ -6,14 +6,14 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Boomerang : ILinkItem
+    public class Bomb : ILinkItem
     {
         Texture2D itemTexture;
         //list of rectangles that contains the frames
         List<Rectangle> spriteFrames;
         int currentFrame = 0;
         int totalFrames;
-        double timePerFrame = 0.05; // Adjustable data
+        double timePerFrame = 0.3; // Adjustable data
         double timeElapsed = 0;
         private int width;
         private int height;
@@ -21,23 +21,20 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 speed = new Vector2(10, 10);
-        // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 offSet = new Vector2(50, 50);
         private Rectangle destination;
         private Boolean exists;
 
-        public Boomerang(Texture2D texture, Vector2 boomerangDirection, Vector2 linkPosition, Boolean appear)
+        public Bomb(Texture2D texture, Vector2 bombDirection, Vector2 linkPosition, Boolean appear)
         {
             exists = appear;
-            maxDistance *= boomerangDirection;
-            maxDistance += linkPosition;
             itemPosition = linkPosition;
             origin = linkPosition;
             itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Boomerang2");
+            spriteFrames = LinkItemDictionary.GetRectangleData("Bomb");
             totalFrames = spriteFrames.Count;
-            direction = boomerangDirection;
+            direction = bombDirection;
+            itemPosition += direction * offSet;
         }
 
         public void Use()
@@ -53,20 +50,11 @@ namespace LegendOfZelda
             if (timeElapsed > timePerFrame)
             {
                 currentFrame++;
-                itemPosition += direction * speed;
-                if(itemPosition == maxDistance)
-                {
-                    direction *= new Vector2(-1, -1);
-                }
                 destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
-                if (itemPosition == origin)
-                {
-                    // If the Boomerang reached its max distance, get rid of it
-                    exists = false;
-                }
                 if (currentFrame >= totalFrames)
                 {
                     currentFrame = 0;
+                    exists = false;
                 }
                 timeElapsed = 0;
             }

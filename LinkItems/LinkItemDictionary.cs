@@ -21,7 +21,9 @@ namespace LegendOfZelda
                 // Down Arrow Rectangle
                 new Rectangle(65, 56, 6, 16),
                 // Up Arrow Rectangle
-                new Rectangle(1, 36, 5, 16)
+                new Rectangle(1, 36, 5, 16),
+                // Arrow Colliding
+                new Rectangle(50, 40, 9, 8)
             }
         },
         { "MagicArrow", new List<Rectangle>()
