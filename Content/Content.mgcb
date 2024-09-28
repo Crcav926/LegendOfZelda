@@ -14,6 +14,8 @@
 #---------------------------------- Content ---------------------------------#
 
 #begin boss.png
+=======
+#begin itemSpriteFinal.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -24,8 +26,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:boss.png
-
 #begin enemySpriteSheetNew.png
+=======
+/build:itemSpriteFinal.png
+#begin LinkSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -48,4 +52,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MonsterList1.png
+=======
+/build:LinkSpriteSheet.png
+
 
