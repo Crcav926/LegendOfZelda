@@ -56,10 +56,12 @@ namespace LegendOfZelda
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.E, e);
-            RegisterCommand(Keys.D3, throwBoomerang);
+            RegisterCommand(Keys.D1, throwBoomerang);
+            RegisterCommand(Keys.D2, new CommShootArrow(game));
+            RegisterCommand(Keys.D3, new CommShootFire(game));
+            RegisterCommand(Keys.D4, new CommUseSword(game));
+            RegisterCommand(Keys.D5, new CommPlaceBomb(game));
             RegisterCommand(Keys.Q, c);
-            RegisterCommand(Keys.D1, arrow);
-            RegisterCommand(Keys.D2 , boomerang);
             RegisterCommand(Keys.I, nextItem);
             RegisterCommand(Keys.U, lastItem);
             RegisterCommand(Keys.T, lastBlock);
@@ -92,6 +94,11 @@ namespace LegendOfZelda
             releaseMappings.Add(Keys.D, rightStop);
             releaseMappings.Add(Keys.W, upStop);
             releaseMappings.Add(Keys.S, downStop);
+            releaseMappings.Add(Keys.D1, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D2, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D3, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D4, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D5, new CommStopUsingWeapon(game));
 
 
 

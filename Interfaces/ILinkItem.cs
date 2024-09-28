@@ -10,7 +10,7 @@ namespace LegendOfZelda
 {
     public interface ILinkItem
     {
-        public void Use(SpriteBatch spriteBatch, GameTime gameTime);
+        public void Use();
 
         public void Update(GameTime gameTime);
 

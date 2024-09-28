@@ -39,8 +39,10 @@ namespace LegendOfZelda
         // items was mostly for testing, static items is the stationary cyclable item.
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
+        private List<ILinkItem> inventory = new List<ILinkItem>();
         private ClassItems item1;
         private ClassItems item2;
+        private Boomerang boomerang;
 
         private IController controllerK;
 
@@ -110,6 +112,8 @@ namespace LegendOfZelda
             //add the items to the item collection
             staticItems.Add(item1);
             items.Add(item2);
+            // inventory.Add();
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -137,6 +141,9 @@ namespace LegendOfZelda
             LinkCharacter.Update(gameTime);
             block.Update(gameTime);
             // Updates sprites in Item classes
+
+            foreach(ILinkItem item in inventory)
+
             foreach (ClassItems item in items)
             {
                 item.Update(gameTime);
@@ -150,6 +157,7 @@ namespace LegendOfZelda
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
             // TODO: Add your drawing code here
             
             IEnemy current = (IEnemy)sprites[currentSprite];
