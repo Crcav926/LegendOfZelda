@@ -19,10 +19,11 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            if(myGame.LinkCharacter.animated == false)
+
+            if (myGame.LinkCharacter.boolean == false)
             {
-                myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, linkDirection);
-                myGame.LinkCharacter.animated = true;
+                myGame.LinkCharacter.linkSprite = myGame.LinkCharacter.spriteFactory.CreateLinkAnimatedSprite(linkDirection,myGame.LinkCharacter.position);
+                myGame.LinkCharacter.boolean = true;
             }
             myGame.LinkCharacter.Move(linkDirection);
         }

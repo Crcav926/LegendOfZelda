@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class CommStopMoving: ICommand
+    internal class CommStopMoving : ICommand
     {
         Game1 myGame;
         Vector2 linkDirection;
@@ -20,8 +20,7 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Execute()
         {
-            myGame.LinkCharacter.linkSprite = new LinkIdleSprite(myGame.linkTexture, linkDirection);
-            myGame.LinkCharacter.animated = false;
+            myGame.LinkCharacter.Idle();
         }
 
     }

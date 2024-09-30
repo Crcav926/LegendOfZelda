@@ -10,15 +10,13 @@ namespace LegendOfZelda.LinkItems
     internal class CommThrowBoomerang: ICommand
     {
             Game1 myGame;
-            Vector2 linkDirection;
             public CommThrowBoomerang(Game1 game)
             {
                 myGame = game;
             }
             public void Execute()
             {
-                linkDirection = myGame.LinkCharacter.direction;
-                myGame.LinkCharacter.item = new Boomerang(myGame.itemTexture, linkDirection, myGame.LinkCharacter.position);
+                myGame.LinkCharacter.Attack();
             }
     }
 }

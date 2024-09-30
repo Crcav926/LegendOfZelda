@@ -9,6 +9,7 @@ using System.Windows.Input;
 using LegendOfZelda.LinkMovement;
 using LegendOfZelda.LinkItems;
 
+
 namespace LegendOfZelda
 {
     internal class KeyboardCont : IController
@@ -36,12 +37,14 @@ namespace LegendOfZelda
             ICommand w = new CommLinkMove(game, new Vector2(0, -1));
             ICommand s = new CommLinkMove(game, new Vector2(0, 1));
             ICommand throwBoomerang = new CommThrowBoomerang(game);
+            //ICommand throwBomb = new CommThrowBomb(game);
+            //ICommand throwFireball = new CommThrowFireball(game);
             ICommand e = new CommLinkDamaged(game);
             ICommand quit = new CommQuit(game);
-            ICommand arrow = new ArrowComm(game);
-            ICommand boomerang = new BoomerangComm(game);
-            ICommand nextItem = new NextItemComm(game);
-            ICommand lastItem = new LastItemComm(game);
+            //ICommand arrow = new ArrowComm(game);
+            ////ICommand boomerang = new BoomerangComm(game);
+            //ICommand nextItem = new NextItemComm(game);
+            //ICommand lastItem = new LastItemComm(game);
 
 
             RegisterCommand(Keys.D0, quit);
@@ -50,12 +53,14 @@ namespace LegendOfZelda
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.E, e);
-            RegisterCommand(Keys.D3, throwBoomerang);
+            RegisterCommand(Keys.D2, throwBoomerang);
+            //RegisterCommand(Keys.D3, throwBomb);
+            //RegisterCommand(Keys.D4, throwFireball);
             RegisterCommand(Keys.Q, c);
-            RegisterCommand(Keys.D1, arrow);
-            RegisterCommand(Keys.D2 , boomerang);
-            RegisterCommand(Keys.I, nextItem);
-            RegisterCommand(Keys.U, lastItem);
+            //  RegisterCommand(Keys.D1, arrow);
+            ////  RegisterCommand(Keys.D2 , boomerang);
+            //  RegisterCommand(Keys.I, nextItem);
+            //  RegisterCommand(Keys.U, lastItem);
 
 
             // set up held down table
@@ -92,6 +97,7 @@ namespace LegendOfZelda
 
         public void Update()
         {
+
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
             foreach (Keys key in pressedKeys)
             {

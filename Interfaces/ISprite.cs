@@ -17,9 +17,13 @@ namespace LegendOfZelda
         /*
          * Draws the given sprite onto the screen
          */
-        void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color);
+        void Draw(SpriteBatch spriteBatch);
+        void SetPosition(Vector2 position);
 
-        void SetSprite(int i);
-        int GetSprite();
+        Texture2D GetTexture();
+        Rectangle GetDestinationRectangle(Vector2 newPosition);
+
+        Rectangle GetCurrentSourceRectangle();
+
     }
 }
