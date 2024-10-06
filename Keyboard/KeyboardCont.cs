@@ -23,14 +23,19 @@ namespace LegendOfZelda
         // constructor
         public KeyboardCont(Game1 game)
         {
+            // Controller mappings holds the on press transition commands
             controllerMappings = new Dictionary<Keys, ICommand>();
+            // these two are more self explanatory maps for while keys are held down and when a key is released
             heldDownMappings = new Dictionary<Keys, ICommand>();
             releaseMappings = new Dictionary<Keys, ICommand>();
 
             myGame = game;
+            //keeps track of keys that were already pressed down to detect transition.
             alrPressed = new List<Keys>();
             
-            // set up the table
+
+            // set up the table which can be later moved to a content loader
+
             ICommand c = new CommQuit(game);
             ICommand a = new CommLinkMove(game, new Vector2(-1, 0));
             ICommand d = new CommLinkMove(game, new Vector2(1, 0));
@@ -41,11 +46,12 @@ namespace LegendOfZelda
             //ICommand throwFireball = new CommThrowFireball(game);
             ICommand e = new CommLinkDamaged(game);
             ICommand quit = new CommQuit(game);
-            //ICommand arrow = new ArrowComm(game);
-            ////ICommand boomerang = new BoomerangComm(game);
-            //ICommand nextItem = new NextItemComm(game);
-            //ICommand lastItem = new LastItemComm(game);
-
+            ICommand arrow = new ArrowComm(game);
+            ICommand boomerang = new BoomerangComm(game);
+            ICommand nextItem = new NextItemComm(game);
+            ICommand lastItem = new LastItemComm(game);
+            ICommand nextBlock = new CommNextBlock(game);
+            ICommand lastBlock = new CommLastBlock(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
@@ -53,14 +59,21 @@ namespace LegendOfZelda
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.E, e);
-            RegisterCommand(Keys.D2, throwBoomerang);
-            //RegisterCommand(Keys.D3, throwBomb);
-            //RegisterCommand(Keys.D4, throwFireball);
+            RegisterCommand(Keys.D1, throwBoomerang);
+            RegisterCommand(Keys.D2, new CommShootArrow(game));
+            RegisterCommand(Keys.D3, new CommShootFire(game));
+            RegisterCommand(Keys.D4, new CommUseSword(game));
+            RegisterCommand(Keys.D5, new CommPlaceBomb(game));
             RegisterCommand(Keys.Q, c);
-            //  RegisterCommand(Keys.D1, arrow);
-            ////  RegisterCommand(Keys.D2 , boomerang);
-            //  RegisterCommand(Keys.I, nextItem);
-            //  RegisterCommand(Keys.U, lastItem);
+            RegisterCommand(Keys.I, nextItem);
+            RegisterCommand(Keys.U, lastItem);
+            RegisterCommand(Keys.T, lastBlock);
+            RegisterCommand(Keys.Y, nextBlock);
+
+            ICommand pSC = new PreviousSpriteCommand(game);
+            ICommand nSC = new NextSpriteCommand(game);
+            RegisterCommand(Keys.O, pSC);
+            RegisterCommand(Keys.P, nSC);
 
 
             // set up held down table
@@ -84,6 +97,11 @@ namespace LegendOfZelda
             releaseMappings.Add(Keys.D, rightStop);
             releaseMappings.Add(Keys.W, upStop);
             releaseMappings.Add(Keys.S, downStop);
+            releaseMappings.Add(Keys.D1, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D2, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D3, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D4, new CommStopUsingWeapon(game));
+            releaseMappings.Add(Keys.D5, new CommStopUsingWeapon(game));
 
 
 
@@ -97,20 +115,24 @@ namespace LegendOfZelda
 
         public void Update()
         {
-
+            // get the keys that are currently pressed
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+
             foreach (Keys key in pressedKeys)
             {
-
+                // if the key has an on transition command mapped to it
                 if (controllerMappings.ContainsKey(key))
                 {
+                    //and its transitioning and not being held
                     if (!alrPressed.Contains(key))
                     {
+                        //execute the on transition command and add it to alr Pressed so that the transition command wont re-trigger
                         controllerMappings[key].Execute();
                         alrPressed.Add(key);
                     }
 
                 }
+                //also any key that is being pressed should execute its held down command if it has one
                 if (heldDownMappings.ContainsKey(key))
                 {
                     heldDownMappings[key].Execute();
@@ -118,6 +140,7 @@ namespace LegendOfZelda
             }
             // remove unpressed keys
 
+            //get a list of keys that were released
             unPressList = new List<Keys>();
             foreach (Keys key in alrPressed)
             {
@@ -126,6 +149,7 @@ namespace LegendOfZelda
                     unPressList.Add(key);
                 }
             }
+            // execute their commands if they had them and remove them from the list of keys that were pressed
             foreach (Keys key in unPressList)
             {
                 // This executes the command on key release

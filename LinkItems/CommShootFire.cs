@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 
-namespace LegendOfZelda.LinkItems
+namespace LegendOfZelda
 {
-    internal class CommThrowBoomerang: ICommand
+    internal class CommShootFire : ICommand
     {
             Game1 myGame;
-            public CommThrowBoomerang(Game1 game)
+            Vector2 linkDirection;
+            public CommShootFire(Game1 game)
             {
                 myGame = game;
             }
             public void Execute()
             {
-                myGame.LinkCharacter.Attack();
                 linkDirection = myGame.LinkCharacter.direction;
                 myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
-                myGame.LinkCharacter.boomerang = new Boomerang(myGame.itemTexture, linkDirection, myGame.LinkCharacter.position, true);
+                myGame.LinkCharacter.fire = new Fire(myGame.itemTexture, linkDirection, myGame.LinkCharacter.position, true);
             }
     }
 }

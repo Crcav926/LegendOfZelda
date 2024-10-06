@@ -17,6 +17,7 @@ namespace LegendOfZelda
         /*
          * Draws the given sprite onto the screen
          */
+
         void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color);
 
     }
