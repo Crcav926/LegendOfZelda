@@ -123,18 +123,18 @@ namespace ObjectManagementExamples
         };
 
         // Don't think position should be a factor here, but it is here for simply a lack of time.
-        public ISprite CreateLinkStillSprite(Vector2 direction,Vector2 position)
+        public ISprite CreateLinkStillSprite(Vector2 direction)
         {
-            return new LinkSprite(linkSpriteSheet, LinkStillFrames[direction], position);
+            return new Sprite(linkSpriteSheet, LinkStillFrames[direction]);
         }
 
-        public ISprite CreateLinkAnimatedSprite(Vector2 direction, Vector2 position) {
-            return new LinkSprite(linkSpriteSheet, LinkSpriteFrames[direction], position);
+        public ISprite CreateLinkAnimatedSprite(Vector2 direction) {
+            return new Sprite(linkSpriteSheet, LinkSpriteFrames[direction]);
         }
 
-        public ISprite CreateLinkAttackSprite(Vector2 direction, Vector2 position)
+        public ISprite CreateLinkAttackSprite(Vector2 direction)
         {
-            return new LinkSprite(linkSpriteSheet, attackSpriteFrames[direction], position);
+            return new Sprite(linkSpriteSheet, attackSpriteFrames[direction]);
         }
 
 

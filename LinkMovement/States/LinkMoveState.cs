@@ -1,7 +1,10 @@
 ﻿using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace LegendOfZelda
 {
@@ -10,11 +13,15 @@ namespace LegendOfZelda
 
         private Link link;
         Vector2 newDirection;
-        public LinkMoveState(Link link)
+        private string name = "Move";
+        public LinkMoveState(Link linkCharacter)
         {
-            this.link = link;
+            this.link = linkCharacter;
             newDirection = link.direction;
+            Debug.WriteLine("Created New Sprite");
+            this.link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(newDirection);
         }
+        public string getState() { return name; }
 
         public void Idle()
         {
@@ -27,10 +34,13 @@ namespace LegendOfZelda
         public void Move(Vector2 newDirection)
         {
             // Updates links position and direction.
-            this.newDirection = newDirection;
-            link.position += newDirection;
-            link.linkSprite.SetPosition(link.position);
-            link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(link.direction, link.position);
+            if (link.direction != newDirection)
+            {
+                link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(newDirection);
+                link.direction = newDirection;
+            }
+            link.position += link.direction;
+            
         }
         public void Attack()
         {
@@ -39,14 +49,13 @@ namespace LegendOfZelda
 
         public void Update(GameTime gameTime)
         {
-            link.direction = newDirection;
             link.linkSprite.Update(gameTime);
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            link.linkSprite.Draw(spriteBatch);
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 60, 60);
+            link.linkSprite.Draw(spriteBatch, destination, Color.White);
         }
     }
 }

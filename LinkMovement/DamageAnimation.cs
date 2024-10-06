@@ -16,7 +16,6 @@ namespace LegendOfZelda.LinkMovement
         private int currentCycle;
         private int maxCycles;
         private List<Color> damageColors = new List<Color> { Color.White, Color.Red, Color.OrangeRed, Color.DarkGray, Color.Gray };
-        private Animation animation;
         private bool isDamaged;
         public bool IsDamaged
         {
@@ -32,7 +31,6 @@ namespace LegendOfZelda.LinkMovement
             timeElapsed = 0;
             // Time between each color frame change.
             colorChangeInterval = 0.05;
-            animation = new Animation(currentColorIndex, damageColors.Count, colorChangeInterval);
         }
 
         public void StartDamageEffect()
@@ -47,7 +45,6 @@ namespace LegendOfZelda.LinkMovement
 
         public void Update(GameTime gameTime)
         {
-            animation.animationLogic();
 
             // Iterates through a cycle after the animation logic.
             currentCycle++;

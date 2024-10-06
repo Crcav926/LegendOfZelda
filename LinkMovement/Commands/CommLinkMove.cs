@@ -19,6 +19,7 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Execute()
         {
+            myGame.LinkCharacter.setState(new LinkMoveState(myGame.LinkCharacter));
             myGame.LinkCharacter.Move(linkDirection);
         }
     }

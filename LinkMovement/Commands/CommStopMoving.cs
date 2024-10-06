@@ -15,7 +15,6 @@ namespace LegendOfZelda.LinkMovement
         public CommStopMoving(Game1 game, Vector2 direction)
         {
             myGame = game;
-            linkDirection = direction;
 
         }
         public void Execute()

@@ -16,6 +16,7 @@ namespace LegendOfZelda
         void Move(Vector2 direction);
         void Attack();
         void Idle();
+        string getState();
 
 
 

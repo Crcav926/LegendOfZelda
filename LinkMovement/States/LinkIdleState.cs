@@ -11,10 +11,13 @@ namespace LegendOfZelda.LinkMovement
     internal class LinkIdleState : ILinkState
     {
         private Link link;
+        private string name = "Idle";
         public LinkIdleState(Link link)
         {
             this.link = link;
+            link.linkSprite = link.spriteFactory.CreateLinkStillSprite(link.direction);
         }
+        public string getState() { return name; }
 
         public void Idle()
         {
@@ -40,7 +43,8 @@ namespace LegendOfZelda.LinkMovement
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            link.linkSprite.Draw(spriteBatch);
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 60, 60);
+            link.linkSprite.Draw(spriteBatch, destination, Color.White);
         }
     }
 }

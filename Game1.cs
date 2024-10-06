@@ -44,7 +44,7 @@ namespace LegendOfZelda
 
             //load texture sheets
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
-            LinkCharacter = new Link(this);
+            LinkCharacter = new Link();
             // Have 0 to be the default facing left
 
 
