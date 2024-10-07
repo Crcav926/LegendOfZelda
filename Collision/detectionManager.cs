@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LegendOfZelda.Collision
 {
-    internal class detectionManager
+    public class detectionManager
     {
         private List<hitbox> stationaryHitboxes;
         private List<hitbox> movingHitboxes;
         public List<Rectangle> collisions;
-        int room;
 
         public detectionManager()
         {
@@ -22,23 +22,17 @@ namespace LegendOfZelda.Collision
             collisions= new List<Rectangle> ();
         }
 
-        private void loadHitboxes(int roomNumber)
+        //this is used by other classes to add their hitbox to the list that we're checking for collisions.
+        public void addHitbox(hitbox box, int type)
         {
-            room = roomNumber;
-            //depending on what room we're in load the hitboxes,
-            // for now just load the ones for room 1.
-            // stationary is blocks and walls and items
-            stationaryHitboxes.Add(new hitbox("leftWall"));
-            stationaryHitboxes.Add(new hitbox("rightWall"));
-            stationaryHitboxes.Add(new hitbox("topWall"));
-            stationaryHitboxes.Add(new hitbox("bottomWall"));
-
-            //moving is link and enemies and link's items (arrow, boomerang, fire, tornado, sword)
-            movingHitboxes.Add(new hitbox("link"));
-            // items here
-            movingHitboxes.Add(new hitbox("boomerang"));
-
-            //enemies here
+            if (type == 1)
+            {
+                movingHitboxes.Add(box);
+            }
+            else
+            {
+                stationaryHitboxes.Add(box);
+            }
         }
 
         public void update()
@@ -47,31 +41,41 @@ namespace LegendOfZelda.Collision
             // so for all moving hitboxes
             for (int i = 0; i < movingHitboxes.Count; i++)
             {
+                //get first hitbox
+                Rectangle firstHitbox = movingHitboxes[i].getHitbox();
                 //check collision with all other moving hitboxes
                 for (int j=i+1; j<movingHitboxes.Count; j++)
                 {
+                    //get second box
+                    Rectangle secondHitbox = movingHitboxes[j].getHitbox();
                     //only collide with "bottom triangle"
                     // if theres a collision
-                    if (movingHitboxes[i].box.IntersectsWith(movingHitboxes[j].box))
+                    if (firstHitbox.IntersectsWith(secondHitbox))
                     {
                         //add it to the collides list.
-                        Rectangle intersection = Rectangle.Intersect(movingHitboxes[i].box, movingHitboxes[j].box);
+                        Rectangle intersection = Rectangle.Intersect(firstHitbox, secondHitbox);
                         collisions.Add(intersection);
                     }
                 }
                 //check collision with all stationary hitboxes
                 for (int j = i + 1; j < stationaryHitboxes.Count; j++)
                 {
+                    Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
                     //only collide with "bottom triangle"
                     // if theres a collision
-                    if (movingHitboxes[i].box.IntersectsWith(stationaryHitboxes[j].box))
+                    if (firstHitbox.IntersectsWith(stationaryHitbox))
                     {
                         //add it to the collides list.
-                        Rectangle intersection = Rectangle.Intersect(movingHitboxes[i].box, stationaryHitboxes[j].box);
+                        Rectangle intersection = Rectangle.Intersect(firstHitbox, stationaryHitbox);
                         collisions.Add(intersection);
                     }
                 }
             }
+        }
+
+        public List<Rectangle> getCollisions()
+        {
+            return collisions;
         }
     }
 }

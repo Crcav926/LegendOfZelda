@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LegendOfZelda.LinkMovement;
 using LegendOfZelda.LinkItems;
+using LegendOfZelda.Command;
 
 namespace LegendOfZelda
 {
@@ -31,7 +32,7 @@ namespace LegendOfZelda
             myGame = game;
             //keeps track of keys that were already pressed down to detect transition.
             alrPressed = new List<Keys>();
-            
+
 
             // set up the table which can be later moved to a content loader
 
@@ -49,6 +50,7 @@ namespace LegendOfZelda
             ICommand lastItem = new LastItemComm(game);
             ICommand nextBlock = new CommNextBlock(game);
             ICommand lastBlock = new CommLastBlock(game);
+            ICommand reset = new CommReset(game);
 
             RegisterCommand(Keys.D0, quit);
             RegisterCommand(Keys.W, w);
@@ -66,6 +68,7 @@ namespace LegendOfZelda
             RegisterCommand(Keys.U, lastItem);
             RegisterCommand(Keys.T, lastBlock);
             RegisterCommand(Keys.Y, nextBlock);
+            RegisterCommand(Keys.R, reset);
 
             ICommand pSC = new PreviousSpriteCommand(game);
             ICommand nSC = new NextSpriteCommand(game);

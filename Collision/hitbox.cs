@@ -8,24 +8,28 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda.Collision
 {
-    internal class hitbox
+    public class hitbox
     {
-        public Rectangle box;
+        //for now store stationary as 0 and moving as 1
+        int type;
         
         // initialize hitboxes
-        public hitbox(string boxName)
+        public hitbox(detectionManager manager, int type)
         {
-            // we should probably data drive this
-            // later we this will say\
-            // box = HitboxData.getRectangleData(boxName);
-            box = new Rectangle();
+            //the constructor is how the hitbox knows where to get the position and size.
+            //this will be added after the refactor since we would have to change it anyway.
+
+            //add it to the list
+            manager.addHitbox(this,type);
         }
 
-        public void update()
+        public Rectangle getHitbox()
         {
-            //I think we can put the position updates in here
-            //we should ask Kirby about coupling problems with interrogating entities where they are.
-            //alternatively command/methods that move items will also move their hitbox.
+            //call this method to get the position and size of a hitbox at a certain time, hitbox does not store this data
+            // this is just to prevent errors, it will be changed after refactor done
+            // for example position= enetity.position and size = entity.sprite.size
+            Rectangle box = new Rectangle(0, 0, 0, 0);
+            return box;
         }
     }
 }

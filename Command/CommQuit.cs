@@ -1,10 +1,9 @@
-﻿
-namespace LegendOfZelda
+﻿namespace LegendOfZelda.Command
 {
     internal class CommQuit : ICommand
     {
         Game1 myGame;
-        public CommQuit(Game1 game) 
+        public CommQuit(Game1 game)
         {
             myGame = game;
         }

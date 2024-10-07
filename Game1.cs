@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using LegendOfZelda.Collision;
 
 namespace LegendOfZelda
 {
@@ -46,13 +47,17 @@ namespace LegendOfZelda
 
         private IController controllerK;
 
+        //For collisions
+        detectionManager collisionDetector;
+        collisionHandler collHandler;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
-
+        
         protected override void Initialize()
         {
             controllerList = new ArrayList();
@@ -61,6 +66,10 @@ namespace LegendOfZelda
             keyboardController = new KeyboardController();
             // Initializes keyboard controller
             controllerK = new KeyboardCont(this);
+
+            //init the collision stuff
+            collisionDetector = new detectionManager();
+            collHandler = new collisionHandler();
             base.Initialize();
         }
 
@@ -126,7 +135,9 @@ namespace LegendOfZelda
             {
                 controller.Update();
             }
-
+            // update collision
+            collisionDetector.update();
+            collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
             IEnemy current = (IEnemy)sprites[currentSprite];
