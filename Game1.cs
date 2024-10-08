@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ObjectManagementExamples;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -36,14 +38,12 @@ namespace LegendOfZelda
         public Texture2D blockTexture;
         public Block block;
         public Link LinkCharacter;
-
-        // items was mostly for testing, static items is the stationary cyclable item.
+        private List<ILinkItem> inventory = new List<ILinkItem>();
+        private Boomerang boomerang;
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
-        private List<ILinkItem> inventory = new List<ILinkItem>();
         private ClassItems item1;
         private ClassItems item2;
-        private Boomerang boomerang;
 
         private IController controllerK;
 
@@ -65,6 +65,7 @@ namespace LegendOfZelda
             // Need discuss where to initialize
             keyboardController = new KeyboardController();
             // Initializes keyboard controller
+
             controllerK = new KeyboardCont(this);
 
             //init the collision stuff
@@ -80,6 +81,7 @@ namespace LegendOfZelda
             // Load the texture for the sprite sheet
             Texture2D texture = Content.Load<Texture2D>("enemySpriteSheet");
             Texture2D Bossture = Content.Load<Texture2D>("bossSpriteSheet");
+            EnemySpriteFactory.Instance.LoadAllTextures(Content);
 
 
             SpriteFactory spriteFactory = new SpriteFactory(_spriteBatch, texture);
@@ -94,7 +96,7 @@ namespace LegendOfZelda
             Goriya = spriteFactory.CreateGoriya();
             Wallmaster = spriteFactory.CreateWallmaster();
             BladeTrap = spriteFactory.CreateBladeTrap();
-            Aquamentus = spriteFactory2.CreateAquamentus();
+            Aquamentus = new Aquamentus(new Vector2(400, 200));
             sprites.Add(Gel);
             sprites.Add(Zol);
             sprites.Add(Keese);
@@ -105,23 +107,21 @@ namespace LegendOfZelda
             sprites.Add(Aquamentus);
             // TODO: use this.Content to load your game content here
 
-            
             //load texture sheets
-            linkTexture = Content.Load<Texture2D>("LinkSpriteSheet");
+            LinkSpriteFactory.Instance.LoadAllTextures(Content);
+            LinkCharacter = new Link();
             blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
             block = new Block(blockTexture);
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             // Have 0 to be the default facing left
-            LinkCharacter = new Link(linkTexture, itemTexture);
-            
+            // inventory.Add();
             // format is texture sheet, x cord, y cord.
-            item1 = new ClassItems(itemTexture, 600,200);
+            item1 = new ClassItems(itemTexture, 600, 200);
             item2 = new ClassItems(itemTexture, 200, 200);
 
             //add the items to the item collection
             staticItems.Add(item1);
             items.Add(item2);
-            // inventory.Add();
 
         }
 
@@ -142,18 +142,8 @@ namespace LegendOfZelda
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
             IEnemy current = (IEnemy)sprites[currentSprite];
             current.Update(gameTime);
-            current.Draw();
-            
-            // TODO: Add your update logic here
-            //Update the keyboard controller
-            controllerK.Update();
-            base.Update(gameTime);
-            // Calls link update, which updates his Sprite and Items
-            LinkCharacter.Update(gameTime);
-            block.Update(gameTime);
-            // Updates sprites in Item classes
-
-            foreach(ILinkItem item in inventory)
+            current.Draw(_spriteBatch);
+            Aquamentus.Update(gameTime);
 
             foreach (ClassItems itemM in items)
             {
@@ -163,6 +153,13 @@ namespace LegendOfZelda
             {
                 itemS.Update(gameTime);
             }
+            //Update the keyboard controller
+            controllerK.Update();
+            base.Update(gameTime);
+            // Calls link update, which updates his Sprite and Items
+            LinkCharacter.Update(gameTime);
+            block.Update(gameTime);
+            // Updates sprites in Item classes
         }
 
         protected override void Draw(GameTime gameTime)
@@ -171,22 +168,24 @@ namespace LegendOfZelda
 
             // TODO: Add your drawing code here
             
-            IEnemy current = (IEnemy)sprites[currentSprite];
-            current.Draw();
+            
 
             _spriteBatch.Begin();
+            // IEnemy current = (IEnemy)sprites[currentSprite];
+            // current.Draw(_spriteBatch);
+            Aquamentus.Draw(_spriteBatch);
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
              //draws all items in item lists
-            foreach (ClassItems item in items)
-            {
-                item.Draw(_spriteBatch);
-            }
-            foreach (ClassItems item in staticItems)
-            {
-                item.Draw(_spriteBatch);
-            }
             block.Draw(_spriteBatch);
+            foreach (ClassItems itemM in items)
+            {
+                itemM.Draw(_spriteBatch);
+            }
+            foreach (ClassItems itemS in staticItems)
+            {
+                itemS.Draw(_spriteBatch);
+            }
 
             _spriteBatch.End();
 

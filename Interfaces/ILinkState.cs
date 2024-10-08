@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    public interface ISprite
+    public interface ILinkState
     {
-        /*
-         * Update the given sprite based on game commands
-         */
+        void Draw(SpriteBatch spriteBatch);
         void Update(GameTime gameTime);
-        /*
-         * Draws the given sprite onto the screen
-         */
+        void TakeDamage();
+        void Move(Vector2 direction);
+        void Attack();
+        void Idle();
+        string getState();
 
-        void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color);
+
 
     }
 }

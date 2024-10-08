@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public interface IEnemy
 {
     void Update(GameTime gameTime);
-    void Draw();
+    void Draw(SpriteBatch spriteBatch);
 
     void takendamage();
 

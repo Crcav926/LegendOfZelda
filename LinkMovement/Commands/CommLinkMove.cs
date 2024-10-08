@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class CommLinkMove: ICommand
+    internal class CommLinkMove : ICommand
     {
         Game1 myGame;
         Vector2 linkDirection;
@@ -19,8 +19,8 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Execute()
         {
+            myGame.LinkCharacter.setState(new LinkMoveState(myGame.LinkCharacter));
             myGame.LinkCharacter.Move(linkDirection);
-            myGame.LinkCharacter.linkSprite = new LinkBasicAnimation(myGame.linkTexture, linkDirection);
         }
     }
 }

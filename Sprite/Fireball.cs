@@ -2,12 +2,12 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
+using LegendOfZelda;
 
 public class Fireball
 {
     private Vector2 position;
     private Vector2 velocity;
-    private Texture2D texture;
     private List<Rectangle> frames;
     private int currentFrame = 0;    // Current frame of  fireball 
     private float frameTime = 0.1f;  // Time to display..
@@ -18,31 +18,20 @@ public class Fireball
     private float scale = 3.0f;
     //private float growthRate = 0.02f;
     //private float maxScale = 5.0f;
+    private ISprite sprite;
 
-    public Fireball(Vector2 startPosition, Vector2 direction, Texture2D texture, List<Rectangle> frames)
+    public Fireball(Vector2 startPosition, Vector2 direction)
     {
         this.position = startPosition;
         this.velocity = direction * speed;
-        this.texture = texture;
-        this.frames = frames;
+        sprite = EnemySpriteFactory.Instance.CreateFireBallSprite();
     }
 
     public void Update(GameTime gameTime)
     {
         // Update the fireball position based on velocity
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        // Animate the fireball
-        frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (frameTimer >= frameTime)
-        {
-            currentFrame++;
-            if (currentFrame >= frames.Count)
-            {
-                currentFrame = 0;
-            }
-            frameTimer = 0f;
-        }
+        sprite.Update(gameTime);
 
         // Increase the size of the fireball
         //scale += growthRate;
@@ -65,15 +54,14 @@ public class Fireball
         // Draw the fireball only if it is active
         if (IsActive)
         {
-            Rectangle sourceRectangle = frames[currentFrame];  // Get the current frame
             Rectangle destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                (int)(sourceRectangle.Width * scale),
-                (int)(sourceRectangle.Height * scale)
+                24,
+                48
             );
 
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
     }
 }

@@ -145,7 +145,7 @@ public class Goriya : DynamicSprite
         }
     }
 
-    public override void Draw()
+    public override void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);

@@ -11,6 +11,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="LinkMovement\Dictionary\**" />
+    <EmbeddedResource Remove="LinkMovement\Dictionary\**" />
+    <None Remove="LinkMovement\Dictionary\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="LinkMovement\DownLinkSprite.cs" />
     <Compile Remove="LinkMovement\RightLinkSprite.cs" />
     <Compile Remove="LinkMovement\UpLinkSprite.cs" />

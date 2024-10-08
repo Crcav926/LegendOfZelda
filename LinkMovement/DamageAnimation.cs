@@ -13,7 +13,7 @@ namespace LegendOfZelda.LinkMovement
         // Index of current color from damageColors. 
         private int currentColorIndex;
         // How many times Miku will cycle through the damage animation.
-        private int cycleCount;
+        private int currentCycle;
         private int maxCycles;
         private List<Color> damageColors = new List<Color> { Color.White, Color.Red, Color.OrangeRed, Color.DarkGray, Color.Gray };
         private bool isDamaged;
@@ -39,30 +39,20 @@ namespace LegendOfZelda.LinkMovement
             isDamaged = true;
             timeElapsed = 0;
             currentColorIndex = 0;
-            cycleCount = 0;
+            currentCycle = 0;
+
         }
 
         public void Update(GameTime gameTime)
         {
 
-            timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            // Checks if enough time has elapsed to meet the interval
-            if (timeElapsed >= colorChangeInterval)
+            // Iterates through a cycle after the animation logic.
+            currentCycle++;
+            if (currentCycle >= maxCycles)
             {
-                currentColorIndex = (currentColorIndex + 1) % damageColors.Count;
-
-                if (currentColorIndex == 0)
-                {
-                    cycleCount++;
-                }
-
-                timeElapsed = 0;
-
-                if (cycleCount >= maxCycles)
-                {
-                    isDamaged = false;
-                }
+                isDamaged = false;
             }
+
         }
 
 

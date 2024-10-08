@@ -20,7 +20,6 @@ namespace LegendOfZelda
             {
                 linkDirection = myGame.LinkCharacter.direction;
                 myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
-                myGame.LinkCharacter.fire = new Fire(myGame.itemTexture, linkDirection, myGame.LinkCharacter.position, true);
             }
     }
 }

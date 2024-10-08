@@ -76,7 +76,7 @@ public class Gel : DynamicSprite
         position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
     }
 
-    public override void Draw()
+    public override void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle, and size it appropriately
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);

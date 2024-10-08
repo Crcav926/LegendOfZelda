@@ -12,7 +12,6 @@ namespace LegendOfZelda.LinkMovement
         public void Execute()
         {
             myGame.LinkCharacter.TakeDamage();
-
         }
     }
 }

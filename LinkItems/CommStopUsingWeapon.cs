@@ -20,9 +20,7 @@ namespace LegendOfZelda.LinkItems
         }
         public void Execute()
         {
-            linkDirection = myGame.LinkCharacter.direction;
-            myGame.LinkCharacter.linkSprite = new LinkIdleSprite(myGame.linkTexture, linkDirection);
-            myGame.LinkCharacter.animated = false;
+            
         }
     }
 }
