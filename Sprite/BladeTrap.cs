@@ -52,7 +52,7 @@ public class BladeTrap : DynamicSprite
         }
     }
 
-    public override void Draw()
+    public override void Draw(SpriteBatch s)
     {
         // Draw the BladeTrap only if it is active
         if (isActive)

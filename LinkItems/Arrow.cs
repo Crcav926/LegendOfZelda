@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ObjectManagementExamples;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,6 +21,7 @@ namespace LegendOfZelda
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
+        ISprite sprite;
         // Adjustable speed vector
         private Vector2 speed = new Vector2(5, 5);
         // Adjustable Distance vector
@@ -28,18 +30,17 @@ namespace LegendOfZelda
         private Boolean exists;
         // private ISprite itemSprite;
 
-        public Arrow(Texture2D texture, Vector2 arrowDirection, Vector2 linkPosition, Boolean appear)
+        public Arrow(Vector2 arrowDirection, Vector2 linkPosition, Boolean appear)
         {
             exists = appear;
             maxDistance *= arrowDirection;
             maxDistance += linkPosition;
             itemPosition = linkPosition;
             origin = linkPosition;
-            itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Arrow");
-            totalFrames = spriteFrames.Count;
             direction = arrowDirection;
             currentFrame = SpriteDirectionData.GetDirection(direction);
+            sprite = ItemSpriteFactory.Instance.CreateArrowSprite(currentFrame);
+
         }
 
         public void Use()
@@ -49,8 +50,6 @@ namespace LegendOfZelda
 
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             itemPosition += direction * speed;
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
@@ -62,7 +61,7 @@ namespace LegendOfZelda
             if (itemPosition == maxDistance)
             {
                 // Once arrow reaches its destination, switch to impact frame
-                currentFrame = totalFrames-1;
+                sprite = ItemSpriteFactory.Instance.CreateImpactSprite();
                 direction = new Vector2(0, 0);
             }
         }
@@ -71,7 +70,7 @@ namespace LegendOfZelda
         {
             if (exists)
             {
-                spriteBatch.Draw(itemTexture, destination, spriteFrames[currentFrame], Color.White);
+                sprite.Draw(spriteBatch, destination, Color.White);
             }
             //create a new destination rectangle of the appropriate size
         }

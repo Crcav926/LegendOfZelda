@@ -22,6 +22,12 @@ namespace LegendOfZelda
         private int maxHealth = 10;
         private int currentHealth = 10;
         public bool boolean = false;
+        public Boomerang boomerang;
+        public Arrow arrow;
+        public Fire fire;
+        public Sword sword;
+        public Bomb bomb;
+
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
@@ -30,6 +36,11 @@ namespace LegendOfZelda
             // Sets link to be Idle initially
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
+            // boomerang = new Boomerang(itemTexture, direction, position, false);
+            // arrow = new Arrow(itemTexture, direction, position, false);
+            // fire = new Fire(itemTexture, direction, position, false);
+            // sword = new Sword(itemTexture, direction, position, false);
+            // bomb = new Bomb(itemTexture, direction, position, false);
         }
         public void setState(ILinkState state) 
         {

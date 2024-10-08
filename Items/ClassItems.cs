@@ -25,15 +25,15 @@ namespace LegendOfZelda
         Texture2D itemTex;
 
         public int direction;
-       public ClassItems(Texture2D ItemTexture, int x, int y)
+        public ClassItems(Texture2D ItemTexture, int x, int y)
         {
             // get the texture sheet
             itemTex = ItemTexture;
             //index 0 is an invisible sprite
             spriteIndex = 0;
             // when first initialized get a new animated sprite object from itemTex sprite sheet with index 0.
-            sprite = new SpriteItemAnimated(itemTex, spriteIndex);
-            
+            sprite = new Sprite(itemTex, SpriteItemData.GetRectangleData(spriteIndex));
+
             // 0 is stationary 1 is vertical 2 is horizontal
             direction = 0;
 
@@ -46,7 +46,7 @@ namespace LegendOfZelda
         {
             // this move section should probably be separated out.
             // only move the arrow when we're in bounds.
-            if (xCord < 800 || xCord>0 ||yCord < 400 || yCord >0 )
+            if (xCord < 800 || xCord > 0 || yCord < 400 || yCord > 0)
             {
                 // this moves the arrow/boomerang sprite across the screen.
                 // this section was largely for testing purposes and will be removed later
@@ -56,17 +56,17 @@ namespace LegendOfZelda
                 }
                 else if (direction == 2)
                 {
-                   xCord++;
+                    xCord++;
                 }
                 // the 60 60 here doesn'
-                
+
             }
 
             sprite.Update(gameTime);
-            
-            
+
+
         }
-        public void SetSprite(int i) { spriteIndex = i;  sprite = new SpriteItemAnimated(itemTex, spriteIndex); }
+        public void SetSprite(int i) { spriteIndex = i; sprite = new Sprite(itemTex, SpriteItemData.GetRectangleData(spriteIndex)); }
 
         public int GetSprite() { return spriteIndex; }
 

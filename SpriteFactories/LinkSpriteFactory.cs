@@ -9,7 +9,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 
 
-namespace ObjectManagementExamples
+namespace LegendOfZelda
 {
     public class LinkSpriteFactory
     {

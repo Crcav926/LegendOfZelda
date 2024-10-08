@@ -28,7 +28,7 @@ public abstract class DynamicSprite : IEnemy
 
     public abstract void Update(GameTime gameTime);
 
-    public abstract void Draw();
+    public abstract void Draw(SpriteBatch spriteBatch);
 
     public abstract void takendamage();
 
