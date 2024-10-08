@@ -28,6 +28,10 @@ namespace LegendOfZelda
         public Sword sword;
         public Bomb bomb;
 
+        public Sprite hitInfo;
+        //collision
+        public Rectangle hitbox;
+
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
@@ -41,6 +45,11 @@ namespace LegendOfZelda
             // fire = new Fire(itemTexture, direction, position, false);
             // sword = new Sword(itemTexture, direction, position, false);
             // bomb = new Bomb(itemTexture, direction, position, false);
+
+            //this allows me to get the sprite into for the hitbox.
+            hitInfo = (Sprite)linkSprite;
+            //create hitbox
+            hitbox = new Rectangle((int)position.X, (int)position.Y, hitInfo.destinationRectangle.Width, hitInfo.destinationRectangle.Height);
         }
         public void setState(ILinkState state) 
         {
@@ -70,6 +79,10 @@ namespace LegendOfZelda
         }
         public void Update(GameTime gameTime)
         {
+            //This updates hitbox
+            hitInfo = (Sprite)linkSprite;
+            hitbox = new Rectangle((int)position.X, (int)position.Y, hitInfo.destinationRectangle.Width, hitInfo.destinationRectangle.Height);
+
             linkState.Update(gameTime);
             linkSprite.Update(gameTime);
         }

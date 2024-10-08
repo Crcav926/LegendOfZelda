@@ -5,7 +5,6 @@ using ObjectManagementExamples;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -70,7 +69,10 @@ namespace LegendOfZelda
 
             //init the collision stuff
             collisionDetector = new detectionManager();
-            collHandler = new collisionHandler();
+            collHandler = new collisionHandler(collisionDetector);
+
+            
+            
             base.Initialize();
         }
 
@@ -123,6 +125,9 @@ namespace LegendOfZelda
             staticItems.Add(item1);
             items.Add(item2);
 
+            // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
+            //load hitboxes
+            collisionDetector.addHitbox(LinkCharacter.hitbox, 1);
         }
 
         protected override void Update(GameTime gameTime)
@@ -160,6 +165,7 @@ namespace LegendOfZelda
             LinkCharacter.Update(gameTime);
             block.Update(gameTime);
             // Updates sprites in Item classes
+
         }
 
         protected override void Draw(GameTime gameTime)
