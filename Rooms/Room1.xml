@@ -1,0 +1,155 @@
+<XnaContent>
+<Asset Type="Room file">
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall1</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 6 Fish, 6 Dragon, 12 Dirt-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorLocked</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorOpen</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorOpen</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorOpen</ObjectName>
+    <Location>0 0</Location>
+</Item>
+</Asset>
+</XnaContent>
