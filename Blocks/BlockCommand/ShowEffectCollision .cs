@@ -15,6 +15,7 @@ public class ShowEffectCollision : ICommand
     }
 
     public void Execute()
+        //draw something out here
     {
         Console.WriteLine("Effect shown at collision area: " + context.CollisionRect);
     }
