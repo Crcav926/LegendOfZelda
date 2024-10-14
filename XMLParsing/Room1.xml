@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Hill2</ObjectName>
+		<Location>0 165</Location>
+	</Item>
+	<Item>
+		<ObjectType>Mario</ObjectType>
+		<ObjectName>MarioBase</ObjectName>
+		<Location>60 185</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Cloud1</ObjectName>
+		<Location>136 40</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Bush3</ObjectName>
+		<Location>184 184</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Hill1</ObjectName>
+		<Location>256 184</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>QuestionBlockCoin</ObjectName>
+		<Location>256 136</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Cloud1</ObjectName>
+		<Location>312 24</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>BrickBlock</ObjectName>
+		<Location>320 136</Location>
+	</Item>
+	<Item>
+		<!-- Shroom Block -->
+		<ObjectType>Block</ObjectType>
+		<ObjectName>QuestionBlockShroom</ObjectName>
+		<Location>336 136</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>BrickBlock</ObjectName>
+		<Location>352 136</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>QuestionBlockCoin</ObjectName>
+		<Location>368 136</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Bush1</ObjectName>
+		<Location>376 184</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>BrickBlock</ObjectName>
+		<Location>384 136</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>QuestionBlockCoin</ObjectName>
+		<Location>352 72</Location>
+	</Item>
+	<Item>
+		<ObjectType>Enemy</ObjectType>
+		<ObjectName>Goomba</ObjectName>
+		<Location>329 185</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Cloud3</ObjectName>
+		<Location>440 40</Location>
+	</Item>
+	<Item>
+		<ObjectType>Pipe</ObjectType>
+		<ObjectName>PipeSmall</ObjectName>
+		<Location>448 169</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Cloud2</ObjectName>
+		<Location>584 24</Location>
+	</Item>
+	<Item>
+		<ObjectType>Pipe</ObjectType>
+		<ObjectName>PipeMedium</ObjectName>
+		<Location>608 153</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Bush2</ObjectName>
+		<Location>664 184</Location>
+	</Item>
+	<Item>
+		<ObjectType>Enemy</ObjectType>
+		<ObjectName>Goomba</ObjectName>
+		<Location>660 185</Location>
+	</Item>
+	<Item>
+		<ObjectType>Pipe</ObjectType>
+		<ObjectName>PipeLarge</ObjectName>
+		<Location>736 137</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Hill2</ObjectName>
+		<Location>768 165</Location>
+	</Item>
+	<Item>
+		<ObjectType>Enemy</ObjectType>
+		<ObjectName>Goomba</ObjectName>
+		<Location>841 185</Location>
+	</Item>
+	<Item>
+		<ObjectType>Enemy</ObjectType>
+		<ObjectName>Goomba</ObjectName>
+		<Location>865 185</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Cloud1</ObjectName>
+		<Location>904 40</Location>
+	</Item>
+	<Item>
+		<ObjectType>Pipe</ObjectType>
+		<ObjectName>PipeLarge</ObjectName>
+		<Location>912 137</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Bush3</ObjectName>
+		<Location>952 184</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Hill1</ObjectName>
+		<Location>1024 184</Location>
+	</Item>
+	<Item>
+		<!-- Fire Shroom Block -->
+		<ObjectType>Block</ObjectType>
+		<ObjectName>HiddenBlock</ObjectName>
+		<Location>1024 120</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Cloud1</ObjectName>
+		<Location>1080 24</Location>
+	</Item>
+	<Item>
+		<ObjectType>Background</ObjectType>
+		<ObjectName>Bush1</ObjectName>
+		<Location>1144 184</Location>
+	</Item>
+	
+</root>

@@ -62,6 +62,8 @@ namespace LegendOfZelda
             // Initializes keyboard controller
 
             controllerK = new KeyboardCont(this);
+            // TEMP
+            Parsing parse = new Parsing();
             base.Initialize();
         }
 
