@@ -1,13 +1,12 @@
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ObjectManagementExamples;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LegendOfZelda
 {
@@ -15,5 +14,7 @@ namespace LegendOfZelda
     {
         //this interface is mostly just so that I can put any collideable object in the collision struct
 
+        public Rectangle getHitbox();
+       
     }
 }

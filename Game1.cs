@@ -127,7 +127,7 @@ namespace LegendOfZelda
 
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             //load hitboxes
-            collisionDetector.addHitbox(LinkCharacter.hitbox, 1);
+            collisionDetector.addHitbox(LinkCharacter, 1);
         }
 
         protected override void Update(GameTime gameTime)

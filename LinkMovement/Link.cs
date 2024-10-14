@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-      public class Link
+      public class Link : ICollideable
     {
         public ISprite linkSprite { get; set; }
         public ILinkState linkState { get; set; }
@@ -28,9 +28,9 @@ namespace LegendOfZelda
         public Sword sword;
         public Bomb bomb;
 
+        //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
-        //collision
-        public Rectangle hitbox;
+
 
         public Link()
         { 
@@ -48,8 +48,7 @@ namespace LegendOfZelda
 
             //this allows me to get the sprite into for the hitbox.
             hitInfo = (Sprite)linkSprite;
-            //create hitbox
-            hitbox = new Rectangle((int)position.X, (int)position.Y, hitInfo.destinationRectangle.Width, hitInfo.destinationRectangle.Height);
+            
         }
         public void setState(ILinkState state) 
         {
@@ -80,11 +79,19 @@ namespace LegendOfZelda
         public void Update(GameTime gameTime)
         {
             //This updates hitbox
+            //the sprite update doesn't work for weapon slots 2 and 3 but I think that's b/c those slots aren't refactored.
             hitInfo = (Sprite)linkSprite;
-            hitbox = new Rectangle((int)position.X, (int)position.Y, hitInfo.destinationRectangle.Width, hitInfo.destinationRectangle.Height);
+           
 
             linkState.Update(gameTime);
             linkSprite.Update(gameTime);
+        }
+        public Rectangle getHitbox()
+        {
+            //put data in the the hitbox
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, hitInfo.destinationRectangle.Width, hitInfo.destinationRectangle.Height);
+            //return it
+            return hitbox;
         }
         public void Draw(SpriteBatch spriteBatch)
         {

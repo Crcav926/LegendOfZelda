@@ -13,10 +13,10 @@ namespace LegendOfZelda.Collision
     {
         //when we figure out the .NET stuff it won't be a list anymore.
         //this is temporary
-        List<Rectangle> collisions;
+        List<collObject> collisionList;
         public collisionHandler(detectionManager collisionDetector)
         {
-            collisions = collisionDetector.getCollisions();
+            //not my problem right now
         }
 
         public void update()

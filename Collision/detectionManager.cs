@@ -1,49 +1,40 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ObjectManagementExamples;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LegendOfZelda.Collision
 {
     public class detectionManager
     {
-        private List<Rectangle> stationaryHitboxes;
-        private List<Rectangle> movingHitboxes;
-        public List<Rectangle> collisions;
+        private List<ICollideable> stationaryHitboxes;
+        private List<ICollideable> movingHitboxes;
+        public List<collObject> collisionList;
 
-        public struct overlaps
-        {
-            public overlaps()
-            {
-                ICollideable obj1;
-                ICollideable obj2;
-                Rectangle overlap;
-            }
-
-        }
 
         public detectionManager()
         {
-            stationaryHitboxes = new List<Rectangle>();
-            movingHitboxes = new List<Rectangle>();
-            collisions= new List<Rectangle> ();
+            stationaryHitboxes = new List<ICollideable>();
+            movingHitboxes = new List<ICollideable>();
+            collisionList = new List<collObject> ();
         }
 
         //this is used by other classes to add their hitbox to the list that we're checking for collisions.
-        public void addHitbox(Rectangle hitbox, int type)
+        public void addHitbox(ICollideable collideable, int type)
         {
+            // 1 is moving otherwise is stationary
             if (type == 1)
             {
-                movingHitboxes.Add(hitbox);
+                movingHitboxes.Add(collideable);
             }
             else
             {
-                stationaryHitboxes.Add(hitbox);
+                stationaryHitboxes.Add(collideable);
             }
         }
 
@@ -54,12 +45,12 @@ namespace LegendOfZelda.Collision
             for (int i = 0; i < movingHitboxes.Count; i++)
             {
                 //get first hitbox
-                Rectangle firstHitbox = movingHitboxes[i];
+                Rectangle firstHitbox = movingHitboxes[i].getHitbox();
                 //check collision with all other moving hitboxes
                 for (int j=i+1; j<movingHitboxes.Count; j++)
                 {
                     //get second box
-                    Rectangle secondHitbox = movingHitboxes[j];
+                    Rectangle secondHitbox = movingHitboxes[j].getHitbox();
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
                     // i got this math from stack overflow ill fix later.
@@ -68,15 +59,16 @@ namespace LegendOfZelda.Collision
                     {
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
-                        Rectangle collision = new Rectangle(0, 0, 0, 0);
+                        Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
+                        collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap);
 
-                        collisions.Add(collision);
+                        collisionList.Add(info);
                     }
                 }
                 //check collision with all stationary hitboxes
                 for (int j = i + 1; j < stationaryHitboxes.Count; j++)
                 {
-                    Rectangle stationaryHitbox = stationaryHitboxes[j];
+                    Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
                     if (firstHitbox.X < (stationaryHitbox.X + stationaryHitbox.Width) && (firstHitbox.X + firstHitbox.Width) > stationaryHitbox.X &&
@@ -84,18 +76,38 @@ namespace LegendOfZelda.Collision
                     {
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
-                        Rectangle collision = new Rectangle(0, 0, 0, 0);
-
-                        collisions.Add(collision);
+                        Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
+                        collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap);
+                        collisionList.Add(info);
                     }
                 
                }
             }
         }
-
-        public List<Rectangle> getCollisions()
+        private Rectangle getOverlap(Rectangle rect1, Rectangle rect2)
         {
-            return collisions;
+            // Find the maximum of the left edges (x)
+            int x1 = Math.Max(rect1.Left, rect2.Left);
+            // Find the minimum of the right edges (x + width)
+            int x2 = Math.Min(rect1.Right, rect2.Right);
+            // Find the maximum of the top edges (y)
+            int y1 = Math.Max(rect1.Top, rect2.Top);
+            // Find the minimum of the bottom edges (y + height)
+            int y2 = Math.Min(rect1.Bottom, rect2.Bottom);
+
+            // Check if the calculated rectangle is valid (non-empty)
+            if (x1 < x2 && y1 < y2)
+            {
+                // Return the intersection rectangle
+                return new Rectangle(x1, y1, x2 - x1, y2 - y1);
+            }
+
+            // No intersection, return empty rectangle
+            return new Rectangle(0, 0, 0, 0);
+        }
+        public List<collObject> getCollisions()
+        {
+            return collisionList;
         }
     }
 }
