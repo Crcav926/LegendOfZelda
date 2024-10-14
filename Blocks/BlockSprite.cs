@@ -21,6 +21,10 @@ public class BlockSprite : ISprite, ICollideable
             // I added position so I can get its hitbox.
             hitboxPosition = new Rectangle(0, 0, 0, 0);
     }
+
+    public Vector2 Velocity { get; internal set; }
+    public Vector2 Position { get; internal set; }
+
     public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color)
     {
             hitboxPosition = destinationRectangle;
