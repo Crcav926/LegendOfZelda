@@ -46,19 +46,21 @@ namespace LegendOfZelda.Collision
             {
                 //get first hitbox
                 Rectangle firstHitbox = movingHitboxes[i].getHitbox();
+                //Debug.WriteLine("First Hitbox retrieved");
                 //check collision with all other moving hitboxes
                 for (int j=i+1; j<movingHitboxes.Count; j++)
                 {
                     //get second box
                     Rectangle secondHitbox = movingHitboxes[j].getHitbox();
+                    //Debug.WriteLine("Second Hitbox retrieved");
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
                     // i got this math from stack overflow ill fix later.
-                    if (firstHitbox.X < (secondHitbox.X+secondHitbox.Width) && (firstHitbox.X+firstHitbox.Width) > secondHitbox.X &&
-    firstHitbox.Y < (secondHitbox.Y +secondHitbox.Height) && (firstHitbox.Y+firstHitbox.Height) > secondHitbox.Y)
+                    if (doIntersect(firstHitbox, secondHitbox))
                     {
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
+                        Debug.WriteLine("Collision Detected");
                         Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
                         collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap);
 
@@ -66,16 +68,17 @@ namespace LegendOfZelda.Collision
                     }
                 }
                 //check collision with all stationary hitboxes
-                for (int j = i + 1; j < stationaryHitboxes.Count; j++)
+                for (int j = 0 ; j < stationaryHitboxes.Count; j++)
                 {
                     Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
+                    //Debug.WriteLine("Stationary Hitbox retrieved");
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
-                    if (firstHitbox.X < (stationaryHitbox.X + stationaryHitbox.Width) && (firstHitbox.X + firstHitbox.Width) > stationaryHitbox.X &&
-    firstHitbox.Y < (stationaryHitbox.Y + stationaryHitbox.Height) && (firstHitbox.Y + firstHitbox.Height) > stationaryHitbox.Y)
+                    if (doIntersect(firstHitbox, stationaryHitbox))
                     {
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
+                        Debug.WriteLine("Collision Detected");
                         Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
                         collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap);
                         collisionList.Add(info);
@@ -83,6 +86,26 @@ namespace LegendOfZelda.Collision
                 
                }
             }
+            var className = movingHitboxes[0].GetType().Name;
+            var className2 = stationaryHitboxes[0].GetType().Name;
+            //Debug.WriteLine($"In Collideable list: {className} {className2}");
+        }
+        private Boolean doIntersect(Rectangle rect1, Rectangle rect2)
+        {
+            // Check if one rectangle is to the left or right of the other
+            if (rect1.X + rect1.Width < rect2.X || rect2.X + rect2.Width < rect1.X)
+            {
+                return false; // No horizontal overlap
+            }
+
+            // Check if one rectangle is above or below the other
+            if (rect1.Y + rect1.Height < rect2.Y || rect2.Y + rect2.Height < rect1.Y)
+            {
+                return false; // No vertical overlap
+            }
+
+            // If there is no horizontal or vertical separation, the rectangles intersect
+            return true;
         }
         private Rectangle getOverlap(Rectangle rect1, Rectangle rect2)
         {

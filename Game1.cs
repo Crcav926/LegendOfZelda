@@ -48,7 +48,7 @@ namespace LegendOfZelda
 
         //For collisions
         detectionManager collisionDetector;
-        collisionHandler collHandler;
+        CollisionHandler collHandler;
 
         public Game1()
         {
@@ -69,7 +69,7 @@ namespace LegendOfZelda
 
             //init the collision stuff
             collisionDetector = new detectionManager();
-            collHandler = new collisionHandler(collisionDetector);
+            collHandler = new CollisionHandler(collisionDetector);
 
             
             
@@ -128,6 +128,7 @@ namespace LegendOfZelda
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             //load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);
+            collisionDetector.addHitbox(block,0);
         }
 
         protected override void Update(GameTime gameTime)

@@ -88,8 +88,13 @@ namespace LegendOfZelda
         }
         public Rectangle getHitbox()
         {
+            //for now assume that Link is 16*4 by 16*4
             //put data in the the hitbox
-            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, hitInfo.destinationRectangle.Width, hitInfo.destinationRectangle.Height);
+            int tempDimension = 16 * 4;
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, tempDimension, tempDimension);
+            //Debug.WriteLine("Hitbox of Link retrieved!");
+            
+            //Debug.WriteLine($"Link Hitbox:{position.X} {position.Y} {tempDimension} {tempDimension}");
             //return it
             return hitbox;
         }
