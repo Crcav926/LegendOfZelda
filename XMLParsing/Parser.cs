@@ -28,12 +28,14 @@ namespace LegendOfZelda
                 XmlNode objectNameNode = node.SelectSingleNode("ObjectName");
                 XmlNode locationNode = node.SelectSingleNode("Location");
                 if (objectTypeNode != null)
-                
+                {
+
                     objectType = objectTypeNode.InnerText;
-                
-                if (objectNameNode != null) 
+                }
+                if (objectNameNode != null)
+                {
                     objectName = objectNameNode.InnerText;
-                
+                }
                 if (locationNode != null)
                 {
                     string[] coords = locationNode.InnerText.Split(' ');
