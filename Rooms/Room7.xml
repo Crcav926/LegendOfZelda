@@ -10,72 +10,87 @@
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
-<!--Object Types: 4 Blocks-->
+<!--Object Types: 6 Blocks-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 65</Location>
+    <Location>113 65</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>177 65</Location>
+    <Location>129 65</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 97</Location>
+    <Location>113 81</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>177 97</Location>
+    <Location>129 81</Location>
 </Item>
-<!--Enemy Types: 5 Stalfos, all must be defeated for a key-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>113 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>129 97</Location>
+</Item>
+<!--Enemy Types: 6 Keese, they must be killed to open the right door.-->
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>81 33</Location>
-</Item>
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
+    <ObjectName>Keese</ObjectName>
     <Location>161 33</Location>
 </Item>
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>191 33</Location>
+    <ObjectName>Keese</ObjectName>
+    <Location>49 49</Location>
 </Item>
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>177 81</Location>
+    <ObjectName>Keese</ObjectName>
+    <Location>33 81</Location>
 </Item>
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>161 113</Location>
+    <ObjectName>Keese</ObjectName>
+    <Location>81 97</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>49 113</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>161 129</Location>
 </Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorBombableWall</ObjectName>
+    <ObjectName>UpDoorLocked</ObjectName>
     <Location>113 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>LeftDoorOpen</ObjectName>
+    <ObjectName>LeftDoorWall</ObjectName>
     <Location>0 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>RightDoorOpen</ObjectName>
+    <ObjectName>RightDoorClosed</ObjectName>
     <Location>225 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>DownDoorOpen</ObjectName>
+    <ObjectName>DownDoorWall</ObjectName>
     <Location>113 145</Location>
 </Item>
 </root>

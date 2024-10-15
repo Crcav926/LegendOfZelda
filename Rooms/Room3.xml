@@ -1,6 +1,5 @@
 <XnaContent>
 <root>
-<!--Sample file to copy, most of this should be the same for rooms.-->
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>

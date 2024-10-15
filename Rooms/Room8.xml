@@ -1,0 +1,58 @@
+<XnaContent>
+<root>
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 1 PUSHABLE Block; not sure what type this needs-->
+<!--Pushing this block is what opens the left door-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>PushableBlock</ObjectName>
+    <Location>113 81</Location>
+</Item>
+<!--Enemy Types: 3 Gel; killing them allows the block to be pushed-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Gel</ObjectName>
+    <Location>97 49</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Gel</ObjectName>
+    <Location>177 49</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Gel</ObjectName>
+    <Location>65 65</Location>
+</Item>
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorWall</ObjectName>
+    <Location>113 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorClosed</ObjectName>
+    <Location>0 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorOpen</ObjectName>
+    <Location>225 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorOpen</ObjectName>
+    <Location>113 145</Location>
+</Item>
+</root>
+</XnaContent>
