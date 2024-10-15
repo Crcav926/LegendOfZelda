@@ -7,13 +7,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace LegendOfZelda.Collision
 {
     public class detectionManager
     {
+        //these lists should be moved to the obejct manager later
         private List<ICollideable> stationaryHitboxes;
         private List<ICollideable> movingHitboxes;
+
         public List<collObject> collisionList;
 
 
@@ -45,13 +48,13 @@ namespace LegendOfZelda.Collision
             for (int i = 0; i < movingHitboxes.Count; i++)
             {
                 //get first hitbox
-                Rectangle firstHitbox = movingHitboxes[i].getHitbox();
+                Microsoft.Xna.Framework.Rectangle firstHitbox = movingHitboxes[i].getHitbox();
                 //Debug.WriteLine("First Hitbox retrieved");
                 //check collision with all other moving hitboxes
                 for (int j=i+1; j<movingHitboxes.Count; j++)
                 {
                     //get second box
-                    Rectangle secondHitbox = movingHitboxes[j].getHitbox();
+                    Microsoft.Xna.Framework.Rectangle secondHitbox = movingHitboxes[j].getHitbox();
                     //Debug.WriteLine("Second Hitbox retrieved");
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
@@ -61,7 +64,7 @@ namespace LegendOfZelda.Collision
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
                         Debug.WriteLine("Collision Detected");
-                        Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
+                        Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
                         collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap);
 
                         collisionList.Add(info);
@@ -70,7 +73,7 @@ namespace LegendOfZelda.Collision
                 //check collision with all stationary hitboxes
                 for (int j = 0 ; j < stationaryHitboxes.Count; j++)
                 {
-                    Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
+                    Microsoft.Xna.Framework.Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
                     //Debug.WriteLine("Stationary Hitbox retrieved");
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
@@ -79,7 +82,7 @@ namespace LegendOfZelda.Collision
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
                         Debug.WriteLine("Collision Detected");
-                        Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
+                        Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
                         collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap);
                         collisionList.Add(info);
                     }
@@ -90,7 +93,7 @@ namespace LegendOfZelda.Collision
             var className2 = stationaryHitboxes[0].GetType().Name;
             //Debug.WriteLine($"In Collideable list: {className} {className2}");
         }
-        private Boolean doIntersect(Rectangle rect1, Rectangle rect2)
+        private Boolean doIntersect(Microsoft.Xna.Framework.Rectangle rect1, Microsoft.Xna.Framework.Rectangle rect2)
         {
             // Check if one rectangle is to the left or right of the other
             if (rect1.X + rect1.Width < rect2.X || rect2.X + rect2.Width < rect1.X)
@@ -107,26 +110,38 @@ namespace LegendOfZelda.Collision
             // If there is no horizontal or vertical separation, the rectangles intersect
             return true;
         }
-        private Rectangle getOverlap(Rectangle rect1, Rectangle rect2)
+        private Microsoft.Xna.Framework.Rectangle getOverlap(Microsoft.Xna.Framework. Rectangle rect1, Microsoft.Xna.Framework. Rectangle rect2)
         {
-            // Find the maximum of the left edges (x)
-            int x1 = Math.Max(rect1.Left, rect2.Left);
-            // Find the minimum of the right edges (x + width)
-            int x2 = Math.Min(rect1.Right, rect2.Right);
-            // Find the maximum of the top edges (y)
-            int y1 = Math.Max(rect1.Top, rect2.Top);
-            // Find the minimum of the bottom edges (y + height)
-            int y2 = Math.Min(rect1.Bottom, rect2.Bottom);
+            //This is alot messier than the old version, but the old version was lowkey pirated so...
+            // convert to system.drawing rectangle and just call intersect lol.
+            int r1x = rect1.X;
+            int r1y = rect1.Y;
+            int r1w = rect1.Width;
+            int r1h = rect1.Height;
 
-            // Check if the calculated rectangle is valid (non-empty)
-            if (x1 < x2 && y1 < y2)
+            int r2x = rect2.X;  
+            int r2y = rect2.Y;
+            int r2w = rect2.Width;
+            int r2h = rect2.Height;
+
+            System.Drawing.Rectangle r1 = new System.Drawing.Rectangle(r1x, r1y, r1w, r1h);
+            System.Drawing.Rectangle r2 = new System.Drawing.Rectangle(r2x, r2y, r2w, r2h);
+
+            System.Drawing.Rectangle rO = new System.Drawing.Rectangle(0, 0, 0, 0);
+            if (r1.IntersectsWith(r2))
             {
-                // Return the intersection rectangle
-                return new Rectangle(x1, y1, x2 - x1, y2 - y1);
+                rO =System.Drawing.Rectangle.Intersect(r1,r2);
             }
 
-            // No intersection, return empty rectangle
-            return new Rectangle(0, 0, 0, 0);
+            int rOx = rO.X;
+            int rOy = rO.Y; 
+            int rOw = rO.Width;
+            int rOh = rO.Height;
+
+            Microsoft.Xna.Framework.Rectangle overlap = new Microsoft.Xna.Framework.Rectangle(rOx, rOy, rOw, rOh);
+
+            return overlap;
+           
         }
         public List<collObject> getCollisions()
         {
