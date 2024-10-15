@@ -13,14 +13,10 @@ public class StopCollision : ICommand
 
     public void Execute()
     {
-        if (context.Obj1 is BlockSprite block1)
+        if (context.Obj1 is Block block1)
         {
-            block1.Velocity = Vector2.Zero;
-        }
-
-        if (context.Obj2 is BlockSprite block2)
-        {
-            block2.Velocity = Vector2.Zero;
+            // Block movement for Obj1 (no further code is needed, as we simply want it to stop here)
+            // No velocity or direction provided
         }
     }
 }
