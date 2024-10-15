@@ -1,6 +1,5 @@
 <XnaContent>
-<Asset Type="/Content/ZeldaTileSheet.png">
-<!--This file path may be wrong, not sure exactly what we need.-->
+<root>
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
@@ -154,11 +153,5 @@
     <ObjectName>DownDoorOpen</ObjectName>
     <Location>113 145</Location>
 </Item>
-<!--I know it was mentioned that we might need Link here, so here it is for testing. Not sure if it's formatted correctly.-->
-<Item>
-    <ObjectType>Link</ObjectType>
-    <ObjectName>Link</ObjectName>
-    <Location>120 81</Location>
-</Item>
-</Asset>
+</root>
 </XnaContent>
