@@ -1,54 +1,58 @@
+using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics;
+using System.Net.Mime;
 using System.Xml;
-
-namespace LegendOfZelda;
-
-public class LevelLoader
+namespace LegendOfZelda
 {
-    public LevelLoader()
+    internal class Parsing
     {
+        public string objectType { get; set; }
+        public string objectName { get; set; }
+        public Vector2 position { get; set; }
 
-    }
+        public Parsing(XmlDocument doc)
 
-    private XmlReaderSettings settings = new XmlReaderSettings(); //should this be in constructor?
-
-    public void Parse(System.IO.Stream stream)//pass in stream
-    {
-        XmlReader reader = XmlReader.Create(stream, settings);
-        while(reader.Read())//copied from the XML class 
         {
-            switch (reader.NodeType) {
-        case XmlNodeType.Element:
-            Console.Write("<{0}>", reader.Name);
-            break;
-        case XmlNodeType.Text:
-            Console.Write(reader.Value);
-            break;
-        case XmlNodeType.CDATA:
-            Console.Write("<![CDATA[{0}]]>", reader.Value);
-            break;
-        case XmlNodeType.ProcessingInstruction:
-            Console.Write("<?{0} {1}?>", reader.Name, reader.Value);
-            break;
-        case XmlNodeType.Comment:
-            Console.Write("<!--{0}-->", reader.Value);
-            break;
-        case XmlNodeType.XmlDeclaration:
-            Console.Write("<?xml version='1.0'?>");
-            break;
-        case XmlNodeType.Document:
-            break;
-        case XmlNodeType.DocumentType:
-            Console.Write("<!DOCTYPE {0} [{1}]", reader.Name, reader.Value);
-            break;
-        case XmlNodeType.EntityReference:
-            Console.Write(reader.Name);
-            break;
-        case XmlNodeType.EndElement:
-            Console.Write("</{0}>", reader.Name);
-            break;
+            LoadObjects(doc);
         }
+
+        private void LoadObjects(XmlDocument document)
+        {
+            XmlDocument doc = document;
+            // Momentary change to check the XML parsing success
+            // doc.Load("C:\\Users\\crcav926\\source\\repos\\FinalRefactor\\Rooms\\Room1.xml");
+
+            foreach (XmlNode node in doc.DocumentElement)
+            {
+
+                XmlNode objectTypeNode = node.SelectSingleNode("ObjectType");
+                XmlNode objectNameNode = node.SelectSingleNode("ObjectName");
+                XmlNode locationNode = node.SelectSingleNode("Location");
+                if (objectTypeNode != null)
+                {
+
+                    objectType = objectTypeNode.InnerText;
+                }
+                if (objectNameNode != null)
+                {
+                    objectName = objectNameNode.InnerText;
+                }
+                if (locationNode != null)
+                {
+                    string[] coords = locationNode.InnerText.Split(' ');
+                    if (coords.Length == 2)
+                    {
+                        int x = int.Parse(coords[0]);
+                        int y = int.Parse(coords[1]);
+
+                        position = new Vector2(x, y);
+                    }
+                }
+                // DELETE LATER
+                Debug.WriteLine($"Gathered info: {objectType}, {objectName}, {position}");
+            }
+
         }
     }
-
 }

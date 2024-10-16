@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using LegendOfZelda.Collision;
+using System.Xml;
 
 namespace LegendOfZelda
 {
@@ -72,8 +73,7 @@ namespace LegendOfZelda
             collisionDetector = new detectionManager();
             collHandler = new CollisionHandler(collisionDetector);
 
-            
-            
+
             base.Initialize();
         }
 
@@ -85,10 +85,8 @@ namespace LegendOfZelda
             Texture2D texture = Content.Load<Texture2D>("enemySpriteSheet");
             Texture2D Bossture = Content.Load<Texture2D>("bossSpriteSheet");
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
-
-
-            SpriteFactory spriteFactory = new SpriteFactory(_spriteBatch, texture);
-            SpriteFactory spriteFactory2 = new SpriteFactory(_spriteBatch, Bossture);
+            XmlDocument doc = Content.Load<XmlDocument>("Room1");
+            Parsing parse = new Parsing(doc);
 
             //All this sprite loading will be moved later to either the level loader or an enemy manager
             // Use the factory to create the sprites
