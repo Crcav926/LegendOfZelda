@@ -5,10 +5,10 @@ using ObjectManagementExamples;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using LegendOfZelda.Collision;
 
 namespace LegendOfZelda
 {
@@ -43,8 +43,13 @@ namespace LegendOfZelda
         public List<ClassItems> staticItems = new List<ClassItems>();
         private ClassItems item1;
         private ClassItems item2;
+        public List<IEnemy> enemies = new List<IEnemy>();
 
         private IController controllerK;
+
+        //For collisions
+        detectionManager collisionDetector;
+        CollisionHandler collHandler;
 
         public Game1()
         {
@@ -52,7 +57,7 @@ namespace LegendOfZelda
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
-
+        
         protected override void Initialize()
         {
             controllerList = new ArrayList();
@@ -63,7 +68,9 @@ namespace LegendOfZelda
 
             controllerK = new KeyboardCont(this);
             // TEMP
-            LevelLoading levelLoading = new LevelLoading();
+            LevelLoading levelLoading = new LevelLoading();        //init the collision stuff
+            collisionDetector = new detectionManager();
+            collHandler = new CollisionHandler(collisionDetector);
             base.Initialize();
         }
 
@@ -82,23 +89,25 @@ namespace LegendOfZelda
 
             //All this sprite loading will be moved later to either the level loader or an enemy manager
             // Use the factory to create the sprites
-            Gel = spriteFactory.CreateGel();
-            Zol = spriteFactory.CreateZol();
-            Keese = spriteFactory.CreateKeese();
-            Stalfol = spriteFactory.CreateStalfol();
-            Goriya = spriteFactory.CreateGoriya();
-            Wallmaster = spriteFactory.CreateWallmaster();
-            BladeTrap = spriteFactory.CreateBladeTrap();
+            // Refactored Enemies
+            // TODO: Be Eaten by LevelLoader
             Aquamentus = new Aquamentus(new Vector2(400, 200));
-            sprites.Add(Gel);
-            sprites.Add(Zol);
-            sprites.Add(Keese);
-            sprites.Add(Stalfol);
-            sprites.Add(Goriya);
-            sprites.Add(Wallmaster);
-            sprites.Add(BladeTrap);
-            sprites.Add(Aquamentus);
-            // TODO: use this.Content to load your game content here
+            BladeTrap = new BladeTrap(new Vector2(350, 200));
+            Gel = new Gel(new Vector2(200, 200));
+            Goriya = new Goriya(new Vector2(100, 200));
+            Keese = new Keese(new Vector2(300, 300));
+            Stalfol = new Stalfol(new Vector2(100, 300));
+            Zol = new Zol(new Vector2(100, 200));
+            Wallmaster = new Wallmaster(new Vector2(50, 100));
+
+            enemies.Add(BladeTrap);
+            enemies.Add(Aquamentus);
+            enemies.Add(Gel);
+            enemies.Add(Goriya);
+            enemies.Add(Keese);
+            enemies.Add(Stalfol);
+            enemies.Add(Zol);
+            enemies.Add(Wallmaster);
 
             //load texture sheets
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
@@ -116,6 +125,10 @@ namespace LegendOfZelda
             staticItems.Add(item1);
             items.Add(item2);
 
+            // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
+            //load hitboxes
+            collisionDetector.addHitbox(LinkCharacter, 1);
+            collisionDetector.addHitbox(block,0);
         }
 
         protected override void Update(GameTime gameTime)
@@ -128,13 +141,15 @@ namespace LegendOfZelda
             {
                 controller.Update();
             }
-
+            // update collision
+            collisionDetector.update();
+            collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
-            IEnemy current = (IEnemy)sprites[currentSprite];
-            current.Update(gameTime);
-            current.Draw(_spriteBatch);
-            Aquamentus.Update(gameTime);
+            foreach(IEnemy enemy in enemies)
+            {
+                enemy.Update(gameTime);
+            }
 
             foreach (ClassItems itemM in items)
             {
@@ -151,6 +166,7 @@ namespace LegendOfZelda
             LinkCharacter.Update(gameTime);
             block.Update(gameTime);
             // Updates sprites in Item classes
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -162,9 +178,10 @@ namespace LegendOfZelda
             
 
             _spriteBatch.Begin();
-            // IEnemy current = (IEnemy)sprites[currentSprite];
-            // current.Draw(_spriteBatch);
-            Aquamentus.Draw(_spriteBatch);
+            foreach (IEnemy enemy in enemies)
+            {
+                enemy.Draw(_spriteBatch);
+            }
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
              //draws all items in item lists

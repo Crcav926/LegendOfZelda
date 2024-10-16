@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-      public class Link
+      public class Link : ICollideable
     {
         public ISprite linkSprite { get; set; }
         public ILinkState linkState { get; set; }
@@ -28,6 +28,10 @@ namespace LegendOfZelda
         public Sword sword;
         public Bomb bomb;
 
+        //this gives me access to the sprite to take its info for hitboxes
+        public Sprite hitInfo;
+
+
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
@@ -41,6 +45,10 @@ namespace LegendOfZelda
             // fire = new Fire(itemTexture, direction, position, false);
             // sword = new Sword(itemTexture, direction, position, false);
             // bomb = new Bomb(itemTexture, direction, position, false);
+
+            //this allows me to get the sprite into for the hitbox.
+            hitInfo = (Sprite)linkSprite;
+            
         }
         public void setState(ILinkState state) 
         {
@@ -70,8 +78,25 @@ namespace LegendOfZelda
         }
         public void Update(GameTime gameTime)
         {
+            //This updates hitbox
+            //the sprite update doesn't work for weapon slots 2 and 3 but I think that's b/c those slots aren't refactored.
+            hitInfo = (Sprite)linkSprite;
+           
+
             linkState.Update(gameTime);
             linkSprite.Update(gameTime);
+        }
+        public Rectangle getHitbox()
+        {
+            //for now assume that Link is 16*4 by 16*4
+            //put data in the the hitbox
+            int tempDimension = 16 * 4;
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, tempDimension, tempDimension);
+            //Debug.WriteLine("Hitbox of Link retrieved!");
+            
+            //Debug.WriteLine($"Link Hitbox:{position.X} {position.Y} {tempDimension} {tempDimension}");
+            //return it
+            return hitbox;
         }
         public void Draw(SpriteBatch spriteBatch)
         {

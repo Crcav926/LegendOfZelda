@@ -6,31 +6,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class KeyboardController : IController
+namespace LegendOfZelda
 {
-
-
-    private Dictionary<Keys, ICommand> controllerMappings;
-
-    public KeyboardController()
+    public class KeyboardController : IController
     {
-        controllerMappings = new Dictionary<Keys, ICommand>();
-    }
 
-    public void RegisterCommand(Keys key, ICommand command)
-    {
-        controllerMappings.Add(key, command);
-    }
 
-    public void Update()
-    {
-        Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+        private Dictionary<Keys, ICommand> controllerMappings;
 
-        foreach (Keys key in pressedKeys)
+        public KeyboardController()
         {
-            if (controllerMappings.ContainsKey(key))
+            controllerMappings = new Dictionary<Keys, ICommand>();
+        }
+
+        public void RegisterCommand(Keys key, ICommand command)
+        {
+            controllerMappings.Add(key, command);
+        }
+
+        public void Update()
+        {
+            Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+
+            foreach (Keys key in pressedKeys)
             {
-                controllerMappings[key].Execute();
+                if (controllerMappings.ContainsKey(key))
+                {
+                    controllerMappings[key].Execute();
+                }
             }
         }
     }

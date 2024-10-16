@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Stalfol : DynamicSprite
+public class Stalfol : IEnemy
 
 {
     private Vector2 velocity;            // Velocity for movement
@@ -21,16 +22,18 @@ public class Stalfol : DynamicSprite
     private float directionChangeTimer = 0f;     // Timer to track direction changes
     private float frameTime = 0.1f;
     private float frameTimer = 0f;
+    private ISprite sprite;
+    private Vector2 position;
+    private Rectangle destinationRectangle;
+    private Boolean alive;
 
-    public Stalfol(SpriteBatch spriteBatch, Vector2 position, Texture2D textures, List<Rectangle> sourceRectangle, List<Rectangle> swordFrames) : base(spriteBatch, position, textures, sourceRectangle)
+    public Stalfol(Vector2 Position)
     {
-        // Set the initial target position (it should be random)
-        this.swordFrames = swordFrames;
-
-        // Set the initial sword offset
-
-        swordOffset = new Vector2(10, 0);
+        this.position = Position;
+        sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();
         ChangeDirection();
+        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        alive = true;
     }
 
     private void ChangeDirection()
@@ -42,28 +45,20 @@ public class Stalfol : DynamicSprite
         {
             case 0:
                 velocity = new Vector2(0, -speed);
-                // swings upward
-                swordOffset = new Vector2(0, -60);
                 break;
             case 1:
                 velocity = new Vector2(0, speed);
-                // swings downward
-                swordOffset = new Vector2(0, 60);
                 break;
             case 2:
                 velocity = new Vector2(-speed, 0);
-                // swings left
-                swordOffset = new Vector2(-60, 0);
                 break;
             case 3:
                 velocity = new Vector2(speed, 0);
-                // swings right
-                swordOffset = new Vector2(60, 0);
                 break;
         }
     }
 
-    public override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         // Update the direction change timer
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -75,31 +70,7 @@ public class Stalfol : DynamicSprite
             ChangeDirection(); 
             directionChangeTimer = 0f; 
         }
-
-        // Animate the sword swing
-        swordFrameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (swordFrameTimer >= swordFrameTime)
-        {
-            currentSwordFrame++;
-            if (currentSwordFrame >= swordFrames.Count)
-            {
-                currentSwordFrame = 0; // Loop back to the first sword frame
-            }
-            swordFrameTimer = 0f;
-        }
-
-        // Animate the skull
-        frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (frameTimer >= frameTime)
-        {
-            currentFrame++;
-            if (currentFrame >= totalFrames)
-            {
-                currentFrame = 0; // Loop back to the first skull frame
-            }
-            frameTimer = 0f;
-        }
-
+        sprite.Update(gameTime);
         // Update position based on velocity
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         //angle need caculate
@@ -119,24 +90,17 @@ public class Stalfol : DynamicSprite
         position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
     }
 
-    public override void Draw(SpriteBatch s)
+    public void Draw(SpriteBatch s)
     {
-        // Use the current position for the destination rectangle, and size it appropriately
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
-
-        spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
-        spriteBatch.Begin();
-        // Draw the sprite using the updated position
-        spriteBatch.Draw(textures, destinationRectangle, sourceRectangle[currentFrame], Color.White);
-        // Position the sword relative to the skull
-        Rectangle swordRectangle = new Rectangle(
-        (int)(position.X + swordOffset.X),
-        (int)(position.Y + swordOffset.Y), swordFrames[currentSwordFrame].Width * 3, swordFrames[currentSwordFrame].Height * 3);
-        spriteBatch.Draw(textures, swordRectangle, swordFrames[currentSwordFrame], Color.White);
-        spriteBatch.End();
+        if (alive)
+        {
+            // Use the current position for the destination rectangle, and size it appropriately
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+            sprite.Draw(s, destinationRectangle, Color.White);
+        }
     }
 
-    public override void takendamage() { }
+    public void takendamage() { alive = false; }
 
-    public override void attack() { }
+    public void attack() { }
 }

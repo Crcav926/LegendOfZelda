@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    internal interface ICommand
+    public interface ICommand
     {
         public void Execute();
     }

@@ -1,0 +1,37 @@
+<XnaContent>
+<root>
+<!--Note the different floor for this room-->
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>FloorVoid</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Not sure how to code this just yet, but we need 2 fire, 1 old man, and some text.-->
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorWall</ObjectName>
+    <Location>113 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorWall</ObjectName>
+    <Location>0 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorOpen</ObjectName>
+    <Location>225 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorWall</ObjectName>
+    <Location>113 145</Location>
+</Item>
+</root>
+</XnaContent>
