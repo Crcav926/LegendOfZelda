@@ -10,103 +10,94 @@
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
-<!--Object Types: 10 Blocks-->
+<!--Object Types: 7 Blocks, 1 Pushable Block-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>49 49</Location>
-</Item>
-<Item>
-    <ObjectType>Block</ObjectType>
-    <ObjectName>Block</ObjectName>
-    <Location>65 49</Location>
+    <Location>129 49</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>177 49</Location>
+    <Location>113 65</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>193 49</Location>
+    <Location>145 65</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>113 81</Location>
+    <Location>161 81</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>129 81</Location>
+    <Location>113 97</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>49 113</Location>
+    <Location>145 97</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 113</Location>
+    <Location>129 113</Location>
 </Item>
+<!--Here's the Pushable Block-->
 <Item>
     <ObjectType>Block</ObjectType>
-    <ObjectName>Block</ObjectName>
-    <Location>177 113</Location>
-</Item>
-<Item>
-    <ObjectType>Block</ObjectType>
-    <ObjectName>Block</ObjectName>
-    <Location>193 113</Location>
-</Item>
-<!--Enemy Types: 5 Gel-->
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>193 33</Location>
-</Item>
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>113 49</Location>
-</Item>
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>161 49</Location>
-</Item>
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
+    <ObjectName>PushableBlock</ObjectName>
     <Location>97 81</Location>
 </Item>
+<!--Enemy Types: 4 Blade Traps-->
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>177 81</Location>
+    <ObjectName>BladeTrap</ObjectName>
+    <Location>33 33</Location>
 </Item>
-<!--This room has the map, same deal as the compass.-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>BladeTrap</ObjectName>
+    <Location>209 33</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>BladeTrap</ObjectName>
+    <Location>33 129</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>BladeTrap</ObjectName>
+    <Location>209 129</Location>
+</Item>
+<!--STAIRCASE DOOR-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>Staircase</ObjectName>
+    <Location>129 81</Location>
+</Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorOpen</ObjectName>
+    <ObjectName>UpDoorWall</ObjectName>
     <Location>113 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>LeftDoorOpen</ObjectName>
+    <ObjectName>LeftDoorWall</ObjectName>
     <Location>0 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>RightDoorLocked</ObjectName>
+    <ObjectName>RightDoorOpen</ObjectName>
     <Location>225 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>DownDoorSecretBombableWall</ObjectName>
+    <ObjectName>DownDoorWall</ObjectName>
     <Location>113 145</Location>
 </Item>
 </root>

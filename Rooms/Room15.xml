@@ -10,7 +10,7 @@
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
-<!--Object Types: 4 Blocks-->
+<!--object Types: 4 Blocks, identical to Room 5-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
@@ -31,36 +31,26 @@
     <ObjectName>Block</ObjectName>
     <Location>177 97</Location>
 </Item>
-<!--Enemy Types: 5 Stalfos, all must be defeated for a key-->
+<!--Enemy Types: 3 Goriyas; killing them drops the boomerang-->
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>81 33</Location>
+    <ObjectName>Goriya</ObjectName>
+    <Location>97 49</Location>
 </Item>
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>161 33</Location>
+    <ObjectName>Goriya</ObjectName>
+    <Location>145 81</Location>
 </Item>
 <Item>
     <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>191 33</Location>
-</Item>
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>177 81</Location>
-</Item>
-<Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>161 113</Location>
+    <ObjectName>Goriya</ObjectName>
+    <Location>97 113</Location>
 </Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorBombableWall</ObjectName>
+    <ObjectName>UpDoorWall</ObjectName>
     <Location>113 0</Location>
 </Item>
 <Item>
@@ -75,7 +65,7 @@
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>DownDoorOpen</ObjectName>
+    <ObjectName>DownDoorSecretBombableWall</ObjectName>
     <Location>113 145</Location>
 </Item>
 </root>

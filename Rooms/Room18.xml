@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 24 Blocks, 2 Fish Statues, 2 Dragon Statues-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>49 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>65 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>81 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>97 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>113 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>129 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>145 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>161 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>177 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>49 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>49 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>49 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>49 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>65 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>81 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>97 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>145 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>161 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>177 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>97 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>81 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>145 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>161 81</Location>
+</Item>
+<!--The Triforce piece will need to be placed somehow.-->
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorWall</ObjectName>
+    <Location>113 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorOpen</ObjectName>
+    <Location>0 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorWall</ObjectName>
+    <Location>225 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorWall</ObjectName>
+    <Location>113 145</Location>
+</Item>
+</root>

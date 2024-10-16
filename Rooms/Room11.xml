@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: If I counted right, 44 Water; this is literally over half the room-->
+<!--Row 1-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>49 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>65 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>81 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>97 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>145 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>161 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>177 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>193 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>209 33</Location>
+</Item>
+<!--Row 2-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>33 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>97 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>177 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>209 49</Location>
+</Item>
+<!--Row 3-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>33 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>65 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>97 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>129 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>145 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>177 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>209 65</Location>
+</Item>
+<!--Row 4-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>65 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>97 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>145 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>177 81</Location>
+</Item>
+<!--Row 5-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>33 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>65 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>97 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>113 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>145 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>177 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>209 97</Location>
+</Item>
+<!--Row 6-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>33 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>65 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>145 113</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>209 113</Location>
+</Item>
+<!--Row 7-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>33 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>49 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>65 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>81 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>97 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>145 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>161 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>177 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>193 129</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>209 129</Location>
+</Item>
+<!--Enemy Types: 3 Stalfos, seems that one has a key-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Stalfos</ObjectName>
+    <Location>193 49</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Stalfos</ObjectName>
+    <Location>49 81</Location>
+</Item>
+<!--This one has the key-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Stalfos</ObjectName>
+    <Location>145 49</Location>
+</Item>
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorLocked</ObjectName>
+    <Location>113 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorWall</ObjectName>
+    <Location>0 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorWall</ObjectName>
+    <Location>225 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorOpen</ObjectName>
+    <Location>113 145</Location>
+</Item>
+</root>

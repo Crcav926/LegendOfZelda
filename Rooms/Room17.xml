@@ -10,17 +10,34 @@
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
-<!--Object Types: 10 Blocks-->
+<!--Object Types: 20 Blocks-->
+<!--Row 1-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>49 49</Location>
+    <Location>145 33</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 49</Location>
+    <Location>161 33</Location>
 </Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>177 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>209 33</Location>
+</Item>
+<!--Rows 2 and 3-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
@@ -34,22 +51,28 @@
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>113 81</Location>
+    <Location>209 49</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>129 81</Location>
+    <Location>193 65</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>49 113</Location>
+    <Location>209 65</Location>
+</Item>
+<!--Rows 5 and 6-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 97</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 113</Location>
+    <Location>209 97</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
@@ -61,52 +84,62 @@
     <ObjectName>Block</ObjectName>
     <Location>193 113</Location>
 </Item>
-<!--Enemy Types: 5 Gel-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>193 33</Location>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>209 113</Location>
+</Item>
+<!--Row 7-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>145 129</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>113 49</Location>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>161 129</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>161 49</Location>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>177 129</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>97 81</Location>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>193 129</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Gel</ObjectName>
-    <Location>177 81</Location>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>209 129</Location>
 </Item>
-<!--This room has the map, same deal as the compass.-->
+<!--Enemy Types: 1 Aquamentus. Upon death, drops a heart container-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Aquamentus</ObjectName>
+    <Location>161 65</Location>
+</Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorOpen</ObjectName>
+    <ObjectName>UpDoorWall</ObjectName>
     <Location>113 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>LeftDoorOpen</ObjectName>
+    <ObjectName>LeftDoorWall</ObjectName>
     <Location>0 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>RightDoorLocked</ObjectName>
+    <ObjectName>RightDoorClosed</ObjectName>
     <Location>225 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>DownDoorSecretBombableWall</ObjectName>
+    <ObjectName>DownDoorOpen</ObjectName>
     <Location>113 145</Location>
 </Item>
 </root>

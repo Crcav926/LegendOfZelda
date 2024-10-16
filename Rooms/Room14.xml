@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--Time for the funny room. Note the different floor and no wall.-->
+<!--I'm being honest here, I don't wanna place 170 blocks, so I'm just using the item room as a floor.-->
+<!--I'm still gonna place blocks for collision, but the walls are still 32px around, just a brick texture instead.-->
+<!--Essentially, there will be blocks drawn over the background that we can put collision on.-->
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>FloorItemRoom</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 22 Bricks. More may be needed for the upper ladder section, but I'm hoping that's solved by wall hitboxes.-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>65 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>81 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>97 33</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>33 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>65 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>81 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>97 49</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>33 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>65 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>81 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>97 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>33 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>65 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>81 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>97 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>113 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>129 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>145 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>161 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>193 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>209 81</Location>
+</Item>
+<!--Enemy Types: 4 Keese. I'm kinda just throwing them wherever-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>33 65</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>33 113</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>209 33</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>161 49</Location>
+</Item>
+<!--Door type will need to be changed-->
+<!--No door visual here, just a transition.-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorOpen</ObjectName>
+    <Location>113 0</Location>
+</Item>
+</root>
