@@ -1,0 +1,97 @@
+<XnaContent>
+<root>
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>33 33</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 6 Blocks-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>113 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>129 65</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>113 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>129 81</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>113 97</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>129 97</Location>
+</Item>
+<!--Enemy Types: 6 Keese, they must be killed to open the right door.-->
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>161 33</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>49 49</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>33 81</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>81 97</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>49 113</Location>
+</Item>
+<Item>
+    <ObjectType>Enemy</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>161 129</Location>
+</Item>
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorLocked</ObjectName>
+    <Location>113 0</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorWall</ObjectName>
+    <Location>0 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorClosed</ObjectName>
+    <Location>225 73</Location>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorWall</ObjectName>
+    <Location>113 145</Location>
+</Item>
+</root>
+</XnaContent>
