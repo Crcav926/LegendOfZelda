@@ -63,7 +63,7 @@ namespace LegendOfZelda
 
             controllerK = new KeyboardCont(this);
             // TEMP
-            Parsing parse = new Parsing();
+            LevelLoading levelLoading = new LevelLoading();
             base.Initialize();
         }
 
