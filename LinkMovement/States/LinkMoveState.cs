@@ -18,7 +18,6 @@ namespace LegendOfZelda
         {
             this.link = linkCharacter;
             newDirection = link.direction;
-            //Debug.WriteLine("Created New Sprite");
             this.link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(newDirection);
         }
         public string getState() { return name; }
