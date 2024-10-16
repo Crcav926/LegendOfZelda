@@ -21,7 +21,7 @@ namespace LegendOfZelda.LinkMovement
             this.link = link;
             currentDirection = link.direction;
             // Constructing Link sprite here.
-            link.linkSprite = link.spriteFactory.CreateLinkAttackSprite(currentDirection);
+            link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(currentDirection);
         }
         public string getState() { return name; }
 

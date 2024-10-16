@@ -43,6 +43,7 @@ namespace LegendOfZelda
         public List<ClassItems> staticItems = new List<ClassItems>();
         private ClassItems item1;
         private ClassItems item2;
+        public List<IEnemy> enemies = new List<IEnemy>();
 
         private IController controllerK;
 
@@ -91,23 +92,25 @@ namespace LegendOfZelda
 
             //All this sprite loading will be moved later to either the level loader or an enemy manager
             // Use the factory to create the sprites
-            Gel = spriteFactory.CreateGel();
-            Zol = spriteFactory.CreateZol();
-            Keese = spriteFactory.CreateKeese();
-            Stalfol = spriteFactory.CreateStalfol();
-            Goriya = spriteFactory.CreateGoriya();
-            Wallmaster = spriteFactory.CreateWallmaster();
-            BladeTrap = spriteFactory.CreateBladeTrap();
+            // Refactored Enemies
+            // TODO: Be Eaten by LevelLoader
             Aquamentus = new Aquamentus(new Vector2(400, 200));
-            sprites.Add(Gel);
-            sprites.Add(Zol);
-            sprites.Add(Keese);
-            sprites.Add(Stalfol);
-            sprites.Add(Goriya);
-            sprites.Add(Wallmaster);
-            sprites.Add(BladeTrap);
-            sprites.Add(Aquamentus);
-            // TODO: use this.Content to load your game content here
+            BladeTrap = new BladeTrap(new Vector2(350, 200));
+            Gel = new Gel(new Vector2(200, 200));
+            Goriya = new Goriya(new Vector2(100, 200));
+            Keese = new Keese(new Vector2(300, 300));
+            Stalfol = new Stalfol(new Vector2(100, 300));
+            Zol = new Zol(new Vector2(100, 200));
+            Wallmaster = new Wallmaster(new Vector2(50, 100));
+
+            enemies.Add(BladeTrap);
+            enemies.Add(Aquamentus);
+            enemies.Add(Gel);
+            enemies.Add(Goriya);
+            enemies.Add(Keese);
+            enemies.Add(Stalfol);
+            enemies.Add(Zol);
+            enemies.Add(Wallmaster);
 
             //load texture sheets
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
@@ -146,10 +149,10 @@ namespace LegendOfZelda
             collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
-            IEnemy current = (IEnemy)sprites[currentSprite];
-            current.Update(gameTime);
-            current.Draw(_spriteBatch);
-            Aquamentus.Update(gameTime);
+            foreach(IEnemy enemy in enemies)
+            {
+                enemy.Update(gameTime);
+            }
 
             foreach (ClassItems itemM in items)
             {
@@ -178,9 +181,10 @@ namespace LegendOfZelda
             
 
             _spriteBatch.Begin();
-            // IEnemy current = (IEnemy)sprites[currentSprite];
-            // current.Draw(_spriteBatch);
-            Aquamentus.Draw(_spriteBatch);
+            foreach (IEnemy enemy in enemies)
+            {
+                enemy.Draw(_spriteBatch);
+            }
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
              //draws all items in item lists

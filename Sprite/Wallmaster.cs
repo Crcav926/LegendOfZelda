@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Wallmaster : DynamicSprite
+public class Wallmaster : IEnemy
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
@@ -16,28 +17,20 @@ public class Wallmaster : DynamicSprite
     private Random random = new Random();
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
-    public Wallmaster(SpriteBatch spriteBatch, Vector2 position, Texture2D textures, List<Rectangle> sourceRectangle) : base(spriteBatch, position, textures, sourceRectangle)
+    private Vector2 position;
+    private Rectangle destinationRectangle;
+    private ISprite sprite;
+
+    public Wallmaster(Vector2 position)
     {
         // Set the initial target position
         targetPosition = position;
+        this.position = position;
+        this.sprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
     }
 
-    public override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
-        // Update the frame timer
-        frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        // Only update the frame if enough time has passed (based on frameTime )
-        if (frameTimer >= frameTime)
-        {
-            // Move to the next frame in the animation
-            currentFrame++;
-            if (currentFrame == totalFrames)
-                currentFrame = 0;
-
-            // Reset the frame timer
-            frameTimer = 0f;
-        }
 
         //????????????????????????
         // Update the jump timer
@@ -69,26 +62,21 @@ public class Wallmaster : DynamicSprite
             direction.Normalize();
             position += direction * jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-
-        // Ensure the sprite doesn't move out of screen bounds (optional)
-        position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
-        position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
+        // Update / Animate the sprite
+        sprite.Update(gameTime);
     }
 
-    public override void Draw(SpriteBatch s)
+    public void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle, and size it appropriately
         // I change the size of the rectangle since it is closest to the real size
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 340, 380);
-
-        spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
-        spriteBatch.Begin();
-        // Draw the sprite using the updated position
-        spriteBatch.Draw(textures, destinationRectangle, sourceRectangle[currentFrame], Color.White);
-        spriteBatch.End();
+        sprite.Draw(s, destinationRectangle, Color.White);
     }
 
-    public override void takendamage() { }
 
-    public override void attack() { }
+
+    public void takendamage() { }
+
+    public void attack() { }
 }

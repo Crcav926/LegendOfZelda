@@ -12,7 +12,7 @@ namespace LegendOfZelda
     {
         private Texture2D texture;
         private List<Rectangle> framesList;
-        private double timePerFrame = 0.1; // fix later
+        private double timePerFrame = 0.25; //TODO: Change based on desired animation speed
         public Rectangle destinationRectangle;
         public Vector2 position;
         private int currentFrameIndex;

@@ -2,8 +2,9 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
+using LegendOfZelda;
 
-public class Goriya : DynamicSprite
+public class Goriya : IEnemy
 {
     private Vector2 velocity;            // Velocity for movement
     private float speed = 100f;          // Movement speed
@@ -22,18 +23,19 @@ public class Goriya : DynamicSprite
     private float frameTimer = 0f;
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
+    private ISprite sprite;
+    private Vector2 position;
+    private Rectangle destinationRectangle;
+    private Boolean alive;
 
-    public Goriya(SpriteBatch spriteBatch, Vector2 position, Texture2D texture, List<Rectangle> upFrames, List<Rectangle> downFrames, List<Rectangle> leftFrames, List<Rectangle> rightFrames, List<Rectangle> projectileFrames)
-        : base(spriteBatch, position, texture, upFrames)  // Use upFrames as the default for Goriyaa
+    public Goriya(Vector2 Position)
     {
-        this.upFrames = upFrames;
-        this.downFrames = downFrames;
-        this.leftFrames = leftFrames;
-        this.rightFrames = rightFrames;
-        this.projectileFrames = projectileFrames;
-        this.currentFrames = upFrames;  // Default to up facing
 
+        this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
+        this.position = Position;
+        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        alive = true;
         ChangeDirection();
     }
 
@@ -48,30 +50,27 @@ public class Goriya : DynamicSprite
             case 0: // Up
                 velocity = new Vector2(0, -speed);
                 projectileOffset = new Vector2(0, -10);
-                currentFrames = upFrames;  // Switch to up-facing frames
+                sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();  // Switch to up-facing frames
                 break;
             case 1: // Down
                 velocity = new Vector2(0, speed);
                 projectileOffset = new Vector2(0, 10);
-                currentFrames = downFrames;  // Switch to down-facing frames
+                sprite = EnemySpriteFactory.Instance.CreateDownGoriyaSprite();
                 break;
             case 2: // Left
                 velocity = new Vector2(-speed, 0);
                 projectileOffset = new Vector2(-10, 0);
-                currentFrames = leftFrames;  // Switch to left-facing frames
+                sprite = EnemySpriteFactory.Instance.CreateLeftGoriyaSprite();   // Switch to left-facing frames
                 break;
             case 3: // Right
                 velocity = new Vector2(speed, 0);
                 projectileOffset = new Vector2(10, 0);
-                currentFrames = rightFrames;  // Switch to right-facing frames
+                sprite = EnemySpriteFactory.Instance.CreateRightGoriyaSprite();  // Switch to right-facing frames
                 break;
         }
-
-        // Reset frame index when switching directions
-        currentFrame = 0;
     }
 
-    public override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         // Update the timer for direction change
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -100,18 +99,7 @@ public class Goriya : DynamicSprite
             projectile.Update(gameTime);
         }
 
-        // Animate the Goriya sprite based on the current direction's frames
-        frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (frameTimer >= frameTime)
-        {
-            currentFrame++;
-            if (currentFrame >= currentFrames.Count)
-            {
-                currentFrame = 0;  
-            }
-            frameTimer = 0f;
-        }
-
+        sprite.Update(gameTime);
         // Move Goriya
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -141,31 +129,30 @@ public class Goriya : DynamicSprite
 
             // Create a new projectile at Goriya's position
             Vector2 projectileStartPosition = new Vector2(position.X + projectileOffset.X, position.Y + projectileOffset.Y);
-            projectiles.Add(new Projectile(projectileStartPosition, direction, textures, projectileFrames));
+            projectiles.Add(new Projectile(projectileStartPosition, direction, EnemySpriteFactory.Instance.CreateGoriyaProjectileSprite()));
         }
     }
 
-    public override void Draw(SpriteBatch s)
+    public void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
-
-        spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
-        spriteBatch.Begin();
-
-        // Draw Goriya with the current frame from the active frames for the current direction
-        spriteBatch.Draw(textures, destinationRectangle, currentFrames[currentFrame], Color.White);
-
-        // Draw all the projectiles
-        foreach (Projectile projectile in projectiles)
+        if (alive)
         {
-            projectile.Draw(spriteBatch);
-        }
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
 
-        spriteBatch.End();
+            sprite.Draw(s, destinationRectangle, Color.White);
+            // Draw all the projectiles
+            foreach (Projectile projectile in projectiles)
+            {
+                projectile.Draw(s);
+            }
+        }
     }
 
-    public override void takendamage() { }
+    public void takendamage() 
+    {
+        alive = false;
+    }
 
-    public override void attack() { }
+    public void attack() { }
 }
