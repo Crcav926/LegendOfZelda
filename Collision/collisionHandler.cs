@@ -3,7 +3,8 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Reflection;
+using LegendOfZelda.Command;
 
 
 namespace LegendOfZelda.Collision
@@ -12,36 +13,34 @@ namespace LegendOfZelda.Collision
     {
         //Since each object probably has it's own position, that's how we tell which direction the collision was
         //you can either pass in the direction or have separate commands for moving link in different directions
-        public enum CollisionType
-        {
-            PlayerBlockLeft,
-            PlayerBlockRight,
-            PlayerBlockTop,
-            PlayerBlockBottom,
 
-        }
+      //  public enum CollisionType
+       // {
+         //  PlayerBlockLeft,
+           // PlayerBlockRight,
+           // PlayerBlockTop,
+          //  PlayerBlockBottom,
+     //   }
 
         //Context is .NET stuff I'm unsure about .
-       // private Dictionary<CollisionType, Context> collisionDictionary;
+        // private Dictionary<CollisionType, Context> collisionDictionary;
 
         private List<collObject> collisionList;
         private detectionManager collDetector;
 
-        private Dictionary<(String, String,String), String> keyDictionary;
+        private Dictionary<Tuple<Type, Type, string>, Type> collisionDictionary;
 
         public CollisionHandler(detectionManager collDet)
         {
-            // Initialize the dictionary or plug in the one noelle is making
+            collisionDictionary = new Dictionary<Tuple<Type, Type, string>, Type>();
+            BuildDictionary();  // Initialize the collision dictionary
 
-            //this is for determining the key/type of collision to plug into noelle's dictionary
-            keyDictionary = new Dictionary<(String, String, String), String>();
-            buildKeyDictionary();
-           // collisionDictioanry = new Dictionary<CollisionType, Context>;
+            // collisionDictioanry = new Dictionary<CollisionType, Context>;
             //this lets any method in the class use the detector
             collDetector = collDet;
             collisionList = collDetector.getCollisions();
         }
-        
+
         //This method will use the hitboxes of the obejcts passed to see where objects are in relation to each other
         //If the overlap rectangle has a higher Y value than X value chances are its side on and more X than Y is a top down collision  
         private String getDirection(collObject c)
@@ -62,7 +61,7 @@ namespace LegendOfZelda.Collision
                 }
                 else
                 {
-                    direction ="right";
+                    direction = "right";
                 }
             }
             else
@@ -97,13 +96,11 @@ namespace LegendOfZelda.Collision
                 HandleCollision(hit);
 
                 collisionList.Remove(hit);
-                
+
                 Debug.WriteLine("Collision Handled\n");
-                
+
 
             }
-
-
         }
         // this should only intake the coll object.
         //each pair of objects results in a certain type of collision
@@ -111,28 +108,87 @@ namespace LegendOfZelda.Collision
         private void HandleCollision(collObject c)
         {
             string direction = getDirection(c);
-           
+
             //possible collideables are Player, Block, Weapon, Item, Enemy (and movable block but uh we aint doing that yet)
             ICollideable o1 = c.obj1;
             ICollideable o2 = c.obj2;
 
-            //from the string and the objects make a key then reference the dctionary.
-            (String, String, String) key = (o1.GetType().ToString(), o2.GetType().ToString(), direction);
-            string finalKey = keyDictionary[key];
-            Debug.WriteLine($"Resulting key: {finalKey}");
+            Tuple<Type, Type, string> key = new Tuple<Type, Type, string>(o1.GetType(), o2.GetType(), direction);
 
-                
+            if (collisionDictionary.TryGetValue(key, out Type commandType))
+            {
+                // Reflection to instantiate the command and invoke its Execute method
+                MethodInfo executeMethod = commandType.GetMethod("Execute");
+                if (executeMethod != null)
+                {
+                    object commandInstance = Activator.CreateInstance(commandType);
+                    executeMethod.Invoke(commandInstance, null);
+                }
+                else
+                {
+                    Debug.WriteLine("Execute method not found for the given command type.");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("No collision action found for the given types and direction.");
+            }
 
         }
 
-        private void buildKeyDictionary()
+        private void BuildDictionary()
         {
-            // link abd block are types not ICollideables here 
-            keyDictionary.Add(("LegendOfZelda.Link", "LegendOfZelda.Block", "left"), "LinkBlockLeft");
-            keyDictionary.Add(("LegendOfZelda.Link", "LegendOfZelda.Block", "right"), "LinkBlockRight");
-            keyDictionary.Add(("LegendOfZelda.Link", "LegendOfZelda.Block", "top"), "LinkBlockUp");
-            keyDictionary.Add(("LegendOfZelda.Link", "LegendOfZelda.Block", "bottom"), "LinkBlockDown");
-        }
+            Type playerType = typeof(Link);
+            Type[] itemTypes = { typeof(Arrow), typeof(Bomb), typeof(Boomerang), typeof(Fire), typeof(Sword) };
 
+            Type[] enemyTypes = { typeof(Aquamentus), typeof(BladeTrap), typeof(Gel), typeof(Goriya), typeof(Keese), typeof(Stalfol), typeof(Wallmaster), typeof(Zol) };
+            Type[] projectileTypes = { typeof(Projectile), typeof(Fireball) }; // add stafol's sword?
+            Type[] obstacleTypes = { typeof(Block) }; // add wall and door?
+
+            //enemy-link collisions
+            foreach (Type enemyType in enemyTypes)
+            {
+                //directions don't matter here
+                RegisterCollision(enemyType, playerType, "left", typeof(PlayerTakeDamage));
+                RegisterCollision(enemyType, playerType, "right", typeof(PlayerTakeDamage));
+                RegisterCollision(enemyType, playerType, "top", typeof(PlayerTakeDamage));
+                RegisterCollision(enemyType, playerType, "bottom", typeof(PlayerTakeDamage));
+
+                //enemy-item collisions
+                foreach (Type itemType in itemTypes)
+                {
+                    //directions don't matter here
+                    RegisterCollision(enemyType, itemType, "left", typeof(EnemyTakeDamage));
+                    RegisterCollision(enemyType, itemType, "right", typeof(EnemyTakeDamage));
+                    RegisterCollision(enemyType, itemType, "top", typeof(EnemyTakeDamage));
+                    RegisterCollision(enemyType, itemType, "bottom", typeof(EnemyTakeDamage));
+                }
+            }
+
+            //link-obstacle collisions
+            foreach (Type obstacleType in obstacleTypes)
+            {
+                RegisterCollision(playerType, obstacleType, "left", typeof(PlayerBlockLeft));
+                RegisterCollision(playerType, obstacleType, "right", typeof(PlayerBlockRight));
+                RegisterCollision(playerType, obstacleType, "top", typeof(PlayerBlockTop));
+                RegisterCollision(playerType, obstacleType, "bottom", typeof(PlayerBlockBottom));
+
+                //enemy-obstacle collisions
+                foreach (Type enemyType in enemyTypes)
+                {
+                    RegisterCollision(enemyType, obstacleType, "left", typeof(EnemyBlockLeft));
+                    RegisterCollision(enemyType, obstacleType, "right", typeof(EnemyBlockRight));
+                    RegisterCollision(enemyType, obstacleType, "top", typeof(EnemyBlockTop));
+                    RegisterCollision(enemyType, obstacleType, "bottom", typeof(EnemyBlockBottom));
+                }
+            }
+
+            //link-door
+        }
+        private void RegisterCollision(Type obj1, Type obj2, string direction, Type command)
+        {
+            var key = new Tuple<Type, Type, string>(obj1, obj2, direction);
+            collisionDictionary[key] = command;
+        }
     }
 }

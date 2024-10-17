@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//update to Ienemy
 public interface IEnemy
 {
     void Update(GameTime gameTime);
     void Draw(SpriteBatch spriteBatch);
 
-    void takendamage();
+    void TakeDamage();
 
-    void attack();
+    void Attack();
 }
 
