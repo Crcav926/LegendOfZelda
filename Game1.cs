@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using LegendOfZelda.Collision;
 using System.Xml;
+using Microsoft.VisualBasic;
 
 namespace LegendOfZelda
 {
@@ -61,6 +62,8 @@ namespace LegendOfZelda
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.PreferredBackBufferWidth = Constants.ScreenWidth;
+            _graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
         }
         
         protected override void Initialize()
@@ -160,10 +163,13 @@ namespace LegendOfZelda
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            
-            
 
-            _spriteBatch.Begin();
+
+            var scaleX = (float)(Constants.ScreenWidth/Constants.OriginalWidth);
+            var scaleY = (float)(Constants.ScreenHeight / Constants.OriginalHeight);
+            var matrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
+
+            _spriteBatch.Begin(transformMatrix: matrix);
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (Block block in blocks)
