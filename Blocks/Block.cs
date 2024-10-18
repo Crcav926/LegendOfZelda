@@ -18,11 +18,14 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
         sprite = BlockSpriteFactory.Instance.CreateSprite(blockName);
         this.position = position;
         //arbitrary numbers, can change to where we want to put it.
+
+        //spawn point of rectangle
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
     }
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, destinationRectangle.Width, destinationRectangle.Height);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 32,32);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it
@@ -30,6 +33,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     }
     public void Draw(SpriteBatch spriteBatch)
     {
+
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
     }

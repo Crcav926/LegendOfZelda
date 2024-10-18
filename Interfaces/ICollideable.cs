@@ -15,6 +15,10 @@ namespace LegendOfZelda
         //this interface is mostly just so that I can put any collideable object in the collision struct
 
         public Rectangle getHitbox();
-       
+
+        public void Update(GameTime gameTime);
+        public void Draw(SpriteBatch spriteBatch);
+
+
     }
 }

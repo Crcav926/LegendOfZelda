@@ -21,7 +21,7 @@ namespace LegendOfZelda
         int totalFrames;
 
         // to scale up the sprites so they aren't tiny
-        float scaleFactor = 3.5F;
+  
         public Sprite(Texture2D texture, List<Rectangle> frames)
         {
             this.texture = texture;
@@ -31,9 +31,6 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color)
         {
-            float width = framesList[currentFrame].Width * scaleFactor;
-            float height = framesList[currentFrame].Height * scaleFactor;
-            destinationRectangle = new Rectangle(destinationRectangle.X, destinationRectangle.Y, (int)width, (int)height);
             spriteBatch.Draw(texture, destinationRectangle, framesList[currentFrame], color);
         }
 

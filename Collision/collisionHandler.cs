@@ -70,7 +70,7 @@ namespace LegendOfZelda.Collision
                     direction = "bottom";
                 }
             }
-            Debug.WriteLine($"{direction} collision");
+            //Debug.WriteLine($"{direction} collision");
             return direction;
         }
 
@@ -88,7 +88,7 @@ namespace LegendOfZelda.Collision
 
                 collisionList.Remove(hit);
 
-                Debug.WriteLine("Collision Handled\n");
+                //Debug.WriteLine("Collision Handled\n");
 
 
             }
@@ -103,7 +103,10 @@ namespace LegendOfZelda.Collision
             //possible collideables are Player, Block, Weapon, Item, Enemy (and movable block but uh we aint doing that yet)
             ICollideable o1 = c.obj1;
             ICollideable o2 = c.obj2;
-
+            if (o1 is Link)
+            {
+                Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name}");
+            }
             Tuple<Type, Type, string> key = new Tuple<Type, Type, string>(o1.GetType(), o2.GetType(), direction);
 
             if (collisionDictionary.TryGetValue(key, out Type commandType))
@@ -117,15 +120,17 @@ namespace LegendOfZelda.Collision
 
                     //b/c currently the first object is the one that responds
                     // this will definitely  need to be changed later
-                    if (o1 is LegendOfZelda.Link || o1 is IEnemy)
+
+                    if (o1 is Link || o1 is IEnemy)
                     {
                         commandInstance = Activator.CreateInstance(commandType, o1);
                     }
                     else
                     {
-                        //used later
+                        Debug.WriteLine($"Object 1 is {o1.GetType().Name} o2 is {o2.GetType().Name}");
                         commandInstance = Activator.CreateInstance(commandType, o2);
                     }
+
                     executeMethod.Invoke(commandInstance, null);
                 }
                 else
@@ -135,6 +140,7 @@ namespace LegendOfZelda.Collision
             }
             else
             {
+                Debug.WriteLine($"Couldn't Find {o1.GetType().Name} and {o2.GetType().Name} and {direction}");
                 Debug.WriteLine("No collision action found for the given types and direction.");
             }
 
@@ -155,12 +161,12 @@ namespace LegendOfZelda.Collision
             foreach (Type enemyType in enemyTypes)
             {
                 //directions don't matter here
-                RegisterCollision(enemyType, playerType, "left", typeof(PlayerTakeDamage));
-                RegisterCollision(enemyType, playerType, "right", typeof(PlayerTakeDamage));
-                RegisterCollision(enemyType, playerType, "top", typeof(PlayerTakeDamage));
-                RegisterCollision(enemyType, playerType, "bottom", typeof(PlayerTakeDamage));
+                RegisterCollision(playerType, enemyType, "left", typeof(PlayerTakeDamage));
+                RegisterCollision(playerType, enemyType, "right", typeof(PlayerTakeDamage));
+                RegisterCollision(playerType, enemyType, "top", typeof(PlayerTakeDamage));
+                RegisterCollision(playerType, enemyType, "bottom", typeof(PlayerTakeDamage));
 
-                //enemy-item collisions
+                //enemy-item collisions they dont do anything i think though lol
                 foreach (Type itemType in itemTypes)
                 {
                     //directions don't matter here
