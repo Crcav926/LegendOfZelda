@@ -70,7 +70,7 @@ public class BladeTrap : DynamicSprite
         }
     }
 
-    public override void takendamage() { }
+    public void TakeDamage() { }
 
-    public override void attack() { }
+    public void Attack() { }
 }

@@ -76,7 +76,7 @@ public class Keese : DynamicSprite
         spriteBatch.End();
     }
 
-    public override void takendamage() { }
+    public void TakeDamage() { }
 
-    public override void attack() { }
+    public void Attack() { }
 }

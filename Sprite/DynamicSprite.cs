@@ -30,9 +30,9 @@ public abstract class DynamicSprite : IEnemy
 
     public abstract void Draw(SpriteBatch spriteBatch);
 
-    public abstract void takendamage();
 
-    public abstract void attack();
+    public void TakeDamage() { }
 
+    public void Attack() { }
 
 }

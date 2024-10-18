@@ -14,17 +14,8 @@ namespace LegendOfZelda.Collision
         //Since each object probably has it's own position, that's how we tell which direction the collision was
         //you can either pass in the direction or have separate commands for moving link in different directions
 
-      //  public enum CollisionType
-       // {
-         //  PlayerBlockLeft,
-           // PlayerBlockRight,
-           // PlayerBlockTop,
-          //  PlayerBlockBottom,
-     //   }
 
         //Context is .NET stuff I'm unsure about .
-        // private Dictionary<CollisionType, Context> collisionDictionary;
-
         private List<collObject> collisionList;
         private detectionManager collDetector;
 
@@ -121,7 +112,20 @@ namespace LegendOfZelda.Collision
                 MethodInfo executeMethod = commandType.GetMethod("Execute");
                 if (executeMethod != null)
                 {
-                    object commandInstance = Activator.CreateInstance(commandType);
+                    object commandInstance;
+                    // we need to be able to pass in the correct object for the command we're trying to make...
+
+                    //b/c currently the first object is the one that responds
+                    // this will definitely  need to be changed later
+                    if (o1 is LegendOfZelda.Link || o1 is IEnemy)
+                    {
+                        commandInstance = Activator.CreateInstance(commandType, o1);
+                    }
+                    else
+                    {
+                        //used later
+                        commandInstance = Activator.CreateInstance(commandType, o2);
+                    }
                     executeMethod.Invoke(commandInstance, null);
                 }
                 else
@@ -136,8 +140,10 @@ namespace LegendOfZelda.Collision
 
         }
 
+        //all this could probably be moved to a level loader
         private void BuildDictionary()
         {
+            //we need to condense this into using a getCollisionType method in the ICollideables but it works.
             Type playerType = typeof(Link);
             Type[] itemTypes = { typeof(Arrow), typeof(Bomb), typeof(Boomerang), typeof(Fire), typeof(Sword) };
 

@@ -15,7 +15,8 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            _link.position = new Vector2(_link.position.X, _link.position.Y - 1);
+            //move link down one b/c he hit the bottom of a block
+            _link.position = new Vector2(_link.position.X, _link.position.Y + 1);
         }
     }
 }
