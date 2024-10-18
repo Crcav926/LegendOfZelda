@@ -165,9 +165,7 @@ namespace LegendOfZelda
             // TODO: Add your drawing code here
 
 
-            var scaleX = (float)(Constants.ScreenWidth/Constants.OriginalWidth);
-            var scaleY = (float)(Constants.ScreenHeight / Constants.OriginalHeight);
-            var matrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
+            var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
             _spriteBatch.Begin(transformMatrix: matrix);
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);

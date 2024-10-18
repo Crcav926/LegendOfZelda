@@ -15,8 +15,8 @@ namespace LegendOfZelda
         public const int OriginalWidth = 800;
         public const int OriginalHeight = 480;
         // Scaling calculations
-        public const float ScaleX = (ScreenWidth / OriginalWidth);
-        public const float ScaleY = (ScreenHeight / OriginalHeight);
+        public const float ScaleX = (float)ScreenWidth / OriginalWidth;
+        public const float ScaleY = (float)ScreenHeight / OriginalHeight;
         // Miku size
         public const int MikuHeight = 40;
         public const int MikuWidth = 40;
