@@ -100,7 +100,7 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle destination = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+            Rectangle destination = new Rectangle((int)position.X, (int)position.Y, 50, 50);
             linkState.Draw(spriteBatch);
         }
     }

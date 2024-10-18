@@ -70,7 +70,7 @@ public class Wallmaster : IEnemy
     {
         // Use the current position for the destination rectangle, and size it appropriately
         // I change the size of the rectangle since it is closest to the real size
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 340, 380);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
         sprite.Draw(s, destinationRectangle, Color.White);
     }
 

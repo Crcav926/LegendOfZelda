@@ -30,7 +30,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     }
     public void Draw(SpriteBatch spriteBatch)
     {
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
     }
 

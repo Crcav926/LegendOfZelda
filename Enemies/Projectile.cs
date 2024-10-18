@@ -46,8 +46,8 @@ public class Projectile
             Rectangle destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                (int)(12),  
-                (int)(12)  
+                (int)(30),  
+                (int)(30)  
             );
 
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);

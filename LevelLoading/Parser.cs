@@ -65,7 +65,8 @@ namespace LegendOfZelda
                     }
                     else
                     {
-
+                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
+                        // con = type.GetConstructor(new[] { typeof(Vector2)});
                     }
                 }
                 if (objectNameNode != null)
@@ -83,12 +84,16 @@ namespace LegendOfZelda
                         float y = normalizeY((float)int.Parse(coords[1]));
 
                         // Sets position to a vector.
-                        position = new Vector2(x, y);
+                        position = new Vector2((int)x, (int)y);
                     }
                 }
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
                 {
                     blocks.Add((Block)con.Invoke(new object[] { position, objectName }));
+                }
+                else if (con != null)
+                {
+
                 }
 
                 // data is held in a tuple added to an object list.

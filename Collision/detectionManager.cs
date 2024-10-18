@@ -89,8 +89,8 @@ namespace LegendOfZelda.Collision
                 
                }
             }
-            var className = movingHitboxes[0].GetType().Name;
-            var className2 = stationaryHitboxes[0].GetType().Name;
+            // var className = movingHitboxes[0].GetType().Name;
+            // var className2 = stationaryHitboxes[0].GetType().Name;
             //Debug.WriteLine($"In Collideable list: {className} {className2}");
         }
         private Boolean doIntersect(Microsoft.Xna.Framework.Rectangle rect1, Microsoft.Xna.Framework.Rectangle rect2)

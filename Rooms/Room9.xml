@@ -1,4 +1,4 @@
-<XnaContent>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 <!--Note the different floor for this room-->
 <Item>
@@ -34,4 +34,3 @@
     <Location>113 145</Location>
 </Item>
 </root>
-</XnaContent>

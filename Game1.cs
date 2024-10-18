@@ -57,9 +57,6 @@ namespace LegendOfZelda
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            _graphics.PreferredBackBufferWidth = 800;
-            _graphics.PreferredBackBufferHeight = 500;
-            _graphics.ApplyChanges();
             IsMouseVisible = true;
         }
         
@@ -133,7 +130,10 @@ namespace LegendOfZelda
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             //load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);
-            collisionDetector.addHitbox(block,0);
+            foreach(Block block in blocks)
+            {
+                collisionDetector.addHitbox(block, 0);
+            }
         }
 
         protected override void Update(GameTime gameTime)

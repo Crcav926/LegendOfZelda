@@ -1,4 +1,4 @@
-<XnaContent>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 <Item>
     <ObjectType>Floor</ObjectType>
@@ -94,4 +94,3 @@
     <Location>113 145</Location>
 </Item>
 </root>
-</XnaContent>
