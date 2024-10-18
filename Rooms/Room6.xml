@@ -31,44 +31,44 @@
     <ObjectName>Block</ObjectName>
     <Location>177 113</Location>
 </Item>
-<!--Enemy Types: 8 Keese-->
+<!--ICollideable Types: 8 Keese-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>81 33</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>193 49</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>129 65</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>161 65</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>209 81</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>161 97</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>193 113</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>81 129</Location>
 </Item>

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
+namespace LegendOfZelda;
 public class BladeTrap : IEnemy, ICollideable
 {
     private bool isActive = true;        // Whether the BladeTrap is currently active

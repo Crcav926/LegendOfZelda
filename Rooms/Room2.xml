@@ -14,17 +14,17 @@
 <!--Enemy Types: 3 Keese-->
 <!--Approximations of enemy position. Can't be 100% accurate without playing the game-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>49 65</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>145 81</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
     <Location>113 97</Location>
 </Item>

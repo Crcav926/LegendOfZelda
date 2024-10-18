@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Should have the same movement as Gel
+namespace LegendOfZelda;
 public class Zol : IEnemy, ICollideable
 
 {

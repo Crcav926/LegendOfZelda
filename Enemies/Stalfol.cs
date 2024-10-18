@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Stalfol : IEnemy, ICollideable
+namespace LegendOfZelda;
+public class Stalfol : ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement

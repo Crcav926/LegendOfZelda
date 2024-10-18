@@ -25,7 +25,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 50, 50);
+        Rectangle hitbox = destinationRectangle;
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

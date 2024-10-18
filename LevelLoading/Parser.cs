@@ -17,7 +17,9 @@ namespace LegendOfZelda
         private Tuple <String,String,Vector2> objectData { get; set; }
         public List<Tuple<string, string, Vector2>> objectList { get; set; } = new List<Tuple<string, string, Vector2>>();
         private ConstructorInfo con;
+        private ConstructorInfo con2;
         private List<Block> blocks = new List<Block>();
+        private List<ICollideable> colliders = new List<ICollideable>();
         private Type type;
         int w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -28,6 +30,7 @@ namespace LegendOfZelda
         }
 
         public List<Block> getBlocks() { return blocks; }
+        public List<ICollideable> getMovers() { return colliders; }
         public float normalizeX(float x) { return x*(800/209); }
         public float normalizeY(float y) { return y*(480/129); }
 
@@ -35,9 +38,9 @@ namespace LegendOfZelda
         {
             // Finds files in content and loads it.
             XmlDocument doc = new XmlDocument();
-            // This will get the current WORKING directory (i.e. \bin\Debug)
+            // This will get the current WORKING directory
             string workingDirectory = Environment.CurrentDirectory;
-            // or: Directory.GetCurrentDirectory() gives the same result
+            // This to get the project directory
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
             string filePath = Path.Combine(projectDirectory, "Rooms", fileName);
             doc.Load(filePath);
@@ -63,10 +66,12 @@ namespace LegendOfZelda
                         // Debug.WriteLine(type.FullName);
                         // Debug.WriteLine(con.ToString());
                     }
-                    else
+                    else if(objectTypeNode.InnerText == "ICollideable" && objectNameNode != null)
                     {
-                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
-                        // con = type.GetConstructor(new[] { typeof(Vector2)});
+                        type = Type.GetType("LegendOfZelda." + objectNameNode.InnerText);
+                        con2 = type.GetConstructor(new[] { typeof(Vector2)});
+                        Debug.WriteLine(con2.ToString());
+                        objectName = objectNameNode.InnerText;
                     }
                 }
                 if (objectNameNode != null)
@@ -84,16 +89,17 @@ namespace LegendOfZelda
                         float y = normalizeY((float)int.Parse(coords[1]));
 
                         // Sets position to a vector.
-                        position = new Vector2((int)x, (int)y);
+                        position = new Vector2(x, y);
                     }
                 }
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
                 {
                     blocks.Add((Block)con.Invoke(new object[] { position, objectName }));
                 }
-                else if (con != null)
+                else if (con2 != null && objectTypeNode != null && objectTypeNode.InnerText == "ICollideable")
                 {
-
+                    colliders.Add((ICollideable)con2.Invoke(new object[] { position }));
+                    Debug.WriteLine("Lil guy added");
                 }
 
                 // data is held in a tuple added to an object list.

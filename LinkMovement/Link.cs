@@ -35,7 +35,7 @@ namespace LegendOfZelda
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
-            position = new Vector2(200, 200); // Fix magic num later
+            position = new Vector2(350, 330); // Fix magic num later
             direction = new Vector2(0, 1); // Fix magic num later
             // Sets link to be Idle initially
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
@@ -69,7 +69,7 @@ namespace LegendOfZelda
 
         public void TakeDamage()
         {
-            Debug.WriteLine("Link took Damage");
+            // Debug.WriteLine("Link took Damage");
             //linkState.TakeDamage();
         }
 
@@ -89,8 +89,7 @@ namespace LegendOfZelda
         {
             //for now assume that Link is 16*4 by 16*4
             //put data in the the hitbox
-            int tempDimension = 16 * 4;
-            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, tempDimension, tempDimension);
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 50, 50);
             //Debug.WriteLine("Hitbox of Link retrieved!");
             
             //Debug.WriteLine($"Link Hitbox:{position.X} {position.Y} {tempDimension} {tempDimension}");

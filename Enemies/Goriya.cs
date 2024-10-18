@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using LegendOfZelda;
 
+namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement

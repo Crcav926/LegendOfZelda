@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 using LegendOfZelda;
 
+namespace LegendOfZelda;
 public class Fireball
 {
     private Vector2 position;

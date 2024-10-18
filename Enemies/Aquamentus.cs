@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using LegendOfZelda;
 
+namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
 {
     private Vector2 velocity;

@@ -71,31 +71,31 @@
     <ObjectName>Block</ObjectName>
     <Location>177 97</Location>
 </Item>
-<!--Enemy Types: 5 Stalfos, 1 has a key.-->
+<!--ICollideable Types: 5 Stalfol, 1 has a key.-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Stalfol</ObjectName>
     <Location>65 49</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Stalfol</ObjectName>
     <Location>193 65</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Stalfol</ObjectName>
     <Location>145 81</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Stalfol</ObjectName>
     <Location>65 113</Location>
 </Item>
 <!--This one has the key-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Stalfol</ObjectName>
     <Location>209 129</Location>
 </Item>
 <!--Door type will need to be changed-->

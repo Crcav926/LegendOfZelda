@@ -105,7 +105,7 @@ namespace LegendOfZelda.Collision
             ICollideable o2 = c.obj2;
             if (o1 is Link)
             {
-                Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name}");
+                // Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name}");
             }
             Tuple<Type, Type, string> key = new Tuple<Type, Type, string>(o1.GetType(), o2.GetType(), direction);
 
