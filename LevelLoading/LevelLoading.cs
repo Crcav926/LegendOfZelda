@@ -15,18 +15,12 @@ namespace LegendOfZelda
         List<ICollideable> getEm2;
 
         public LevelLoading() { }
-        public List<Block> Load()
+        public void Load(String room)
 
         {
-            // Can find a better way to hold this data
-            fileNameList = new List<string>();
-            fileNameList.Add("Room1.xml");
-            fileNameList.Add("Room2.xml");
-            fileNameList.Add("Room3.xml");
-            fileNameList.Add("Room4.xml");
 
-            Parsing parseIt = new Parsing("Room6.xml");
-            List<Block> getEm = parseIt.getBlocks();
+            Parsing parseIt = new Parsing(room);
+            getEm = parseIt.getBlocks();
             getEm2 = parseIt.getMovers();
             foreach (ICollideable collideable in getEm2)
             {
@@ -34,6 +28,9 @@ namespace LegendOfZelda
             }
             // Sorts through each item in the list and parses through.
             // Mainly testing by parsing through all rooms, but eventually have only cetain rooms have their information loaded.
+        }
+        public List<Block> getBlocks()
+        {
             return getEm;
         }
         public List<ICollideable> getMovers()

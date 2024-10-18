@@ -89,53 +89,20 @@ namespace LegendOfZelda
             Texture2D BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
+
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
             LevelLoading levelLoading = new LevelLoading();
-            blocks = levelLoading.Load();
+            levelLoading.Load("Room1.xml");
+            blocks = levelLoading.getBlocks();
             movers = levelLoading.getMovers();
-
-            //All this sprite loading will be moved later to either the level loader or an enemy manager
-            // Use the factory to create the sprites
-            // Refactored Enemies
-            // TODO: Be Eaten by LevelLoader
-            Aquamentus = new Aquamentus(new Vector2(400, 200));
-            BladeTrap = new BladeTrap(new Vector2(350, 200));
-            Gel = new Gel(new Vector2(200, 200));
-            Goriya = new Goriya(new Vector2(100, 200));
-            Keese = new Keese(new Vector2(300, 300));
-            // Stalfol = new Stalfol(new Vector2(100, 300));
-            Zol = new Zol(new Vector2(100, 200));
-            Wallmaster = new Wallmaster(new Vector2(50, 100));
-
-            enemies.Add(BladeTrap);
-            enemies.Add(Aquamentus);
-            enemies.Add(Gel);
-            enemies.Add(Goriya);
-            enemies.Add(Keese);
-            // enemies.Add(Stalfol);
-            enemies.Add(Zol);
-            enemies.Add(Wallmaster);
 
             //load texture sheets
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             LinkCharacter = new Link();
-            blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
-            block = new Block(new Vector2(100, 300), "dirt");
-            itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
-            // Have 0 to be the default facing left
-            // inventory.Add();
-            // format is texture sheet, x cord, y cord.
-            item1 = new ClassItems(itemTexture, 600, 200); 
-            item2 = new ClassItems(itemTexture, 200, 200);
-
-            //add the items to the item collection
-            staticItems.Add(item1);
-            items.Add(item2);
-
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
-            //load hitboxes
+            // load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);
             foreach (Block block in blocks) {
                 collisionDetector.addHitbox(block, 0);
@@ -145,12 +112,13 @@ namespace LegendOfZelda
                 collisionDetector.addHitbox(mover, 1);
             }
 
-            //76 thick top
-            //
-            Wall top = new Wall(new Rectangle(0,0,800,76));
-            Wall bot = new Wall(new Rectangle(0, 460, 800, 20));
-            Wall left = new Wall(new Rectangle(0, 0, 20, 480));
-            Wall right = new Wall(new Rectangle(780, 0, 20, 480));
+            // Walls are 100 pixels thick wide and 88 pixels thick tall
+            // Dimensions of the rooms are 800 / 480
+
+            Wall top = new Wall(new Rectangle(0,0,800,88));
+            Wall bot = new Wall(new Rectangle(0, 392, 800, 88));
+            Wall left = new Wall(new Rectangle(0, 0, 100, 480));
+            Wall right = new Wall(new Rectangle(700, 0, 100, 480));
 
             collisionDetector.addHitbox(top, 0);
             collisionDetector.addHitbox(bot, 0);
@@ -174,28 +142,15 @@ namespace LegendOfZelda
             collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
-            foreach(IEnemy enemy in enemies)
-            {
-                enemy.Update(gameTime);
-            }
             foreach (ICollideable mover in movers)
             {
                 mover.Update(gameTime);
-            }
-            foreach (ClassItems itemM in items)
-            {
-                itemM.Update(gameTime);
-            }
-            foreach (ClassItems itemS in staticItems)
-            {
-                itemS.Update(gameTime);
             }
             //Update the keyboard controller
             controllerK.Update();
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
             LinkCharacter.Update(gameTime);
-            block.Update(gameTime);
             // Updates sprites in Item classes
 
         }
@@ -215,25 +170,12 @@ namespace LegendOfZelda
             {
                 block.Draw(_spriteBatch);
             }
-            foreach (IEnemy enemy in enemies)
-            {
-                // enemy.Draw(_spriteBatch);
-            }
             foreach (ICollideable mover in movers)
             {
                 mover.Draw(_spriteBatch);
             }
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
-             //draws all items in item lists
-            foreach (ClassItems itemM in items)
-            {
-                itemM.Draw(_spriteBatch);
-            }
-            foreach (ClassItems itemS in staticItems)
-            {
-                itemS.Draw(_spriteBatch);
-            }
 
             _spriteBatch.End();
 

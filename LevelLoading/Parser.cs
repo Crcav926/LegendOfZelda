@@ -94,25 +94,15 @@ namespace LegendOfZelda
                 }
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
                 {
+                    // Populates list of non-moving collideable objects
                     blocks.Add((Block)con.Invoke(new object[] { position, objectName }));
                 }
                 else if (con2 != null && objectTypeNode != null && objectTypeNode.InnerText == "ICollideable")
                 {
+                    // Populates list of non-moving collideable objects
                     colliders.Add((ICollideable)con2.Invoke(new object[] { position }));
                     Debug.WriteLine("Lil guy added");
                 }
-
-                // data is held in a tuple added to an object list.
-                objectData = new Tuple<string, string, Vector2>(objectType, objectName, position);
-
-                objectList.Add(objectData);
-
-
-            }
-            // Debug line to check items in objectList.
-            foreach (Tuple<String,String,Vector2> t in objectList)
-            {
-                // Debug.WriteLine(t.ToString());
             }
         }
     }

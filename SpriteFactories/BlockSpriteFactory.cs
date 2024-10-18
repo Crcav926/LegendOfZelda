@@ -19,6 +19,9 @@ namespace LegendOfZelda
             "Block", new List<Rectangle>{ new Rectangle(1001, 11, 16, 16) }
             },
             {
+            "PushableBlock", new List<Rectangle>{ new Rectangle(1001, 11, 16, 16) }
+            },
+            {
             "FishStatue", new List<Rectangle>{ new Rectangle(1018, 11, 16, 16) }
             },
             {
