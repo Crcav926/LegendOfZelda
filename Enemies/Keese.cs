@@ -13,7 +13,7 @@ public class Keese : IEnemy, ICollideable
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
     private Vector2 velocity;  // direction and speed
-    private float speed = 100f;
+    //private float speed = 100f;
     private Random random = new Random();
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
@@ -32,9 +32,9 @@ public class Keese : IEnemy, ICollideable
         );
         // Normalize to ensure consistent speed in all directions
         velocity.Normalize();
-        velocity *= speed;
+        velocity *= Constants.KeeseSpeed;
         sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.KeeseWidth, Constants.KeeseHeight);
         alive = true;
     }
 
@@ -46,12 +46,12 @@ public class Keese : IEnemy, ICollideable
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         // Check for collisions with screen edges and reflect velocity
-        if (position.X <= 0 || position.X >= 256 - destinationRectangle.Width)
+        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reverse X direction
         }
 
-        if (position.Y <= 0 || position.Y >= 176 - destinationRectangle.Height)
+        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
         {
             velocity.Y *= -1; // Reverse Y direction
         }
@@ -63,7 +63,7 @@ public class Keese : IEnemy, ICollideable
         if (alive)
         {
             // Use the current position for the destination rectangle, and size it appropriately
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.KeeseWidth, Constants.KeeseHeight);
 
             sprite.Draw(s, destinationRectangle, Color.White);
         }
@@ -71,7 +71,7 @@ public class Keese : IEnemy, ICollideable
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.KeeseWidth, Constants.KeeseHeight);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

@@ -20,7 +20,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
         //arbitrary numbers, can change to where we want to put it.
 
         //spawn point of rectangle
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.BlockWidth, Constants.BlockHeight);
     }
     public Rectangle getHitbox()
     {

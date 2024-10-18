@@ -7,11 +7,11 @@ namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
 {
     private Vector2 velocity;
-    private float speed = 80f;
+    //private float speed = 80f;
     private List<Fireball> fireballs;    // List to track active fireballs
     private List<Rectangle> rightFrames;
     private List<Rectangle> projectileFrames; // List of rectangles for fireball animation
-    private float throwCooldown = 3f;    // Time between fireball throws
+    //private float throwCooldown = 3f;    // Time between fireball throws
     private float throwTimer = 0f;       // Timer to track when to throw a fireball
     private float frameTime = 0.1f;
     private float frameTimer = 0f;
@@ -25,18 +25,18 @@ public class Aquamentus : IEnemy, ICollideable
         this.position = position;
         fireballs = new List<Fireball>();
         sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
-        velocity = new Vector2(speed, 0);  // ontly Horizontal movement
+        velocity = new Vector2(Constants.AquamentusSpeed, 0);  // ontly Horizontal movement
         // Define the movement range (minX and maxX)
-        minX = position.X - 10;
-        maxX = position.X + 100;
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        minX = position.X - Constants.AquamentusMinX;
+        maxX = position.X + Constants.AquamentusMaxX;
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
     }
 
     public void Update(GameTime gameTime)
     {
         // Update the timer for throwing fireballs
         throwTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (throwTimer >= throwCooldown)
+        if (throwTimer >= Constants.AquamentusThrowCooldown)
         {
             // Throw 3 fireballs in different directions
             ThrowFireball(new Vector2(-1, -1));
@@ -68,13 +68,13 @@ public class Aquamentus : IEnemy, ICollideable
     private void ThrowFireball(Vector2 direction)
     {
         // Create a new fireball at Aquamentus's position and add it to the list
-        Vector2 fireballStartPosition = new Vector2(position.X + 10, position.Y + 30); // Adjust the offset
+        Vector2 fireballStartPosition = new Vector2(position.X + Constants.AquamentusFireballXOffset, position.Y + Constants.AquamentusFireballYOffset); // Adjust the offset
         fireballs.Add(new Fireball(fireballStartPosition, direction));
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
 
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
 
@@ -91,7 +91,7 @@ public class Aquamentus : IEnemy, ICollideable
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

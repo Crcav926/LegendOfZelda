@@ -12,14 +12,14 @@ public class Stalfol : ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement
-    private float speed = 100f;          // Movement speed
+    //private float speed = 100f;          // Movement speed
     private Vector2 swordOffset;         // Offset of the sword relative to the skull
     private List<Rectangle> swordFrames;
     private Random random = new Random();
     private int currentSwordFrame = 0;   // Current frame for the sword
     private float swordFrameTime = 0.1f; // Duration of each sword swing frame
     private float swordFrameTimer = 0f;  // Timer for sword animation
-    private float directionChangeCooldown = 2f;  // Time between direction changes
+    //private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
     private float frameTime = 0.1f;
     private float frameTimer = 0f;
@@ -33,7 +33,7 @@ public class Stalfol : ICollideable
         this.position = Position;
         sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();
         ChangeDirection();
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
         alive = true;
     }
 
@@ -45,16 +45,16 @@ public class Stalfol : ICollideable
         switch (direction)
         {
             case 0:
-                velocity = new Vector2(0, -speed);
+                velocity = new Vector2(0, -Constants.StalfosSpeed);
                 break;
             case 1:
-                velocity = new Vector2(0, speed);
+                velocity = new Vector2(0, Constants.StalfosSpeed);
                 break;
             case 2:
-                velocity = new Vector2(-speed, 0);
+                velocity = new Vector2(-Constants.StalfosSpeed, 0);
                 break;
             case 3:
-                velocity = new Vector2(speed, 0);
+                velocity = new Vector2(Constants.StalfosSpeed, 0);
                 break;
         }
     }
@@ -65,7 +65,7 @@ public class Stalfol : ICollideable
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         // If it's time to change direction
-        if (directionChangeTimer >= directionChangeCooldown)
+        if (directionChangeTimer >= Constants.StalfosChangeDirectionCooldown)
         {
             // Choose a new random direction and reset the timer
             ChangeDirection(); 
@@ -76,12 +76,12 @@ public class Stalfol : ICollideable
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         //angle need caculate
         //if the skull hits the screen edges and reflect its direction?????
-        if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
+        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reflect on the X axis
         }
 
-        if (position.Y <= 0 || position.Y >= 600 - destinationRectangle.Height)
+        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
@@ -92,14 +92,14 @@ public class Stalfol : ICollideable
         if (alive)
         {
             // Use the current position for the destination rectangle, and size it appropriately
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
             sprite.Draw(s, destinationRectangle, Color.White);
         }
     }
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

@@ -17,7 +17,7 @@ namespace LegendOfZelda
         public Door(Vector2 position) 
         {
             this.position = position;
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 98, 88);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.DoorWidth, Constants.DoorHeight);
         }
         public Rectangle getHitbox()
         {
