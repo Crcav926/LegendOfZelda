@@ -112,11 +112,11 @@ namespace LegendOfZelda
                 collisionDetector.addHitbox(mover, 1);
             }
 
-            // Walls are 100 pixels thick wide and 88 pixels thick tall
+            // Walls are 100 pixels thick wide and 87 pixels thick tall
             // Dimensions of the rooms are 800 / 480
 
-            Wall top = new Wall(new Rectangle(0,0,800,88));
-            Wall bot = new Wall(new Rectangle(0, 392, 800, 88));
+            Wall top = new Wall(new Rectangle(0,0,800,87));
+            Wall bot = new Wall(new Rectangle(0, 390, 800, 87));
             Wall left = new Wall(new Rectangle(0, 0, 100, 480));
             Wall right = new Wall(new Rectangle(700, 0, 100, 480));
 
