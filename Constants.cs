@@ -9,8 +9,8 @@ namespace LegendOfZelda
         // Global scaling
         public const float GlobalScale = 4.0f;
         // Screen size
-        public const int ScreenWidth = 1920;  // Screen width
-        public const int ScreenHeight = 1080;  // Screen height
+        public const int ScreenWidth = 1600;  // Screen width
+        public const int ScreenHeight = 960;  // Screen height
         // Original resolution in which the sprites are scaled to.
         public const int OriginalWidth = 800;
         public const int OriginalHeight = 480;

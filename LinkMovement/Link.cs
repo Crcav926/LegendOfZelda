@@ -27,7 +27,7 @@ namespace LegendOfZelda
         public Fire fire;
         public Sword sword;
         public Bomb bomb;
-
+        public DamageAnimation damageAnimation;
         //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
 
@@ -45,7 +45,7 @@ namespace LegendOfZelda
             // fire = new Fire(itemTexture, direction, position, false);
             // sword = new Sword(itemTexture, direction, position, false);
             // bomb = new Bomb(itemTexture, direction, position, false);
-
+            damageAnimation = new DamageAnimation();
             //this allows me to get the sprite into for the hitbox.
             hitInfo = (Sprite)linkSprite;
             
@@ -70,7 +70,7 @@ namespace LegendOfZelda
         public void TakeDamage()
         {
             // Debug.WriteLine("Link took Damage");
-            //linkState.TakeDamage();
+            linkState.TakeDamage();
         }
 
         public void Attack()
@@ -84,12 +84,13 @@ namespace LegendOfZelda
             
             linkState.Update(gameTime);
             linkSprite.Update(gameTime);
+            damageAnimation.Update(gameTime);
         }
         public Rectangle getHitbox()
         {
             //for now assume that Link is 16*4 by 16*4
             //put data in the the hitbox
-            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.MikuWidth, Constants.MikuHeight);
             //Debug.WriteLine("Hitbox of Link retrieved!");
             
             //Debug.WriteLine($"Link Hitbox:{position.X} {position.Y} {tempDimension} {tempDimension}");
@@ -98,7 +99,7 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle destination = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            Rectangle destination = new Rectangle((int)position.X, (int)position.Y, Constants.MikuWidth, Constants.MikuHeight);
             linkState.Draw(spriteBatch);
         }
     }

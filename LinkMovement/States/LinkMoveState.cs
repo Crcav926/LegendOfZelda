@@ -19,6 +19,7 @@ namespace LegendOfZelda
             this.link = linkCharacter;
             newDirection = link.direction;
             this.link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(newDirection);
+            DamageAnimation damageAnimation = link.damageAnimation;
         }
         public string getState() { return name; }
 
@@ -29,7 +30,8 @@ namespace LegendOfZelda
         public void TakeDamage()
         {
             link.linkState = new LinkDamagedState(link); 
-        }
+            link.linkState.TakeDamage();
+        }   
         public void Move(Vector2 newDirection)
         {
             // Updates links position and direction.
@@ -53,8 +55,9 @@ namespace LegendOfZelda
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 45, 40);
-            link.linkSprite.Draw(spriteBatch, destination, Color.White);
+            Color color = link.damageAnimation.GetCurrentColor();
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
+            link.linkSprite.Draw(spriteBatch, destination, color);
         }
     }
 }
