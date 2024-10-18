@@ -22,6 +22,7 @@ namespace LegendOfZelda.LinkMovement
             currentDirection = link.direction;
             // Constructing Link sprite here.
             link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(currentDirection);
+            DamageAnimation damageAnimation = link.damageAnimation;
         }
         public string getState() { return name; }
 
@@ -50,8 +51,9 @@ namespace LegendOfZelda.LinkMovement
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 45, 40);
-            link.linkSprite.Draw(spriteBatch, destination, Color.White);
+            Color color = link.damageAnimation.GetCurrentColor();
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
+            link.linkSprite.Draw(spriteBatch, destination, color);
         }
     }
 }

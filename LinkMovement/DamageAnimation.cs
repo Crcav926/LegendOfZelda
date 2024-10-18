@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class DamageAnimation
+    public class DamageAnimation
     {
         private double timeElapsed = 0;
         // How long per color change.
@@ -40,19 +40,27 @@ namespace LegendOfZelda.LinkMovement
             timeElapsed = 0;
             currentColorIndex = 0;
             currentCycle = 0;
-
         }
 
         public void Update(GameTime gameTime)
         {
 
-            // Iterates through a cycle after the animation logic.
-            currentCycle++;
-            if (currentCycle >= maxCycles)
+            timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+            // Checks if enough time has elapsed to meet the interval
+            if (timeElapsed >= colorChangeInterval)
             {
-                isDamaged = false;
-            }
+                currentColorIndex = (currentColorIndex + 1) % damageColors.Count;
+                if (currentColorIndex == 0)
+                {
+                    currentCycle++;
+                }
+                timeElapsed = 0;
+                if (currentCycle >= maxCycles)
+                {
+                    isDamaged = false;
+                }
 
+            }
         }
 
 

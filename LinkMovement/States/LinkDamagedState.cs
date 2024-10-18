@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace LegendOfZelda.LinkMovement
 {
@@ -18,8 +19,8 @@ namespace LegendOfZelda.LinkMovement
         public LinkDamagedState(Link link)
         {
             this.link = link;
-            damageAnimation = new DamageAnimation();
             currentDirection = link.direction;
+            damageAnimation = link.damageAnimation;
         }
         public string getState() { return name; }
 
@@ -29,11 +30,12 @@ namespace LegendOfZelda.LinkMovement
         }
         public void TakeDamage()
         {
-            
+            Debug.WriteLine("TAKING DAMAGEE IN THE DAMAGED STATE");
+            damageAnimation.StartDamageEffect();
         }
         public void Move(Vector2 newDirection)
         {
-            link.Move(newDirection);
+            link.linkState = new LinkMoveState(link);
         }
         public void Attack()
         {
@@ -47,9 +49,9 @@ namespace LegendOfZelda.LinkMovement
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Color damageColor = damageAnimation.GetCurrentColor();
-            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 45, 40);
-            link.linkSprite.Draw(spriteBatch, destination, damageColor);
+            Color color = link.damageAnimation.GetCurrentColor();
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
+            link.linkSprite.Draw(spriteBatch, destination, color);
         }
     }
 }
