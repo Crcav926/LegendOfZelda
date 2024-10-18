@@ -113,30 +113,23 @@ namespace LegendOfZelda.Collision
             {
                 // Reflection to instantiate the command and invoke its Execute method
                 MethodInfo executeMethod = commandType.GetMethod("Execute");
-                if (executeMethod != null)
+                object commandInstance;
+                // we need to be able to pass in the correct object for the command we're trying to make...
+
+                //b/c currently the first object is the one that responds
+                // this will definitely  need to be changed later
+
+                if (o1 is Link || o1 is IEnemy)
                 {
-                    object commandInstance;
-                    // we need to be able to pass in the correct object for the command we're trying to make...
-
-                    //b/c currently the first object is the one that responds
-                    // this will definitely  need to be changed later
-
-                    if (o1 is Link || o1 is IEnemy)
-                    {
-                        commandInstance = Activator.CreateInstance(commandType, o1);
-                    }
-                    else
-                    {
-                        Debug.WriteLine($"Object 1 is {o1.GetType().Name} o2 is {o2.GetType().Name}");
-                        commandInstance = Activator.CreateInstance(commandType, o2);
-                    }
-
-                    executeMethod.Invoke(commandInstance, null);
+                    commandInstance = Activator.CreateInstance(commandType, o1);
                 }
                 else
                 {
-                    Debug.WriteLine("Execute method not found for the given command type.");
+                    Debug.WriteLine($"Object 1 is {o1.GetType().Name} o2 is {o2.GetType().Name}");
+                    commandInstance = Activator.CreateInstance(commandType, o2);
                 }
+
+                executeMethod.Invoke(commandInstance, null);
             }
             else
             {
@@ -170,10 +163,10 @@ namespace LegendOfZelda.Collision
                 foreach (Type itemType in itemTypes)
                 {
                     //directions don't matter here
-                    RegisterCollision(enemyType, itemType, "left", typeof(EnemyTakeDamage));
-                    RegisterCollision(enemyType, itemType, "right", typeof(EnemyTakeDamage));
-                    RegisterCollision(enemyType, itemType, "top", typeof(EnemyTakeDamage));
-                    RegisterCollision(enemyType, itemType, "bottom", typeof(EnemyTakeDamage));
+                    RegisterCollision(enemyType, itemType, "left", typeof(EnemyTakeDamageLeft));
+                    RegisterCollision(enemyType, itemType, "right", typeof(EnemyTakeDamageRight));
+                    RegisterCollision(enemyType, itemType, "top", typeof(EnemyTakeDamageTop));
+                    RegisterCollision(enemyType, itemType, "bottom", typeof(EnemyTakeDamageBottom));
                 }
             }
 
