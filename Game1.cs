@@ -68,12 +68,10 @@ namespace LegendOfZelda
             // Initializes keyboard controller
 
             controllerK = new KeyboardCont(this);
-
-            //init the collision stuff
+            // TEMP
+            LevelLoading levelLoading = new LevelLoading();        //init the collision stuff
             collisionDetector = new detectionManager();
             collHandler = new CollisionHandler(collisionDetector);
-
-
             base.Initialize();
         }
 

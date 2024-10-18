@@ -21,8 +21,18 @@
     <Compile Remove="LinkMovement\UpLinkSprite.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Content\Room1.xml" />
+    <None Remove="Content\Room2.xml" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Room1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Room2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
