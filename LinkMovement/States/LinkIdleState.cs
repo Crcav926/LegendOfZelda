@@ -43,7 +43,7 @@ namespace LegendOfZelda.LinkMovement
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 45, 40);
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, 16, 16);
             link.linkSprite.Draw(spriteBatch, destination, Color.White);
         }
     }

@@ -56,12 +56,13 @@ namespace LegendOfZelda
         detectionManager collisionDetector;
         CollisionHandler collHandler;
 
+        private Matrix matrix = Matrix.CreateScale(Constants.ScaleX,Constants.ScaleY,1.0f);
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferHeight = 176,
-                PreferredBackBufferWidth = 256
+                PreferredBackBufferHeight = Constants.ScreenHeight,
+                PreferredBackBufferWidth = Constants.ScreenWidth
             };
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -167,7 +168,7 @@ namespace LegendOfZelda
             
             
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(transformMatrix: matrix);
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 256, 176), Color.White);
             background.Draw(_spriteBatch, new Rectangle(33, 33, 192, 112), Color.White);
             foreach (Block block in blocks)
