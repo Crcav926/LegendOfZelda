@@ -155,7 +155,7 @@ namespace LegendOfZelda.Collision
 
             Type[] enemyTypes = { typeof(Aquamentus), typeof(BladeTrap), typeof(Gel), typeof(Goriya), typeof(Keese), typeof(Stalfol), typeof(Wallmaster), typeof(Zol) };
             Type[] projectileTypes = { typeof(Projectile), typeof(Fireball) }; // add stafol's sword?
-            Type[] obstacleTypes = { typeof(Block) }; // add wall and door?
+            Type[] obstacleTypes = { typeof(Block), typeof(Wall) }; // add wall and door?
 
             //enemy-link collisions
             foreach (Type enemyType in enemyTypes)

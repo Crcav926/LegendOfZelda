@@ -144,6 +144,19 @@ namespace LegendOfZelda
             {
                 collisionDetector.addHitbox(mover, 1);
             }
+
+            //76 thick top
+            //
+            Wall top = new Wall(new Rectangle(0,0,800,76));
+            Wall bot = new Wall(new Rectangle(0, 460, 800, 20));
+            Wall left = new Wall(new Rectangle(0, 0, 20, 480));
+            Wall right = new Wall(new Rectangle(780, 0, 20, 480));
+
+            collisionDetector.addHitbox(top, 0);
+            collisionDetector.addHitbox(bot, 0);
+            collisionDetector.addHitbox(left, 0);
+            collisionDetector.addHitbox(right, 0);
+
         }
 
         protected override void Update(GameTime gameTime)
