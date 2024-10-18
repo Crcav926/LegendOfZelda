@@ -82,6 +82,10 @@ public class Zol : IEnemy, ICollideable
         //return it
         return hitbox;
     }
+    public String getCollisionType()
+    {
+        return "Enemy";
+    }
     public void takendamage() { }
 
     public void attack() { }

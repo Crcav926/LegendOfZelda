@@ -84,7 +84,10 @@ public class Wallmaster : IEnemy, ICollideable
         return hitbox;
     }
 
-
+    public String getCollisionType()
+    {
+        return "Enemy";
+    }
     public void takendamage() { }
 
     public void attack() { }

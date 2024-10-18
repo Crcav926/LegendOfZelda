@@ -96,6 +96,10 @@ namespace LegendOfZelda
             //return it
             return hitbox;
         }
+        public String getCollisionType()
+        {
+            return "Player";
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             Rectangle destination = new Rectangle((int)position.X, (int)position.Y, 45, 40);

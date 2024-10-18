@@ -16,12 +16,15 @@ namespace LegendOfZelda
 		public ICollideable obj1;
 		public ICollideable obj2;
 		public Rectangle overlap;
+		public String direction;
 
-		public collObject(ICollideable o1, ICollideable o2, Rectangle over)
+		public collObject(ICollideable o1, ICollideable o2, Rectangle over, String d)
 		{
 			obj1 = o1;
 			obj2 = o2;
 			overlap = over;
+			direction = d;
+			
 		}
 
 

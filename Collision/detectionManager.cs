@@ -17,14 +17,19 @@ namespace LegendOfZelda.Collision
         private List<ICollideable> stationaryHitboxes;
         private List<ICollideable> movingHitboxes;
 
-        public List<collObject> collisionList;
+        //instead of the list just call handle
+        //removable public List<collObject> collisionList;
+        private CollisionHandler handler;
 
-
-        public detectionManager()
+        public detectionManager(CollisionHandler collHandler)
         {
             stationaryHitboxes = new List<ICollideable>();
             movingHitboxes = new List<ICollideable>();
-            collisionList = new List<collObject> ();
+
+            //Removable collisionList = new List<collObject> ();
+
+            //lets other methods use the handler
+            handler = collHandler;
         }
 
         //this is used by other classes to add their hitbox to the list that we're checking for collisions.
@@ -51,7 +56,7 @@ namespace LegendOfZelda.Collision
                 Microsoft.Xna.Framework.Rectangle firstHitbox = movingHitboxes[i].getHitbox();
                 //Debug.WriteLine("First Hitbox retrieved");
                 //check collision with all other moving hitboxes
-                for (int j=i+1; j<movingHitboxes.Count; j++)
+                for (int j = i + 1; j < movingHitboxes.Count; j++)
                 {
                     if (movingHitboxes[i] is IEnemy && movingHitboxes[j] is IEnemy)
                     {
@@ -63,24 +68,29 @@ namespace LegendOfZelda.Collision
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
 
-                    
-                    
-                        //calculate where they collide and add that rectangle to the collides list
-                        //this is temporary ill fix it later
-                        //Debug.WriteLine("Collision Detected");
+                    //calculate where they collide and add that rectangle to the collides list
+                    //this is temporary ill fix it later
+                    //Debug.WriteLine("Collision Detected");
                     Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
 
                     //this version got rid of doIntersect while the stationary one hasn't
                     //if there's overlap we collided so add to collision list.
                     if (overlap.X > 0 || overlap.Y > 0)
                     {
-                        collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap);
-                        collisionList.Add(info);
+                        String direction = "null";
+                        collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap, direction);
+                        //get the direction
+                        direction = getDirection(info);
+                        //replace the null direction with the new direction.
+                        info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap, direction);
+                        //collisionList.Add(info);
+                        //directly handle instead 
+                        handler.HandleCollision(info);
                     }
-                    
+
                 }
                 //check collision with all stationary hitboxes
-                for (int j = 0 ; j < stationaryHitboxes.Count; j++)
+                for (int j = 0; j < stationaryHitboxes.Count; j++)
                 {
                     Microsoft.Xna.Framework.Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
                     //Debug.WriteLine("Stationary Hitbox retrieved");
@@ -92,11 +102,16 @@ namespace LegendOfZelda.Collision
                         //this is temporary ill fix it later
                         //Debug.WriteLine("Collision Detected");
                         Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
-                        collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap);
-                        collisionList.Add(info);
+                        String direction = "null";
+                        collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
+                        direction = getDirection(info);
+                        info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
+                        handler.HandleCollision(info);
+
+                        //collisionList.Add(info);
                     }
-                
-               }
+
+                }
             }
             // var className = movingHitboxes[0].GetType().Name;
             // var className2 = stationaryHitboxes[0].GetType().Name;
@@ -121,7 +136,7 @@ namespace LegendOfZelda.Collision
             return true;
         }
         //this has replcaed do intersect by always calculating overlap idk if the overhead is worse or better though, needs testing
-        private Microsoft.Xna.Framework.Rectangle getOverlap(Microsoft.Xna.Framework. Rectangle rect1, Microsoft.Xna.Framework. Rectangle rect2)
+        private Microsoft.Xna.Framework.Rectangle getOverlap(Microsoft.Xna.Framework.Rectangle rect1, Microsoft.Xna.Framework.Rectangle rect2)
         {
             //This is alot messier than the old version, but the old version was lowkey pirated so...
             // convert to system.drawing rectangle and just call intersect lol.
@@ -133,21 +148,59 @@ namespace LegendOfZelda.Collision
             System.Drawing.Rectangle rO;
             if (r1.IntersectsWith(r2))
             {
-                rO =System.Drawing.Rectangle.Intersect(r1,r2);
-                overlap =  new Microsoft.Xna.Framework.Rectangle(rO.X, rO.Y, rO.Width, rO.Height);
+                rO = System.Drawing.Rectangle.Intersect(r1, r2);
+                overlap = new Microsoft.Xna.Framework.Rectangle(rO.X, rO.Y, rO.Width, rO.Height);
             }
             else
             {
-                overlap = new Microsoft.Xna.Framework.Rectangle(0,0,0,0);
+                overlap = new Microsoft.Xna.Framework.Rectangle(0, 0, 0, 0);
             }
 
             return overlap;
-           
+
+        }
+        //This method will use the hitboxes of the obejcts passed to see where objects are in relation to each other
+        //If the overlap rectangle has a higher Y value than X value chances are its side on and more X than Y is a top down collision  
+        private String getDirection(collObject c)
+        {
+            string direction = "null";
+            Microsoft.Xna.Framework.Rectangle overlap = c.overlap;
+            Microsoft.Xna.Framework.Rectangle r1 = c.obj1.getHitbox();
+            Microsoft.Xna.Framework.Rectangle r2 = c.obj2.getHitbox();
+            if (overlap.Height > overlap.Width)
+            {
+                //assume side collision
+                int r1X = r1.X;
+                int r2X = r2.X;
+                if (r2X > r1X)
+                {
+                    //if the first object is on the left
+                    direction = "left";
+                }
+                else
+                {
+                    direction = "right";
+                }
+            }
+            else
+            {
+                //assume top down collision
+                int r1Y = r1.Y;
+                int r2Y = r2.Y;
+                if (r2Y > r1Y)
+                {
+                    //if the first object is above the second object
+                    direction = "top";
+                }
+                else
+                {
+                    direction = "bottom";
+                }
+            }
+            //Debug.WriteLine($"{direction} collision");
+            return direction;
         }
 
-        public List<collObject> getCollisions()
-        {
-            return collisionList;
-        }
+        //not needed removed getCollision list
     }
 }

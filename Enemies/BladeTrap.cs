@@ -70,4 +70,8 @@ public class BladeTrap : IEnemy, ICollideable
     {
         // Worry about later
     }
+    public String getCollisionType()
+    {
+        return "Enemy";
+    }
 }

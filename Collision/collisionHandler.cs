@@ -16,98 +16,43 @@ namespace LegendOfZelda.Collision
 
 
         //Context is .NET stuff I'm unsure about .
-        private List<collObject> collisionList;
-        private detectionManager collDetector;
 
-        private Dictionary<Tuple<Type, Type, string>, Type> collisionDictionary;
+        //both not needed anymore
+        //private List<collObject> collisionList;
+        //private detectionManager collDetector;
 
-        public CollisionHandler(detectionManager collDet)
+        private Dictionary<Tuple<string,string, string>, Type> collisionDictionary;
+
+        public CollisionHandler()
         {
-            collisionDictionary = new Dictionary<Tuple<Type, Type, string>, Type>();
+            collisionDictionary = new Dictionary<Tuple<string,string, string>, Type>();
             BuildDictionary();  // Initialize the collision dictionary
 
             // collisionDictioanry = new Dictionary<CollisionType, Context>;
             //this lets any method in the class use the detector
-            collDetector = collDet;
-            collisionList = collDetector.getCollisions();
+            //collDetector = collDet;
+            //collisionList = collDetector.getCollisions();
         }
 
-        //This method will use the hitboxes of the obejcts passed to see where objects are in relation to each other
-        //If the overlap rectangle has a higher Y value than X value chances are its side on and more X than Y is a top down collision  
-        private String getDirection(collObject c)
-        {
-            string direction = "null";
-            Rectangle overlap = c.overlap;
-            Rectangle r1 = c.obj1.getHitbox();
-            Rectangle r2 = c.obj2.getHitbox();
-            if (overlap.Height > overlap.Width)
-            {
-                //assume side collision
-                int r1X = r1.X;
-                int r2X = r2.X;
-                if (r2X > r1X)
-                {
-                    //if the first object is on the left
-                    direction = "left";
-                }
-                else
-                {
-                    direction = "right";
-                }
-            }
-            else
-            {
-                //assume top down collision
-                int r1Y = r1.Y;
-                int r2Y = r2.Y;
-                if (r2Y > r1Y)
-                {
-                    //if the first object is above the second object
-                    direction = "top";
-                }
-                else
-                {
-                    direction = "bottom";
-                }
-            }
-            //Debug.WriteLine($"{direction} collision");
-            return direction;
-        }
+        
+        //this actually shouldnt be needed anymore. I removed the update method.
+            
 
-        public void update()
-        {
-            //Debug.WriteLine("Collision Handler updated\n");
-            //get the list of collisions that needs to be handled
-            collisionList = collDetector.getCollisions();
-            List<collObject> removeList = new List<collObject>();
-            while (collisionList.Count != 0)
-            {
-                //handle the collision then remove it from the list
-                collObject hit = collisionList[0];
-                HandleCollision(hit);
-
-                collisionList.Remove(hit);
-
-                //Debug.WriteLine("Collision Handled\n");
-
-
-            }
-        }
         // this should only intake the coll object.
         //each pair of objects results in a certain type of collision
         // and from this collision type do the right command on the right objects
-        private void HandleCollision(collObject c)
+        public void HandleCollision(collObject c)
         {
-            string direction = getDirection(c);
 
             //possible collideables are Player, Block, Weapon, Item, Enemy (and movable block but uh we aint doing that yet)
             ICollideable o1 = c.obj1;
             ICollideable o2 = c.obj2;
+            String direction = c.direction;
             if (o1 is Link)
             {
                 // Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name}");
             }
-            Tuple<Type, Type, string> key = new Tuple<Type, Type, string>(o1.GetType(), o2.GetType(), direction);
+            Tuple<string,string, string> key = new Tuple<string, string, string>(o1.getCollisionType(), o2.getCollisionType(), direction);
 
             if (collisionDictionary.TryGetValue(key, out Type commandType))
             {
@@ -150,6 +95,7 @@ namespace LegendOfZelda.Collision
         private void BuildDictionary()
         {
             //we need to condense this into using a getCollisionType method in the ICollideables but it works.
+            //this is unused but im leaving it just in case?
             Type playerType = typeof(Link);
             Type[] itemTypes = { typeof(Arrow), typeof(Bomb), typeof(Boomerang), typeof(Fire), typeof(Sword) };
 
@@ -157,49 +103,27 @@ namespace LegendOfZelda.Collision
             Type[] projectileTypes = { typeof(Projectile), typeof(Fireball) }; // add stafol's sword?
             Type[] obstacleTypes = { typeof(Block), typeof(Wall) }; // add wall and door?
 
-            //enemy-link collisions
-            foreach (Type enemyType in enemyTypes)
-            {
-                //directions don't matter here
-                RegisterCollision(playerType, enemyType, "left", typeof(PlayerTakeDamage));
-                RegisterCollision(playerType, enemyType, "right", typeof(PlayerTakeDamage));
-                RegisterCollision(playerType, enemyType, "top", typeof(PlayerTakeDamage));
-                RegisterCollision(playerType, enemyType, "bottom", typeof(PlayerTakeDamage));
+            // new dictionary that is more compact but im also ignoring items
+            RegisterCollision("Player", "Enemy", "left", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Enemy", "right", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Enemy", "top", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Enemy", "bottom", typeof(PlayerTakeDamage));
 
-                //enemy-item collisions they dont do anything i think though lol
-                foreach (Type itemType in itemTypes)
-                {
-                    //directions don't matter here
-                    RegisterCollision(enemyType, itemType, "left", typeof(EnemyTakeDamage));
-                    RegisterCollision(enemyType, itemType, "right", typeof(EnemyTakeDamage));
-                    RegisterCollision(enemyType, itemType, "top", typeof(EnemyTakeDamage));
-                    RegisterCollision(enemyType, itemType, "bottom", typeof(EnemyTakeDamage));
-                }
-            }
+            RegisterCollision("Player", "Obstacle", "left", typeof(PlayerBlockLeft));
+            RegisterCollision("Player", "Obstacle", "right", typeof(PlayerBlockRight));
+            RegisterCollision("Player", "Obstacle", "top", typeof(PlayerBlockTop));
+            RegisterCollision("Player", "Obstacle", "bottom", typeof(PlayerBlockBottom));
 
-            //link-obstacle collisions
-            foreach (Type obstacleType in obstacleTypes)
-            {
-                RegisterCollision(playerType, obstacleType, "left", typeof(PlayerBlockLeft));
-                RegisterCollision(playerType, obstacleType, "right", typeof(PlayerBlockRight));
-                RegisterCollision(playerType, obstacleType, "top", typeof(PlayerBlockTop));
-                RegisterCollision(playerType, obstacleType, "bottom", typeof(PlayerBlockBottom));
-
-                //enemy-obstacle collisions
-                foreach (Type enemyType in enemyTypes)
-                {
-                    RegisterCollision(enemyType, obstacleType, "left", typeof(EnemyBlockLeft));
-                    RegisterCollision(enemyType, obstacleType, "right", typeof(EnemyBlockRight));
-                    RegisterCollision(enemyType, obstacleType, "top", typeof(EnemyBlockTop));
-                    RegisterCollision(enemyType, obstacleType, "bottom", typeof(EnemyBlockBottom));
-                }
-            }
+            RegisterCollision("Enemy", "Obstacle", "left", typeof(EnemyBlockLeft));
+            RegisterCollision("Enemy", "Obstacle", "right", typeof(EnemyBlockRight));
+            RegisterCollision("Enemy", "Obstacle", "top", typeof(EnemyBlockTop));
+            RegisterCollision("Enemy", "Obstacle", "bottom", typeof(EnemyBlockBottom));
 
             //link-door
         }
-        private void RegisterCollision(Type obj1, Type obj2, string direction, Type command)
+        private void RegisterCollision(string obj1, string obj2, string direction, Type command)
         {
-            var key = new Tuple<Type, Type, string>(obj1, obj2, direction);
+            var key = new Tuple<string,string, string>(obj1, obj2, direction);
             collisionDictionary[key] = command;
         }
     }
