@@ -87,7 +87,7 @@ public class Aquamentus : IEnemy
         }
     }
 
-    public void takendamage() { }
+    public void TakeDamage() { }
 
-    public void attack() { }
+    public void Attack() { }
 }
