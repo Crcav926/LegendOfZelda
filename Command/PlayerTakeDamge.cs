@@ -8,9 +8,9 @@ namespace LegendOfZelda.Command
 {
     class PlayerTakeDamage : ICommand
     {
-        private readonly ILinkState _link;
+        private readonly Link _link;
 
-        public PlayerTakeDamage(ILinkState link) => _link = link;
+        public PlayerTakeDamage(Link link) => _link = link;
 
         public void Execute()
         {

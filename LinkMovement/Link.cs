@@ -69,7 +69,8 @@ namespace LegendOfZelda
 
         public void TakeDamage()
         {
-            linkState.TakeDamage();
+            Debug.WriteLine("Link took Damage");
+            //linkState.TakeDamage();
         }
 
         public void Attack()
@@ -80,9 +81,7 @@ namespace LegendOfZelda
         {
             //This updates hitbox
             //the sprite update doesn't work for weapon slots 2 and 3 but I think that's b/c those slots aren't refactored.
-            hitInfo = (Sprite)linkSprite;
-           
-
+            
             linkState.Update(gameTime);
             linkSprite.Update(gameTime);
         }

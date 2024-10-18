@@ -53,22 +53,31 @@ namespace LegendOfZelda.Collision
                 //check collision with all other moving hitboxes
                 for (int j=i+1; j<movingHitboxes.Count; j++)
                 {
+                    if (movingHitboxes[i] is IEnemy && movingHitboxes[j] is IEnemy)
+                    {
+                        continue;
+                    }
                     //get second box
                     Microsoft.Xna.Framework.Rectangle secondHitbox = movingHitboxes[j].getHitbox();
                     //Debug.WriteLine("Second Hitbox retrieved");
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
-                    // i got this math from stack overflow ill fix later.
-                    if (doIntersect(firstHitbox, secondHitbox))
-                    {
+
+                    
+                    
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
-                        Debug.WriteLine("Collision Detected");
-                        Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
-                        collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap);
+                        //Debug.WriteLine("Collision Detected");
+                    Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
 
+                    //this version got rid of doIntersect while the stationary one hasn't
+                    //if there's overlap we collided so add to collision list.
+                    if (overlap.X > 0 || overlap.Y > 0)
+                    {
+                        collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap);
                         collisionList.Add(info);
                     }
+                    
                 }
                 //check collision with all stationary hitboxes
                 for (int j = 0 ; j < stationaryHitboxes.Count; j++)
@@ -81,7 +90,7 @@ namespace LegendOfZelda.Collision
                     {
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
-                        Debug.WriteLine("Collision Detected");
+                        //Debug.WriteLine("Collision Detected");
                         Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
                         collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap);
                         collisionList.Add(info);
@@ -93,6 +102,7 @@ namespace LegendOfZelda.Collision
             // var className2 = stationaryHitboxes[0].GetType().Name;
             //Debug.WriteLine($"In Collideable list: {className} {className2}");
         }
+        //this isn't being used anymore
         private Boolean doIntersect(Microsoft.Xna.Framework.Rectangle rect1, Microsoft.Xna.Framework.Rectangle rect2)
         {
             // Check if one rectangle is to the left or right of the other
@@ -110,39 +120,31 @@ namespace LegendOfZelda.Collision
             // If there is no horizontal or vertical separation, the rectangles intersect
             return true;
         }
+        //this has replcaed do intersect by always calculating overlap idk if the overhead is worse or better though, needs testing
         private Microsoft.Xna.Framework.Rectangle getOverlap(Microsoft.Xna.Framework. Rectangle rect1, Microsoft.Xna.Framework. Rectangle rect2)
         {
             //This is alot messier than the old version, but the old version was lowkey pirated so...
             // convert to system.drawing rectangle and just call intersect lol.
-            int r1x = rect1.X;
-            int r1y = rect1.Y;
-            int r1w = rect1.Width;
-            int r1h = rect1.Height;
 
-            int r2x = rect2.X;  
-            int r2y = rect2.Y;
-            int r2w = rect2.Width;
-            int r2h = rect2.Height;
+            Microsoft.Xna.Framework.Rectangle overlap;
+            System.Drawing.Rectangle r1 = new System.Drawing.Rectangle(rect1.X, rect1.Y, rect1.Width, rect1.Height);
+            System.Drawing.Rectangle r2 = new System.Drawing.Rectangle(rect2.X, rect2.Y, rect2.Width, rect2.Height);
 
-            System.Drawing.Rectangle r1 = new System.Drawing.Rectangle(r1x, r1y, r1w, r1h);
-            System.Drawing.Rectangle r2 = new System.Drawing.Rectangle(r2x, r2y, r2w, r2h);
-
-            System.Drawing.Rectangle rO = new System.Drawing.Rectangle(0, 0, 0, 0);
+            System.Drawing.Rectangle rO;
             if (r1.IntersectsWith(r2))
             {
                 rO =System.Drawing.Rectangle.Intersect(r1,r2);
+                overlap =  new Microsoft.Xna.Framework.Rectangle(rO.X, rO.Y, rO.Width, rO.Height);
             }
-
-            int rOx = rO.X;
-            int rOy = rO.Y; 
-            int rOw = rO.Width;
-            int rOh = rO.Height;
-
-            Microsoft.Xna.Framework.Rectangle overlap = new Microsoft.Xna.Framework.Rectangle(rOx, rOy, rOw, rOh);
+            else
+            {
+                overlap = new Microsoft.Xna.Framework.Rectangle(0,0,0,0);
+            }
 
             return overlap;
            
         }
+
         public List<collObject> getCollisions()
         {
             return collisionList;

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZelda
 {
-public class BlockSprite : ISprite, ICollideable
+public class BlockSprite : ISprite
 {
     private Texture2D blockTexture;
     private int index;

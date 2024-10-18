@@ -120,7 +120,7 @@ namespace LegendOfZelda
             // Have 0 to be the default facing left
             // inventory.Add();
             // format is texture sheet, x cord, y cord.
-            item1 = new ClassItems(itemTexture, 600, 200);
+            item1 = new ClassItems(itemTexture, 600, 200); 
             item2 = new ClassItems(itemTexture, 200, 200);
 
             //add the items to the item collection
@@ -130,9 +130,12 @@ namespace LegendOfZelda
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             //load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);
-            foreach(Block block in blocks)
-            {
+            foreach (Block block in blocks) {
                 collisionDetector.addHitbox(block, 0);
+            }
+            foreach (ICollideable enemy in enemies)
+            {
+                collisionDetector.addHitbox(enemy, 1);
             }
         }
 
