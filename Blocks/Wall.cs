@@ -20,6 +20,10 @@ namespace LegendOfZelda
         {
             return theWall;
         }
+        public String getCollisionType()
+        {
+            return "Obstacle";
+        }
         public void Update(GameTime gameTime)
         {
             //walls dont update for now.

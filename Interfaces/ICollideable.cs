@@ -16,8 +16,12 @@ namespace LegendOfZelda
 
         public Rectangle getHitbox();
 
+        public String getCollisionType();
+
         public void Update(GameTime gameTime);
         public void Draw(SpriteBatch spriteBatch);
+
+
 
 
     }

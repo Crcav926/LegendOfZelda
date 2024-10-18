@@ -42,4 +42,8 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     {
         sprite.Update(gameTime); //this function currently does nothing. Do blocks even need to update?
     }
+    public String getCollisionType()
+    {
+        return "Obstacle";
+    }
 }

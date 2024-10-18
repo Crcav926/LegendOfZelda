@@ -105,7 +105,10 @@ public class Stalfol : ICollideable
         //return it
         return hitbox;
     }
-
+    public String getCollisionType()
+    {
+        return "Enemy";
+    }
     public void takendamage() { alive = false; }
 
     public void attack() { }

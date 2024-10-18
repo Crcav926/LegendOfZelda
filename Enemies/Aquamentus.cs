@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
-using LegendOfZelda;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
@@ -96,5 +100,9 @@ public class Aquamentus : IEnemy, ICollideable
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it
         return hitbox;
+    }
+    public String getCollisionType()
+    {
+        return "Enemy";
     }
 }
