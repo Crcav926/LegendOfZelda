@@ -58,7 +58,11 @@ namespace LegendOfZelda
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferHeight = 176,
+                PreferredBackBufferWidth = 256
+            };
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -115,10 +119,10 @@ namespace LegendOfZelda
             // Walls are 100 pixels thick wide and 87 pixels thick tall
             // Dimensions of the rooms are 800 / 480
 
-            Wall top = new Wall(new Rectangle(0,0,800,87));
-            Wall bot = new Wall(new Rectangle(0, 390, 800, 87));
-            Wall left = new Wall(new Rectangle(0, 0, 100, 480));
-            Wall right = new Wall(new Rectangle(700, 0, 100, 480));
+            Wall top = new Wall(new Rectangle(0,0,256,32));
+            Wall bot = new Wall(new Rectangle(0, 144, 256, 32));
+            Wall left = new Wall(new Rectangle(0, 0, 32, 160));
+            Wall right = new Wall(new Rectangle(225, 0, 32, 160));
 
             collisionDetector.addHitbox(top, 0);
             collisionDetector.addHitbox(bot, 0);
@@ -164,8 +168,8 @@ namespace LegendOfZelda
             
 
             _spriteBatch.Begin();
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-            background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
+            walls.Draw(_spriteBatch, new Rectangle(0, 0, 256, 176), Color.White);
+            background.Draw(_spriteBatch, new Rectangle(33, 33, 192, 112), Color.White);
             foreach (Block block in blocks)
             {
                 block.Draw(_spriteBatch);

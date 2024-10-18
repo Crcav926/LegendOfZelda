@@ -34,7 +34,7 @@ public class Keese : IEnemy, ICollideable
         velocity.Normalize();
         velocity *= speed;
         sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
         alive = true;
     }
 
@@ -46,12 +46,12 @@ public class Keese : IEnemy, ICollideable
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         // Check for collisions with screen edges and reflect velocity
-        if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
+        if (position.X <= 0 || position.X >= 256 - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reverse X direction
         }
 
-        if (position.Y <= 0 || position.Y >= 600 - destinationRectangle.Height)
+        if (position.Y <= 0 || position.Y >= 176 - destinationRectangle.Height)
         {
             velocity.Y *= -1; // Reverse Y direction
         }
@@ -63,7 +63,7 @@ public class Keese : IEnemy, ICollideable
         if (alive)
         {
             // Use the current position for the destination rectangle, and size it appropriately
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
 
             sprite.Draw(s, destinationRectangle, Color.White);
         }

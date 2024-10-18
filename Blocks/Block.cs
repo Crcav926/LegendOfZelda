@@ -11,16 +11,16 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     private Texture2D blockTexture;
     private Rectangle destinationRectangle;
     private int spriteIndex;
-    private Vector2 position;
+    //private Vector2 position;
     public Block(Vector2 position, String blockName)
     {
         spriteIndex = 0;
         sprite = BlockSpriteFactory.Instance.CreateSprite(blockName);
-        this.position = position;
+        //this.position = position;
         //arbitrary numbers, can change to where we want to put it.
 
         //spawn point of rectangle
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 42);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
     }
     public Rectangle getHitbox()
     {
@@ -34,7 +34,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     public void Draw(SpriteBatch spriteBatch)
     {
 
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 42);
+        //destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 16, 16);
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
     }
 
