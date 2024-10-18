@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-public class BladeTrap : IEnemy
+public class BladeTrap : IEnemy, ICollideable
 {
     private bool isActive = true;        // Whether the BladeTrap is currently active
     private float activeTime = 10f;      // Time to stay active in seconds
@@ -49,6 +49,15 @@ public class BladeTrap : IEnemy
             sprite.Draw(s, destinationRectangle, Color.White);
 
         }
+    }
+    public Rectangle getHitbox()
+    {
+        //put data in the the hitbox
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        //Debug.WriteLine("Hitbox of block retrieved!");
+        //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
+        //return it
+        return hitbox;
     }
 
     public void takendamage() 

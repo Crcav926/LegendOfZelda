@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Gel : IEnemy
+public class Gel : IEnemy, ICollideable
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
@@ -77,6 +77,15 @@ public class Gel : IEnemy
     public Vector2 getPosition()
     {
         return this.position;
+    }
+    public Rectangle getHitbox()
+    {
+        //put data in the the hitbox
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 32, 60);
+        //Debug.WriteLine("Hitbox of block retrieved!");
+        //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
+        //return it
+        return hitbox;
     }
     public void takendamage() { }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using LegendOfZelda;
 
-public class Goriya : IEnemy
+public class Goriya : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement
     private float speed = 100f;          // Movement speed
@@ -143,6 +143,15 @@ public class Goriya : IEnemy
                 projectile.Draw(s);
             }
         }
+    }
+    public Rectangle getHitbox()
+    {
+        //put data in the the hitbox
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        //Debug.WriteLine("Hitbox of block retrieved!");
+        //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
+        //return it
+        return hitbox;
     }
 
     public void takendamage() 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Wallmaster : IEnemy
+public class Wallmaster : IEnemy, ICollideable
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
@@ -73,7 +73,15 @@ public class Wallmaster : IEnemy
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
         sprite.Draw(s, destinationRectangle, Color.White);
     }
-
+    public Rectangle getHitbox()
+    {
+        //put data in the the hitbox
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 30, 30);
+        //Debug.WriteLine("Hitbox of block retrieved!");
+        //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
+        //return it
+        return hitbox;
+    }
 
 
     public void takendamage() { }

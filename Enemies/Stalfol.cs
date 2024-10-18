@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Stalfol : IEnemy
+public class Stalfol : IEnemy, ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement
@@ -94,6 +94,15 @@ public class Stalfol : IEnemy
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
             sprite.Draw(s, destinationRectangle, Color.White);
         }
+    }
+    public Rectangle getHitbox()
+    {
+        //put data in the the hitbox
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        //Debug.WriteLine("Hitbox of block retrieved!");
+        //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
+        //return it
+        return hitbox;
     }
 
     public void takendamage() { alive = false; }

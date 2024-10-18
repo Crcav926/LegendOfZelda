@@ -22,7 +22,7 @@ namespace LegendOfZelda
             fileNameList.Add("Room3.xml");
             fileNameList.Add("Room4.xml");
 
-            Parsing parseIt = new Parsing("Room5.xml");
+            Parsing parseIt = new Parsing("Room1.xml");
             List<Block> getEm = parseIt.getBlocks();
             // Sorts through each item in the list and parses through.
             // Mainly testing by parsing through all rooms, but eventually have only cetain rooms have their information loaded.

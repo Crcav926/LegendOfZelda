@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using LegendOfZelda;
 
-public class Aquamentus : IEnemy
+public class Aquamentus : IEnemy, ICollideable
 {
     private Vector2 velocity;
     private float speed = 80f;
@@ -87,4 +87,13 @@ public class Aquamentus : IEnemy
     public void takendamage() { }
 
     public void attack() { }
+    public Rectangle getHitbox()
+    {
+        //put data in the the hitbox
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        //Debug.WriteLine("Hitbox of block retrieved!");
+        //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
+        //return it
+        return hitbox;
+    }
 }
