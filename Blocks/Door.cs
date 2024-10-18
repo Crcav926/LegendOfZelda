@@ -31,6 +31,9 @@ namespace LegendOfZelda
         {
             // Make later.
         }
-
+        public String getCollisionType()
+        {
+            return "Door";
+        }
     }
 }

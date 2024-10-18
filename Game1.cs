@@ -77,8 +77,9 @@ namespace LegendOfZelda
             controllerK = new KeyboardCont(this);
             // TEMP
             //init the collision stuff
-            collisionDetector = new detectionManager();
-            collHandler = new CollisionHandler(collisionDetector);
+            collHandler = new CollisionHandler();
+            collisionDetector = new detectionManager(collHandler);
+            
             base.Initialize();
         }
 
@@ -143,7 +144,7 @@ namespace LegendOfZelda
             }
             // update collision
             collisionDetector.update();
-            collHandler.update();
+            //collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
             foreach (ICollideable mover in movers)

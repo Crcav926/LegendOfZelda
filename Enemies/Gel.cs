@@ -88,6 +88,10 @@ public class Gel : IEnemy, ICollideable
         //return it
         return hitbox;
     }
+    public String getCollisionType()
+    {
+        return "Enemy";
+    }
     public void takendamage() { }
 
     public void attack() { }
