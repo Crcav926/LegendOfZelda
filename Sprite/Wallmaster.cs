@@ -17,7 +17,7 @@ public class Wallmaster : IEnemy
     private Random random = new Random();
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
-    private Vector2 position;
+    public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private ISprite sprite;
 

@@ -17,7 +17,7 @@ public class Aquamentus : IEnemy
     private float minX;  // Left boundary for movement
     private float maxX;  // Right boundary for movement
     private ISprite sprite;
-    private Vector2 position;
+    public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     public Aquamentus(Vector2 position)
     {
@@ -61,9 +61,6 @@ public class Aquamentus : IEnemy
             velocity.X *= -1;
         }
 
-        // Ensure Aquamentus stays within screen bounds
-        position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
-        position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
         sprite.Update(gameTime);
     }
 
@@ -87,7 +84,7 @@ public class Aquamentus : IEnemy
         }
     }
 
-    public void TakeDamage() { }
+    public void takendamage() { }
 
-    public void Attack() { }
+    public void attack() { }
 }

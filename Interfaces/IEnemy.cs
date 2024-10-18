@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 public interface IEnemy
 {
+    Vector2 position { get; set; }
     void Update(GameTime gameTime);
     void Draw(SpriteBatch spriteBatch);
 
-    void TakeDamage();
+    void takendamage();
 
-    void Attack();
+    void attack();
 }
 

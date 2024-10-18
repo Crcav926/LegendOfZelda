@@ -24,7 +24,7 @@ public class Goriya : IEnemy
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
     private ISprite sprite;
-    private Vector2 position;
+    public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private Boolean alive;
 
@@ -113,10 +113,6 @@ public class Goriya : IEnemy
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
-
-        // Ensure Goriya stays within screen bounds
-        position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
-        position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
     }
 
     private void ThrowProjectile()

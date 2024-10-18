@@ -17,9 +17,9 @@ public class Keese : IEnemy
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
     private ISprite sprite;
-    private Vector2 position;
     private Rectangle destinationRectangle;
     private Boolean alive;
+    public Vector2 position { get; set; }
     public Keese(Vector2 position)
     {
         // Set the initial target position (I dont know so I randomlzie it here
@@ -54,10 +54,6 @@ public class Keese : IEnemy
         {
             velocity.Y *= -1; // Reverse Y direction
         }
-
-        // Ensure the sprite stays within screen bounds
-        position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
-        position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
         sprite.Update(gameTime);
     }
 

@@ -17,7 +17,7 @@ public class Gel : IEnemy
     private Random random = new Random();
     private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
-    private Vector2 position;
+    public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private ISprite sprite;
     public Gel(Vector2 Position)
@@ -64,10 +64,6 @@ public class Gel : IEnemy
             direction.Normalize();
             position += direction * jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-
-        // Ensure the sprite doesn't move out of screen bounds (optional)
-        position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
-        position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
         sprite.Update(gameTime);
     }
 
@@ -78,7 +74,10 @@ public class Gel : IEnemy
         sprite.Draw(s, destinationRectangle, Color.White);
 
     }
-
+    public Vector2 getPosition()
+    {
+        return this.position;
+    }
     public void takendamage() { }
 
     public void attack() { }

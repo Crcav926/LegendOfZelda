@@ -14,7 +14,7 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            _enemy.TakeDamage();
+            _enemy.takendamage();
         }
     }
 }

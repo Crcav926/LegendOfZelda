@@ -23,7 +23,7 @@ public class Stalfol : IEnemy
     private float frameTime = 0.1f;
     private float frameTimer = 0f;
     private ISprite sprite;
-    private Vector2 position;
+    public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private Boolean alive;
 
@@ -84,10 +84,6 @@ public class Stalfol : IEnemy
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
-
-        // Ensure the skull stays within screen bounds
-        position.X = MathHelper.Clamp(position.X, 0, 800 - destinationRectangle.Width);
-        position.Y = MathHelper.Clamp(position.Y, 0, 600 - destinationRectangle.Height);
     }
 
     public void Draw(SpriteBatch s)

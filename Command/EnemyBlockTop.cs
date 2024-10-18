@@ -9,9 +9,9 @@ namespace LegendOfZelda.Command
 {
     class EnemyBlockTop : ICommand
     {
-        private readonly DynamicSprite _enemy;
+        private readonly IEnemy _enemy;
 
-        public EnemyBlockTop(DynamicSprite enemy) => _enemy = enemy;
+        public EnemyBlockTop(IEnemy enemy) => _enemy = enemy;
 
         public void Execute()
         {

@@ -47,8 +47,6 @@ namespace LegendOfZelda
             //ICommand throwFireball = new CommThrowFireball(game);
             ICommand e = new CommLinkDamaged(game);
             ICommand quit = new CommQuit(game);
-            ICommand nextBlock = new CommNextBlock(game);
-            ICommand lastBlock = new CommLastBlock(game);
             ICommand reset = new CommReset(game);
 
             RegisterCommand(Keys.D0, quit);
@@ -65,8 +63,6 @@ namespace LegendOfZelda
             RegisterCommand(Keys.Q, c);
             RegisterCommand(Keys.U, new LastItemComm(game));
             RegisterCommand(Keys.I, new NextItemComm(game));
-            RegisterCommand(Keys.T, lastBlock);
-            RegisterCommand(Keys.Y, nextBlock);
             RegisterCommand(Keys.R, reset);
 
             ICommand pSC = new PreviousSpriteCommand(game);

@@ -18,7 +18,7 @@ namespace LegendOfZelda
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         public Texture2D texture;
-        private KeyboardController keyboardController;
+        private KeyboardCont keyboardController;
         public ArrayList sprites;
         ArrayList controllerList;
 
@@ -45,6 +45,7 @@ namespace LegendOfZelda
         private ClassItems item1;
         private ClassItems item2;
         public List<IEnemy> enemies = new List<IEnemy>();
+        private List<Block> blocks;
 
         private IController controllerK;
 
@@ -56,6 +57,9 @@ namespace LegendOfZelda
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 500;
+            _graphics.ApplyChanges();
             IsMouseVisible = true;
         }
         
@@ -64,12 +68,12 @@ namespace LegendOfZelda
             controllerList = new ArrayList();
             sprites = new ArrayList();
             // Need discuss where to initialize
-            keyboardController = new KeyboardController();
+            keyboardController = new KeyboardCont(this);
             // Initializes keyboard controller
 
             controllerK = new KeyboardCont(this);
             // TEMP
-            LevelLoading levelLoading = new LevelLoading();        //init the collision stuff
+            //init the collision stuff
             collisionDetector = new detectionManager();
             collHandler = new CollisionHandler(collisionDetector);
             base.Initialize();
@@ -83,8 +87,10 @@ namespace LegendOfZelda
             Texture2D texture = Content.Load<Texture2D>("enemySpriteSheet");
             Texture2D Bossture = Content.Load<Texture2D>("bossSpriteSheet");
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
-            XmlDocument doc = Content.Load<XmlDocument>("Room1");
-            Parsing parse = new Parsing(doc);
+            BlockSpriteFactory.Instance.LoadAllTextures(Content);
+
+            LevelLoading levelLoading = new LevelLoading();
+            blocks = levelLoading.Load();
 
             //All this sprite loading will be moved later to either the level loader or an enemy manager
             // Use the factory to create the sprites
@@ -112,7 +118,7 @@ namespace LegendOfZelda
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             LinkCharacter = new Link();
             blockTexture = Content.Load<Texture2D>("ZeldaTileSheet");
-            block = new Block(blockTexture);
+            block = new Block(new Vector2(100, 300), "dirt");
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             // Have 0 to be the default facing left
             // inventory.Add();
@@ -177,6 +183,11 @@ namespace LegendOfZelda
             
 
             _spriteBatch.Begin();
+
+            foreach (Block block in blocks)
+            {
+                block.Draw(_spriteBatch);
+            }
             foreach (IEnemy enemy in enemies)
             {
                 enemy.Draw(_spriteBatch);

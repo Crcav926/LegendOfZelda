@@ -11,7 +11,7 @@ public class BladeTrap : IEnemy
     private float hiddenTime = 2f;        // Time to stay hidden in seconds
     private float timer = 0f;             // Timer to track visibility
     private ISprite sprite;
-    private Vector2 position;
+    public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
 
     public BladeTrap(Vector2 position)
