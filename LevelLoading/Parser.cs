@@ -31,8 +31,8 @@ namespace LegendOfZelda
 
         public List<Block> getBlocks() { return blocks; }
         public List<ICollideable> getMovers() { return colliders; }
-        public float normalizeX(float x) { return x*(800/209); }
-        public float normalizeY(float y) { return y*(480/129); }
+        public float normalizeX(float x) { return x; }
+        public float normalizeY(float y) { return y; }
 
         private void LoadObjects(string fileName)
         {

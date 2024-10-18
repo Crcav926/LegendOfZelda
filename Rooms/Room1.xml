@@ -14,62 +14,62 @@
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>FishStatue</ObjectName>
-    <Location>49 49</Location>
+    <Location>150 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>FishStatue</ObjectName>
-    <Location>97 49</Location>
+    <Location>150 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>FishStatue</ObjectName>
-    <Location>49 81</Location>
+    <Location>150 308</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>FishStatue</ObjectName>
-    <Location>97 81</Location>
+    <Location>300 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>FishStatue</ObjectName>
-    <Location>49 113</Location>
+    <Location>300 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>FishStatue</ObjectName>
-    <Location>97 113</Location>
+    <Location>300 308</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>DragonStatue</ObjectName>
-    <Location>145 49</Location>
+    <Location>450 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>DragonStatue</ObjectName>
-    <Location>193 49</Location>
+    <Location>450 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>DragonStatue</ObjectName>
-    <Location>145 81</Location>
+    <Location>450 308</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>DragonStatue</ObjectName>
-    <Location>193 81</Location>
+    <Location>600 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>DragonStatue</ObjectName>
-    <Location>145 113</Location>
+    <Location>600 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>DragonStatue</ObjectName>
-    <Location>193 113</Location>
+    <Location>600 308</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>

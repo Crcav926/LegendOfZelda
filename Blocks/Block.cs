@@ -20,7 +20,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
         //arbitrary numbers, can change to where we want to put it.
 
         //spawn point of rectangle
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 45);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 44);
     }
     public Rectangle getHitbox()
     {
@@ -34,7 +34,7 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     public void Draw(SpriteBatch spriteBatch)
     {
 
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 45);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 44);
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
     }
 
