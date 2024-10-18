@@ -50,14 +50,14 @@ namespace LegendOfZelda.Collision
             String direction = c.direction;
             if (o1 is Link)
             {
-                // Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name}");
+                //Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
             }
             Tuple<string,string, string> key = new Tuple<string, string, string>(o1.getCollisionType(), o2.getCollisionType(), direction);
 
             if (collisionDictionary.TryGetValue(key, out Type commandType))
             {
                 // Reflection to instantiate the command and invoke its Execute method
-                MethodInfo executeMethod = commandType.GetMethod("Execute");
+                MethodInfo executeMethod = commandType.GetMethod("Execute"); 
                 if (executeMethod != null)
                 {
                     object commandInstance;

@@ -95,22 +95,21 @@ namespace LegendOfZelda.Collision
                     Microsoft.Xna.Framework.Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
                     //Debug.WriteLine("Stationary Hitbox retrieved");
                     //only collide with "bottom triangle"
-                    // if first hitbox collides with the second hitbox
-                    if (doIntersect(firstHitbox, stationaryHitbox))
-                    {
+                    
+                    
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
                         //Debug.WriteLine("Collision Detected");
                         Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
-                        String direction = "null";
-                        collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
-                        direction = getDirection(info);
-                        info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
-                        handler.HandleCollision(info);
-
-                        //collisionList.Add(info);
-                    }
-
+                        if (overlap.X > 0 || overlap.Y > 0)
+                        {
+                            String direction = "null";
+                            collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
+                            direction = getDirection(info);
+                            info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
+                            handler.HandleCollision(info);
+                        }
+                        
                 }
             }
             // var className = movingHitboxes[0].GetType().Name;
