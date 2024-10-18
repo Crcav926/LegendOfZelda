@@ -93,10 +93,9 @@ namespace LegendOfZelda
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
-            LevelLoading levelLoading = new LevelLoading();
-            levelLoading.Load("Room1.xml");
-            blocks = levelLoading.getBlocks();
-            movers = levelLoading.getMovers();
+            LevelLoader.Instance.Load("Room4.xml");
+            blocks = LevelLoader.Instance.getBlocks();
+            movers = LevelLoader.Instance.getMovers();
 
             //load texture sheets
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
@@ -129,6 +128,8 @@ namespace LegendOfZelda
 
         protected override void Update(GameTime gameTime)
         {
+            blocks = LevelLoader.Instance.getBlocks();
+            movers = LevelLoader.Instance.getMovers();
             // Let the keyboard controller handle input
             keyboardController.Update();
 

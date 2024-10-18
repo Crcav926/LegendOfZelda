@@ -7,14 +7,24 @@ using System.Xml;
 
 namespace LegendOfZelda
 {
-    internal class LevelLoading
+    internal class LevelLoader
     {
 
         List<string> fileNameList;
         List<Block> getEm;
         List<ICollideable> getEm2;
 
-        public LevelLoading() { }
+        public LevelLoader() { }
+
+        private static LevelLoader instance = new LevelLoader();
+
+        public static LevelLoader Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public void Load(String room)
 
         {

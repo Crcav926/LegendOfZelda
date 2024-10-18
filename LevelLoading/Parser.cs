@@ -21,8 +21,6 @@ namespace LegendOfZelda
         private List<Block> blocks = new List<Block>();
         private List<ICollideable> colliders = new List<ICollideable>();
         private Type type;
-        int w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
         public Parsing(string fileName)
         {
@@ -31,8 +29,6 @@ namespace LegendOfZelda
 
         public List<Block> getBlocks() { return blocks; }
         public List<ICollideable> getMovers() { return colliders; }
-        public float normalizeX(float x) { return x; }
-        public float normalizeY(float y) { return y; }
 
         private void LoadObjects(string fileName)
         {
@@ -85,8 +81,8 @@ namespace LegendOfZelda
                     if (coords.Length == 2)
                     {
                         // x = first num. y = second num.
-                        float x = normalizeX((float)int.Parse(coords[0]));
-                        float y = normalizeY((float)int.Parse(coords[1]));
+                        float x = (float)int.Parse(coords[0]);
+                        float y = (float)int.Parse(coords[1]);
 
                         // Sets position to a vector.
                         position = new Vector2(x, y);
