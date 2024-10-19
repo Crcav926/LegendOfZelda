@@ -66,16 +66,12 @@ namespace LegendOfZelda.Collision
                     //b/c currently the first object is the one that responds
                     // this will definitely  need to be changed later
 
-                    if ((o1 is Link && !(o2 is Door)) || o1 is IEnemy )
+                    if ((o1 is Link && !(o2 is Door)) || o1 is IEnemy || o1 is IItems)
                     {
                         commandInstance = Activator.CreateInstance(commandType, o1);
                     }else if(o1 is Link && o2 is Door)
                     {
-                        //let link move into the door a little
-                        //if (c.overlap.Width > 10 || c.overlap.Height > 10)
-                        //{
-                            commandInstance = Activator.CreateInstance(commandType, o2);
-                        //}
+                        commandInstance = Activator.CreateInstance(commandType, o2);
                     }
                     else
                     {
@@ -131,6 +127,23 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Door", "right", typeof(PlayerDoor));
             RegisterCollision("Player", "Door", "top", typeof(PlayerDoor));
             RegisterCollision("Player", "Door", "bottom", typeof(PlayerDoor));
+
+            //item collisions
+            RegisterCollision("Enemy", "Item", "left", typeof(EnemyItem));
+            RegisterCollision("Enemy", "Item", "right", typeof(EnemyItem));
+            RegisterCollision("Enemy", "Item", "top", typeof(EnemyItem));
+            RegisterCollision("Enemy", "Item", "bottom", typeof(EnemyItem));
+            //this probably won't trigger because enemies are probably before items in the list, but to be safe
+            RegisterCollision("Item", "Enemy", "left", typeof(EnemyItem));
+            RegisterCollision("Item", "Enemy", "right", typeof(EnemyItem));
+            RegisterCollision("Item", "Enemy", "top", typeof(EnemyItem));
+            RegisterCollision("Item", "Enemy", "bottom", typeof(EnemyItem));
+
+            RegisterCollision("Item", "Obstacle", "left", typeof(ItemObstacle));
+            RegisterCollision("Item", "Obstacle", "right", typeof(ItemObstacle));
+            RegisterCollision("Item", "Obstacle", "top", typeof(ItemObstacle));
+            RegisterCollision("Item", "Obstacle", "bottom", typeof(ItemObstacle));
+
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)
         {

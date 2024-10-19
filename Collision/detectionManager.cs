@@ -32,10 +32,7 @@ namespace LegendOfZelda.Collision
             movingHitboxes = RoomObjectManager.Instance.getMovers();
             //stationaryHitboxes = new List<ICollideable>();
             //movingHitboxes = new List<ICollideable>();
-            if (movingHitboxes == null)
-            {
-                Debug.WriteLine("Failed to retrieve moving Collideables List");
-            }
+            
             
             //Removable collisionList = new List<collObject> ();
 
@@ -53,7 +50,7 @@ namespace LegendOfZelda.Collision
             }
             else
             {
-               // stationaryHitboxes.Add(collideable);
+                //stationaryHitboxes.Add(collideable);
             }
         }
 
@@ -61,10 +58,18 @@ namespace LegendOfZelda.Collision
         {
             stationaryHitboxes = RoomObjectManager.Instance.getStandStills();
             movingHitboxes = RoomObjectManager.Instance.getMovers();
-            
+            if (movingHitboxes == null)
+            {
+                Debug.WriteLine("Failed to retrieve moving Collideables List");
+            }
+
             if (stationaryHitboxes.Count == 0)
             {
                 Debug.WriteLine("No stationary hitboxes");
+            }
+            foreach (ICollideable mov in movingHitboxes)
+            {
+                Debug.WriteLine($"{mov.GetType().Name}");
             }
             //only moving items can initiate collision
             // so for all moving hitboxes
