@@ -66,13 +66,16 @@ namespace LegendOfZelda.Collision
                     //b/c currently the first object is the one that responds
                     // this will definitely  need to be changed later
 
-                    if ((o1 is Link && !(o2 is Door)) || o1 is IEnemy || o1 is IItems)
+                    if ((o1 is Link && !(o2 is Door)) || (o1 is IEnemy && !(o2 is Link)) || o1 is IItems)
                     {
                         commandInstance = Activator.CreateInstance(commandType, o1);
                     }else if(o1 is Link && o2 is Door)
                     {
                         ICollideable[] parameters= { o1, o2 };
                         commandInstance = Activator.CreateInstance(commandType, parameters);
+                    }else if(o1 is EnemyBlockBottom && o2 is Link)
+                    {
+                        commandInstance = Activator.CreateInstance(commandType, o2);
                     }
                     else
                     {
@@ -112,6 +115,11 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Enemy", "right", typeof(PlayerTakeDamage));
             RegisterCollision("Player", "Enemy", "top", typeof(PlayerTakeDamage));
             RegisterCollision("Player", "Enemy", "bottom", typeof(PlayerTakeDamage));
+
+            RegisterCollision("Enemy","Player", "left", typeof(PlayerTakeDamage));
+            RegisterCollision("Enemy", "Player", "right", typeof(PlayerTakeDamage));
+            RegisterCollision("Enemy", "Player", "top", typeof(PlayerTakeDamage));
+            RegisterCollision("Enemy", "Player", "bottom", typeof(PlayerTakeDamage));
 
             RegisterCollision("Player", "Obstacle", "left", typeof(PlayerBlockLeft));
             RegisterCollision("Player", "Obstacle", "right", typeof(PlayerBlockRight));
