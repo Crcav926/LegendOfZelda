@@ -1,12 +1,15 @@
 # LegendOfZelda
 
 Current Sprint2 necessary documentation:
-Known bugs: If 3 or more movement keys are pressed at the same time, Link will move in one direction while facing another direction.
-Design Choices Slightly Different From Original LOZ: Link will move diagonally if 2 movement keys are pressed at the same time.
+Known bugs: Sometimes when a you throw a boomerang, it will spawn way behind the player and instantly collide with a wall, causing weird interactions, same with arrow.
+- Some enemies will linger after death
+- Some enemies do not die
+- There is a very very very small chance that a Goriya can clip into the wall and spin in a circle in perpetuity.
+- Room 14 is otherwise inaccessible and is currently bugged with how LevelLoader works
+- Stalfos is missing a frame
+- Goriya doesn't have a second movement frame when moving up and down
 
 Controls:
 Use WASD to move, 1 to throw a boomerang, 2 to shoot an arrow, 3 to throw fire, 4 to use the sword, and 5 to place a bomb.
-Use "u" key to rotate back through items and "i" key to rotate forward through items.
-Use "o" key to rotate back through Enemies and "p" key to rotate forward through enemies.
-Use "t" key to rotate back through Blocks and "y" key to rotate forward through Blocks.
+Use "enter" key to rotate through doors
 Press "q" key to quit game.
