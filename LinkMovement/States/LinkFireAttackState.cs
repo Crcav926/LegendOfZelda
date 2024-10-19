@@ -6,23 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class LinkAttackingState : ILinkState
+    internal class LinkFireAttackState : ILinkState
     {
-        Vector2 currentDirection;
         private Link link;
-        private string name = "Attack";
+        private string name = "FireAttack";
         private double timeElapsed;
         private double timeWait = 0.5;
-        public LinkAttackingState(Link link)
+        ILinkItem fire;
+        Vector2 position;
+        Vector2 direction;
+
+        public LinkFireAttackState(Link link)
         {
+            this.position = link.position;
+            this.direction = link.direction;
             this.link = link;
-            currentDirection = link.direction;
+            fire = link.fire;
             // Constructing Link sprite here.
-            link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(currentDirection);
-            DamageAnimation damageAnimation = link.damageAnimation;
+            link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(link.direction);
         }
         public string getState() { return name; }
 
@@ -36,17 +41,34 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Move(Vector2 newDirection)
         {
-            // Link should not move when he attacks
+            link.linkState = new LinkMoveState(link);
         }
-        public void Attack()
+        public void BoomerangAttack()
         {
-            // ATTACK!
+            link.linkState = new LinkBoomerangAttackState(link);
         }
-
+        public void SwordAttack()
+        {
+            link.linkState = new LinkSwordAttackState(link);
+        }
+        public void FireAttack()
+        {
+            link.fire.Use(this.direction, this.position);
+        }
+        public void ArrowAttack()
+        {
+            link.linkState = new LinkArrowAttackState(link);
+        }
+        public void BombAttack()
+        {
+            link.linkState = new LinkBombAttackState(link);
+        }
         public void Update(GameTime gameTime)
         {
-
-            // No update required, were standing still.
+            if (!fire.exists)
+            {
+                link.linkState = new LinkIdleState(link);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

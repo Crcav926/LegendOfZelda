@@ -18,8 +18,7 @@ namespace LegendOfZelda
             }
             public void Execute()
             {
-                linkDirection = myGame.LinkCharacter.direction;
-                myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
-            }
+            myGame.LinkCharacter.FireAttack();
+        }
     }
 }

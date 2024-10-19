@@ -10,11 +10,13 @@ namespace LegendOfZelda
 {
     public interface ILinkItem
     {
-        public void Use();
-
+        public bool exists { get; set; }
         public void Update(GameTime gameTime);
 
         public void Draw(SpriteBatch spriteBatch);
+        public void Use(Vector2 newDirection, Vector2 newPosition);
+        
 
+        
     }
 }

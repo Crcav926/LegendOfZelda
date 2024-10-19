@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using LegendOfZelda.Collision;
 using System.Xml;
 using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 namespace LegendOfZelda
 {
@@ -28,6 +29,8 @@ namespace LegendOfZelda
         public Texture2D linkTexture;
         public Texture2D itemTexture;
         public Texture2D blockTexture;
+        public Texture2D Bossture;
+        public Texture2D BackgroundTure;
         public Block block;
         public Link LinkCharacter;
         private List<ILinkItem> inventory = new List<ILinkItem>();
@@ -41,7 +44,7 @@ namespace LegendOfZelda
         private List<ICollideable> movers;
         private ISprite background;
         private ISprite walls;
-
+        private SpriteFont font;
         private IController controllerK;
 
         //For collisions
@@ -77,11 +80,14 @@ namespace LegendOfZelda
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            // Temp load font for fps check.
+            font = Content.Load<SpriteFont>("font");
             // Load the texture for the sprite sheet
-            Texture2D texture = Content.Load<Texture2D>("enemySpriteSheet");
-            Texture2D Bossture = Content.Load<Texture2D>("bossSpriteSheet");
-            Texture2D BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
+            itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
+            texture = Content.Load<Texture2D>("enemySpriteSheet");
+            Bossture = Content.Load<Texture2D>("bossSpriteSheet");
+            BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
+            ItemSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
 
@@ -139,7 +145,7 @@ namespace LegendOfZelda
             controllerK.Update();
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
-            LinkCharacter.Update(gameTime);
+            //LinkCharacter.Update(gameTime);
             // Updates sprites in Item classes
 
         }
@@ -149,8 +155,10 @@ namespace LegendOfZelda
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-
-
+            // Temp fps check.
+            double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
+            string fpsText = $"FPS: {frameRate:0.00}";
+                //
             var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
             _spriteBatch.Begin(transformMatrix: matrix);
@@ -166,9 +174,8 @@ namespace LegendOfZelda
             }
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
-
+            _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

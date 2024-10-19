@@ -14,14 +14,14 @@ namespace LegendOfZelda.LinkMovement
     {
         private Link link;
         DamageAnimation damageAnimation;
-        Vector2 currentDirection;
         private string name = "Damaged";
+
         public LinkDamagedState(Link link)
         {
             this.link = link;
-            currentDirection = link.direction;
             damageAnimation = link.damageAnimation;
         }
+
         public string getState() { return name; }
 
         public void Idle()
@@ -30,18 +30,32 @@ namespace LegendOfZelda.LinkMovement
         }
         public void TakeDamage()
         {
-            Debug.WriteLine("TAKING DAMAGEE IN THE DAMAGED STATE");
             damageAnimation.StartDamageEffect();
         }
         public void Move(Vector2 newDirection)
         {
             link.linkState = new LinkMoveState(link);
         }
-        public void Attack()
+        public void BoomerangAttack()
         {
-            link.linkState = new LinkAttackingState(link);
+            link.linkState = new LinkBoomerangAttackState(link);
         }
-
+        public void SwordAttack()
+        {
+            link.linkState = new LinkSwordAttackState(link);
+        }
+        public void FireAttack()
+        {
+            link.linkState = new LinkFireAttackState(link);
+        }
+        public void ArrowAttack()
+        {
+            link.linkState = new LinkArrowAttackState(link);
+        }
+        public void BombAttack()
+        {
+            link.linkState = new LinkBombAttackState(link);
+        }
         public void Update(GameTime gameTime)
         {
             link.linkSprite.Update(gameTime);

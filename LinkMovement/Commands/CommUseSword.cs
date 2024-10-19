@@ -8,18 +8,17 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfZelda.LinkItems
 {
-    internal class CommPlaceBomb : ICommand
+    internal class CommUseSword : ICommand
     {
             Game1 myGame;
             Vector2 linkDirection;
-            public CommPlaceBomb(Game1 game)
+            public CommUseSword(Game1 game)
             {
                 myGame = game;
             }
             public void Execute()
             {
-                linkDirection = myGame.LinkCharacter.direction;
-                myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
-            }
+            myGame.LinkCharacter.SwordAttack();
+        }
     }
 }

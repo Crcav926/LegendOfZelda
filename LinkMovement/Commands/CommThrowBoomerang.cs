@@ -17,7 +17,7 @@ namespace LegendOfZelda.LinkItems
             }
             public void Execute()
             {
-                myGame.LinkCharacter.Attack();
+                myGame.LinkCharacter.BoomerangAttack();
             }
     }
 }

@@ -42,7 +42,6 @@ namespace LegendOfZelda
             ICommand d = new CommLinkMove(game, new Vector2(1, 0));
             ICommand w = new CommLinkMove(game, new Vector2(0, -1));
             ICommand s = new CommLinkMove(game, new Vector2(0, 1));
-            ICommand throwBoomerang = new CommThrowBoomerang(game);
             //ICommand throwBomb = new CommThrowBomb(game);
             //ICommand throwFireball = new CommThrowFireball(game);
             ICommand e = new CommLinkDamaged(game);
@@ -55,7 +54,7 @@ namespace LegendOfZelda
             RegisterCommand(Keys.A, a);
             RegisterCommand(Keys.D, d);
             RegisterCommand(Keys.E, e);
-            RegisterCommand(Keys.D1, throwBoomerang);
+            RegisterCommand(Keys.D1, new CommThrowBoomerang(game));
             RegisterCommand(Keys.D2, new CommShootArrow(game));
             RegisterCommand(Keys.D3, new CommShootFire(game));
             RegisterCommand(Keys.D4, new CommUseSword(game));
@@ -93,11 +92,6 @@ namespace LegendOfZelda
             releaseMappings.Add(Keys.D, rightStop);
             releaseMappings.Add(Keys.W, upStop);
             releaseMappings.Add(Keys.S, downStop);
-            releaseMappings.Add(Keys.D1, new CommStopUsingWeapon(game));
-            releaseMappings.Add(Keys.D2, new CommStopUsingWeapon(game));
-            releaseMappings.Add(Keys.D3, new CommStopUsingWeapon(game));
-            releaseMappings.Add(Keys.D4, new CommStopUsingWeapon(game));
-            releaseMappings.Add(Keys.D5, new CommStopUsingWeapon(game));
 
 
 
