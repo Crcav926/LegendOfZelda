@@ -15,12 +15,13 @@ namespace LegendOfZelda
             "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml" 
         };
         int currIndex = 0;
+
         public CommChangeRoom()
         {
-            
         }
         public void Execute()
         {
+
             currIndex++;
             if (currIndex < _rooms.Count)
             {

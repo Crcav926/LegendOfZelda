@@ -92,7 +92,7 @@
     <ObjectName>UpDoorOpen</ObjectName>
     <Location>350 0</Location>
 	<LinkLocationX>370</LinkLocationX>
-	<LinkLocationY>385</LinkLocationY>
+	<LinkLocationY>350</LinkLocationY>
 	<Room></Room>
 </Item>
 <Item>
