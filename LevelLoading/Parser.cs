@@ -48,7 +48,7 @@ namespace LegendOfZelda
             string filePath = Path.Combine(projectDirectory, "Rooms", fileName);
             doc.Load(filePath);
 
-            Debug.WriteLine("Now Loading: " + fileName);
+            // Debug.WriteLine("Now Loading: " + fileName);
             // Foreach through each node in the document.
             foreach (XmlNode node in doc.DocumentElement)
             {
@@ -76,7 +76,7 @@ namespace LegendOfZelda
                     {
                         type = Type.GetType("LegendOfZelda." + objectNameNode.InnerText);
                         con2 = type.GetConstructor(new[] { typeof(Vector2)});
-                        Debug.WriteLine(con2.ToString());
+                        // Debug.WriteLine(con2.ToString());
                         objectName = objectNameNode.InnerText;
                     }
 
@@ -84,13 +84,13 @@ namespace LegendOfZelda
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
                         con3 = type.GetConstructor(new[] { typeof(Vector2), typeof(String), typeof(String), typeof(Vector2) });
-                        Debug.WriteLine(con3.ToString());
+                        // Debug.WriteLine(con3.ToString());
                         objectName = objectNameNode.InnerText;
                         int x = int.Parse(linkLocationX.InnerText);
                         int y = int.Parse(linkLocationY.InnerText);
                         newPosition = new Vector2(x, y);
                         roomName = room.InnerText;
-                        Debug.WriteLine(newPosition.ToString());
+                        // Debug.WriteLine(newPosition.ToString());
                     }
                 }
                 if (objectNameNode != null)
@@ -99,7 +99,7 @@ namespace LegendOfZelda
                 }
                 else
                 {
-                    Debug.WriteLine("Invalid Object Name.");
+                    // Debug.WriteLine("Invalid Object Name.");
                 }
                 if (locationNode != null)
                 {
@@ -118,7 +118,7 @@ namespace LegendOfZelda
                 }
                 else
                 {
-                    Debug.WriteLine("Invalid Location Type.");
+                    // Debug.WriteLine("Invalid Location Type.");
                 }
 
 

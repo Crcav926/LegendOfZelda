@@ -12,7 +12,7 @@ namespace LegendOfZelda
         { 
             "Room1.xml", "Room2.xml", "Room3.xml", "Room4.xml", "Room5.xml", 
             "Room6.xml", "Room7.xml", "Room8.xml", "Room9.xml", "Room10.xml", "Room11.xml", "Room12.xml", "Room13.xml", 
-            "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml" 
+            "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml", "Room20.xml" 
         };
         int currIndex = 0;
 
