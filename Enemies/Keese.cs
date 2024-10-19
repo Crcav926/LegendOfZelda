@@ -37,7 +37,27 @@ public class Keese : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
         alive = true;
     }
+    public void ChangeDirection()
+    {
+        // Choose a random direction (up, down, left, right)
+        int direction = random.Next(0, 4);
 
+        switch (direction)
+        {
+            case 0:
+                velocity = new Vector2(speed, -speed);
+                break;
+            case 1:
+                velocity = new Vector2(-speed, speed);
+                break;
+            case 2:
+                velocity = new Vector2(-speed, -speed);
+                break;
+            case 3:
+                velocity = new Vector2(speed, speed);
+                break;
+        }
+    }
     public void Update(GameTime gameTime)
     {
         // Update the frame timer for animation transitions

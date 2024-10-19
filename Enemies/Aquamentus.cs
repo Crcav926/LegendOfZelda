@@ -33,7 +33,11 @@ public class Aquamentus : IEnemy, ICollideable
         // Define the movement range (minX and maxX)
         minX = position.X - 10;
         maxX = position.X + 100;
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
+    }
+    public void ChangeDirection()
+    {
+        velocity.X *= -1;
     }
 
     public void Update(GameTime gameTime)
@@ -78,7 +82,7 @@ public class Aquamentus : IEnemy, ICollideable
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
 
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
 
@@ -95,7 +99,7 @@ public class Aquamentus : IEnemy, ICollideable
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 80, 80);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

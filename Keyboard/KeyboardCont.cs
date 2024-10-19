@@ -63,6 +63,7 @@ namespace LegendOfZelda
             RegisterCommand(Keys.U, new LastItemComm(game));
             RegisterCommand(Keys.I, new NextItemComm(game));
             RegisterCommand(Keys.R, reset);
+            RegisterCommand(Keys.Enter, new CommChangeRoom());
 
             ICommand pSC = new PreviousSpriteCommand(game);
             ICommand nSC = new NextSpriteCommand(game);

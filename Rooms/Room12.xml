@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 24 Water-->
+<!--Rows 2 and 3-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>150 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>200 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>250 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>500 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>550 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>600 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>150 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>600 176</Location>
+</Item>
+<!--Row 4-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>150 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>250 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>300 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>350 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>400 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>450 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>500 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>600 220</Location>
+</Item>
+<!--Rows 5 and 6-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>150 264</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>600 264</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>150 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>200 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>250 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>500 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>550 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>600 308</Location>
+</Item>
+<!--ICollideable Types: 3 Goriyas; a key drops upon killing all 3.-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Goriya</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Goriya</ObjectName>
+    <Location>650 88</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Goriya</ObjectName>
+    <Location>400 176</Location>
+</Item>
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorWall</ObjectName>
+    <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>closed</Room>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorLocked</ObjectName>
+    <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room13.xml</Room>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorWall</ObjectName>
+    <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>closed</Room>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorOpen</ObjectName>
+    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room11.xml</Room>
+</Item>
+</root>

@@ -29,7 +29,10 @@ public class Gel : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);
         sprite = EnemySpriteFactory.Instance.CreateGelSprite();
     }
-
+    // TODO: Make Gel change direction
+    public void ChangeDirection()
+    {
+    }
     public void Update(GameTime gameTime)
     {
         // Update the frame timer

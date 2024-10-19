@@ -3,7 +3,7 @@
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
-    <Location>33 33</Location>
+    <Location>100 88</Location>
 </Item>
 <Item>
     <ObjectType>Wall</ObjectType>
@@ -11,42 +11,42 @@
     <Location>0 0</Location>
 </Item>
 <!--Object Types: None-->
-<!--Enemy Types: 3 Keese-->
-<!--Approximations of enemy position. Can't be 100% accurate without playing the game-->
+<!--ICollideable Types: 3 Keese-->
+<!--Approximations of ICollideable position. Can't be 100% accurate without playing the game-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
-    <Location>49 65</Location>
+    <Location>150 176</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
-    <Location>145 81</Location>
+    <Location>450 220</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
     <ObjectName>Keese</ObjectName>
-    <Location>113 97</Location>
+    <Location>350 264</Location>
 </Item>
 <!--a key spawns in this room when you kill the keese, don't know if that needs to be in here.-->
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>UpDoorWall</ObjectName>
-    <Location>113 0</Location>
+    <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>closed</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>LeftDoorWall</ObjectName>
-    <Location>0 73</Location>
+    <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>closed</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorOpen</ObjectName>
-    <Location>225 73</Location>
+    <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room1.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorWall</ObjectName>
-    <Location>113 145</Location>
+    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
 </Item>
 </root>

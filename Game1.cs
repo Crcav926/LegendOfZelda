@@ -25,15 +25,6 @@ namespace LegendOfZelda
         ArrayList controllerList;
 
         // Later these enemies will be moved out to level loader.
-        IEnemy Gel;
-        IEnemy Zol;
-        IEnemy Keese;
-        IEnemy Stalfol;
-        IEnemy Goriya;
-        IEnemy Wallmaster;
-        IEnemy BladeTrap;
-        IEnemy Aquamentus;
-
         public int currentSprite { get; set; }
         public Texture2D linkTexture;
         public Texture2D itemTexture;
@@ -49,7 +40,7 @@ namespace LegendOfZelda
         private ClassItems item1;
         private ClassItems item2;
         public List<IEnemy> enemies = new List<IEnemy>();
-        private List<Block> blocks;
+        private List<ICollideable> blocks;
         private List<ICollideable> movers;
         private ISprite background;
         private ISprite walls;
@@ -100,40 +91,32 @@ namespace LegendOfZelda
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
 
+            // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
+            // TODO: Make this fully within level loader. Not yet added b/c it would mess up a lot of commands and we don't have time to fix it rn
+            LinkSpriteFactory.Instance.LoadAllTextures(Content);
+            LinkCharacter = new Link();
 
-            LevelLoader.Instance.Load("Room2.xml");
+            LevelLoader.Instance.Load("Room1.xml");
+            RoomObjectManager.Instance.addLink(LinkCharacter);
+            RoomObjectManager.Instance.Update();
+
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
             //load texture sheets
-            LinkSpriteFactory.Instance.LoadAllTextures(Content);
-            LinkCharacter = new Link();
+            
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             // load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);
-            foreach (Block block in blocks) {
+            foreach (ICollideable block in blocks) {
                 collisionDetector.addHitbox(block, 0);
             }
             foreach (ICollideable mover in movers)
             {
                 collisionDetector.addHitbox(mover, 1);
             }
-
-            // Walls are 100 pixels thick wide and 87 pixels thick tall
-            // Dimensions of the rooms are 800 / 480
-
-            Wall top = new Wall(new Rectangle(0,0,800,87));
-            Wall bot = new Wall(new Rectangle(0, 390, 800, 87));
-            Wall left = new Wall(new Rectangle(0, 0, 100, 480));
-            Wall right = new Wall(new Rectangle(700, 0, 100, 480));
-
-            collisionDetector.addHitbox(top, 0);
-            collisionDetector.addHitbox(bot, 0);
-            collisionDetector.addHitbox(left, 0);
-            collisionDetector.addHitbox(right, 0);
-
         }
 
         protected override void Update(GameTime gameTime)
@@ -142,6 +125,7 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
             // Let the keyboard controller handle input
             keyboardController.Update();
+            RoomObjectManager.Instance.Update();
 
             // Ensure the sprite is correctly referenced
             foreach (IController controller in controllerList)
@@ -180,7 +164,7 @@ namespace LegendOfZelda
             _spriteBatch.Begin(transformMatrix: matrix);
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
-            foreach (Block block in blocks)
+            foreach (ICollideable block in blocks)
             {
                 block.Draw(_spriteBatch);
             }

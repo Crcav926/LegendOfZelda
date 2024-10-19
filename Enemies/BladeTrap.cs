@@ -20,7 +20,10 @@ public class BladeTrap : IEnemy, ICollideable
         this.position = position;
         sprite = EnemySpriteFactory.Instance.CreateBladeTrapSprite();
     }
+    public void ChangeDirection()
+    {
 
+    }
     public void Update(GameTime gameTime)
     {
         // Update the active timer

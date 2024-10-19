@@ -11,7 +11,7 @@ public interface IEnemy
     Vector2 position { get; set; }
     void Update(GameTime gameTime);
     void Draw(SpriteBatch spriteBatch);
-
+    void ChangeDirection();
     void takendamage();
 
     void attack();

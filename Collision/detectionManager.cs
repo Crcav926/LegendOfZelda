@@ -21,11 +21,23 @@ namespace LegendOfZelda.Collision
         //removable public List<collObject> collisionList;
         private CollisionHandler handler;
 
+        //get an instance of the roomObjectManager
+        
+
         public detectionManager(CollisionHandler collHandler)
         {
-            stationaryHitboxes = new List<ICollideable>();
-            movingHitboxes = new List<ICollideable>();
-
+            // The object manager is currently not returning lists
+            // unComment the add hitbox method and change the Lists to new lists to revert to old method.
+            stationaryHitboxes = RoomObjectManager.Instance.getStandStills();
+            movingHitboxes = RoomObjectManager.Instance.getMovers();
+            //stationaryHitboxes = new List<ICollideable>();
+            //movingHitboxes = new List<ICollideable>();
+            if (RoomObjectManager.Instance.getMovers() == null)
+            {
+                Debug.WriteLine("Failed to retrieve moving Collideables List");
+            }
+            
+            
             //Removable collisionList = new List<collObject> ();
 
             //lets other methods use the handler
@@ -38,32 +50,40 @@ namespace LegendOfZelda.Collision
             // 1 is moving otherwise is stationary
             if (type == 1)
             {
-                movingHitboxes.Add(collideable);
+                //movingHitboxes.Add(collideable);
             }
             else
             {
-                stationaryHitboxes.Add(collideable);
+                //stationaryHitboxes.Add(collideable);
             }
         }
 
         public void update()
         {
+            if (RoomObjectManager.Instance.getStandStills().Count == 0)
+            {
+                Debug.WriteLine("No stationary hitboxes");
+            }
+            foreach (ICollideable mov in RoomObjectManager.Instance.getMovers())
+            {
+                Debug.WriteLine($"{mov.GetType().Name}");
+            }
             //only moving items can initiate collision
             // so for all moving hitboxes
-            for (int i = 0; i < movingHitboxes.Count; i++)
+            for (int i = 0; i < RoomObjectManager.Instance.getMovers().Count; i++)
             {
                 //get first hitbox
-                Microsoft.Xna.Framework.Rectangle firstHitbox = movingHitboxes[i].getHitbox();
+                Microsoft.Xna.Framework.Rectangle firstHitbox = RoomObjectManager.Instance.getMovers()[i].getHitbox();
                 //Debug.WriteLine("First Hitbox retrieved");
                 //check collision with all other moving hitboxes
-                for (int j = i + 1; j < movingHitboxes.Count; j++)
+                for (int j = i + 1; j < RoomObjectManager.Instance.getMovers().Count; j++)
                 {
-                    if (movingHitboxes[i] is IEnemy && movingHitboxes[j] is IEnemy)
+                    if (RoomObjectManager.Instance.getMovers()[i] is IEnemy && RoomObjectManager.Instance.getMovers()[j] is IEnemy)
                     {
                         continue;
                     }
                     //get second box
-                    Microsoft.Xna.Framework.Rectangle secondHitbox = movingHitboxes[j].getHitbox();
+                    Microsoft.Xna.Framework.Rectangle secondHitbox = RoomObjectManager.Instance.getMovers()[j].getHitbox();
                     //Debug.WriteLine("Second Hitbox retrieved");
                     //only collide with "bottom triangle"
                     // if first hitbox collides with the second hitbox
@@ -78,11 +98,11 @@ namespace LegendOfZelda.Collision
                     if (overlap.X > 0 || overlap.Y > 0)
                     {
                         String direction = "null";
-                        collObject info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap, direction);
+                        collObject info = new collObject(RoomObjectManager.Instance.getMovers()[i], RoomObjectManager.Instance.getMovers()[j], overlap, direction);
                         //get the direction
                         direction = getDirection(info);
                         //replace the null direction with the new direction.
-                        info = new collObject(movingHitboxes[i], movingHitboxes[j], overlap, direction);
+                        info = new collObject(RoomObjectManager.Instance.getMovers()[i], RoomObjectManager.Instance.getMovers()[j], overlap, direction);
                         //collisionList.Add(info);
                         //directly handle instead 
                         handler.HandleCollision(info);
@@ -90,9 +110,9 @@ namespace LegendOfZelda.Collision
 
                 }
                 //check collision with all stationary hitboxes
-                for (int j = 0; j < stationaryHitboxes.Count; j++)
+                for (int j = 0; j < RoomObjectManager.Instance.getStandStills().Count; j++)
                 {
-                    Microsoft.Xna.Framework.Rectangle stationaryHitbox = stationaryHitboxes[j].getHitbox();
+                    Microsoft.Xna.Framework.Rectangle stationaryHitbox = RoomObjectManager.Instance.getStandStills()[j].getHitbox();
                     //Debug.WriteLine("Stationary Hitbox retrieved");
                     //only collide with "bottom triangle"
                     
@@ -104,9 +124,9 @@ namespace LegendOfZelda.Collision
                         if (overlap.X > 0 || overlap.Y > 0)
                         {
                             String direction = "null";
-                            collObject info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
+                            collObject info = new collObject(RoomObjectManager.Instance.getMovers()[i], RoomObjectManager.Instance.getStandStills()[j], overlap, direction);
                             direction = getDirection(info);
-                            info = new collObject(movingHitboxes[i], stationaryHitboxes[j], overlap, direction);
+                            info = new collObject(RoomObjectManager.Instance.getMovers()[i], RoomObjectManager.Instance.getStandStills()[j], overlap, direction);
                             handler.HandleCollision(info);
                         }
                         
@@ -201,5 +221,26 @@ namespace LegendOfZelda.Collision
         }
 
         //not needed removed getCollision list
+
+        private void addWalls()
+        {
+            // Walls are 100 pixels thick wide and 87 pixels thick tall
+            // Dimensions of the rooms are 800 / 480
+
+            Wall top = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 800, 87));
+            Wall bot = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 392, 800, 87));
+            Wall left1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 100, 196));
+            Wall left2 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 284, 100, 196));
+            Wall right1 = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 0, 100, 196));
+            Wall right2 = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 284, 100, 196));
+
+            stationaryHitboxes.Add(top);
+            stationaryHitboxes.Add(bot);   
+            stationaryHitboxes.Add(left1);
+            stationaryHitboxes.Add(left2);
+            stationaryHitboxes.Add(right1);
+            stationaryHitboxes.Add(right2);
+           
+        }
     }
 }

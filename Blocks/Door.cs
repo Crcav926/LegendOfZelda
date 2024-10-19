@@ -14,10 +14,18 @@ namespace LegendOfZelda
     {
         private Vector2 position;
         private Rectangle destinationRectangle;
-        public Door(Vector2 position) 
+        private String room;
+        public String doorType;
+        private ISprite sprite;
+        private Vector2 newPos;
+
+        public Door(Vector2 position, String doorType, String room, Vector2 newPos) 
         {
             this.position = position;
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 98, 88);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 88);
+            sprite = BlockSpriteFactory.Instance.CreateSprite(doorType);
+            this.room = room;
+            this.newPos = newPos;
         }
         public Rectangle getHitbox()
         {
@@ -27,13 +35,23 @@ namespace LegendOfZelda
         {
             // Nothing right now
         }
+        public String getRoom() 
+        {
+            return room;
+        }
+        public Vector2 getNewPosition()
+        {
+            return newPos;
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Make later.
+            sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
         public String getCollisionType()
         {
             return "Door";
         }
+       
+       
     }
 }

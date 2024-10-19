@@ -10,9 +10,10 @@ namespace LegendOfZelda
     internal class LevelLoader
     {
 
-        List<string> fileNameList;
-        List<Block> getEm;
-        List<ICollideable> getEm2;
+        private List<string> fileNameList;
+        private List<ICollideable> getEm;
+        private List<ICollideable> getEm2;
+        private String room;
 
         public LevelLoader() { }
 
@@ -28,7 +29,7 @@ namespace LegendOfZelda
         public void Load(String room)
 
         {
-
+            this.room = room;
             Parsing parseIt = new Parsing(room);
             getEm = parseIt.getBlocks();
             getEm2 = parseIt.getMovers();
@@ -39,7 +40,7 @@ namespace LegendOfZelda
             // Sorts through each item in the list and parses through.
             // Mainly testing by parsing through all rooms, but eventually have only cetain rooms have their information loaded.
         }
-        public List<Block> getBlocks()
+        public List<ICollideable> getBlocks()
         {
             return getEm;
         }
@@ -47,6 +48,9 @@ namespace LegendOfZelda
         {
             return getEm2;
         }
-
+        public string getRoom()
+        {
+            return room;
+        }
     }
 }
