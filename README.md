@@ -1,7 +1,8 @@
 # LegendOfZelda
 
 Current Sprint2 necessary documentation:
-Known bugs: Sometimes when a you throw a boomerang, it will spawn way behind the player and instantly collide with a wall, causing weird interactions, same with arrow.
+Known bugs: 
+- Sometimes when a you throw a boomerang, it will spawn way behind the player and instantly collide with a wall, causing weird interactions, same with arrow.
 - Some enemies will linger after death
 - Some enemies do not die
 - There is a very very very small chance that a Goriya can clip into the wall and spin in a circle in perpetuity.
