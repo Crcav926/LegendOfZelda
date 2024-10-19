@@ -23,6 +23,7 @@ namespace LegendOfZelda
         private List<ICollideable> blocks = new List<ICollideable>();
         private List<ICollideable> colliders = new List<ICollideable>();
         private Type type;
+        private string roomName;
 
         public Parsing(string fileName)
         {
@@ -87,6 +88,7 @@ namespace LegendOfZelda
                         int x = int.Parse(linkLocationX.InnerText);
                         int y = int.Parse(linkLocationY.InnerText);
                         newPosition = new Vector2(x, y);
+                        roomName = room.InnerText;
                         Debug.WriteLine(newPosition.ToString());
                     }
                 }
@@ -122,7 +124,7 @@ namespace LegendOfZelda
                 if (con3 != null && objectTypeNode != null && objectTypeNode.InnerText == "Door")
                 {
                     // Populates list of non-moving collideable objects
-                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, "Room1.xml", newPosition }));
+                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition }));
                 }
             }
         }

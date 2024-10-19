@@ -94,8 +94,10 @@ namespace LegendOfZelda
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
 
+            // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
+            // TODO: Make this fully within level loader. Not yet added b/c it would mess up a lot of commands and we don't have time to fix it rn
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             LinkCharacter = new Link();
 
@@ -118,24 +120,6 @@ namespace LegendOfZelda
             {
                 collisionDetector.addHitbox(mover, 1);
             }
-
-            // Walls are 100 pixels thick wide and 87 pixels thick tall
-            // Dimensions of the rooms are 800 / 480
-
-            Wall top = new Wall(new Rectangle(0,0,800,87));
-            Wall bot = new Wall(new Rectangle(0, 392, 800, 87));
-            Wall left1 = new Wall(new Rectangle(0, 0, 100, 196));
-            Wall left2 = new Wall(new Rectangle(0, 284, 100, 196));
-            Wall right1 = new Wall(new Rectangle(700, 0, 100, 196));
-            Wall right2 = new Wall(new Rectangle(700, 284, 100, 196));
-
-            collisionDetector.addHitbox(top, 0);
-            collisionDetector.addHitbox(bot, 0);
-            collisionDetector.addHitbox(left1, 0);
-            collisionDetector.addHitbox(left2, 0);
-            collisionDetector.addHitbox(right1, 0);
-            collisionDetector.addHitbox(right2, 0);
-
         }
 
         protected override void Update(GameTime gameTime)

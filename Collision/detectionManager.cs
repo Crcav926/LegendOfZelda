@@ -64,7 +64,7 @@ namespace LegendOfZelda.Collision
             {
                 Debug.WriteLine("No stationary hitboxes");
             }
-            foreach (ICollideable mov in movingHitboxes)
+            foreach (ICollideable mov in RoomObjectManager.Instance.getMovers())
             {
                 Debug.WriteLine($"{mov.GetType().Name}");
             }

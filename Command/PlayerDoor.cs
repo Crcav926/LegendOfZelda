@@ -21,8 +21,10 @@ namespace LegendOfZelda.Command
 
             string roomName = door.getRoom();
             Debug.WriteLine($"Room is {roomName}");
-            
-            LevelLoader.Instance.Load(roomName);
+            if (roomName != "closed")
+            {
+                LevelLoader.Instance.Load(roomName);
+            }
             
 
         }
