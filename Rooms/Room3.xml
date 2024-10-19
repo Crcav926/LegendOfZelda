@@ -102,7 +102,7 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>UpDoorWall</ObjectName>
-    <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>385</LinkLocationY><Room>closed</Room>
+    <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>closed</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>

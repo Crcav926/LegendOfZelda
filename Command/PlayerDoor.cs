@@ -28,8 +28,8 @@ namespace LegendOfZelda.Command
             if (roomName != "closed")
             {
                 LevelLoader.Instance.Load(roomName);
+                link.position = door.getNewPosition();
             }
-            link.position = door.getNewPosition();
 
         }
     }

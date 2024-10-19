@@ -24,15 +24,6 @@ namespace LegendOfZelda
         ArrayList controllerList;
 
         // Later these enemies will be moved out to level loader.
-        IEnemy Gel;
-        IEnemy Zol;
-        IEnemy Keese;
-        IEnemy Stalfol;
-        IEnemy Goriya;
-        IEnemy Wallmaster;
-        IEnemy BladeTrap;
-        IEnemy Aquamentus;
-
         public int currentSprite { get; set; }
         public Texture2D linkTexture;
         public Texture2D itemTexture;
