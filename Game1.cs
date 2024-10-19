@@ -96,16 +96,18 @@ namespace LegendOfZelda
 
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
+            LinkSpriteFactory.Instance.LoadAllTextures(Content);
+            LinkCharacter = new Link();
 
-            LevelLoader.Instance.Load("Room2.xml");
+            LevelLoader.Instance.Load("Room1.xml");
+            RoomObjectManager.Instance.addLink(LinkCharacter);
             RoomObjectManager.Instance.Update();
 
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
             //load texture sheets
-            LinkSpriteFactory.Instance.LoadAllTextures(Content);
-            LinkCharacter = new Link();
+            
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             // load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);

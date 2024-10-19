@@ -10,8 +10,9 @@ namespace LegendOfZelda
     internal class RoomObjectManager
     {
         private static RoomObjectManager instance = new RoomObjectManager();
-        public List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
-        public List<ICollideable> movers = LevelLoader.Instance.getMovers();
+        private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
+        private List<ICollideable> movers = LevelLoader.Instance.getMovers();
+        private Link link;
         public static RoomObjectManager Instance
         {
             get
@@ -34,9 +35,20 @@ namespace LegendOfZelda
         }
         public void Update()
         {
-            movers = LevelLoader.Instance.getMovers();
-            blocks = LevelLoader.Instance.getBlocks();
-            addWalls();
+            if (movers != LevelLoader.Instance.getMovers())
+            {
+                movers = LevelLoader.Instance.getMovers();
+                movers.Add(link);
+            }
+            if (blocks != LevelLoader.Instance.getBlocks())
+            {
+                blocks = LevelLoader.Instance.getBlocks();
+                addWalls();
+            }
+        }
+        public void addLink(Link link)
+        {
+            this.link = link;
         }
 
         private void addWalls()
