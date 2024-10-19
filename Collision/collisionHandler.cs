@@ -71,7 +71,8 @@ namespace LegendOfZelda.Collision
                         commandInstance = Activator.CreateInstance(commandType, o1);
                     }else if(o1 is Link && o2 is Door)
                     {
-                        commandInstance = Activator.CreateInstance(commandType, o2);
+                        ICollideable[] parameters= { o1, o2 };
+                        commandInstance = Activator.CreateInstance(commandType, parameters);
                     }
                     else
                     {

@@ -11,9 +11,13 @@ namespace LegendOfZelda.Command
     {
         
         private Door door;
+        private Link link;
 
-        public PlayerDoor(Door d) => door = d;
-
+        public PlayerDoor(Link l, Door d)
+        {
+            link = l; 
+            door = d;
+        }
 
         public void Execute()
         {
@@ -25,7 +29,7 @@ namespace LegendOfZelda.Command
             {
                 LevelLoader.Instance.Load(roomName);
             }
-            
+            link.position = door.getNewPosition();
 
         }
     }
