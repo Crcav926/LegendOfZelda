@@ -46,7 +46,7 @@ namespace LegendOfZelda
         private ClassItems item1;
         private ClassItems item2;
         public List<IEnemy> enemies = new List<IEnemy>();
-        private List<Block> blocks;
+        private List<ICollideable> blocks;
         private List<ICollideable> movers;
         private ISprite background;
         private ISprite walls;
@@ -97,7 +97,7 @@ namespace LegendOfZelda
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
-            LevelLoader.Instance.Load("Room17.xml");
+            LevelLoader.Instance.Load("Room2.xml");
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
@@ -107,7 +107,7 @@ namespace LegendOfZelda
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             // load hitboxes
             collisionDetector.addHitbox(LinkCharacter, 1);
-            foreach (Block block in blocks) {
+            foreach (ICollideable block in blocks) {
                 collisionDetector.addHitbox(block, 0);
             }
             foreach (ICollideable mover in movers)
@@ -120,13 +120,17 @@ namespace LegendOfZelda
 
             Wall top = new Wall(new Rectangle(0,0,800,87));
             Wall bot = new Wall(new Rectangle(0, 392, 800, 87));
-            Wall left = new Wall(new Rectangle(0, 0, 100, 480));
-            Wall right = new Wall(new Rectangle(700, 0, 100, 480));
+            Wall left1 = new Wall(new Rectangle(0, 0, 100, 196));
+            Wall left2 = new Wall(new Rectangle(0, 284, 100, 196));
+            Wall right1 = new Wall(new Rectangle(700, 0, 100, 196));
+            Wall right2 = new Wall(new Rectangle(700, 284, 100, 196));
 
             collisionDetector.addHitbox(top, 0);
             collisionDetector.addHitbox(bot, 0);
-            collisionDetector.addHitbox(left, 0);
-            collisionDetector.addHitbox(right, 0);
+            collisionDetector.addHitbox(left1, 0);
+            collisionDetector.addHitbox(left2, 0);
+            collisionDetector.addHitbox(right1, 0);
+            collisionDetector.addHitbox(right2, 0);
 
         }
 
@@ -136,6 +140,7 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
             // Let the keyboard controller handle input
             keyboardController.Update();
+            RoomObjectManager.Instance.Update(gameTime);
 
             // Ensure the sprite is correctly referenced
             foreach (IController controller in controllerList)
@@ -172,7 +177,7 @@ namespace LegendOfZelda
             _spriteBatch.Begin(transformMatrix: matrix);
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
-            foreach (Block block in blocks)
+            foreach (ICollideable block in blocks)
             {
                 block.Draw(_spriteBatch);
             }

@@ -11,7 +11,7 @@ namespace LegendOfZelda
     {
 
         List<string> fileNameList;
-        List<Block> getEm;
+        List<ICollideable> getEm;
         List<ICollideable> getEm2;
 
         public LevelLoader() { }
@@ -39,7 +39,7 @@ namespace LegendOfZelda
             // Sorts through each item in the list and parses through.
             // Mainly testing by parsing through all rooms, but eventually have only cetain rooms have their information loaded.
         }
-        public List<Block> getBlocks()
+        public List<ICollideable> getBlocks()
         {
             return getEm;
         }

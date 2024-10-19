@@ -14,11 +14,13 @@ namespace LegendOfZelda
         private string objectType { get; set; }
         private string objectName { get; set; }
         private Vector2 position { get; set; }
+        private Vector2 newPosition { get; set; }
         private Tuple <String,String,Vector2> objectData { get; set; }
         public List<Tuple<string, string, Vector2>> objectList { get; set; } = new List<Tuple<string, string, Vector2>>();
         private ConstructorInfo con;
         private ConstructorInfo con2;
-        private List<Block> blocks = new List<Block>();
+        private ConstructorInfo con3;
+        private List<ICollideable> blocks = new List<ICollideable>();
         private List<ICollideable> colliders = new List<ICollideable>();
         private Type type;
 
@@ -27,11 +29,15 @@ namespace LegendOfZelda
             LoadObjects(fileName);
         }
 
-        public List<Block> getBlocks() { return blocks; }
+        public List<ICollideable> getBlocks() { return blocks; }
         public List<ICollideable> getMovers() { return colliders; }
 
         private void LoadObjects(string fileName)
         {
+            //TODO: FOR DEBUGGING ONLY DELETE ONCE XML IS CREATED
+            newPosition = new Vector2(0, 0);
+
+
             // Finds files in content and loads it.
             XmlDocument doc = new XmlDocument();
             // This will get the current WORKING directory
@@ -50,7 +56,10 @@ namespace LegendOfZelda
                 XmlNode objectTypeNode = node.SelectSingleNode("ObjectType");
                 XmlNode objectNameNode = node.SelectSingleNode("ObjectName");
                 XmlNode locationNode = node.SelectSingleNode("Location");
-                
+                XmlNode linkLocationX = node.SelectSingleNode("LinkLocationX");
+                XmlNode linkLocationY = node.SelectSingleNode("LinkLocationY");
+                XmlNode room = node.SelectSingleNode("Room");
+
                 // Checks for null, if not null find the inner text.
                 if (objectTypeNode != null)
                 {
@@ -68,6 +77,17 @@ namespace LegendOfZelda
                         con2 = type.GetConstructor(new[] { typeof(Vector2)});
                         Debug.WriteLine(con2.ToString());
                         objectName = objectNameNode.InnerText;
+                    }
+                    else if (objectTypeNode.InnerText == "Door" && objectNameNode != null)
+                    {
+                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
+                        con3 = type.GetConstructor(new[] { typeof(Vector2), typeof(String), typeof(String), typeof(Vector2) });
+                        Debug.WriteLine(con3.ToString());
+                        objectName = objectNameNode.InnerText;
+                        int x = int.Parse(linkLocationX.InnerText);
+                        int y = int.Parse(linkLocationY.InnerText);
+                        newPosition = new Vector2(x, y);
+                        Debug.WriteLine(newPosition.ToString());
                     }
                 }
                 if (objectNameNode != null)
@@ -91,13 +111,18 @@ namespace LegendOfZelda
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
                 {
                     // Populates list of non-moving collideable objects
-                    blocks.Add((Block)con.Invoke(new object[] { position, objectName }));
+                    blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
                 }
                 else if (con2 != null && objectTypeNode != null && objectTypeNode.InnerText == "ICollideable")
                 {
                     // Populates list of non-moving collideable objects
                     colliders.Add((ICollideable)con2.Invoke(new object[] { position }));
-                    Debug.WriteLine("Lil guy added");
+                    // Debug.WriteLine("Lil guy added");
+                }
+                if (con3 != null && objectTypeNode != null && objectTypeNode.InnerText == "Door")
+                {
+                    // Populates list of non-moving collideable objects
+                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, objectType, newPosition }));
                 }
             }
         }

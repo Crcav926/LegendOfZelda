@@ -47,7 +47,69 @@ namespace LegendOfZelda
             },
             {
             "Ladder", new List<Rectangle> { new Rectangle(1001, 45, 16, 16) }
-            }
+            },
+            {
+            "UpDoorWall", new List<Rectangle>{ new Rectangle(815, 11, 32, 32) }
+            },
+            {
+            "LeftDoorWall", new List<Rectangle>{ new Rectangle(815, 44, 32, 32) }
+            },
+            {
+            "RightDoorWall", new List<Rectangle>{ new Rectangle(815, 77, 32, 32) }
+            },
+            {
+            "DownDoorWall", new List<Rectangle>{ new Rectangle(815, 110, 32, 32) }
+            },
+            {
+            "UpDoorOpen", new List<Rectangle>{ new Rectangle(848, 11, 32, 32) }
+            },
+            {
+            "LeftDoorOpen", new List<Rectangle>{ new Rectangle(848, 44, 32, 32) }
+            },
+            {
+            "RightDoorOpen", new List<Rectangle>{ new Rectangle(848, 77, 32, 32) }
+            },
+            {
+            "DownDoorOpen", new List<Rectangle>{ new Rectangle(848, 110, 32, 32) }
+            },
+            {
+            "UpDoorLocked", new List<Rectangle>{ new Rectangle(881, 11, 32, 32) }
+            },
+            {
+            "LeftDoorLocked", new List<Rectangle>{ new Rectangle(881, 44, 32, 32) }
+            },
+            {
+            "RightDoorLocked", new List<Rectangle>{ new Rectangle(881, 77, 32, 32) }
+            },
+            {
+            "DownDoorLocked", new List<Rectangle>{ new Rectangle(881, 110, 32, 32) }
+            },
+            {
+            "UpDoorClosed", new List<Rectangle>{ new Rectangle(914, 11, 32, 32) }
+            },
+            {
+            "LeftDoorClosed", new List<Rectangle>{ new Rectangle(914, 44, 32, 32) }
+            },
+            {
+            "RightDoorClosed", new List<Rectangle>{ new Rectangle(914, 77, 32, 32) }
+            },
+            {
+            "DownDoorClosed", new List<Rectangle>{ new Rectangle(914, 110, 32, 32) }
+            },
+            {
+            "UpDoorSecretBombableWall", new List<Rectangle>{ new Rectangle(947, 11, 32, 32) }
+            },
+            {
+            "LeftDoorSecretBombableWall", new List<Rectangle>{ new Rectangle(947, 44, 32, 32) }
+            },
+            {
+            "RightDoorSecretBombableWall", new List<Rectangle>{ new Rectangle(947, 77, 32, 32) }
+            },
+            {
+            "DownDoorSecretBombableWall", new List<Rectangle>{ new Rectangle(947, 110, 32, 32) }
+            },
+
+
         };
         private Texture2D texture;
         // More private Texture2Ds follow
