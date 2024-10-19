@@ -15,7 +15,7 @@ namespace LegendOfZelda
         private Vector2 position;
         private Rectangle destinationRectangle;
         private String room;
-        private String doorType;
+        public String doorType;
         private ISprite sprite;
         public Door(Vector2 position, String doorType, String room, Vector2 newPos) 
         {
@@ -48,5 +48,7 @@ namespace LegendOfZelda
         {
             return "Door";
         }
+       
+       
     }
 }

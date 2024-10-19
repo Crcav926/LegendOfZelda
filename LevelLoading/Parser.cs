@@ -122,7 +122,7 @@ namespace LegendOfZelda
                 if (con3 != null && objectTypeNode != null && objectTypeNode.InnerText == "Door")
                 {
                     // Populates list of non-moving collideable objects
-                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, objectType, newPosition }));
+                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, "Room1.xml", newPosition }));
                 }
             }
         }

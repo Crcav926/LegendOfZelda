@@ -98,6 +98,8 @@ namespace LegendOfZelda
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
             LevelLoader.Instance.Load("Room2.xml");
+            RoomObjectManager.Instance.Update();
+
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
@@ -140,7 +142,7 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
             // Let the keyboard controller handle input
             keyboardController.Update();
-            RoomObjectManager.Instance.Update(gameTime);
+            RoomObjectManager.Instance.Update();
 
             // Ensure the sprite is correctly referenced
             foreach (IController controller in controllerList)

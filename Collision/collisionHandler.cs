@@ -50,7 +50,7 @@ namespace LegendOfZelda.Collision
             String direction = c.direction;
             if (o1 is Link)
             {
-                //Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
+                Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
             }
             Tuple<string,string, string> key = new Tuple<string, string, string>(o1.getCollisionType(), o2.getCollisionType(), direction);
 
@@ -66,9 +66,16 @@ namespace LegendOfZelda.Collision
                     //b/c currently the first object is the one that responds
                     // this will definitely  need to be changed later
 
-                    if (o1 is Link || o1 is IEnemy)
+                    if ((o1 is Link && !(o2 is Door)) || o1 is IEnemy )
                     {
                         commandInstance = Activator.CreateInstance(commandType, o1);
+                    }else if(o1 is Link && o2 is Door)
+                    {
+                        //let link move into the door a little
+                        //if (c.overlap.Width > 10 || c.overlap.Height > 10)
+                        //{
+                            commandInstance = Activator.CreateInstance(commandType, o2);
+                        //}
                     }
                     else
                     {
@@ -120,11 +127,17 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Enemy", "Obstacle", "bottom", typeof(EnemyBlockBottom));
 
             //link-door
+            RegisterCollision("Player", "Door", "left", typeof(PlayerDoor));
+            RegisterCollision("Player", "Door", "right", typeof(PlayerDoor));
+            RegisterCollision("Player", "Door", "top", typeof(PlayerDoor));
+            RegisterCollision("Player", "Door", "bottom", typeof(PlayerDoor));
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)
         {
             var key = new Tuple<string,string, string>(obj1, obj2, direction);
             collisionDictionary[key] = command;
         }
+
+        
     }
 }

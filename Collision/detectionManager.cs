@@ -21,11 +21,22 @@ namespace LegendOfZelda.Collision
         //removable public List<collObject> collisionList;
         private CollisionHandler handler;
 
+        //get an instance of the roomObjectManager
+        
+
         public detectionManager(CollisionHandler collHandler)
         {
-            stationaryHitboxes = new List<ICollideable>();
-            movingHitboxes = new List<ICollideable>();
-
+            // The object manager is currently not returning lists
+            // unComment the add hitbox method and change the Lists to new lists to revert to old method.
+            stationaryHitboxes = RoomObjectManager.Instance.getStandStills();
+            movingHitboxes = RoomObjectManager.Instance.getMovers();
+            //stationaryHitboxes = new List<ICollideable>();
+            //movingHitboxes = new List<ICollideable>();
+            if (movingHitboxes == null)
+            {
+                Debug.WriteLine("Failed to retrieve moving Collideables List");
+            }
+            
             //Removable collisionList = new List<collObject> ();
 
             //lets other methods use the handler
@@ -38,16 +49,23 @@ namespace LegendOfZelda.Collision
             // 1 is moving otherwise is stationary
             if (type == 1)
             {
-                movingHitboxes.Add(collideable);
+                //movingHitboxes.Add(collideable);
             }
             else
             {
-                stationaryHitboxes.Add(collideable);
+               // stationaryHitboxes.Add(collideable);
             }
         }
 
         public void update()
         {
+            stationaryHitboxes = RoomObjectManager.Instance.getStandStills();
+            movingHitboxes = RoomObjectManager.Instance.getMovers();
+            
+            if (stationaryHitboxes.Count == 0)
+            {
+                Debug.WriteLine("No stationary hitboxes");
+            }
             //only moving items can initiate collision
             // so for all moving hitboxes
             for (int i = 0; i < movingHitboxes.Count; i++)
@@ -201,5 +219,26 @@ namespace LegendOfZelda.Collision
         }
 
         //not needed removed getCollision list
+
+        private void addWalls()
+        {
+            // Walls are 100 pixels thick wide and 87 pixels thick tall
+            // Dimensions of the rooms are 800 / 480
+
+            Wall top = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 800, 87));
+            Wall bot = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 392, 800, 87));
+            Wall left1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 100, 196));
+            Wall left2 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 284, 100, 196));
+            Wall right1 = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 0, 100, 196));
+            Wall right2 = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 284, 100, 196));
+
+            stationaryHitboxes.Add(top);
+            stationaryHitboxes.Add(bot);   
+            stationaryHitboxes.Add(left1);
+            stationaryHitboxes.Add(left2);
+            stationaryHitboxes.Add(right1);
+            stationaryHitboxes.Add(right2);
+           
+        }
     }
 }
