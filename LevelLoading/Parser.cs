@@ -69,13 +69,21 @@ namespace LegendOfZelda
                         Debug.WriteLine(con2.ToString());
                         objectName = objectNameNode.InnerText;
                     }
+                } else
+                {
+                    Debug.WriteLine("Invalid Object Type.");
                 }
                 if (objectNameNode != null)
                 {
                     objectName = objectNameNode.InnerText;
                 }
+                else
+                {
+                    Debug.WriteLine("Invalid Object Name.");
+                }
                 if (locationNode != null)
                 {
+                    // Change this from split to 2 entries in the XML files
                     // Splits the string into 2 separated by the space.
                     string[] coords = locationNode.InnerText.Split(' ');
                     if (coords.Length == 2)
@@ -88,6 +96,12 @@ namespace LegendOfZelda
                         position = new Vector2(x, y);
                     }
                 }
+                else
+                {
+                    Debug.WriteLine("Invalid Location Type.");
+                }
+
+
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
                 {
                     // Populates list of non-moving collideable objects

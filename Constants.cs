@@ -6,8 +6,6 @@ namespace LegendOfZelda
 {
     public class Constants
     {
-        // Global scaling
-        public const float GlobalScale = 4.0f;
         // Screen size
         public const int ScreenWidth = 1600;  // Screen width
         public const int ScreenHeight = 960;  // Screen height
@@ -23,6 +21,19 @@ namespace LegendOfZelda
         // Standard size
         public const int StandardHeight = 16;
         public const int StandardWidth = 16;
+        // Animation time
+        public const int AnimationTime = 1;
+        // Boomerang
+        public const int BoomerangSpeed = 10;
+        public const int BoomerangWidth = 24;
+        public const int BoomerangHeight = 32;
+        public static readonly Vector2 BoomerangMaxDistance = new Vector2(150, 150);
+        public const float BoomerangTimePerFrame = .05f;
+        // Arrow
+        public const int ArrowSpeed = 3;
+        public static readonly Vector2 ArrowMaxDistance = new Vector2(150, 150);
+        // Bomb
+        public const double ExplosionFrameDuration = .5;
         // Aquamentus
         public const int AquamentusHeight = 100;
         public const int AquamentusWidth = 100;
