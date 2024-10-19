@@ -21,9 +21,9 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 speed = new Vector2(5, 5);
+        private Vector2 speed = new Vector2(Constants.FireSpeedX, Constants.FireSpeedY);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance = new Vector2(Constants.FireMaxDistanceX, Constants.FireMaxDistanceY);
         private Rectangle destination;
         private Boolean exists;
         // private ISprite itemSprite;
@@ -49,8 +49,9 @@ namespace LegendOfZelda
 
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+            //removed the * 4, may be really small now. - TJ
+            width = spriteFrames[currentFrame].Width;
+            height = spriteFrames[currentFrame].Height;
             itemPosition += direction * speed;
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
             if (itemPosition == maxDistance)

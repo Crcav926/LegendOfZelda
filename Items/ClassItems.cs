@@ -46,7 +46,7 @@ namespace LegendOfZelda
         {
             // this move section should probably be separated out.
             // only move the arrow when we're in bounds.
-            if (xCord < 800 || xCord > 0 || yCord < 400 || yCord > 0)
+            if (xCord < Constants.OriginalWidth || xCord > 0 || yCord < Constants.OriginalHeight || yCord > 0)
             {
                 // this moves the arrow/boomerang sprite across the screen.
                 // this section was largely for testing purposes and will be removed later
@@ -74,7 +74,7 @@ namespace LegendOfZelda
         public void Draw(SpriteBatch spriteBatch)
         {
             // just initialize a rectangle, sprite Draw we call here actually figures out correct dimensions
-            Rectangle destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
+            Rectangle destinationRectangle = new Rectangle(xCord, yCord, Constants.StandardWidth, Constants.StandardHeight);
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
     }

@@ -17,9 +17,12 @@ namespace LegendOfZelda
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
         public const float ScaleY = (float)ScreenHeight / OriginalHeight;
-        // Miku size
-        public const int MikuHeight = 16;
-        public const int MikuWidth = 16;
+        // Link
+        public const int LinkHeight = 16;
+        public const int LinkWidth = 16;
+        public const int LinkMaxDamageCycles = 6;
+        public const double LinkColorChangeInterval = 0.05;
+        public const int LinkStartingHealth = 10;
         // Standard size
         public const int StandardHeight = 16;
         public const int StandardWidth = 16;
@@ -92,5 +95,40 @@ namespace LegendOfZelda
         public const float ZolJumpRange = 50f;
         public const int ZolHeight = 16;
         public const int ZolWidth = 16;
+
+        //Arrows
+        public const float ArrowSpeedX = 5f;
+        public const float ArrowSpeedY = 5f;
+        public const float ArrowMaxDistanceX = 150f;
+        public const float ArrowMaxDistanceY = 150f;
+
+        //Bombs
+        public const float BombOffsetX = 50f;
+        public const float BombOffsetY = 50f;
+        public const float BombTimePerFrame = 0.3f;
+
+         //Boomerang
+        public const float BoomerangSpeedX = 5f;
+        public const float BoomerangSpeedY = 5f;
+        public const float BoomerangMaxDistanceX = 150f;
+        public const float BoomerangMaxDistanceY = 150f;
+        public const double BoomerangTimePerFrame = 0.05;
+        //not sure why this one is a double while the rest are floats, i'm just copying over.
+
+        //Fire
+        public const double FireLingerTime = 0.50;
+        //linger time actually goes unused right now, but i put it here anyway.
+        public const float FireSpeedX = 5f;
+        public const float FireSpeedY = 5f;
+        public const float FireMaxDistanceX = 150f;
+        public const float FireMaxDistanceY = 150f;
+
+        //Sword
+        public const double SwordTimeOnScreen = 0.40;
+        //these almost certainly need reduced.
+        public const float SwordOffsetX = 24f;
+        public const float SwordOffsetY = 24f;
+        public const float SwordMaxDistanceX = 150f;
+        public const float SwordMaxDistanceY = 150f;
     }
 }

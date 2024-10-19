@@ -13,7 +13,7 @@ namespace LegendOfZelda
         List<Rectangle> spriteFrames;
         int currentFrame = 0;
         int totalFrames;
-        double timePerFrame = 0.3; // Adjustable data
+        //double timePerFrame = 0.3; // Adjustable data
         double timeElapsed = 0;
         private int width;
         private int height;
@@ -21,7 +21,7 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 offSet = new Vector2(50, 50);
+        private Vector2 offSet = new Vector2(Constants.BombOffsetX, Constants.BombOffsetY);
         private Rectangle destination;
         private Boolean exists;
 
@@ -44,10 +44,11 @@ namespace LegendOfZelda
 
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+            //note: i might've made the bombs really small, these used to be multiplied by 4. - TJ
+            width = spriteFrames[currentFrame].Width;
+            height = spriteFrames[currentFrame].Height;
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timePerFrame)
+            if (timeElapsed > Constants.BombTimePerFrame)
             {
                 currentFrame++;
                 destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);

@@ -13,7 +13,7 @@ namespace LegendOfZelda
         List<Rectangle> spriteFrames;
         int currentFrame = 0;
         int totalFrames;
-        double timePerFrame = 0.05; // Adjustable data
+        //double timePerFrame = 0.05; // Adjustable data
         double timeElapsed = 0;
         private int width;
         private int height;
@@ -21,9 +21,9 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 speed = new Vector2(10, 10);
+        private Vector2 speed = new Vector2(Constants.BoomerangSpeedX, Constants.BoomerangSpeedY);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance = new Vector2(Constants.BoomerangMaxDistanceX, Constants.BoomerangMaxDistanceY);
         private Rectangle destination;
         private Boolean exists;
 
@@ -47,10 +47,11 @@ namespace LegendOfZelda
 
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+            //same as bombs, i might've made these really small. - TJ
+            width = spriteFrames[currentFrame].Width;
+            height = spriteFrames[currentFrame].Height;
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timePerFrame)
+            if (timeElapsed > Constants.BoomerangTimePerFrame)
             {
                 currentFrame++;
                 itemPosition += direction * speed;

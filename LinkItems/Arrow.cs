@@ -23,9 +23,9 @@ namespace LegendOfZelda
         private Vector2 origin;
         ISprite sprite;
         // Adjustable speed vector
-        private Vector2 speed = new Vector2(5, 5);
+        private Vector2 speed = new Vector2(Constants.ArrowSpeedX, Constants.ArrowSpeedY);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance = new Vector2(Constants.ArrowMaxDistanceX, Constants.ArrowMaxDistanceY);
         private Rectangle destination;
         private Boolean exists;
         // private ISprite itemSprite;
@@ -53,6 +53,7 @@ namespace LegendOfZelda
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             itemPosition += direction * speed;
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
+            //width and height are never set? - TJ
             if(direction == new Vector2(0, 0))
             {
                 // Get rid of impact frame

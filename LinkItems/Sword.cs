@@ -13,7 +13,7 @@ namespace LegendOfZelda
         List<Rectangle> spriteFrames;
         int currentFrame;
         int totalFrames;
-        double timeOnScreen = 0.40; // Adjustable data
+        //double timeOnScreen = 0.40; // Adjustable data
         double timeElapsed = 0;
         private int width;
         private int height;
@@ -21,9 +21,9 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 offSet = new Vector2(24, 24);
+        private Vector2 offSet = new Vector2(Constants.SwordOffsetX, Constants.SwordOffsetY);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance = new Vector2(Constants.SwordMaxDistanceX, Constants.SwordMaxDistanceY);
         private Rectangle destination;
         private Boolean exists;
         // private ISprite itemSprite;
@@ -51,11 +51,12 @@ namespace LegendOfZelda
 
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+            //may have made really small, removed the * 4. - TJ
+            width = spriteFrames[currentFrame].Width;
+            height = spriteFrames[currentFrame].Height;
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timeOnScreen)
+            if (timeElapsed > Constants.SwordTimeOnScreen)
             {
                 exists = false;
             }
