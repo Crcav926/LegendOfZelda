@@ -50,7 +50,7 @@ namespace LegendOfZelda.Collision
             String direction = c.direction;
             if (o1 is Link)
             {
-                Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
+                // Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
             }
             Tuple<string,string, string> key = new Tuple<string, string, string>(o1.getCollisionType(), o2.getCollisionType(), direction);
 

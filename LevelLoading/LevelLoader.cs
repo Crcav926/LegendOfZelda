@@ -33,10 +33,6 @@ namespace LegendOfZelda
             Parsing parseIt = new Parsing(room);
             getEm = parseIt.getBlocks();
             getEm2 = parseIt.getMovers();
-            foreach (ICollideable collideable in getEm2)
-            {
-                Debug.WriteLine(collideable.getHitbox().ToString());
-            }
             // Sorts through each item in the list and parses through.
             // Mainly testing by parsing through all rooms, but eventually have only cetain rooms have their information loaded.
         }
