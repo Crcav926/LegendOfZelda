@@ -14,7 +14,7 @@ namespace LegendOfZelda.LinkMovement
     {
         private Link link;
         private string name = "BombAttack";
-        ILinkItem bomb;
+        IItems bomb;
         Vector2 position;
         Vector2 direction;
         public LinkBombAttackState(Link link)
@@ -60,7 +60,11 @@ namespace LegendOfZelda.LinkMovement
         }
         public void BombAttack()
         {
-            link.bomb.Use(this.direction, this.position);
+            if (!bomb.exists)
+            {
+                link.bomb.Use(this.direction, this.position);
+            }
+            // 
         }
         public void Update(GameTime gameTime)
         {

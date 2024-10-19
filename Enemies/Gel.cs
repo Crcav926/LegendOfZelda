@@ -21,6 +21,7 @@ public class Gel : IEnemy, ICollideable
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private ISprite sprite;
+    private Boolean alive;
     public Gel(Vector2 Position)
     {
         // Set the initial target position
@@ -28,6 +29,7 @@ public class Gel : IEnemy, ICollideable
         this.position = Position;
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);
         sprite = EnemySpriteFactory.Instance.CreateGelSprite();
+        alive = true;
     }
     // TODO: Make Gel change direction
     public void ChangeDirection()
@@ -84,8 +86,12 @@ public class Gel : IEnemy, ICollideable
     }
     public Rectangle getHitbox()
     {
+        Rectangle hitbox = new Rectangle(0, 0, 0, 0);
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 32, 60);
+        if (alive)
+        {
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+        }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it
@@ -95,7 +101,7 @@ public class Gel : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { }
+    public void takendamage() { alive = false; }
 
     public void attack() { }
 }

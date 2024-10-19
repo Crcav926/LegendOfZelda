@@ -16,7 +16,7 @@ namespace LegendOfZelda.LinkMovement
         private string name = "FireAttack";
         private double timeElapsed;
         private double timeWait = 0.5;
-        ILinkItem fire;
+        IItems fire;
         Vector2 position;
         Vector2 direction;
 
@@ -53,7 +53,11 @@ namespace LegendOfZelda.LinkMovement
         }
         public void FireAttack()
         {
-            link.fire.Use(this.direction, this.position);
+            if (!fire.exists)
+            {
+                link.fire.Use(this.direction, this.position);
+            }
+           
         }
         public void ArrowAttack()
         {

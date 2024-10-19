@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace LegendOfZelda
 {
@@ -15,14 +16,15 @@ namespace LegendOfZelda
         // Magic numbers to be used later
         private int maxHealth = 10;
         private int currentHealth = 10;
-        public ILinkItem boomerang;
-        public ILinkItem arrow;
-        public ILinkItem fire;
-        public ILinkItem sword;
-        public ILinkItem bomb;
+        public IItems boomerang;
+        public IItems arrow;
+        public IItems fire;
+        public IItems sword;
+        public IItems bomb;
         public DamageAnimation damageAnimation;
         //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
+        public List<ICollideable> inventory = new List<ICollideable>();
 
 
         public Link()
@@ -40,6 +42,12 @@ namespace LegendOfZelda
             fire = new Fire(direction, position);
             sword = new Sword(direction, position);
             bomb = new Bomb(direction, position);
+            inventory.Add((ICollideable)boomerang);
+            inventory.Add((ICollideable)arrow);
+            inventory.Add((ICollideable)fire);
+            inventory.Add((ICollideable)sword);
+            inventory.Add((ICollideable)bomb);
+
             //this allows me to get the sprite into for the hitbox.
             hitInfo = (Sprite)linkSprite;
             

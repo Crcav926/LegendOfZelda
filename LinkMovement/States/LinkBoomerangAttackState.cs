@@ -16,7 +16,7 @@ namespace LegendOfZelda.LinkMovement
         private string name = "BoomerangAttack";
         Vector2 position;
         Vector2 direction;
-        ILinkItem boomerang;
+        IItems boomerang;
         public LinkBoomerangAttackState(Link link)
         {
             this.position = link.position;
@@ -40,7 +40,7 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Move(Vector2 newDirection)
         {
-            link.linkState = new LinkMoveState(link);
+            // link.linkState = new LinkMoveState(link);
             if (!boomerang.exists)
             {
                 link.linkState = new LinkBoomerangAttackState(link);

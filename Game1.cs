@@ -81,7 +81,7 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
-            font = Content.Load<SpriteFont>("font");
+            // font = Content.Load<SpriteFont>("font");
             // Load the texture for the sprite sheet
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             texture = Content.Load<Texture2D>("enemySpriteSheet");
@@ -137,7 +137,7 @@ namespace LegendOfZelda
             //collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
-            foreach (ICollideable mover in movers)
+            foreach (ICollideable mover in LevelLoader.Instance.getMovers())
             {
                 mover.Update(gameTime);
             }
@@ -145,7 +145,7 @@ namespace LegendOfZelda
             controllerK.Update();
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
-            //LinkCharacter.Update(gameTime);
+            // LinkCharacter.Update(gameTime);
             // Updates sprites in Item classes
 
         }
@@ -168,13 +168,13 @@ namespace LegendOfZelda
             {
                 block.Draw(_spriteBatch);
             }
-            foreach (ICollideable mover in movers)
+            foreach (ICollideable mover in LevelLoader.Instance.getMovers())
             {
                 mover.Draw(_spriteBatch);
             }
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
-            _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+            // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

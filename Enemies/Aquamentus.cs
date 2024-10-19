@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ public class Aquamentus : IEnemy, ICollideable
     private float minX;  // Left boundary for movement
     private float maxX;  // Right boundary for movement
     private ISprite sprite;
+    private Boolean alive;
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     public Aquamentus(Vector2 position)
@@ -34,6 +36,7 @@ public class Aquamentus : IEnemy, ICollideable
         minX = position.X - 10;
         maxX = position.X + 100;
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
+        alive = true;
     }
     public void ChangeDirection()
     {
@@ -82,6 +85,7 @@ public class Aquamentus : IEnemy, ICollideable
 
     public void Draw(SpriteBatch spriteBatch)
     {
+        if (alive) {
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
 
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
@@ -91,15 +95,20 @@ public class Aquamentus : IEnemy, ICollideable
         {
             fireball.Draw(spriteBatch);
         }
+        }
     }
 
-    public void takendamage() { }
+    public void takendamage() { alive = false; }
 
     public void attack() { }
     public Rectangle getHitbox()
     {
+        Rectangle hitbox = new Rectangle(0, 0, 0, 0);
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 80, 80);
+        if (alive)
+        {
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+        }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

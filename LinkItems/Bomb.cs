@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Bomb : ILinkItem
+    public class Bomb : IItems, ICollideable
     {
         private bool isLingering;
         double bombStillTime = 2;
@@ -40,6 +40,10 @@ namespace LegendOfZelda
             isLingering = false;
             exists = true;
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);
+        }
+        public void makeContact()
+        {
+            exists = false;
         }
         public void Update(GameTime gameTime)
         {
@@ -82,6 +86,22 @@ namespace LegendOfZelda
                 }
                 
             }
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

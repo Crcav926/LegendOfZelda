@@ -19,6 +19,7 @@ namespace LegendOfZelda.LinkItems
             public void Execute()
             {
             myGame.LinkCharacter.ArrowAttack();
-        }
+            myGame.LinkCharacter.ArrowAttack();
+            }
     }
 }

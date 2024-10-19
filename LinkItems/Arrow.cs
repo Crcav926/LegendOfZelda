@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Arrow : ILinkItem
+    public class Arrow : IItems, ICollideable
     {
         private bool isLingering;
         private double lingerTime = .5;
@@ -23,6 +23,7 @@ namespace LegendOfZelda
         private int vectorToInt;
         ItemSpriteFactory itemSpriteFactory;
         ISprite arrowSprite;
+        Boolean collided = false;
         public bool exists { get;  set; }
 
 
@@ -45,6 +46,13 @@ namespace LegendOfZelda
             direction = newDirection;
             isLingering = false;
             exists = true;
+            collided = false;
+        }
+        public void makeContact()
+        {
+            arrowSprite = itemSpriteFactory.CreateImpactSprite();
+            isLingering = true;
+            direction = new Vector2(0, 0);
         }
         public void Update(GameTime gameTime)
         {
@@ -75,6 +83,11 @@ namespace LegendOfZelda
                 }
             }
 
+            if (collided)
+            {
+                exists = false;
+            }
+
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
         }
 
@@ -85,6 +98,22 @@ namespace LegendOfZelda
                 arrowSprite.Draw(spriteBatch, destination, Color.White);
             }
 
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

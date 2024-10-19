@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Fire : ILinkItem
+    public class Fire : IItems, ICollideable
     {
         double lingerTime = 1; // Adjustable data
         double timeElapsed = 0;
@@ -39,6 +39,10 @@ namespace LegendOfZelda
             exists = true;
             isLingering = false;
             lingerElapsed = 0;
+        }
+        public void makeContact()
+        {
+            exists = false;
         }
         public void Update(GameTime gameTime)
         {
@@ -73,6 +77,22 @@ namespace LegendOfZelda
 
                 fireSprite.Draw(spriteBatch,destination,Color.White);
             }
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

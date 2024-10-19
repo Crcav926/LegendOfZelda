@@ -16,7 +16,7 @@ namespace LegendOfZelda.LinkMovement
         private string name = "SwordAttack";
         Vector2 position;
         Vector2 direction;
-        ILinkItem sword;
+        IItems sword;
         public LinkSwordAttackState(Link link)
         {
             this.position = link.position;

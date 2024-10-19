@@ -19,6 +19,7 @@ namespace LegendOfZelda
             public void Execute()
             {
             myGame.LinkCharacter.FireAttack();
+            myGame.LinkCharacter.FireAttack();
         }
     }
 }

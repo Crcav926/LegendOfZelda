@@ -18,7 +18,8 @@ namespace LegendOfZelda.LinkItems
             }
             public void Execute()
             {
-            myGame.LinkCharacter.SwordAttack();
-        }
+                myGame.LinkCharacter.SwordAttack();
+                myGame.LinkCharacter.SwordAttack();
+            }
     }
 }

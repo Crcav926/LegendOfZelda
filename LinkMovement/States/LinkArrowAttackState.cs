@@ -14,7 +14,7 @@ namespace LegendOfZelda.LinkMovement
     {
         private Link link;
         private string name = "ArrowAttack";
-        ILinkItem arrow;
+        IItems arrow;
         Vector2 position;
         Vector2 direction;
         public LinkArrowAttackState(Link link)
@@ -55,7 +55,11 @@ namespace LegendOfZelda.LinkMovement
         }
         public void ArrowAttack()
         {
-            arrow.Use(this.direction,this.position);
+            if (!arrow.exists)
+            {
+                arrow.Use(this.direction, this.position);
+            }
+            
         }
         public void BombAttack()
         {

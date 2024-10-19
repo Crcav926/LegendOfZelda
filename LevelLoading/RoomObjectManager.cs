@@ -12,7 +12,7 @@ namespace LegendOfZelda
         private static RoomObjectManager instance = new RoomObjectManager();
         private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
-        private Link link;
+        public Link link;
         private string room;
         public static RoomObjectManager Instance
         {
@@ -42,6 +42,10 @@ namespace LegendOfZelda
             {
                 movers = LevelLoader.Instance.getMovers();
                 movers.Add(link);
+                foreach (ICollideable item in link.inventory)
+                {
+                    movers.Add(item);
+                }
             }
             if (blocks != LevelLoader.Instance.getBlocks())
             {
