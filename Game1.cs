@@ -97,7 +97,7 @@ namespace LegendOfZelda
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
-            LevelLoader.Instance.Load("Room4.xml");
+            LevelLoader.Instance.Load("Room17.xml");
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
@@ -119,7 +119,7 @@ namespace LegendOfZelda
             // Dimensions of the rooms are 800 / 480
 
             Wall top = new Wall(new Rectangle(0,0,800,87));
-            Wall bot = new Wall(new Rectangle(0, 390, 800, 87));
+            Wall bot = new Wall(new Rectangle(0, 392, 800, 87));
             Wall left = new Wall(new Rectangle(0, 0, 100, 480));
             Wall right = new Wall(new Rectangle(700, 0, 100, 480));
 

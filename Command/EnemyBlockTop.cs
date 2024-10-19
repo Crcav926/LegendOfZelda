@@ -15,7 +15,8 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            _enemy.position = new Vector2(_enemy.position.X, _enemy.position.Y + 2);
+            _enemy.position = new Vector2(_enemy.position.X, _enemy.position.Y - 2);
+            _enemy.ChangeDirection();
         }
     }
 }

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--Time for the funny room. Note the different floor and no wall.-->
+<!--I'm being honest here, I don't wanna place 170 blocks, so I'm just using the item room as a floor.-->
+<!--I'm still gonna place blocks for collision, but the walls are still 32px around, just a brick texture instead.-->
+<!--Essentially, there will be blocks drawn over the background that we can put collision on.-->
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>FloorItemRoom</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 22 Bricks. More may be needed for the upper ladder section, but I'm hoping that's solved by wall hitboxes.-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>200 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>250 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>300 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>100 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>200 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>250 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>300 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>100 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>200 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>250 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>300 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>100 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>200 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>250 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>300 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>350 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>400 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>450 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>500 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>600 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>650 220</Location>
+</Item>
+<!--ICollideable Types: 4 Keese. I'm kinda just throwing them wherever-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>100 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>100 308</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>650 88</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>500 132</Location>
+</Item>
+<!--Door type will need to be changed-->
+<!--No door visual here, just a transition.-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorOpen</ObjectName>
+    <Location>350 0</Location>
+</Item>
+</root>

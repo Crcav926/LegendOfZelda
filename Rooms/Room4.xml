@@ -3,7 +3,7 @@
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
-    <Location>33 33</Location>
+    <Location>100 88</Location>
 </Item>
 <Item>
     <ObjectType>Wall</ObjectType>
@@ -14,68 +14,68 @@
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>113 65</Location>
+    <Location>350 176</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>129 65</Location>
+    <Location>400 176</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>113 81</Location>
+    <Location>350 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>129 81</Location>
+    <Location>400 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>113 97</Location>
+    <Location>350 264</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>129 97</Location>
+    <Location>400 264</Location>
 </Item>
-<!--Enemy Types: 3 Stalfos-->
+<!--ICollideable Types: 3 Stalfos-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Stalfos</ObjectName>
-    <Location>97 33</Location>
+    <Location>300 88</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Stalfos</ObjectName>
-    <Location>49 49</Location>
+    <Location>150 132</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Stalfos</ObjectName>
-    <Location>81 97</Location>
+    <Location>250 264</Location>
 </Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>UpDoorOpen</ObjectName>
-    <Location>113 0</Location>
+    <Location>350 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>LeftDoorWall</ObjectName>
-    <Location>0 73</Location>
+    <Location>0 125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorWall</ObjectName>
-    <Location>225 73</Location>
+    <Location>700  125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorOpen</ObjectName>
-    <Location>113 145</Location>
+    <Location>350 396</Location>
 </Item>
 </root>

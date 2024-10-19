@@ -8,7 +8,7 @@ namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement
-    private float speed = 100f;          // Movement speed
+    private float speed = 2f;          // Movement speed
     private Vector2 projectileOffset;    // Offset for throwing projectiles
     private List<Projectile> projectiles; // List to keep track of projectiles
     private List<Rectangle> upFrames;    // Frames when facing up
@@ -41,7 +41,7 @@ public class Goriya : IEnemy, ICollideable
     }
 
     //Change the direction of Goriya itself
-    private void ChangeDirection()
+    public void ChangeDirection()
     {
         // Chose a random direction (up, down, left, right)
         int direction = random.Next(0, 4);
@@ -102,7 +102,7 @@ public class Goriya : IEnemy, ICollideable
 
         sprite.Update(gameTime);
         // Move Goriya
-        position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        position += velocity;
 
         // Check if Goriya hits the screen edges and reflect direction
         if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
@@ -135,7 +135,7 @@ public class Goriya : IEnemy, ICollideable
         // Use the current position for the destination rectangle
         if (alive)
         {
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 45, 40);
 
             sprite.Draw(s, destinationRectangle, Color.White);
             // Draw all the projectiles
@@ -148,7 +148,7 @@ public class Goriya : IEnemy, ICollideable
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

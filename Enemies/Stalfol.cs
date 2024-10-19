@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LegendOfZelda;
-public class Stalfol : ICollideable
+public class Stalfol : IEnemy, ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement
-    private float speed = 100f;          // Movement speed
+    private float speed = 2f;          // Movement speed
     private Vector2 swordOffset;         // Offset of the sword relative to the skull
     private List<Rectangle> swordFrames;
     private Random random = new Random();
@@ -37,7 +37,7 @@ public class Stalfol : ICollideable
         alive = true;
     }
 
-    private void ChangeDirection()
+    public void ChangeDirection()
     {
         // Choose a random direction (up, down, left, right)
         int direction = random.Next(0, 4);
@@ -73,7 +73,7 @@ public class Stalfol : ICollideable
         }
         sprite.Update(gameTime);
         // Update position based on velocity
-        position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        position += velocity;
         //angle need caculate
         //if the skull hits the screen edges and reflect its direction?????
         if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
@@ -92,14 +92,14 @@ public class Stalfol : ICollideable
         if (alive)
         {
             // Use the current position for the destination rectangle, and size it appropriately
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 40, 40);
             sprite.Draw(s, destinationRectangle, Color.White);
         }
     }
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 40, 40);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it

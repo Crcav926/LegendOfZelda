@@ -10,7 +10,7 @@
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
-<!--Object Types: 4 Blocks-->
+<!--object Types: 4 Blocks, identical to Room 5-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
@@ -31,36 +31,26 @@
     <ObjectName>Block</ObjectName>
     <Location>550 264</Location>
 </Item>
-<!--ICollideable Types: 5 Stalfos, all must be defeated for a key-->
+<!--ICollideable Types: 3 Goriyas; killing them drops the boomerang-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>250 88</Location>
+    <ObjectName>Goriya</ObjectName>
+    <Location>300 132</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>500 88</Location>
+    <ObjectName>Goriya</ObjectName>
+    <Location>450 220</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>191 88</Location>
-</Item>
-<Item>
-    <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>550 220</Location>
-</Item>
-<Item>
-    <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Stalfos</ObjectName>
-    <Location>500 308</Location>
+    <ObjectName>Goriya</ObjectName>
+    <Location>300 308</Location>
 </Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorBombableWall</ObjectName>
+    <ObjectName>UpDoorWall</ObjectName>
     <Location>350 0</Location>
 </Item>
 <Item>
@@ -71,11 +61,11 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorOpen</ObjectName>
-    <Location>700  125</Location>
+    <Location>700 125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>DownDoorOpen</ObjectName>
+    <ObjectName>DownDoorSecretBombableWall</ObjectName>
     <Location>350 396</Location>
 </Item>
 </root>

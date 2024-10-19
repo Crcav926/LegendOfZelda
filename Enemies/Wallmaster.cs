@@ -29,6 +29,7 @@ public class Wallmaster : IEnemy, ICollideable
         this.position = position;
         this.sprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
     }
+    public void ChangeDirection() { }
 
     public void Update(GameTime gameTime)
     {

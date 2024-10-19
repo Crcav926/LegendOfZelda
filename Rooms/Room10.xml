@@ -3,7 +3,7 @@
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
-    <Location>33 33</Location>
+    <Location>100 88</Location>
 </Item>
 <Item>
     <ObjectType>Wall</ObjectType>
@@ -14,99 +14,99 @@
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>49 49</Location>
+    <Location>150 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 49</Location>
+    <Location>200 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>177 49</Location>
+    <Location>550 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>193 49</Location>
+    <Location>600 132</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>113 81</Location>
+    <Location>350 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>129 81</Location>
+    <Location>400 220</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>49 113</Location>
+    <Location>150 308</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>65 113</Location>
+    <Location>200 308</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>177 113</Location>
+    <Location>550 308</Location>
 </Item>
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Block</ObjectName>
-    <Location>193 113</Location>
+    <Location>600 308</Location>
 </Item>
-<!--Enemy Types: 5 Gel-->
+<!--ICollideable Types: 5 Gel-->
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Gel</ObjectName>
-    <Location>193 33</Location>
+    <Location>600 88</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Gel</ObjectName>
-    <Location>113 49</Location>
+    <Location>350 132</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Gel</ObjectName>
-    <Location>161 49</Location>
+    <Location>500 132</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Gel</ObjectName>
-    <Location>97 81</Location>
+    <Location>300 220</Location>
 </Item>
 <Item>
-    <ObjectType>Enemy</ObjectType>
+    <ObjectType>ICollideable</ObjectType>
     <ObjectName>Gel</ObjectName>
-    <Location>177 81</Location>
+    <Location>550 220</Location>
 </Item>
 <!--This room has the map, same deal as the compass.-->
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>UpDoorOpen</ObjectName>
-    <Location>113 0</Location>
+    <Location>350 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>LeftDoorOpen</ObjectName>
-    <Location>0 73</Location>
+    <Location>0 125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorLocked</ObjectName>
-    <Location>225 73</Location>
+    <Location>700  125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorSecretBombableWall</ObjectName>
-    <Location>113 145</Location>
+    <Location>350 396</Location>
 </Item>
 </root>

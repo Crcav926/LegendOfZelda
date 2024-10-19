@@ -29,7 +29,10 @@ public class Zol : IEnemy, ICollideable
         targetPosition = position;
         sprite = EnemySpriteFactory.Instance.CreateZolSprite();
     }
+    public void ChangeDirection()
+    {
 
+    }
     public void Update(GameTime gameTime)
     {
         // Update the jump timer

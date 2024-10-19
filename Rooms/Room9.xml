@@ -4,7 +4,7 @@
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>FloorVoid</ObjectName>
-    <Location>33 33</Location>
+    <Location>100 88</Location>
 </Item>
 <Item>
     <ObjectType>Wall</ObjectType>
@@ -16,21 +16,21 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>UpDoorWall</ObjectName>
-    <Location>113 0</Location>
+    <Location>350 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>LeftDoorWall</ObjectName>
-    <Location>0 73</Location>
+    <Location>0 125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorOpen</ObjectName>
-    <Location>225 73</Location>
+    <Location>700  125</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorWall</ObjectName>
-    <Location>113 145</Location>
+    <Location>350 396</Location>
 </Item>
 </root>
