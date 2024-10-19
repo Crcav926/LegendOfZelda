@@ -1,13 +1,8 @@
 ﻿using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ObjectManagementExamples;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
@@ -21,15 +16,15 @@ namespace LegendOfZelda
         // Magic numbers to be used later
         private int maxHealth = 10;
         private int currentHealth = 10;
-        public bool boolean = false;
-        public Boomerang boomerang;
-        public Arrow arrow;
-        public Fire fire;
-        public Sword sword;
-        public Bomb bomb;
+        public IItems boomerang;
+        public IItems arrow;
+        public IItems fire;
+        public IItems sword;
+        public IItems bomb;
         public DamageAnimation damageAnimation;
         //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
+        public List<ICollideable> inventory = new List<ICollideable>();
 
 
         public Link()
@@ -40,12 +35,19 @@ namespace LegendOfZelda
             // Sets link to be Idle initially
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
-            // boomerang = new Boomerang(itemTexture, direction, position, false);
-            // arrow = new Arrow(itemTexture, direction, position, false);
-            // fire = new Fire(itemTexture, direction, position, false);
-            // sword = new Sword(itemTexture, direction, position, false);
-            // bomb = new Bomb(itemTexture, direction, position, false);
             damageAnimation = new DamageAnimation();
+
+            boomerang = new Boomerang(direction, position);
+            arrow = new Arrow(direction, position);
+            fire = new Fire(direction, position);
+            sword = new Sword(direction, position);
+            bomb = new Bomb(direction, position);
+            inventory.Add((ICollideable)boomerang);
+            inventory.Add((ICollideable)arrow);
+            inventory.Add((ICollideable)fire);
+            inventory.Add((ICollideable)sword);
+            inventory.Add((ICollideable)bomb);
+
             //this allows me to get the sprite into for the hitbox.
             hitInfo = (Sprite)linkSprite;
             
@@ -69,13 +71,28 @@ namespace LegendOfZelda
 
         public void TakeDamage()
         {
-            // Debug.WriteLine("Link took Damage");
             linkState.TakeDamage();
         }
 
-        public void Attack()
+        public void BoomerangAttack()
         {
-            linkState.Attack();
+            linkState.BoomerangAttack();
+        }
+        public void SwordAttack() 
+        { 
+            linkState.SwordAttack();
+        }
+        public void FireAttack() 
+        { 
+            linkState.FireAttack();
+        }
+        public void ArrowAttack()
+        {
+            linkState.ArrowAttack();
+        }
+        public void BombAttack()
+        {
+            linkState.BombAttack();
         }
         public void Update(GameTime gameTime)
         {
@@ -85,6 +102,11 @@ namespace LegendOfZelda
             linkState.Update(gameTime);
             linkSprite.Update(gameTime);
             damageAnimation.Update(gameTime);
+            boomerang.Update(gameTime);
+            arrow.Update(gameTime);
+            fire.Update(gameTime);
+            sword.Update(gameTime);
+            bomb.Update(gameTime);
         }
         public Rectangle getHitbox()
         {
@@ -102,8 +124,13 @@ namespace LegendOfZelda
             return "Player";
         }
         public void Draw(SpriteBatch spriteBatch)
-        {
-            Rectangle destination = new Rectangle((int)position.X, (int)position.Y, Constants.MikuWidth, Constants.MikuHeight);
+        { 
+         
+            boomerang.Draw(spriteBatch);
+            arrow.Draw(spriteBatch);
+            fire.Draw(spriteBatch);
+            sword.Draw(spriteBatch);
+            bomb.Draw(spriteBatch);
             linkState.Draw(spriteBatch);
         }
     }

@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    internal interface IItems
+    public interface IItems
     {
-        public void Update(GameTime gametime) { }
-
-        public void Draw(SpriteBatch spriteBatch) { }
+        public bool exists { get; set; }
+        public void Update(GameTime gameTime);
+        public void makeContact();
+        public void Draw(SpriteBatch spriteBatch);
+        public void Use(Vector2 newDirection, Vector2 newPosition);
     }
 }

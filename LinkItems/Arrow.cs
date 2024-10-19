@@ -7,72 +7,113 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Arrow : ILinkItem
+    public class Arrow : IItems, ICollideable
     {
-        Texture2D itemTexture;
-        //list of rectangles that contains the frames
-        List<Rectangle> spriteFrames;
-        int currentFrame;
-        int totalFrames;
+        private bool isLingering;
+        private double lingerTime = .5;
         double timePerFrame = 0.05; // Adjustable data
         double timeElapsed = 0;
-        private int width;
-        private int height;
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
-        ISprite sprite;
         // Adjustable speed vector
-        private Vector2 speed = new Vector2(5, 5);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance;
         private Rectangle destination;
-        private Boolean exists;
-        // private ISprite itemSprite;
+        private int vectorToInt;
+        ItemSpriteFactory itemSpriteFactory;
+        ISprite arrowSprite;
+        Boolean collided = false;
+        public bool exists { get;  set; }
 
-        public Arrow(Vector2 arrowDirection, Vector2 linkPosition, Boolean appear)
+
+        public Arrow(Vector2 arrowDirection, Vector2 linkPosition)
         {
-            exists = appear;
-            maxDistance *= arrowDirection;
-            maxDistance += linkPosition;
-            itemPosition = linkPosition;
-            origin = linkPosition;
-            direction = arrowDirection;
-            currentFrame = SpriteDirectionData.GetDirection(direction);
-            sprite = ItemSpriteFactory.Instance.CreateArrowSprite(currentFrame);
-
+            itemSpriteFactory = ItemSpriteFactory.Instance;
+            vectorToInt = SpriteDirectionData.GetDirection(arrowDirection);
+            arrowSprite = itemSpriteFactory.CreateArrowSprite(vectorToInt);
+            exists = false;
         }
-
-        public void Use()
+        public void Use(Vector2 newDirection, Vector2 newPosition)
         {
+            vectorToInt = SpriteDirectionData.GetDirection(newDirection);
+            arrowSprite = itemSpriteFactory.CreateArrowSprite(vectorToInt);
+            maxDistance = Constants.ArrowMaxDistance;
+            maxDistance *= newDirection;
+            maxDistance += newPosition;
+            itemPosition = newPosition;
+            origin = newPosition;
+            direction = newDirection;
+            isLingering = false;
             exists = true;
+            collided = false;
         }
-
+        public void makeContact()
+        {
+            arrowSprite = itemSpriteFactory.CreateImpactSprite();
+            isLingering = true;
+            direction = new Vector2(0, 0);
+        }
         public void Update(GameTime gameTime)
         {
-            timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            itemPosition += direction * speed;
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
-            if(direction == new Vector2(0, 0))
+            arrowSprite.Update(gameTime);
+            itemPosition += direction * Constants.ArrowSpeed;
+               
+            if (!isLingering && itemPosition == maxDistance)
             {
-                // Get rid of impact frame
+                
+                arrowSprite = itemSpriteFactory.CreateArrowSprite(vectorToInt);
+                if (Vector2.Distance(itemPosition, maxDistance) <= 0)
+                {
+                    isLingering = true;
+                    direction = Vector2.Zero;
+
+                }
+            }
+
+            if (isLingering)
+            {
+                timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+                arrowSprite = itemSpriteFactory.CreateImpactSprite();
+                if (timeElapsed >= lingerTime)
+                {
+                    exists = false;
+                    isLingering = false;
+                    timeElapsed = 0;
+                }
+            }
+
+            if (collided)
+            {
                 exists = false;
             }
-            if (itemPosition == maxDistance)
-            {
-                // Once arrow reaches its destination, switch to impact frame
-                sprite = ItemSpriteFactory.Instance.CreateImpactSprite();
-                direction = new Vector2(0, 0);
-            }
+
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (exists)
             {
-                sprite.Draw(spriteBatch, destination, Color.White);
+                arrowSprite.Draw(spriteBatch, destination, Color.White);
             }
-            //create a new destination rectangle of the appropriate size
+
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

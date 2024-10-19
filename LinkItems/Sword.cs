@@ -6,58 +6,62 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Sword : ILinkItem
+    public class Sword : IItems, ICollideable
     {
-        Texture2D itemTexture;
-        //list of rectangles that contains the frames
-        List<Rectangle> spriteFrames;
         int currentFrame;
         int totalFrames;
-        double timeOnScreen = 0.40; // Adjustable data
+        double timeOnScreen = .3; // Adjustable data
         double timeElapsed = 0;
-        private int width;
-        private int height;
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 offSet = new Vector2(24, 24);
+        private Vector2 offSet;
         // Adjustable Distance vector
         private Vector2 maxDistance = new Vector2(150, 150);
         private Rectangle destination;
-        private Boolean exists;
+        private ItemSpriteFactory itemSpriteFactory;
+        ISprite swordSprite;
+        private int vectorToInt;
+        public bool exists { get; set; }
         // private ISprite itemSprite;
 
-        public Sword(Texture2D texture, Vector2 swordDirection, Vector2 linkPosition, Boolean appear)
+        public Sword( Vector2 swordDirection, Vector2 linkPosition)
         {
-            exists = appear;
-            maxDistance *= swordDirection;
-            maxDistance += linkPosition;
-            itemPosition = linkPosition;
-            origin = linkPosition;
-            itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Sword");
-            totalFrames = spriteFrames.Count;
+            itemSpriteFactory = ItemSpriteFactory.Instance;
             direction = swordDirection;
-            currentFrame = SpriteDirectionData.GetDirection(direction);
-            itemPosition += direction * offSet;
-
+            vectorToInt = SpriteDirectionData.GetDirection(swordDirection);
+            swordSprite = itemSpriteFactory.CreateSwordSprite(vectorToInt);
+            exists = false;
+             
         }
-
-        public void Use()
+        public void Use(Vector2 newDirection, Vector2 newPosition)
         {
+            offSet = new Vector2(35 * newDirection.X, 35 * newDirection.Y);
+            vectorToInt = SpriteDirectionData.GetDirection(newDirection);
+            swordSprite = itemSpriteFactory.CreateSwordSprite(vectorToInt);
+            itemPosition = newPosition;
+            origin = newPosition;
+            direction = newDirection;
             exists = true;
+            
         }
-
+        public void makeContact()
+        {
+            exists = false;
+        }
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
+
+            itemPosition = origin + offSet;
+            swordSprite.Update(gameTime);
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 40, 40);
+
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > timeOnScreen)
             {
                 exists = false;
+                timeElapsed = 0;
             }
         }
 
@@ -65,9 +69,24 @@ namespace LegendOfZelda
         {
             if (exists)
             {
-                spriteBatch.Draw(itemTexture, destination, spriteFrames[currentFrame], Color.White);
+                swordSprite.Draw(spriteBatch, destination, Color.White);
             }
-            //create a new destination rectangle of the appropriate size
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

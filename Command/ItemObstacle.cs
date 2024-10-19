@@ -16,6 +16,7 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //take damage
+            item.makeContact();
             //command should be like item.goSplat();
         }
     }

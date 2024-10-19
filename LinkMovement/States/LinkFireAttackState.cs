@@ -5,24 +5,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class LinkIdleState : ILinkState
+    internal class LinkFireAttackState : ILinkState
     {
         private Link link;
-        private string name = "Idle";
-        public LinkIdleState(Link link)
+        private string name = "FireAttack";
+        private double timeElapsed;
+        private double timeWait = 0.5;
+        IItems fire;
+        Vector2 position;
+        Vector2 direction;
+
+        public LinkFireAttackState(Link link)
         {
+            this.position = link.position;
+            this.direction = link.direction;
             this.link = link;
-            link.linkSprite = link.spriteFactory.CreateLinkStillSprite(link.direction);
-            DamageAnimation damageAnimation = link.damageAnimation;
+            fire = link.fire;
+            // Constructing Link sprite here.
+            link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(link.direction);
         }
         public string getState() { return name; }
 
         public void Idle()
         {
-            // Does nothing while idle.
+            link.linkState = new LinkIdleState(link);
         }
         public void TakeDamage()
         {
@@ -42,7 +53,11 @@ namespace LegendOfZelda.LinkMovement
         }
         public void FireAttack()
         {
-            link.linkState = new LinkFireAttackState(link);
+            if (!fire.exists)
+            {
+                link.fire.Use(this.direction, this.position);
+            }
+           
         }
         public void ArrowAttack()
         {
@@ -54,7 +69,10 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Update(GameTime gameTime)
         {
-            // No update required, were standing still.
+            if (!fire.exists)
+            {
+                link.linkState = new LinkIdleState(link);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

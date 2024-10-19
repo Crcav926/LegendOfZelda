@@ -18,8 +18,8 @@ namespace LegendOfZelda.LinkItems
             }
             public void Execute()
             {
-                linkDirection = myGame.LinkCharacter.direction;
-                myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
+            myGame.LinkCharacter.ArrowAttack();
+            myGame.LinkCharacter.ArrowAttack();
             }
     }
 }

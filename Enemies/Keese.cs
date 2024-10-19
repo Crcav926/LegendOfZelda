@@ -90,8 +90,12 @@ public class Keese : IEnemy, ICollideable
     }
     public Rectangle getHitbox()
     {
+        Rectangle hitbox = new Rectangle(0, 0, 0, 0);
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        if (alive)
+        {
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+        }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it
@@ -101,7 +105,7 @@ public class Keese : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { }
+    public void takendamage() { alive = false; }
 
     public void attack() { }
 }

@@ -6,66 +6,93 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Fire : ILinkItem
+    public class Fire : IItems, ICollideable
     {
-        Texture2D itemTexture;
-        //list of rectangles that contains the frames
-        List<Rectangle> spriteFrames;
-        int currentFrame;
-        int totalFrames;
-        double lingerTime = 0.50; // Adjustable data
+        double lingerTime = 1; // Adjustable data
         double timeElapsed = 0;
-        private int width;
-        private int height;
+        private double lingerElapsed = 0; // Timer for lingering
+        private bool isLingering; // State to check if it's lingering
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
-        // Adjustable speed vector
-        private Vector2 speed = new Vector2(5, 5);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance;
         private Rectangle destination;
-        private Boolean exists;
-        // private ISprite itemSprite;
-
-        public Fire(Texture2D texture, Vector2 fireDirection, Vector2 linkPosition, Boolean appear)
+        public bool exists { get; set; }
+        private ItemSpriteFactory itemSpriteFactory;
+        ISprite fireSprite;
+        public Fire( Vector2 fireDirection, Vector2 linkPosition)
         {
-            exists = appear;
-            maxDistance *= fireDirection;
-            maxDistance += linkPosition;
-            itemPosition = linkPosition;
-            origin = linkPosition;
-            itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Fire");
-            totalFrames = spriteFrames.Count;
-            direction = fireDirection;
-            currentFrame = 0;
+            itemSpriteFactory = ItemSpriteFactory.Instance;
+            fireSprite = itemSpriteFactory.CreateFireSprite();
+            exists = false ;
         }
 
-        public void Use()
+        public void Use(Vector2 newDirection, Vector2 newPosition)
         {
+            maxDistance = Constants.BoomerangMaxDistance;
+            maxDistance *= newDirection;
+            maxDistance += newPosition;
+            itemPosition = newPosition;
+            origin = newPosition;
+            direction = newDirection;
             exists = true;
+            isLingering = false;
+            lingerElapsed = 0;
         }
-
+        public void makeContact()
+        {
+            exists = false;
+        }
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
-            itemPosition += direction * speed;
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
-            if (itemPosition == maxDistance)
+            fireSprite.Update(gameTime);
+            itemPosition += direction * Constants.ArrowSpeed;
+
+            if (!isLingering)
             {
-                exists = false;
+                itemPosition += direction * Constants.ArrowSpeed;
+                if (Vector2.Distance(itemPosition, maxDistance) <= 0)
+                {
+                    isLingering = true;
+                    direction = Vector2.Zero;
+                    
+                }
             }
+
+            if (isLingering)
+            {
+                lingerElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+                if (lingerElapsed >= lingerTime)
+                {
+                    exists = false; 
+                }
+            }
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuHeight, Constants.MikuHeight);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (exists) { 
+
+                fireSprite.Draw(spriteBatch,destination,Color.White);
+            }
+        }
+        public Rectangle getHitbox()
+        {
             if (exists)
             {
-                spriteBatch.Draw(itemTexture, destination, spriteFrames[currentFrame], Color.White);
+                return destination;
             }
-            //create a new destination rectangle of the appropriate size
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

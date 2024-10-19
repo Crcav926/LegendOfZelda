@@ -6,67 +6,102 @@ using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Bomb : ILinkItem
+    public class Bomb : IItems, ICollideable
     {
-        Texture2D itemTexture;
-        //list of rectangles that contains the frames
-        List<Rectangle> spriteFrames;
-        int currentFrame = 0;
-        int totalFrames;
-        double timePerFrame = 0.3; // Adjustable data
+        private bool isLingering;
+        double bombStillTime = 2;
         double timeElapsed = 0;
-        private int width;
-        private int height;
+        double lingerTime = 0.5;
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
         private Vector2 offSet = new Vector2(50, 50);
         private Rectangle destination;
-        private Boolean exists;
-
-        public Bomb(Texture2D texture, Vector2 bombDirection, Vector2 linkPosition, Boolean appear)
+        private ItemSpriteFactory itemSpriteFactory;
+        public bool exists { get; set; }
+        ISprite bombSprite;
+        ISprite explosionSprite;
+        public Bomb(Vector2 bombDirection, Vector2 linkPosition)
         {
-            exists = appear;
-            itemPosition = linkPosition;
-            origin = linkPosition;
-            itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Bomb");
-            totalFrames = spriteFrames.Count;
-            direction = bombDirection;
-            itemPosition += direction * offSet;
+            itemSpriteFactory = ItemSpriteFactory.Instance;
+            bombSprite = itemSpriteFactory.CreateBombSprite();
+            explosionSprite = itemSpriteFactory.CreateExplosionSprite();
+            exists = false;
         }
 
-        public void Use()
+        public void Use(Vector2 newDirection, Vector2 newPosition)
         {
+            bombSprite = itemSpriteFactory.CreateBombSprite();
+            explosionSprite = itemSpriteFactory.CreateExplosionSprite();
+            itemPosition = newPosition;
+            direction = newDirection;
+            itemPosition += newDirection * offSet;
+            isLingering = false;
             exists = true;
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);
         }
-
+        public void makeContact()
+        {
+            exists = false;
+        }
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timePerFrame)
+            bombSprite.Update(gameTime);
+            explosionSprite.Update(gameTime);
+            if (!isLingering)
             {
-                currentFrame++;
-                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
-                if (currentFrame >= totalFrames)
+                if (timeElapsed > bombStillTime)
                 {
-                    currentFrame = 0;
+                    isLingering = true ;
+                    timeElapsed = 0;
+                }
+            }
+
+            if (isLingering)
+            {
+                if (timeElapsed >= lingerTime)
+                {
+                    isLingering = false;
+                    timeElapsed = 0;
                     exists = false;
                 }
-                timeElapsed = 0;
             }
         }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (exists)
             {
-                spriteBatch.Draw(itemTexture, destination, spriteFrames[currentFrame], Color.White);
+                if (!isLingering)
+                {
+                    bombSprite.Draw(spriteBatch, destination, Color.White);
+                }
+                else
+                {
+                    explosionSprite.Draw(spriteBatch, destination, Color.White);
+                }
+                
             }
-            //create a new destination rectangle of the appropriate size
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

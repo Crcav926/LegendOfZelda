@@ -1,84 +1,96 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace LegendOfZelda
 {
-    public class Boomerang : ILinkItem
+    public class Boomerang : IItems, ICollideable
     {
-        Texture2D itemTexture;
-        //list of rectangles that contains the frames
-        List<Rectangle> spriteFrames;
-        int currentFrame = 0;
-        int totalFrames;
-        double timePerFrame = 0.05; // Adjustable data
-        double timeElapsed = 0;
-        private int width;
-        private int height;
+        
+        private double timeElapsed;
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
-        // Adjustable speed vector
-        private Vector2 speed = new Vector2(10, 10);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance;
         private Rectangle destination;
-        private Boolean exists;
-
-        public Boomerang(Texture2D texture, Vector2 boomerangDirection, Vector2 linkPosition, Boolean appear)
+        public bool exists { get; set; }
+        ItemSpriteFactory itemSpriteFactory;
+        ISprite boomerangSprite;
+        Boolean collided = false;
+        public Boomerang(Vector2 boomerangDirection, Vector2 linkPosition)
         {
-            exists = appear;
-            maxDistance *= boomerangDirection;
-            maxDistance += linkPosition;
-            itemPosition = linkPosition;
-            origin = linkPosition;
-            itemTexture = texture;
-            spriteFrames = LinkItemDictionary.GetRectangleData("Boomerang2");
-            totalFrames = spriteFrames.Count;
-            direction = boomerangDirection;
+            itemSpriteFactory = ItemSpriteFactory.Instance;
+            boomerangSprite = itemSpriteFactory.CreateBoomerangSprite();
+            Debug.WriteLine("I exist!");
+            exists = false;
         }
-
-        public void Use()
+        public void Use(Vector2 newDirection, Vector2 newPosition)
         {
+            maxDistance = Constants.BoomerangMaxDistance;
+            boomerangSprite = itemSpriteFactory.CreateBoomerangSprite();
+            maxDistance *= newDirection;
+            maxDistance += newPosition;
+            itemPosition = newPosition;
+            origin = newPosition;
+            direction = newDirection;
             exists = true;
+            collided = false;
         }
-
+        public void makeContact()
+        {
+            boomerangSprite = itemSpriteFactory.CreateImpactSprite();
+            collided = true;
+        }
         public void Update(GameTime gameTime)
         {
-            width = spriteFrames[currentFrame].Width * 4;
-            height = spriteFrames[currentFrame].Height * 4;
+            boomerangSprite.Update(gameTime);
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timePerFrame)
+            if (timeElapsed > Constants.BoomerangTimePerFrame)
             {
-                currentFrame++;
-                itemPosition += direction * speed;
+                itemPosition += direction * Constants.BoomerangSpeed;
                 if(itemPosition == maxDistance)
                 {
                     direction *= new Vector2(-1, -1);
                 }
-                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, width, height);
+                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.BoomerangWidth, Constants.BoomerangHeight);
                 if (itemPosition == origin)
                 {
                     // If the Boomerang reached its max distance, get rid of it
                     exists = false;
                 }
-                if (currentFrame >= totalFrames)
+                if (collided)
                 {
-                    currentFrame = 0;
+                    exists = false;
                 }
                 timeElapsed = 0;
             }
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (exists)
             {
-                spriteBatch.Draw(itemTexture, destination, spriteFrames[currentFrame], Color.White);
+                boomerangSprite.Draw(spriteBatch,destination,Color.White);
             }
-            //create a new destination rectangle of the appropriate size
+        }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "Item";
         }
     }
 }

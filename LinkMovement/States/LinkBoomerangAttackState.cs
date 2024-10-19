@@ -5,24 +5,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class LinkIdleState : ILinkState
+    internal class LinkBoomerangAttackState : ILinkState
     {
         private Link link;
-        private string name = "Idle";
-        public LinkIdleState(Link link)
+        private string name = "BoomerangAttack";
+        Vector2 position;
+        Vector2 direction;
+        IItems boomerang;
+        public LinkBoomerangAttackState(Link link)
         {
+            this.position = link.position;
+            this.direction = link.direction;
             this.link = link;
-            link.linkSprite = link.spriteFactory.CreateLinkStillSprite(link.direction);
-            DamageAnimation damageAnimation = link.damageAnimation;
+            // Constructing Link sprite here.
+            link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(link.direction);
+            boomerang = link.boomerang;
+            Debug.WriteLine(boomerang);
         }
+
         public string getState() { return name; }
 
         public void Idle()
         {
-            // Does nothing while idle.
+            link.linkState = new LinkIdleState(link);
         }
         public void TakeDamage()
         {
@@ -30,11 +40,19 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Move(Vector2 newDirection)
         {
-            link.linkState = new LinkMoveState(link);
+            // link.linkState = new LinkMoveState(link);
+            if (!boomerang.exists)
+            {
+                link.linkState = new LinkBoomerangAttackState(link);
+            }
         }
         public void BoomerangAttack()
         {
-            link.linkState = new LinkBoomerangAttackState(link);
+            Debug.WriteLine("Boomer4");
+            if (!boomerang.exists)
+            {
+                boomerang.Use(this.direction,this.position);
+            }
         }
         public void SwordAttack()
         {
@@ -54,7 +72,11 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Update(GameTime gameTime)
         {
-            // No update required, were standing still.
+
+            if (!boomerang.exists)
+            {
+                link.linkState = new LinkIdleState(link); // Switch to idle state when boomerang is done
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -62,6 +84,7 @@ namespace LegendOfZelda.LinkMovement
             Color color = link.damageAnimation.GetCurrentColor();
             Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
             link.linkSprite.Draw(spriteBatch, destination, color);
+  
         }
     }
 }

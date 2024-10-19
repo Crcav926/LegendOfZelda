@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 
-namespace LegendOfZelda.LinkItems
+namespace LegendOfZelda
 {
-    internal class CommPlaceBomb : ICommand
+    internal class CommShootFire : ICommand
     {
             Game1 myGame;
             Vector2 linkDirection;
-            public CommPlaceBomb(Game1 game)
+            public CommShootFire(Game1 game)
             {
                 myGame = game;
             }
             public void Execute()
             {
-                linkDirection = myGame.LinkCharacter.direction;
-                myGame.LinkCharacter.linkSprite = new LinkUseWeaponSprite(myGame.linkTexture, linkDirection);
-            }
+            myGame.LinkCharacter.FireAttack();
+            myGame.LinkCharacter.FireAttack();
+        }
     }
 }

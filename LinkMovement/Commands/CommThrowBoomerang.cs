@@ -17,7 +17,10 @@ namespace LegendOfZelda.LinkItems
             }
             public void Execute()
             {
-                myGame.LinkCharacter.Attack();
+                // HOTFIX - Call attack twice, one to change the state and one to throw the boomerang
+                // Formerly would just change states than instantly change back
+                myGame.LinkCharacter.BoomerangAttack();
+                myGame.LinkCharacter.BoomerangAttack();
             }
     }
 }

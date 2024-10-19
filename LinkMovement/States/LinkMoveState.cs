@@ -43,11 +43,26 @@ namespace LegendOfZelda
             link.position += link.direction;
             
         }
-        public void Attack()
+        public void BoomerangAttack()
         {
-            link.linkState = new LinkAttackingState(link);
+            link.linkState = new LinkBoomerangAttackState(link);
         }
-
+        public void SwordAttack()
+        {
+            link.linkState = new LinkSwordAttackState(link);
+        }
+        public void FireAttack()
+        {
+            link.linkState = new LinkFireAttackState(link);
+        }
+        public void ArrowAttack()
+        {
+            link.linkState = new LinkArrowAttackState(link);
+        }
+        public void BombAttack()
+        {
+            link.linkState = new LinkBombAttackState(link);
+        }
         public void Update(GameTime gameTime)
         {
             link.linkSprite.Update(gameTime);

@@ -14,7 +14,11 @@ namespace LegendOfZelda
         void Update(GameTime gameTime);
         void TakeDamage();
         void Move(Vector2 direction);
-        void Attack();
+        void BoomerangAttack();
+        void SwordAttack();
+        void FireAttack();
+        void ArrowAttack();
+        void BombAttack();
         void Idle();
         string getState();
 

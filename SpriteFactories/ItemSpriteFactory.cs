@@ -10,7 +10,8 @@ namespace LegendOfZelda
 {
     public class ItemSpriteFactory
     {
-        private Texture2D itemSpriteFinal;
+        // Allows us to get the texture, but can't set.
+        public Texture2D itemSpriteFinal { get; private set; }
         // More private Texture2Ds follow
 
         private static ItemSpriteFactory instance = new ItemSpriteFactory();
@@ -29,7 +30,7 @@ namespace LegendOfZelda
 
         public void LoadAllTextures(ContentManager content)
         {
-            Texture2D itemSpriteFinal = content.Load<Texture2D>("itemSpriteFinal");
+            itemSpriteFinal = content.Load<Texture2D>("itemSpriteFinal");
         }
 
 
@@ -135,6 +136,11 @@ namespace LegendOfZelda
             {
                 // Animation Frames
                 new Rectangle(125, 35, 10, 18),
+            }
+            },
+            { "Explosion", new List<Rectangle>()
+                {
+                // Animation Frames
                 new Rectangle(135, 35, 16, 18),
                 new Rectangle(152, 35, 16, 18),
                 new Rectangle(169, 35, 16, 18),
@@ -188,6 +194,10 @@ namespace LegendOfZelda
         public ISprite CreateBombSprite()
         {
             return new Sprite(itemSpriteFinal, SpriteFrames["Bomb"]);
+        }
+        public ISprite CreateExplosionSprite()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Explosion"]);
         }
         public ISprite CreateBoomerangSprite()
         {
