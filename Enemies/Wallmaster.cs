@@ -21,6 +21,7 @@ public class Wallmaster : IEnemy, ICollideable
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private ISprite sprite;
+    private Boolean alive;
 
     public Wallmaster(Vector2 position)
     {
@@ -28,6 +29,7 @@ public class Wallmaster : IEnemy, ICollideable
         targetPosition = position;
         this.position = position;
         this.sprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
+        alive = true;
     }
     public void ChangeDirection() { }
 
@@ -92,4 +94,5 @@ public class Wallmaster : IEnemy, ICollideable
     public void takendamage() { }
 
     public void attack() { }
+    public Boolean isAlive() { return alive; }
 }

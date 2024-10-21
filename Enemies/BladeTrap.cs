@@ -14,11 +14,13 @@ public class BladeTrap : IEnemy, ICollideable
     private ISprite sprite;
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
+    private Boolean alive;
 
     public BladeTrap(Vector2 position)
     {
         this.position = position;
         sprite = EnemySpriteFactory.Instance.CreateBladeTrapSprite();
+        alive = true;
     }
     public void ChangeDirection()
     {
@@ -73,6 +75,7 @@ public class BladeTrap : IEnemy, ICollideable
     {
         // Worry about later
     }
+    public Boolean isAlive() { return alive; }
     public String getCollisionType()
     {
         return "Enemy";
