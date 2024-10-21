@@ -7,7 +7,6 @@ namespace ObjectManagementExamples
     public static class Texture2DStorage
     {
         // Note that we are not using Game1's ContentLoader here (outside the scope of class methods) since it has not been instantiated yet
-        private static Texture2D linkSpriteSheet;
         private static Texture2D itemSpriteSheet;
         // More private static Texture2D fields follow
         public static void LoadAllTextures(ContentManager content)

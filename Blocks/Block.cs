@@ -8,13 +8,10 @@ namespace LegendOfZelda;
 public class Block : IBlock , ICollideable //IBlock currently does nothing, but depending on what we do with collision, it may be necessary.
 {
     private ISprite sprite;
-    private Texture2D blockTexture;
     private Rectangle destinationRectangle;
-    private int spriteIndex;
     private Vector2 position;
     public Block(Vector2 position, String blockName)
     {
-        spriteIndex = 0;
         sprite = BlockSpriteFactory.Instance.CreateSprite(blockName);
         this.position = position;
         //arbitrary numbers, can change to where we want to put it.

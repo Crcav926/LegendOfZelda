@@ -11,17 +11,9 @@ public class Goriya : IEnemy, ICollideable
     private float speed = 2f;          // Movement speed
     private Vector2 projectileOffset;    // Offset for throwing projectiles
     private List<Projectile> projectiles; // List to keep track of projectiles
-    private List<Rectangle> upFrames;    // Frames when facing up
-    private List<Rectangle> downFrames;  // Frames when facing down
-    private List<Rectangle> leftFrames;  // Frames when facing left
-    private List<Rectangle> rightFrames; // Frames when facing right
-    private List<Rectangle> projectileFrames; // List of rectangles for the projectile animation
     private Random random = new Random();
     private float throwCooldown = 2f;    // Time between throws
     private float throwTimer = 0f;       // Timer to track when to throw a projectile
-    private List<Rectangle> currentFrames; // Current frames for the current direction
-    private float frameTime = 0.1f;
-    private float frameTimer = 0f;
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
     private ISprite sprite;

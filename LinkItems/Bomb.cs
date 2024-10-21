@@ -14,7 +14,6 @@ namespace LegendOfZelda
         double lingerTime = 0.5;
         private Vector2 itemPosition;
         private Vector2 direction;
-        private Vector2 origin;
         // Adjustable speed vector
         private Vector2 offSet = new Vector2(50, 50);
         private Rectangle destination;

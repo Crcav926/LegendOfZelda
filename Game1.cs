@@ -34,17 +34,13 @@ namespace LegendOfZelda
         public Block block;
         public Link LinkCharacter;
         private List<ILinkItem> inventory = new List<ILinkItem>();
-        private Boomerang boomerang;
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
-        private ClassItems item1;
-        private ClassItems item2;
         public List<IEnemy> enemies = new List<IEnemy>();
         private List<ICollideable> blocks;
         private List<ICollideable> movers;
         private ISprite background;
         private ISprite walls;
-        private SpriteFont font;
         private IController controllerK;
 
         //For collisions
@@ -90,6 +86,7 @@ namespace LegendOfZelda
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
+            //Line to cause error so I can clean up the warnings
 
             // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
@@ -109,14 +106,6 @@ namespace LegendOfZelda
             
             // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
             // load hitboxes
-            collisionDetector.addHitbox(LinkCharacter, 1);
-            foreach (ICollideable block in blocks) {
-                collisionDetector.addHitbox(block, 0);
-            }
-            foreach (ICollideable mover in movers)
-            {
-                collisionDetector.addHitbox(mover, 1);
-            }
         }
 
         protected override void Update(GameTime gameTime)

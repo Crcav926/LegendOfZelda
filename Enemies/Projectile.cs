@@ -8,11 +8,6 @@ public class Projectile
 {
     private Vector2 position;
     private Vector2 velocity;
-    private Texture2D texture;
-    private List<Rectangle> frames;  // List of rectangles representing the frames
-    private int currentFrame = 0;    // Current frame of the animation
-    private float frameTime = 0.1f;  // Time to display each frame (in seconds)
-    private float frameTimer = 0f;   // Timer to track time passed for animation
     private float speed = 200f;      // Speed of the projectile
     private ISprite sprite;
     public bool IsActive { get; private set; } = true;  // Track whether the projectile is active

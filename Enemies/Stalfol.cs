@@ -13,16 +13,9 @@ public class Stalfol : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement
     private float speed = 2f;          // Movement speed
-    private Vector2 swordOffset;         // Offset of the sword relative to the skull
-    private List<Rectangle> swordFrames;
     private Random random = new Random();
-    private int currentSwordFrame = 0;   // Current frame for the sword
-    private float swordFrameTime = 0.1f; // Duration of each sword swing frame
-    private float swordFrameTimer = 0f;  // Timer for sword animation
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
-    private float frameTime = 0.1f;
-    private float frameTimer = 0f;
     private ISprite sprite;
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;

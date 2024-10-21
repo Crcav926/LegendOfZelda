@@ -14,12 +14,8 @@ public class Aquamentus : IEnemy, ICollideable
     private Vector2 velocity;
     private float speed = 80f;
     private List<Fireball> fireballs;    // List to track active fireballs
-    private List<Rectangle> rightFrames;
-    private List<Rectangle> projectileFrames; // List of rectangles for fireball animation
     private float throwCooldown = 3f;    // Time between fireball throws
     private float throwTimer = 0f;       // Timer to track when to throw a fireball
-    private float frameTime = 0.1f;
-    private float frameTimer = 0f;
     private float minX;  // Left boundary for movement
     private float maxX;  // Right boundary for movement
     private ISprite sprite;

@@ -11,7 +11,6 @@ namespace LegendOfZelda
     {
         private bool isLingering;
         private double lingerTime = .5;
-        double timePerFrame = 0.05; // Adjustable data
         double timeElapsed = 0;
         private Vector2 itemPosition;
         private Vector2 direction;

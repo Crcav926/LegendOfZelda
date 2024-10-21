@@ -11,7 +11,6 @@ namespace LegendOfZelda.LinkItems
     internal class CommPlaceBomb : ICommand
     {
         Game1 myGame;
-        Vector2 linkDirection;
         public CommPlaceBomb(Game1 game)
         {
             myGame = game;

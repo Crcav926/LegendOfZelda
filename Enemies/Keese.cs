@@ -15,8 +15,6 @@ public class Keese : IEnemy, ICollideable
     private Vector2 velocity;  // direction and speed
     private float speed = 100f;
     private Random random = new Random();
-    private float frameTime = 0.1f; // Duration of each frame in seconds 
-    private float frameTimer = 0f;  // Timer to track time since last frame change
     private ISprite sprite;
     private Rectangle destinationRectangle;
     private Boolean alive;
@@ -60,8 +58,6 @@ public class Keese : IEnemy, ICollideable
     }
     public void Update(GameTime gameTime)
     {
-        // Update the frame timer for animation transitions
-        frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         // Update position based on velocity
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 

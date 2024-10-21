@@ -15,7 +15,6 @@ namespace LegendOfZelda
         private double timePerFrame = 0.25; //TODO: Change based on desired animation speed
         public Rectangle destinationRectangle;
         public Vector2 position;
-        private int currentFrameIndex;
         private double timeElapsed;
         int currentFrame = 0;
         int totalFrames;

@@ -14,8 +14,6 @@ namespace LegendOfZelda.LinkMovement
     {
         private Link link;
         private string name = "FireAttack";
-        private double timeElapsed;
-        private double timeWait = 0.5;
         IItems fire;
         Vector2 position;
         Vector2 direction;

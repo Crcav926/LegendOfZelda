@@ -9,7 +9,6 @@ namespace LegendOfZelda
     public class Fire : IItems, ICollideable
     {
         double lingerTime = 1; // Adjustable data
-        double timeElapsed = 0;
         private double lingerElapsed = 0; // Timer for lingering
         private bool isLingering; // State to check if it's lingering
         private Vector2 itemPosition;

@@ -16,7 +16,6 @@ public class Gel : IEnemy, ICollideable
     private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
     private Random random = new Random();
-    private float frameTime = 0.1f; // Duration of each frame in seconds 
     private float frameTimer = 0f;  // Timer to track time since last frame change
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
