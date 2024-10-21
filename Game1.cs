@@ -104,19 +104,6 @@ namespace LegendOfZelda
 
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
-
-            //load texture sheets
-            
-            // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
-            // load hitboxes
-            collisionDetector.addHitbox(LinkCharacter, 1);
-            foreach (ICollideable block in blocks) {
-                collisionDetector.addHitbox(block, 0);
-            }
-            foreach (ICollideable mover in movers)
-            {
-                collisionDetector.addHitbox(mover, 1);
-            }
         }
 
         protected override void Update(GameTime gameTime)

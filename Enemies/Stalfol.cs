@@ -113,6 +113,7 @@ public class Stalfol : IEnemy, ICollideable
     {
         return "Enemy";
     }
+    public Boolean isAlive() { return alive; }
     public void takendamage() { alive = false; }
 
     public void attack() { }

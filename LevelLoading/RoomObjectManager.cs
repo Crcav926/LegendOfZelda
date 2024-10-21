@@ -52,6 +52,17 @@ namespace LegendOfZelda
                 blocks = LevelLoader.Instance.getBlocks();
                 addWalls();
             }
+            for(int i = 0; i < movers.Count; i++)
+            {
+                if(movers[i] is IEnemy)
+                {
+                    IEnemy enemy1 = (IEnemy)movers[i];
+                    if (!enemy1.isAlive())
+                    {
+                        movers.Remove(movers[i]);
+                    }
+                }
+            }
         }
         public void addLink(Link link)
         {

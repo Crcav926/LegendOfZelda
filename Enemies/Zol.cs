@@ -22,12 +22,14 @@ public class Zol : IEnemy, ICollideable
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private ISprite sprite;
+    private Boolean alive;
     public Zol(Vector2 position)
     {
         this.position = position;
         // Set the initial target position
         targetPosition = position;
         sprite = EnemySpriteFactory.Instance.CreateZolSprite();
+        alive = true;
     }
     public void ChangeDirection()
     {
@@ -92,4 +94,5 @@ public class Zol : IEnemy, ICollideable
     public void takendamage() { }
 
     public void attack() { }
+    public Boolean isAlive() { return alive; }
 }

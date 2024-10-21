@@ -30,7 +30,12 @@ namespace LegendOfZelda.LinkMovement
         }
         public void TakeDamage()
         {
-            damageAnimation.StartDamageEffect();
+            if (link.canTakeDamage)
+            {
+                damageAnimation.StartDamageEffect();
+                link.invulnerable();
+
+            }
         }
         public void Move(Vector2 newDirection)
         {
