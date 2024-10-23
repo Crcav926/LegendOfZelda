@@ -42,9 +42,9 @@ namespace LegendOfZelda
             {
                 movers = LevelLoader.Instance.getMovers();
                 movers.Add(link);
-                foreach (ICollideable item in link.inventory)
+                foreach (IItems item in link.inventory.items)
                 {
-                    movers.Add(item);
+                    movers.Add((ICollideable)item);
                 }
             }
             if (blocks != LevelLoader.Instance.getBlocks())

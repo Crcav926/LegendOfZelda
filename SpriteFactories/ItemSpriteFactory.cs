@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using ObjectManagementExamples;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics;
 
 namespace LegendOfZelda
 {
@@ -145,7 +146,12 @@ namespace LegendOfZelda
                 new Rectangle(152, 35, 16, 18),
                 new Rectangle(169, 35, 16, 18),
             }
-        }
+        },{ "OrangeRupee", new List<Rectangle>()
+            {
+                // Single orange Rupee
+                new Rectangle(72, 0, 8, 16)
+            }
+}
     };
 
 
@@ -214,6 +220,11 @@ namespace LegendOfZelda
         public ISprite CreateFireSprite()
         {
             return new Sprite(itemSpriteFinal, SpriteFrames["Fire"]);
+        }
+        public ISprite OrangeRupee()
+        {
+            Debug.WriteLine("Generated Orange Rupee Sprite");
+            return new Sprite(itemSpriteFinal, SpriteFrames["OrangeRupee"]);
         }
     }
 

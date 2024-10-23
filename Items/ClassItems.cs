@@ -6,76 +6,84 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Data;
+using System.Reflection;
 
 namespace LegendOfZelda
 {
-    public class ClassItems
+    public class ClassItems :ICollideable, IItems
     {
-        // keep track of your own sprite and which one from the dictionary we want
-        // this is more or less a get set property see SetSprite and GetSprite
-        public ISprite sprite;
-        //this should be the authoratitive source on what sprite we're on.
-        public int spriteIndex;
+        double timePerFrame = 0.05; // Adjustable data
+        double timeElapsed = 0;
+
+        private Vector2 itemPosition;
+        private Rectangle destination;
+
+        ItemSpriteFactory itemSpriteFactory;
+        ISprite itemSprite;
+        Boolean collided = false;
+        public bool exists { get; set; }
+
+        String itemType;
 
 
-        public int xCord;
-        public int yCord;
-
-
-        Texture2D itemTex;
-
-        public int direction;
-        public ClassItems(Texture2D ItemTexture, int x, int y)
+        public ClassItems(Vector2 pos, String _itemType)
         {
-            // get the texture sheet
-            itemTex = ItemTexture;
-            //index 0 is an invisible sprite
-            spriteIndex = 0;
-            // when first initialized get a new animated sprite object from itemTex sprite sheet with index 0.
-            sprite = new Sprite(itemTex, SpriteItemData.GetRectangleData(spriteIndex));
-
-            // 0 is stationary 1 is vertical 2 is horizontal
-            direction = 0;
+            itemPosition = pos;
+            itemSpriteFactory = ItemSpriteFactory.Instance;
+            itemType = _itemType;
+            MethodInfo methodInfo = typeof(ItemSpriteFactory).GetMethod(itemType);
+            itemSprite = (ISprite)methodInfo?.Invoke(itemSpriteFactory, null);
 
 
-            // set starting position
-            xCord = x;
-            yCord = y;
+            exists = true;
+        }
+        public String getItemType()
+        {
+            return itemType;
         }
         public void Update(GameTime gameTime)
         {
-            // this move section should probably be separated out.
-            // only move the arrow when we're in bounds.
-            if (xCord < 800 || xCord > 0 || yCord < 400 || yCord > 0)
-            {
-                // this moves the arrow/boomerang sprite across the screen.
-                // this section was largely for testing purposes and will be removed later
-                if (direction == 1)
-                {
-                    yCord--;
-                }
-                else if (direction == 2)
-                {
-                    xCord++;
-                }
-                // the 60 60 here doesn'
 
+            if (collided)
+            {
+                exists = false;
             }
 
-            sprite.Update(gameTime);
-
-
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
         }
-        public void SetSprite(int i) { spriteIndex = i; sprite = new Sprite(itemTex, SpriteItemData.GetRectangleData(spriteIndex)); }
-
-        public int GetSprite() { return spriteIndex; }
-
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // just initialize a rectangle, sprite Draw we call here actually figures out correct dimensions
-            Rectangle destinationRectangle = new Rectangle(xCord, yCord, 60, 60);
-            sprite.Draw(spriteBatch, destinationRectangle, Color.White);
+            if (exists)
+            {
+                itemSprite.Draw(spriteBatch, destination, Color.White);
+            }
+
         }
+        public Rectangle getHitbox()
+        {
+            if (exists)
+            {
+                return destination;
+            }
+            else
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+        }
+
+        public String getCollisionType()
+        {
+            return "statItem";
+        }
+
+        //unused methods
+        public void Use(Vector2 v, Vector2 v2) { }
+
+        public void makeContact() {
+            exists = false;
+        }
+
     }
 }
