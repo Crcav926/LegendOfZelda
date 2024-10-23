@@ -86,11 +86,11 @@ namespace LegendOfZelda
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
-            //Line to cause error so I can clean up the warnings
 
             // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
+
             // TODO: Make this fully within level loader. Not yet added b/c it would mess up a lot of commands and we don't have time to fix it rn
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             LinkCharacter = new Link();
@@ -98,14 +98,6 @@ namespace LegendOfZelda
             LevelLoader.Instance.Load("Room1.xml");
             RoomObjectManager.Instance.addLink(LinkCharacter);
             RoomObjectManager.Instance.Update();
-
-            blocks = LevelLoader.Instance.getBlocks();
-            movers = LevelLoader.Instance.getMovers();
-
-            //load texture sheets
-            
-            // for now I"m adding the hitboxes to the collision detector here it should be moved to level loader though
-            // load hitboxes
         }
 
         protected override void Update(GameTime gameTime)
