@@ -104,4 +104,5 @@ public class Keese : IEnemy, ICollideable
     public void takendamage() { alive = false; }
 
     public void attack() { }
+    public Boolean isAlive() { return alive; }
 }

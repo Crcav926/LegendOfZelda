@@ -160,4 +160,5 @@ public class Goriya : IEnemy, ICollideable
     }
 
     public void attack() { }
+    public Boolean isAlive() { return alive; }
 }

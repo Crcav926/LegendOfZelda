@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace LegendOfZelda
 {
@@ -25,6 +26,9 @@ namespace LegendOfZelda
         //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
         public List<ICollideable> inventory = new List<ICollideable>();
+        public Boolean canTakeDamage { get; private set; }
+        private double invincibilityTimer = 1.5;
+        private double timeElapsed = 0;
 
 
         public Link()
@@ -36,6 +40,7 @@ namespace LegendOfZelda
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
+            canTakeDamage = true;
 
             boomerang = new Boomerang(direction, position);
             arrow = new Arrow(direction, position);
@@ -71,7 +76,11 @@ namespace LegendOfZelda
 
         public void TakeDamage()
         {
-            linkState.TakeDamage();
+            if (canTakeDamage)
+            {
+                linkState.TakeDamage();
+                currentHealth -= 1;
+            }
         }
 
         public void BoomerangAttack()
@@ -107,6 +116,24 @@ namespace LegendOfZelda
             fire.Update(gameTime);
             sword.Update(gameTime);
             bomb.Update(gameTime);
+
+            timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+            if (timeElapsed > invincibilityTimer)
+            {
+                canTakeDamage = true;
+                timeElapsed = 0;
+            }
+            if (currentHealth == 0)
+            {
+                LevelLoader.Instance.Load("Room1.xml");
+            }
+        }
+        public void invulnerable()
+        {
+            if (canTakeDamage)
+            {
+                canTakeDamage = false;
+            }
         }
         public Rectangle getHitbox()
         {

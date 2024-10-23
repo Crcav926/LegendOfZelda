@@ -29,8 +29,11 @@ namespace LegendOfZelda
         }
         public void TakeDamage()
         {
-            link.linkState = new LinkDamagedState(link); 
-            link.linkState.TakeDamage();
+            if(link.canTakeDamage)
+            {
+                link.linkState = new LinkDamagedState(link);
+                link.linkState.TakeDamage();
+            }
         }   
         public void Move(Vector2 newDirection)
         {

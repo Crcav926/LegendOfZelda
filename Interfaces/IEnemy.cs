@@ -13,7 +13,7 @@ public interface IEnemy
     void Draw(SpriteBatch spriteBatch);
     void ChangeDirection();
     void takendamage();
-
+    Boolean isAlive();
     void attack();
 }
 

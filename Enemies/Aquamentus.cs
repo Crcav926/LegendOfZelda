@@ -19,7 +19,7 @@ public class Aquamentus : IEnemy, ICollideable
     private float minX;  // Left boundary for movement
     private float maxX;  // Right boundary for movement
     private ISprite sprite;
-    private Boolean alive;
+    public Boolean alive { get; private set; }
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     public Aquamentus(Vector2 position)
@@ -94,9 +94,13 @@ public class Aquamentus : IEnemy, ICollideable
         }
     }
 
-    public void takendamage() { alive = false; }
+    public void takendamage() 
+    { 
+        alive = false; 
+    }
 
     public void attack() { }
+    public Boolean isAlive() { return alive; }
     public Rectangle getHitbox()
     {
         Rectangle hitbox = new Rectangle(0, 0, 0, 0);
