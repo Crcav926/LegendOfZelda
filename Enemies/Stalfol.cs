@@ -20,6 +20,11 @@ public class Stalfol : IEnemy, ICollideable
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private Boolean alive;
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
 
     public Stalfol(Vector2 Position)
     {
@@ -28,6 +33,15 @@ public class Stalfol : IEnemy, ICollideable
         ChangeDirection();
         destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
+
+        hp = 2;
+        swordDamage = new Dictionary<string, int>
+        {
+            { "WOOD", 1 },
+            { "WHITE", 2 },
+            { "MAGIC", 2 }
+        };
+        canTakeDamage = true;
     }
 
     public void ChangeDirection()
@@ -51,7 +65,13 @@ public class Stalfol : IEnemy, ICollideable
                 break;
         }
     }
-
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
     public void Update(GameTime gameTime)
     {
         // Update the direction change timer
@@ -64,6 +84,14 @@ public class Stalfol : IEnemy, ICollideable
             ChangeDirection(); 
             directionChangeTimer = 0f; 
         }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
+        }
+
         sprite.Update(gameTime);
         // Update position based on velocity
         position += velocity;
@@ -107,7 +135,16 @@ public class Stalfol : IEnemy, ICollideable
         return "Enemy";
     }
     public Boolean isAlive() { return alive; }
-    public void takendamage() { alive = false; }
+    public void TakeDamage(string swordType) {
+        if (swordDamage.ContainsKey(swordType))
+        {
+            hp -= swordDamage[swordType];
+        }
+        if (hp <= 0)
+        {
+            alive = false;
+        }
+    }
 
-    public void attack() { }
+    public void Attack() { }
 }

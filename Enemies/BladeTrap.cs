@@ -66,15 +66,16 @@ public class BladeTrap : IEnemy, ICollideable
         return hitbox;
     }
 
-    public void takendamage() 
+    public void TakeDamage(string swordType)
     {
         // Does nothing, Bladetraps can't take damage
     }
 
-    public void attack() 
+    public void Attack()
     {
         // Worry about later
     }
+        
     public Boolean isAlive() { return alive; }
     public String getCollisionType()
     {

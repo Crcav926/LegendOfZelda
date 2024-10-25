@@ -1,11 +1,6 @@
-﻿using LegendOfZelda;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LegendOfZelda;
 public class Keese : IEnemy, ICollideable
@@ -19,6 +14,11 @@ public class Keese : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private Boolean alive;
     public Vector2 position { get; set; }
+    private int hp;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
+
     public Keese(Vector2 position)
     {
         // Set the initial target position (I dont know so I randomlzie it here
@@ -34,6 +34,8 @@ public class Keese : IEnemy, ICollideable
         sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
         alive = true;
+        hp = 1;
+        canTakeDamage = true;
     }
     public void ChangeDirection()
     {
@@ -56,10 +58,24 @@ public class Keese : IEnemy, ICollideable
                 break;
         }
     }
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
     public void Update(GameTime gameTime)
     {
         // Update position based on velocity
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
+        }
 
         // Check for collisions with screen edges and reflect velocity
         if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
@@ -101,8 +117,14 @@ public class Keese : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { alive = false; }
-
-    public void attack() { }
+    public void TakeDamage(string swordType)
+    {
+        hp -= 1;
+        if (hp <= 0)
+        {
+            alive = false;
+        }
+    }
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
 }

@@ -22,6 +22,12 @@ public class Aquamentus : IEnemy, ICollideable
     public Boolean alive { get; private set; }
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
+
     public Aquamentus(Vector2 position)
     {
         this.position = position;
@@ -33,12 +39,26 @@ public class Aquamentus : IEnemy, ICollideable
         maxX = position.X + 100;
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
         alive = true;
+        hp = 6;
+        swordDamage = new Dictionary<string, int>
+        {
+            { "WOOD", 1 },
+            { "WHITE", 2 }
+            //MAGIC??
+        };
+        canTakeDamage = true;
     }
     public void ChangeDirection()
     {
         velocity.X *= -1;
     }
-
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
     public void Update(GameTime gameTime)
     {
         // Update the timer for throwing fireballs
@@ -50,6 +70,13 @@ public class Aquamentus : IEnemy, ICollideable
             ThrowFireball(new Vector2(-1, 0));
             ThrowFireball(new Vector2(-1, 1));
             throwTimer = 0f;
+        }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
         }
 
         // Update and remove inactive fireballs
@@ -94,12 +121,20 @@ public class Aquamentus : IEnemy, ICollideable
         }
     }
 
-    public void takendamage() 
-    { 
-        alive = false; 
+    public void TakeDamage(string swordType)
+    {
+        if (swordDamage.ContainsKey(swordType))
+        {
+            hp -= swordDamage[swordType];
+        }
+
+        if (hp <= 0)
+        {
+            alive = false;
+        }
     }
 
-    public void attack() { }
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
     public Rectangle getHitbox()
     {
