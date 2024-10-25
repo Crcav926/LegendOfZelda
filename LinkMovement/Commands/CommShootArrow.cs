@@ -11,7 +11,6 @@ namespace LegendOfZelda.LinkItems
     internal class CommShootArrow : ICommand
     {
             Game1 myGame;
-            Vector2 linkDirection;
             public CommShootArrow(Game1 game)
             {
                 myGame = game;

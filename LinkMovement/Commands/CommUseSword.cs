@@ -11,7 +11,6 @@ namespace LegendOfZelda.LinkItems
     internal class CommUseSword : ICommand
     {
             Game1 myGame;
-            Vector2 linkDirection;
             public CommUseSword(Game1 game)
             {
                 myGame = game;

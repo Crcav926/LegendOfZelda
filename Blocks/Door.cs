@@ -15,7 +15,6 @@ namespace LegendOfZelda
         private Vector2 position;
         private Rectangle destinationRectangle;
         private String room;
-        public String doorType;
         private ISprite sprite;
         private Vector2 newPos;
 

@@ -12,8 +12,8 @@ public interface IEnemy
     void Update(GameTime gameTime);
     void Draw(SpriteBatch spriteBatch);
     void ChangeDirection();
-    void takendamage();
+    void TakeDamage(string swordType);
     Boolean isAlive();
-    void attack();
+    void Attack();
 }
 

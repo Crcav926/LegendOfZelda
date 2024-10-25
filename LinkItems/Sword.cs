@@ -8,8 +8,6 @@ namespace LegendOfZelda
 {
     public class Sword : IItems, ICollideable
     {
-        int currentFrame;
-        int totalFrames;
         double timeOnScreen = .3; // Adjustable data
         double timeElapsed = 0;
         private Vector2 itemPosition;

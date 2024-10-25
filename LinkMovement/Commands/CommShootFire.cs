@@ -11,7 +11,6 @@ namespace LegendOfZelda
     internal class CommShootFire : ICommand
     {
             Game1 myGame;
-            Vector2 linkDirection;
             public CommShootFire(Game1 game)
             {
                 myGame = game;

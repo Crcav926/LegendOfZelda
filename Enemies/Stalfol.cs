@@ -13,20 +13,18 @@ public class Stalfol : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement
     private float speed = 2f;          // Movement speed
-    private Vector2 swordOffset;         // Offset of the sword relative to the skull
-    private List<Rectangle> swordFrames;
     private Random random = new Random();
-    private int currentSwordFrame = 0;   // Current frame for the sword
-    private float swordFrameTime = 0.1f; // Duration of each sword swing frame
-    private float swordFrameTimer = 0f;  // Timer for sword animation
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
-    private float frameTime = 0.1f;
-    private float frameTimer = 0f;
     private ISprite sprite;
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private Boolean alive;
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
 
     public Stalfol(Vector2 Position)
     {
@@ -35,6 +33,15 @@ public class Stalfol : IEnemy, ICollideable
         ChangeDirection();
         destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
+
+        hp = 2;
+        swordDamage = new Dictionary<string, int>
+        {
+            { "WOOD", 1 },
+            { "WHITE", 2 },
+            { "MAGIC", 2 }
+        };
+        canTakeDamage = true;
     }
 
     public void ChangeDirection()
@@ -58,7 +65,13 @@ public class Stalfol : IEnemy, ICollideable
                 break;
         }
     }
-
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
     public void Update(GameTime gameTime)
     {
         // Update the direction change timer
@@ -71,6 +84,14 @@ public class Stalfol : IEnemy, ICollideable
             ChangeDirection(); 
             directionChangeTimer = 0f; 
         }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
+        }
+
         sprite.Update(gameTime);
         // Update position based on velocity
         position += velocity;
@@ -114,7 +135,16 @@ public class Stalfol : IEnemy, ICollideable
         return "Enemy";
     }
     public Boolean isAlive() { return alive; }
-    public void takendamage() { alive = false; }
+    public void TakeDamage(string swordType) {
+        if (swordDamage.ContainsKey(swordType))
+        {
+            hp -= swordDamage[swordType];
+        }
+        if (hp <= 0)
+        {
+            alive = false;
+        }
+    }
 
-    public void attack() { }
+    public void Attack() { }
 }

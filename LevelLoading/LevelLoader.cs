@@ -9,8 +9,6 @@ namespace LegendOfZelda
 {
     internal class LevelLoader
     {
-
-        private List<string> fileNameList;
         private List<ICollideable> getEm;
         private List<ICollideable> getEm2;
         private String room;

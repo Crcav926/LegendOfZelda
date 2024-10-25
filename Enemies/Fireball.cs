@@ -9,14 +9,8 @@ public class Fireball
 {
     private Vector2 position;
     private Vector2 velocity;
-    private List<Rectangle> frames;
-    private int currentFrame = 0;    // Current frame of  fireball 
-    private float frameTime = 0.1f;  // Time to display..
-    private float frameTimer = 0f;   // Timer to track time passed for animation
     private float speed = 150f;
     public bool IsActive { get; private set; } = true;  // Track whether the fireball is active
-    // Try to make the fireball bigger and bigger 
-    private float scale = 3.0f;
     //private float growthRate = 0.02f;
     //private float maxScale = 5.0f;
     private ISprite sprite;

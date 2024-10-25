@@ -16,12 +16,15 @@ public class Wallmaster : IEnemy, ICollideable
     private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
     private Random random = new Random();
-    private float frameTime = 0.1f; // Duration of each frame in seconds 
-    private float frameTimer = 0f;  // Timer to track time since last frame change
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private ISprite sprite;
     private Boolean alive;
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
 
     public Wallmaster(Vector2 position)
     {
@@ -30,13 +33,28 @@ public class Wallmaster : IEnemy, ICollideable
         this.position = position;
         this.sprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
         alive = true;
+
+        hp = 3;
+        swordDamage = new Dictionary<string, int>
+        {
+            { "WOOD", 1 },
+            { "WHITE", 2 },
+            { "MAGIC", 3 }
+        };
+        canTakeDamage = true;
     }
     public void ChangeDirection() { }
 
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
+
     public void Update(GameTime gameTime)
     {
-
-        //????????????????????????
         // Update the jump timer
         jumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         // If the sprite is close enough to the target position, wait for the cooldown to set a new target position
@@ -55,6 +73,13 @@ public class Wallmaster : IEnemy, ICollideable
                 // Reset the timer for the next jump
                 jumpTimer = 0f;
             }
+        }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
         }
 
         // Move towards the target position smoothly
@@ -91,8 +116,18 @@ public class Wallmaster : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { }
+    public void TakeDamage(string swordType) {
+        if (swordDamage.ContainsKey(swordType))
+        {
+            hp -= swordDamage[swordType];
+        }
+        if (hp <= 0)
+        {
+            alive = false;
+        }
 
-    public void attack() { }
+    }
+
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
 }

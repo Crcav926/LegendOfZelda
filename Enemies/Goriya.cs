@@ -11,17 +11,9 @@ public class Goriya : IEnemy, ICollideable
     private float speed = 2f;          // Movement speed
     private Vector2 projectileOffset;    // Offset for throwing projectiles
     private List<Projectile> projectiles; // List to keep track of projectiles
-    private List<Rectangle> upFrames;    // Frames when facing up
-    private List<Rectangle> downFrames;  // Frames when facing down
-    private List<Rectangle> leftFrames;  // Frames when facing left
-    private List<Rectangle> rightFrames; // Frames when facing right
-    private List<Rectangle> projectileFrames; // List of rectangles for the projectile animation
     private Random random = new Random();
     private float throwCooldown = 2f;    // Time between throws
     private float throwTimer = 0f;       // Timer to track when to throw a projectile
-    private List<Rectangle> currentFrames; // Current frames for the current direction
-    private float frameTime = 0.1f;
-    private float frameTimer = 0f;
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
     private ISprite sprite;
@@ -29,15 +21,37 @@ public class Goriya : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private Boolean alive;
 
-    public Goriya(Vector2 Position)
-    {
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
 
+    public Goriya(Vector2 Position, string type)
+    {
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
         destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
         ChangeDirection();
+        swordDamage = new Dictionary<string, int>();
+
+        if (type == "Red")
+        {
+            swordDamage["WOOD"] = 1;
+            swordDamage["WHITE"] = 2;
+            swordDamage["MAGIC"] = 3;
+            hp = 3;
+        }
+        else if (type == "Blue")
+        {
+            swordDamage["WOOD"] = 1;
+            swordDamage["WHITE"] = 2;
+            swordDamage["MAGIC"] = 3;
+            hp = 5;
+        }
+        canTakeDamage = true;
     }
 
     //Change the direction of Goriya itself
@@ -70,6 +84,13 @@ public class Goriya : IEnemy, ICollideable
                 break;
         }
     }
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
 
     public void Update(GameTime gameTime)
     {
@@ -90,6 +111,13 @@ public class Goriya : IEnemy, ICollideable
             // Throw a projectile in the direction Goriya is facing
             ThrowProjectile();
             throwTimer = 0f; // Reset the throw timer
+        }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
         }
 
         // Update and remove inactive projectiles
@@ -162,11 +190,18 @@ public class Goriya : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() 
+    public void TakeDamage(string swordType) 
     {
-        alive = false;
+        if (swordDamage.ContainsKey(swordType))
+        {
+            hp -= swordDamage[swordType];
+        }
+        if (hp <= 0)
+        {
+            alive = false;
+        }
     }
 
-    public void attack() { }
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
 }

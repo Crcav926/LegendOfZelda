@@ -36,17 +36,13 @@ namespace LegendOfZelda
         public Block block;
         public Link LinkCharacter;
         private List<ILinkItem> inventory = new List<ILinkItem>();
-        private Boomerang boomerang;
         public List<ClassItems> items = new List<ClassItems>();
         public List<ClassItems> staticItems = new List<ClassItems>();
-        private ClassItems item1;
-        private ClassItems item2;
         public List<IEnemy> enemies = new List<IEnemy>();
         private List<ICollideable> blocks;
         private List<ICollideable> movers;
         private ISprite background;
         private ISprite walls;
-        private SpriteFont font;
         private IController controllerK;
 
         //For collisions
@@ -104,6 +100,7 @@ namespace LegendOfZelda
             // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
+
             // TODO: Make this fully within level loader. Not yet added b/c it would mess up a lot of commands and we don't have time to fix it rn
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             LinkCharacter = new Link();
@@ -128,6 +125,7 @@ namespace LegendOfZelda
             SoundEffectInstance modifier = mikuSong.CreateInstance();
             modifier.IsLooped = true;
             modifier.Play();
+
 
         }
 
