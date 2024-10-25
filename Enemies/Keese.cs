@@ -117,9 +117,10 @@ public class Keese : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void TakeDamage(string swordType)
+    public void TakeDamage(int damage)
     {
-        hp -= 1;
+        hp -= damage;
+
         if (hp <= 0)
         {
             alive = false;

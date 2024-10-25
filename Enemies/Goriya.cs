@@ -190,15 +190,17 @@ public class Goriya : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void TakeDamage(string swordType) 
+    public void TakeDamage(int damage)
     {
-        if (swordDamage.ContainsKey(swordType))
+        if (canTakeDamage)
         {
-            hp -= swordDamage[swordType];
-        }
-        if (hp <= 0)
-        {
-            alive = false;
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
         }
     }
 

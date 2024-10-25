@@ -71,6 +71,7 @@ public class Stalfol : IEnemy, ICollideable
         {
             canTakeDamage = false;
         }
+
     }
     public void Update(GameTime gameTime)
     {
@@ -84,8 +85,9 @@ public class Stalfol : IEnemy, ICollideable
             ChangeDirection(); 
             directionChangeTimer = 0f; 
         }
-
         timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+
+        //if we're invincible undo that
         if (timeElapsed > invincibilityTimer)
         {
             canTakeDamage = true;
@@ -135,16 +137,18 @@ public class Stalfol : IEnemy, ICollideable
         return "Enemy";
     }
     public Boolean isAlive() { return alive; }
-    public void TakeDamage(string swordType) {
-        if (swordDamage.ContainsKey(swordType))
+    public void TakeDamage(int damage)
+    {
+        if ( canTakeDamage)
         {
-            hp -= swordDamage[swordType];
-        }
-        if (hp <= 0)
-        {
-            alive = false;
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
         }
     }
-
     public void Attack() { }
 }

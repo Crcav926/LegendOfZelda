@@ -85,5 +85,11 @@ namespace LegendOfZelda
             exists = false;
         }
 
+
+        //not used for stationary items
+        public int getDamage()
+        {
+            return 1;
+        }
     }
 }

@@ -116,17 +116,20 @@ public class Wallmaster : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void TakeDamage(string swordType) {
-        if (swordDamage.ContainsKey(swordType))
+    public void TakeDamage(int damage)
+    {
+        if (canTakeDamage)
         {
-            hp -= swordDamage[swordType];
-        }
-        if (hp <= 0)
-        {
-            alive = false;
-        }
+            hp -= damage;
 
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
+        }
     }
+
 
     public void Attack() { }
     public Boolean isAlive() { return alive; }

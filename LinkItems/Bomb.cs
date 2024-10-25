@@ -97,7 +97,11 @@ namespace LegendOfZelda
                 return new Rectangle(0, 0, 0, 0);
             }
         }
-
+        public int getDamage()
+        {
+            // idk damage numbers right now
+            return 1;
+        }
         public String getCollisionType()
         {
             return "Item";

@@ -141,6 +141,7 @@ namespace LegendOfZelda
             if (currentHealth == 0)
             {
                 LevelLoader.Instance.Load("Room1.xml");
+                currentHealth = 10;
             }
         }
         public void invulnerable()

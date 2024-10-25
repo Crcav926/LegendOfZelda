@@ -15,5 +15,6 @@ namespace LegendOfZelda
         public void makeContact();
         public void Draw(SpriteBatch spriteBatch);
         public void Use(Vector2 newDirection, Vector2 newPosition);
+        public int getDamage();
     }
 }

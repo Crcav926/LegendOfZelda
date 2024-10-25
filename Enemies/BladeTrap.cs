@@ -66,7 +66,7 @@ public class BladeTrap : IEnemy, ICollideable
         return hitbox;
     }
 
-    public void TakeDamage(string swordType)
+    public void TakeDamage(int damage)
     {
         // Does nothing, Bladetraps can't take damage
     }

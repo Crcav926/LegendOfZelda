@@ -121,19 +121,19 @@ public class Aquamentus : IEnemy, ICollideable
         }
     }
 
-    public void TakeDamage(string swordType)
+    public void TakeDamage(int damage)
     {
-        if (swordDamage.ContainsKey(swordType))
+        if (canTakeDamage)
         {
-            hp -= swordDamage[swordType];
-        }
+            hp -= damage;
 
-        if (hp <= 0)
-        {
-            alive = false;
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
         }
     }
-
     public void Attack() { }
     public Boolean isAlive() { return alive; }
     public Rectangle getHitbox()

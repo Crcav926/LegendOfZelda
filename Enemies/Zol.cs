@@ -111,8 +111,10 @@ public class Zol : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void TakeDamage(string swordType) {
-        hp -= 1;
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+
         if (hp <= 0)
         {
             alive = false;
