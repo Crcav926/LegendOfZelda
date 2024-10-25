@@ -57,7 +57,7 @@ namespace LegendOfZelda.Collision
             if (collisionDictionary.TryGetValue(key, out Type commandType))
             {
                 // Reflection to instantiate the command and invoke its Execute method
-                MethodInfo executeMethod = commandType.GetMethod("Execute"); 
+                MethodInfo executeMethod = commandType.GetMethod("Execute");
                 if (executeMethod != null)
                 {
                     object commandInstance;
@@ -66,14 +66,15 @@ namespace LegendOfZelda.Collision
                     //b/c currently the first object is the one that responds
                     // this will definitely  need to be changed later
 
+                    // I think i need to change the how to select which command triggered
                     if ((o1 is Link && !(o2 is Door)) || (o1 is IEnemy && !(o2 is Link)) || o1 is IItems)
                     {
                         commandInstance = Activator.CreateInstance(commandType, o1);
-                    }else if(o1 is Link && o2 is Door)
+                    } else if ((o1 is Link && o2 is Door) || (o1 is Link && o2 is ClassItems))
                     {
-                        ICollideable[] parameters= { o1, o2 };
+                        ICollideable[] parameters = { o1, o2 };
                         commandInstance = Activator.CreateInstance(commandType, parameters);
-                    }else if(o1 is EnemyBlockBottom && o2 is Link)
+                    } else if ((o1 is EnemyBlockBottom && o2 is Link) )
                     {
                         commandInstance = Activator.CreateInstance(commandType, o2);
                     }
@@ -92,8 +93,8 @@ namespace LegendOfZelda.Collision
             }
             else
             {
-                Debug.WriteLine($"Couldn't Find {o1.GetType().Name} and {o2.GetType().Name} and {direction}");
-                Debug.WriteLine("No collision action found for the given types and direction.");
+               // Debug.WriteLine($"Couldn't Find {o1.GetType().Name} and {o2.GetType().Name} and {direction}");
+               // Debug.WriteLine("No collision action found for the given types and direction.");
             }
 
         }
@@ -152,6 +153,12 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Item", "Obstacle", "right", typeof(ItemObstacle));
             RegisterCollision("Item", "Obstacle", "top", typeof(ItemObstacle));
             RegisterCollision("Item", "Obstacle", "bottom", typeof(ItemObstacle));
+            
+            //when the player collides with static items add them to the their inventory
+            RegisterCollision("Player", "statItem", "left", typeof(PlayerStatItem));
+            RegisterCollision("Player", "statItem", "right", typeof(PlayerStatItem));
+            RegisterCollision("Player", "statItem", "top", typeof(PlayerStatItem));
+            RegisterCollision("Player", "statItem", "bottom", typeof(PlayerStatItem));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)

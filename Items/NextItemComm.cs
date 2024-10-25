@@ -18,16 +18,7 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            //right now this only cycles the static items
-            foreach (ClassItems item in myGame.staticItems)
-            {
-                int i = item.GetSprite();
-                i++;
-                if (i < maxIndex && i >= 0)
-                {
-                    item.SetSprite(i);
-                }
-            }
+            //this is no longer needed functionality
         }
     }
 }

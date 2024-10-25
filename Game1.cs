@@ -12,6 +12,8 @@ using LegendOfZelda.Collision;
 using System.Xml;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Audio;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda
 {
@@ -47,6 +49,10 @@ namespace LegendOfZelda
         detectionManager collisionDetector;
         CollisionHandler collHandler;
 
+        SoundMachine soundMachine = SoundMachine.Instance;
+        //for stationary items
+        IItems testItem;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -69,6 +75,10 @@ namespace LegendOfZelda
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
+
+
+            //temporary testing of items
+            testItem = new ClassItems(new Vector2(100,100), "OrangeRupee");
             
             base.Initialize();
         }
@@ -98,6 +108,25 @@ namespace LegendOfZelda
             LevelLoader.Instance.Load("Room1.xml");
             RoomObjectManager.Instance.addLink(LinkCharacter);
             RoomObjectManager.Instance.Update();
+
+            blocks = LevelLoader.Instance.getBlocks();
+            movers = LevelLoader.Instance.getMovers();
+
+            //I should probably be moving the sound loading to level loader.
+            SoundEffect attack = Content.Load<SoundEffect>("mikuAttack");
+            SoundEffect hurt = Content.Load<SoundEffect>("mikuHurt");
+            SoundEffect ha = Content.Load<SoundEffect>("mikuHa");
+            soundMachine.addSound("attack", attack);
+            soundMachine.addSound("hurt", hurt);
+            soundMachine.addSound("ha", ha);
+
+           
+            SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
+            SoundEffectInstance modifier = mikuSong.CreateInstance();
+            modifier.IsLooped = true;
+            modifier.Play();
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -155,6 +184,10 @@ namespace LegendOfZelda
             }
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
+
+            // test for static items
+            //testItem.Draw(_spriteBatch);
+
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
