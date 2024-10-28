@@ -33,74 +33,22 @@ namespace LegendOfZelda
             myGame = game;
             //keeps track of keys that were already pressed down to detect transition.
             alrPressed = new List<Keys>();
-
-
-            // set up the table which can be later moved to a content loader
-
-            ICommand c = new CommQuit(game);
-            ICommand a = new CommLinkMove(game, new Vector2(-1, 0));
-            ICommand d = new CommLinkMove(game, new Vector2(1, 0));
-            ICommand w = new CommLinkMove(game, new Vector2(0, -1));
-            ICommand s = new CommLinkMove(game, new Vector2(0, 1));
-            //ICommand throwBomb = new CommThrowBomb(game);
-            //ICommand throwFireball = new CommThrowFireball(game);
-            ICommand e = new CommLinkDamaged(game);
-            ICommand quit = new CommQuit(game);
-            ICommand reset = new CommReset(game);
-
-            RegisterCommand(Keys.D0, quit);
-            RegisterCommand(Keys.W, w);
-            RegisterCommand(Keys.S, s);
-            RegisterCommand(Keys.A, a);
-            RegisterCommand(Keys.D, d);
-            RegisterCommand(Keys.E, e);
-            RegisterCommand(Keys.D1, new CommThrowBoomerang(game));
-            RegisterCommand(Keys.D2, new CommShootArrow(game));
-            RegisterCommand(Keys.D3, new CommShootFire(game));
-            RegisterCommand(Keys.D4, new CommUseSword(game));
-            RegisterCommand(Keys.D5, new CommPlaceBomb(game));
-            RegisterCommand(Keys.Q, c);
-            RegisterCommand(Keys.U, new LastItemComm(game));
-            RegisterCommand(Keys.I, new NextItemComm(game));
-            RegisterCommand(Keys.R, reset);
-            RegisterCommand(Keys.Enter, new CommChangeRoom());
-
-            ICommand pSC = new PreviousSpriteCommand(game);
-            ICommand nSC = new NextSpriteCommand(game);
-            RegisterCommand(Keys.O, pSC);
-            RegisterCommand(Keys.P, nSC);
-
-
-            // set up held down table
-
-            ICommand left = new CommMoveHeldDown(game, new Vector2(-1, 0));
-            ICommand right = new CommMoveHeldDown(game, new Vector2(1, 0));
-            ICommand up = new CommMoveHeldDown(game, new Vector2(0, -1));
-            ICommand down = new CommMoveHeldDown(game, new Vector2(0, 1));
-
-            heldDownMappings.Add(Keys.A, left);
-            heldDownMappings.Add(Keys.D, right);
-            heldDownMappings.Add(Keys.W, up);
-            heldDownMappings.Add(Keys.S, down);
-
-            ICommand leftStop = new CommStopMoving(game, new Vector2(-1, 0));
-            ICommand rightStop = new CommStopMoving(game, new Vector2(1, 0));
-            ICommand upStop = new CommStopMoving(game, new Vector2(0, -1));
-            ICommand downStop = new CommStopMoving(game, new Vector2(0, 1));
-
-            releaseMappings.Add(Keys.A, leftStop);
-            releaseMappings.Add(Keys.D, rightStop);
-            releaseMappings.Add(Keys.W, upStop);
-            releaseMappings.Add(Keys.S, downStop);
-
-
-
-
-
         }
+        /*
+         * Repeated code for now to be able to call different maps we need to add to, I'm sure we could
+         * Find a way to consolidate
+         */
         public void RegisterCommand(Keys key, ICommand command)
         {
             controllerMappings.Add(key, command);
+        }
+        public void registerHeldDown(Keys key, ICommand command) 
+        {
+            heldDownMappings.Add(key, command);
+        }
+        public void registerRelease(Keys key, ICommand command)
+        {
+            releaseMappings.Add(key, command);
         }
 
         public void Update()

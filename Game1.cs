@@ -32,16 +32,13 @@ namespace LegendOfZelda
         public Texture2D Bossture;
         public Texture2D BackgroundTure;
         public Block block;
-        public Link LinkCharacter;
         private List<ILinkItem> inventory = new List<ILinkItem>();
-        public List<ClassItems> items = new List<ClassItems>();
-        public List<ClassItems> staticItems = new List<ClassItems>();
         public List<IEnemy> enemies = new List<IEnemy>();
         private List<ICollideable> blocks;
         private List<ICollideable> movers;
         private ISprite background;
         private ISprite walls;
-        private IController controllerK;
+        private KeyboardCont controllerK;
 
         //For collisions
         detectionManager collisionDetector;
@@ -78,25 +75,16 @@ namespace LegendOfZelda
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
             // font = Content.Load<SpriteFont>("font");
-            // Load the texture for the sprite sheet
-            itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
-            texture = Content.Load<Texture2D>("enemySpriteSheet");
-            Bossture = Content.Load<Texture2D>("bossSpriteSheet");
+            // TODO: Absorb into level loader
             BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
-            ItemSpriteFactory.Instance.LoadAllTextures(Content);
-            EnemySpriteFactory.Instance.LoadAllTextures(Content);
-            BlockSpriteFactory.Instance.LoadAllTextures(Content);
 
             // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
-            // TODO: Make this fully within level loader. Not yet added b/c it would mess up a lot of commands and we don't have time to fix it rn
-            LinkSpriteFactory.Instance.LoadAllTextures(Content);
-            LinkCharacter = new Link();
-
+            LevelLoader.Instance.LoadAllContent(Content);
+            LevelLoader.Instance.RegisterAllCommands(controllerK, this);
             LevelLoader.Instance.Load("Room1.xml");
-            RoomObjectManager.Instance.addLink(LinkCharacter);
             RoomObjectManager.Instance.Update();
         }
 
@@ -139,22 +127,19 @@ namespace LegendOfZelda
             // Temp fps check.
             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
             string fpsText = $"FPS: {frameRate:0.00}";
-                //
             var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
             _spriteBatch.Begin(transformMatrix: matrix);
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)
             {
                 block.Draw(_spriteBatch);
             }
+            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             foreach (ICollideable mover in LevelLoader.Instance.getMovers())
             {
                 mover.Draw(_spriteBatch);
             }
-            // Calls Link's Draw method
-            LinkCharacter.Draw(_spriteBatch);
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);

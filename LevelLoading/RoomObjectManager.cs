@@ -41,7 +41,6 @@ namespace LegendOfZelda
             if (movers != LevelLoader.Instance.getMovers())
             {
                 movers = LevelLoader.Instance.getMovers();
-                movers.Add(link);
                 foreach (ICollideable item in link.inventory)
                 {
                     movers.Add(item);

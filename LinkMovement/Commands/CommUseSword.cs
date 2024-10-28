@@ -10,15 +10,15 @@ namespace LegendOfZelda.LinkItems
 {
     internal class CommUseSword : ICommand
     {
-            Game1 myGame;
-            public CommUseSword(Game1 game)
+            Link LinkCharacter;
+            public CommUseSword(Link link)
             {
-                myGame = game;
+                LinkCharacter = link;
             }
             public void Execute()
             {
-                myGame.LinkCharacter.SwordAttack();
-                myGame.LinkCharacter.SwordAttack();
+                LinkCharacter.SwordAttack();
+                LinkCharacter.SwordAttack();
             }
     }
 }
