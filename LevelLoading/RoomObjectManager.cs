@@ -13,7 +13,7 @@ namespace LegendOfZelda
         private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
         //for any items on the ground
-        public List<ClassItems> staticItems = new List<ClassItems>();
+        public List<ICollideable> staticItems = new List<ICollideable>();
 
         public Link link;
         private string room;
@@ -36,9 +36,22 @@ namespace LegendOfZelda
         }
         public List<ICollideable> getStandStills()
         {
-            return blocks;
+            //This is super scuffed because sometimes (especially on start up) blocks is null.
+            List<ICollideable> standStills = new List<ICollideable>();
+            if (blocks != null)
+            {
+                foreach (ICollideable block in blocks)
+                {
+                    standStills.Add(block);
+                }
+            }
+            foreach (ICollideable item in staticItems)
+            {
+                standStills.Add(item);
+            }
+            return standStills;
         }
-        public List<ClassItems> getGroundItems()
+        public List<ICollideable> getGroundItems()
         {
             return staticItems;
         }

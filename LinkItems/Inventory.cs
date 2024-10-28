@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,19 @@ namespace LegendOfZelda.LinkItems
         {
             //add item to inventory
             items.Add(item);
+            Debug.WriteLine($"Current inventory is");
+            foreach (IItems item2 in items)
+            {
+                if (item2 is not ClassItems)
+                {
+                    Debug.WriteLine($"{item2.ToString()}");
+                }
+                else
+                {
+                    ClassItems item3 = (ClassItems)item2;
+                    Debug.WriteLine($"{item3.getItemType()}");
+                }
+            }
         }
 
         public void setMap(bool mapStatus)

@@ -4,14 +4,15 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LegendOfZelda.Command
 {
     class PlayerStatItem : ICommand
     {
         private readonly Link _link;
-        private IItems item;
-        public PlayerStatItem(Link link, IItems items)
+        private ClassItems item;
+        public PlayerStatItem(Link link, ClassItems items)
         {
             _link = link;
             item = items;
@@ -19,20 +20,24 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            // cast to access the getItemType
-            ClassItems statItem = (ClassItems)item;
+            Debug.WriteLine("Miku picked up an Item!");
+           
             //add the item to link's inventory and delete it off the screen
-            if (statItem.getItemType() == "key")
+            if (item.getItemType() == "key")
             {
                 _link.inventory.addKey();
             }
-            if (statItem.getItemType() == "map")
+            if (item.getItemType() == "map")
             {
                 _link.inventory.setMap(true);
             }
             //I'm still adding the keys to the inventory because they should probably show up in the HUD?
+            Debug.WriteLine($"Added {item.getItemType()} to inventory");
             _link.inventory.addItem(item);
+
+            //doing both to be safe
             item.exists = false;
+            RoomObjectManager.Instance.staticItems.Remove(item);
         }
     }
 }
