@@ -19,7 +19,6 @@ namespace LegendOfZelda
         private Vector2 itemPosition;
         private Rectangle destination;
 
-        ItemSpriteFactory itemSpriteFactory;
         ISprite itemSprite;
         Boolean collided = false;
         public bool exists { get; set; }
@@ -30,10 +29,8 @@ namespace LegendOfZelda
         public ClassItems(Vector2 pos, String _itemType)
         {
             itemPosition = pos;
-            itemSpriteFactory = ItemSpriteFactory.Instance;
             itemType = _itemType;
-            MethodInfo methodInfo = typeof(ItemSpriteFactory).GetMethod(itemType);
-            itemSprite = (ISprite)methodInfo?.Invoke(itemSpriteFactory, null);
+            itemSprite = ItemSpriteFactory.Instance.CreateFireSprite();
 
             Debug.WriteLine($"Sucessfully created {itemType}");
 
@@ -56,8 +53,10 @@ namespace LegendOfZelda
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
             if (exists)
             {
+                Debug.WriteLine("Hey buddy, I exist now");
                 itemSprite.Draw(spriteBatch, destination, Color.White);
             }
 

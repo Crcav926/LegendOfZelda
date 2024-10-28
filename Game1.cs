@@ -124,7 +124,7 @@ namespace LegendOfZelda
             modifier.Play();
 
             //temporary testing of items
-            testItem = new ClassItems(new Vector2(100, 100), "OrangeRupee");
+            testItem = new ClassItems(new Vector2(300, 300), "OrangeRupee");
         }
 
         protected override void Update(GameTime gameTime)
