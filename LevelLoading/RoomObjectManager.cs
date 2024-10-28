@@ -12,6 +12,9 @@ namespace LegendOfZelda
         private static RoomObjectManager instance = new RoomObjectManager();
         private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
+        //for any items on the ground
+        public List<ClassItems> staticItems = new List<ClassItems>();
+
         public Link link;
         private string room;
         public static RoomObjectManager Instance
@@ -34,6 +37,10 @@ namespace LegendOfZelda
         public List<ICollideable> getStandStills()
         {
             return blocks;
+        }
+        public List<ClassItems> getGroundItems()
+        {
+            return staticItems;
         }
         public void Update()
         {

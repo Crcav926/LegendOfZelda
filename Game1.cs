@@ -37,7 +37,7 @@ namespace LegendOfZelda
         public Link LinkCharacter;
         private List<ILinkItem> inventory = new List<ILinkItem>();
         public List<ClassItems> items = new List<ClassItems>();
-        public List<ClassItems> staticItems = new List<ClassItems>();
+        
         public List<IEnemy> enemies = new List<IEnemy>();
         private List<ICollideable> blocks;
         private List<ICollideable> movers;
@@ -50,8 +50,7 @@ namespace LegendOfZelda
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
-        //for stationary items
-        IItems testItem;
+        
 
         public Game1()
         {
@@ -123,8 +122,7 @@ namespace LegendOfZelda
             modifier.IsLooped = true;
             modifier.Play();
 
-            //temporary testing of items
-            testItem = new ClassItems(new Vector2(300, 300), "OrangeRupee");
+         
         }
 
         protected override void Update(GameTime gameTime)
@@ -183,8 +181,11 @@ namespace LegendOfZelda
             // Calls Link's Draw method
             LinkCharacter.Draw(_spriteBatch);
 
-            // test for static items
-            testItem.Draw(_spriteBatch);
+            //draw the dropped items
+            foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
+            {
+                statItem.Draw(_spriteBatch);
+            }
 
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();

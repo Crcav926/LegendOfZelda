@@ -30,7 +30,18 @@ namespace LegendOfZelda
         {
             itemPosition = pos;
             itemType = _itemType;
-            itemSprite = ItemSpriteFactory.Instance.CreateFireSprite();
+            
+            //itemSprite = ItemSpriteFactory.Instance.CreateFireSprite();
+            MethodInfo methodInfo = typeof(ItemSpriteFactory).GetMethod(itemType);
+            if (methodInfo != null)
+            {
+                itemSprite = (ISprite)methodInfo.Invoke(ItemSpriteFactory.Instance, null);
+            }
+            else
+            {
+                Debug.WriteLine("Failed to create sprite");
+            }
+          
 
             Debug.WriteLine($"Sucessfully created {itemType}");
 
@@ -48,7 +59,6 @@ namespace LegendOfZelda
                 exists = false;
             }
 
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -56,7 +66,7 @@ namespace LegendOfZelda
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
             if (exists)
             {
-                Debug.WriteLine("Hey buddy, I exist now");
+                //Debug.WriteLine("Draw in ClassItems called");
                 itemSprite.Draw(spriteBatch, destination, Color.White);
             }
 

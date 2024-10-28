@@ -152,6 +152,7 @@ public class Wallmaster : IEnemy, ICollideable
             //for now I'm using Rupees to test drops
             droppedItem = new ClassItems(position, "OrangeRupee");
             HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
         }
     }
 }

@@ -103,11 +103,6 @@ public class Keese : IEnemy, ICollideable
 
             sprite.Draw(s, destinationRectangle, Color.White);
         }
-        if (HasDroppedItem)
-        {
-            //this should only be called when the droppedItem has been assigned a value...
-            droppedItem.Draw(s);
-        }
     }
     public Rectangle getHitbox()
     {
@@ -144,8 +139,9 @@ public class Keese : IEnemy, ICollideable
         {
             Debug.WriteLine("DropItem called: Item drop initialized");
             //for now I'm using Rupees to test drops
-            droppedItem = new ClassItems(position, "CreateFireSprite");
+            droppedItem = new ClassItems(position, "OrangeRupee");
             HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
         }
     }
 }
