@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class Keese : IEnemy, ICollideable
@@ -18,6 +19,9 @@ public class Keese : IEnemy, ICollideable
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
 
     public Keese(Vector2 position)
     {
@@ -99,6 +103,11 @@ public class Keese : IEnemy, ICollideable
 
             sprite.Draw(s, destinationRectangle, Color.White);
         }
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Rectangle getHitbox()
     {
@@ -128,4 +137,15 @@ public class Keese : IEnemy, ICollideable
     }
     public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            droppedItem = new ClassItems(position, "CreateFireSprite");
+            HasDroppedItem = true;
+        }
+    }
 }

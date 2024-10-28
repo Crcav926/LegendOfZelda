@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
@@ -27,6 +28,9 @@ public class Aquamentus : IEnemy, ICollideable
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
 
     public Aquamentus(Vector2 position)
     {
@@ -119,6 +123,13 @@ public class Aquamentus : IEnemy, ICollideable
             fireball.Draw(spriteBatch);
         }
         }
+
+        //draw the item drops
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(spriteBatch);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -152,5 +163,15 @@ public class Aquamentus : IEnemy, ICollideable
     public String getCollisionType()
     {
         return "Enemy";
+    }
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            droppedItem = new ClassItems(position, "OrangeRupee");
+            HasDroppedItem = true;
+        }
     }
 }

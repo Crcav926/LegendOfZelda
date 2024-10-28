@@ -76,9 +76,6 @@ namespace LegendOfZelda
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
 
-
-            //temporary testing of items
-            testItem = new ClassItems(new Vector2(100,100), "OrangeRupee");
             
             base.Initialize();
         }
@@ -126,7 +123,8 @@ namespace LegendOfZelda
             modifier.IsLooped = true;
             modifier.Play();
 
-
+            //temporary testing of items
+            testItem = new ClassItems(new Vector2(100, 100), "OrangeRupee");
         }
 
         protected override void Update(GameTime gameTime)
@@ -186,7 +184,7 @@ namespace LegendOfZelda
             LinkCharacter.Draw(_spriteBatch);
 
             // test for static items
-            //testItem.Draw(_spriteBatch);
+            testItem.Draw(_spriteBatch);
 
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();

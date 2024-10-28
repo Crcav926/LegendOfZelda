@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+// I don't think this command is in use anymore.
 namespace LegendOfZelda.Command
 {
     class EnemyTakeDamage : ICommand

@@ -15,5 +15,7 @@ public interface IEnemy
     void TakeDamage(int damage);
     Boolean isAlive();
     void Attack();
+
+    void DropItem();
 }
 

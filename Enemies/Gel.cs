@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class Gel : IEnemy, ICollideable
@@ -25,6 +26,9 @@ public class Gel : IEnemy, ICollideable
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
 
     public Gel(Vector2 Position)
     {
@@ -99,6 +103,11 @@ public class Gel : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);
         sprite.Draw(s, destinationRectangle, Color.White);
 
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Vector2 getPosition()
     {
@@ -133,4 +142,15 @@ public class Gel : IEnemy, ICollideable
 
     public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            droppedItem = new ClassItems(position, "OrangeRupee");
+            HasDroppedItem = true;
+        }
+    }
 }

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
 using LegendOfZelda;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
@@ -26,6 +27,9 @@ public class Goriya : IEnemy, ICollideable
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
 
     public Goriya(Vector2 Position, string type)
     {
@@ -172,6 +176,12 @@ public class Goriya : IEnemy, ICollideable
                 projectile.Draw(s);
             }
         }
+
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Rectangle getHitbox()
     {
@@ -206,4 +216,15 @@ public class Goriya : IEnemy, ICollideable
 
     public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            droppedItem = new ClassItems(position, "OrangeRupee");
+            HasDroppedItem = true;
+        }
+    }
 }

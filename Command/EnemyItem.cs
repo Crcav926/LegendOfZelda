@@ -22,8 +22,8 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             int damage = item.getDamage();
-            Debug.WriteLine($"{damage} damage done to {_enemy.GetType().Name}");
             _enemy.TakeDamage(damage);
+            _enemy.DropItem();
         }
     }
 }

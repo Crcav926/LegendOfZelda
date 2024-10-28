@@ -35,6 +35,7 @@ namespace LegendOfZelda
             MethodInfo methodInfo = typeof(ItemSpriteFactory).GetMethod(itemType);
             itemSprite = (ISprite)methodInfo?.Invoke(itemSpriteFactory, null);
 
+            Debug.WriteLine($"Sucessfully created {itemType}");
 
             exists = true;
         }
@@ -78,18 +79,21 @@ namespace LegendOfZelda
             return "statItem";
         }
 
-        //unused methods
-        public void Use(Vector2 v, Vector2 v2) { }
-
-        public void makeContact() {
+        //call this when link picks up the item
+        public void makeContact()
+        {
             exists = false;
         }
 
+        //unused methods
+        public void Use(Vector2 v, Vector2 v2) { }
+
 
         //not used for stationary items
+        //but if enemies do run into them they shouldn't do damage.
         public int getDamage()
         {
-            return 1;
+            return 0;
         }
     }
 }
