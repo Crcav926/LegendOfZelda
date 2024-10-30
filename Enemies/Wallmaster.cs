@@ -150,7 +150,8 @@ public class Wallmaster : IEnemy, ICollideable
         {
             Debug.WriteLine("DropItem called: Item drop initialized");
             //for now I'm using Rupees to test drops
-            droppedItem = new ClassItems(position, "OrangeRupee");
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName(typeof(Zol));
+            droppedItem = new ClassItems(position, ItemTobeDroped);
             HasDroppedItem = true;
             RoomObjectManager.Instance.staticItems.Add(droppedItem);
         }
