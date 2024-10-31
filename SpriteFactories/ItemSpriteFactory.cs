@@ -151,6 +151,30 @@ namespace LegendOfZelda
                 // Single orange Rupee
                 new Rectangle(72, 0, 8, 16)
             }
+        },{ "Heart", new List<Rectangle>()
+            {
+                // Single orange Rupee
+                new Rectangle(0, 0, 8, 8)
+            }
+        }
+            ,{ "Clock", new List<Rectangle>()
+            {
+                // Single orange Rupee
+                new Rectangle(60, 0, 8, 16)
+            }
+        }
+            ,{ "BlueRupee", new List<Rectangle>()
+            {
+                // Single orange Rupee
+                new Rectangle(72, 17, 8, 16)
+            }
+}
+            ,{ "Unknown", new List<Rectangle>()
+            {
+                // Single orange Rupee
+                new Rectangle(50, 0, 8, 16),
+                new Rectangle(58, 0, 8, 16),
+            }
 }
     };
 
