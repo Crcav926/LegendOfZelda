@@ -138,13 +138,12 @@ namespace LegendOfZelda
                 // Animation Frames
                 new Rectangle(125, 35, 10, 18),
             }
-            },
-            { "Explosion", new List<Rectangle>()
+        },{ "Explosion", new List<Rectangle>()
                 {
                 // Animation Frames
                 new Rectangle(135, 35, 16, 18),
                 new Rectangle(152, 35, 16, 18),
-                new Rectangle(169, 35, 16, 18),
+                new Rectangle(169, 35, 16, 18)
             }
         },{ "OrangeRupee", new List<Rectangle>()
             {
