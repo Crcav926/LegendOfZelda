@@ -17,6 +17,7 @@ namespace LegendOfZelda
 
         public Link link;
         private string room;
+        private int DeathCounter = 0;
         public static RoomObjectManager Instance
         {
             get
@@ -24,6 +25,65 @@ namespace LegendOfZelda
                 return instance;
             }
         }
+        private Dictionary<int, string> ClassB = new Dictionary<int, string>()
+        {
+            {1, "Bomb"},
+            {2, "OrangeRupee"},
+            {3, "Clock"},
+            {4, "OrangeRupee"},
+            {5, "Heart"},
+            {6, "Bomb"},
+            {7, "OrangeRupee"},
+            {8, "Bomb"},
+            {9, "Heart"},
+            {0, "Heart"},
+        };
+
+        private Dictionary<int, string> ClassC = new Dictionary<int, string>()
+        {
+            {1, "OrangeRupee"},
+            {2, "Heart"},
+            {3, "OrangeRupee"},
+            {4, "BlueRupee"},
+            {5, "Heart"},
+            {6, "Clock"},
+            {7, "OrangeRupee"},
+            {8, "OrangeRupee"},
+            {9, "OrangeRupee"},
+            {0, "BlueRupee"},
+        };
+
+        private Dictionary<int, string> ClassD = new Dictionary<int, string>()
+        {
+            {1, "Heart"},
+            {2, "Unknown"},
+            {3, "OrangeRupee"},
+            {4, "Heart"},
+            {5, "Unknown"},
+            {6, "Heart"},
+            {7, "Heart"},
+            {8, "Heart"},
+            {9, "OrangeRupee"},
+            {0, "Heart"},
+        };
+
+        public String GetItemName (Type Etype)
+        {
+            String result;
+            if (Etype == typeof(Goriya))
+            {
+                result = ClassB[DeathCounter];
+            } else if (Etype == typeof(Stalfol) || Etype == typeof(Zol) || Etype == typeof(Wallmaster))
+            {
+                result = ClassC[DeathCounter];
+            } else
+            {
+                result = ClassD[DeathCounter];
+            }
+            return result;
+        }
+
+
         public RoomObjectManager() 
         {
             movers = LevelLoader.Instance.getMovers();
@@ -79,6 +139,13 @@ namespace LegendOfZelda
                     IEnemy enemy1 = (IEnemy)movers[i];
                     if (!enemy1.isAlive())
                     {
+                        if (DeathCounter < 9)
+                        {
+                            DeathCounter++;
+                        } else
+                        {
+                            DeathCounter  = 0;
+                        }
                         movers.Remove(movers[i]);
                     }
                 }
