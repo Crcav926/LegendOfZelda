@@ -22,17 +22,19 @@ namespace LegendOfZelda.LinkItems
         {
             //add item to inventory
             items.Add(item);
-            Debug.WriteLine($"Current inventory is");
+            
+            //Prints inventory for debugging
+            //Debug.WriteLine($"Current inventory is");
             foreach (IItems item2 in items)
             {
                 if (item2 is not ClassItems)
                 {
-                    Debug.WriteLine($"{item2.ToString()}");
+                    //Debug.WriteLine($"{item2.ToString()}");
                 }
                 else
                 {
                     ClassItems item3 = (ClassItems)item2;
-                    Debug.WriteLine($"{item3.getItemType()}");
+                   // Debug.WriteLine($"{item3.getItemType()}");
                 }
             }
         }

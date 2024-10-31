@@ -142,6 +142,7 @@ namespace LegendOfZelda
             {
                 LevelLoader.Instance.Load("Room1.xml");
                 currentHealth = 10;
+                RoomObjectManager.Instance.staticItems.Clear();
             }
         }
         public void invulnerable()

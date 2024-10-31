@@ -20,7 +20,7 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            Debug.WriteLine("Miku picked up an Item!");
+            //Debug.WriteLine("Miku picked up an Item!");
            
             //add the item to link's inventory and delete it off the screen
             if (item.getItemType() == "key")
@@ -32,7 +32,7 @@ namespace LegendOfZelda.Command
                 _link.inventory.setMap(true);
             }
             //I'm still adding the keys to the inventory because they should probably show up in the HUD?
-            Debug.WriteLine($"Added {item.getItemType()} to inventory");
+            //Debug.WriteLine($"Added {item.getItemType()} to inventory");
             _link.inventory.addItem(item);
 
             //doing both to be safe

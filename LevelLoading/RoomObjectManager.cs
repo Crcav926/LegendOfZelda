@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,9 @@ namespace LegendOfZelda
 
         public Link link;
         private string room;
+        //for the drop table
         private int DeathCounter = 0;
+
         public static RoomObjectManager Instance
         {
             get
@@ -25,62 +28,14 @@ namespace LegendOfZelda
                 return instance;
             }
         }
-        private Dictionary<int, string> ClassB = new Dictionary<int, string>()
-        {
-            {1, "Bomb"},
-            {2, "OrangeRupee"},
-            {3, "Clock"},
-            {4, "OrangeRupee"},
-            {5, "Heart"},
-            {6, "Bomb"},
-            {7, "OrangeRupee"},
-            {8, "Bomb"},
-            {9, "Heart"},
-            {0, "Heart"},
-        };
 
-        private Dictionary<int, string> ClassC = new Dictionary<int, string>()
+        //we keep this here because the death counter is kept here.
+        //Also because since this is a singleton its easier to access this method.
+        public String GetItemName (char c)
         {
-            {1, "OrangeRupee"},
-            {2, "Heart"},
-            {3, "OrangeRupee"},
-            {4, "BlueRupee"},
-            {5, "Heart"},
-            {6, "Clock"},
-            {7, "OrangeRupee"},
-            {8, "OrangeRupee"},
-            {9, "OrangeRupee"},
-            {0, "BlueRupee"},
-        };
-
-        private Dictionary<int, string> ClassD = new Dictionary<int, string>()
-        {
-            {1, "Heart"},
-            {2, "Unknown"},
-            {3, "OrangeRupee"},
-            {4, "Heart"},
-            {5, "Unknown"},
-            {6, "Heart"},
-            {7, "Heart"},
-            {8, "Heart"},
-            {9, "OrangeRupee"},
-            {0, "Heart"},
-        };
-
-        public String GetItemName (Type Etype)
-        {
-            String result;
-            if (Etype == typeof(Goriya))
-            {
-                result = ClassB[DeathCounter];
-            } else if (Etype == typeof(Stalfol) || Etype == typeof(Zol) || Etype == typeof(Wallmaster))
-            {
-                result = ClassC[DeathCounter];
-            } else
-            {
-                result = ClassD[DeathCounter];
-            }
-            return result;
+            (int, char) key = (DeathCounter, c);
+            Debug.WriteLine($"Death counter is {DeathCounter}");
+            return DropDictionary.GetDropName(key);
         }
 
 

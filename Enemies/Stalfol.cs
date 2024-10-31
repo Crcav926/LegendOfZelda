@@ -24,7 +24,7 @@ public class Stalfol : IEnemy, ICollideable
     private int hp;
     private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
-    private double invincibilityTimer = 1.5;
+    private double invincibilityTimer = .5;
     private double timeElapsed = 0;
 
     public bool HasDroppedItem { get; set; } = false;
@@ -168,7 +168,7 @@ public class Stalfol : IEnemy, ICollideable
         {
             Debug.WriteLine("DropItem called: Item drop initialized");
             //for now I'm using Rupees to test drops
-            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName(typeof(Zol));
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
             droppedItem = new ClassItems(position, ItemTobeDroped);
             HasDroppedItem = true;
             RoomObjectManager.Instance.staticItems.Add(droppedItem);

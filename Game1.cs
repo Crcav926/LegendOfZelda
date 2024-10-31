@@ -167,7 +167,7 @@ namespace LegendOfZelda
                 //
             var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
-            _spriteBatch.Begin(transformMatrix: matrix);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)

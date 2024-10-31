@@ -151,31 +151,152 @@ namespace LegendOfZelda
                 // Single orange Rupee
                 new Rectangle(72, 0, 8, 16)
             }
+        },{ "NoItem", new List<Rectangle>()
+            {
+                new Rectangle(0, 64, 1, 1)
+            }
+        },{ "bow", new List<Rectangle>()
+            {
+                new Rectangle(144, 0, 9, 16)
+            }
+        },{ "HeartRed", new List<Rectangle>()
+            {
+                new Rectangle(0, 0, 7, 7)
+            }
+        },{ "HalfHeart", new List<Rectangle>()
+            {
+                new Rectangle(8, 0, 7, 7)
+            }
+        },{ "EmptyHeart", new List<Rectangle>()
+            {
+                new Rectangle(16, 0, 7, 7)
+            }
+        },{ "HeartBlue", new List<Rectangle>()
+            {
+                new Rectangle(0, 8, 7, 7)
+            }
+        },{ "HeartBig", new List<Rectangle>()
+            {
+                new Rectangle(25, 0, 13, 13)
+            }
+        },{ "Fairy", new List<Rectangle>()
+            {
+                new Rectangle(40, 0, 8, 16),
+                new Rectangle(48, 0, 8, 16)
+            }
+        },{ "Clock", new List<Rectangle>()
+            {
+                new Rectangle(58, 0, 11, 16)
+            }
+        },{ "JewelBlue", new List<Rectangle>()
+            {
+                new Rectangle(72, 16, 8, 16)
+            }
+        },{ "PotionRed", new List<Rectangle>()
+            {
+                new Rectangle(80, 0, 8, 16)
+            }
+        },{ "PotionBlue", new List<Rectangle>()
+            {
+                new Rectangle(80, 16, 8, 16)
+            }
+        },{ "Scroll", new List<Rectangle>()
+            {
+                new Rectangle(87, 0, 8, 16)
+            }
+        },{ "ScrollBlue", new List<Rectangle>()
+            {
+                new Rectangle(88, 16, 8, 16)
+            }
+        },{ "Meat", new List<Rectangle>()
+            {
+                new Rectangle(88, 0, 8, 16)
+            }
+        },{ "swordBlue", new List<Rectangle>()
+            {
+                new Rectangle(104, 16, 8, 16)
+            }
+        },{ "swordFancy", new List<Rectangle>()
+            {
+                new Rectangle(112, 0, 8, 16)
+            }
+        },{ "shield", new List<Rectangle>()
+            {
+                new Rectangle(120, 0, 8, 16)
+            }
+        },{ "boomerang", new List<Rectangle>()
+            {
+                new Rectangle(128, 0, 8, 16)
+            }
+        },{ "boomerangBlue", new List<Rectangle>()
+            {
+                new Rectangle(128, 16, 8, 16)
+            }
+        },{ "Candle", new List<Rectangle>()
+            {
+                new Rectangle(160, 0, 8, 16)
+            }
+        },{ "CandleBlue", new List<Rectangle>()
+            {
+                new Rectangle(160, 16, 8, 16)
+            }
+        },{ "Ring", new List<Rectangle>()
+            {
+                new Rectangle(169, 0, 8, 16)
+            }
+        },{ "RingBlue", new List<Rectangle>() {
+                new Rectangle(169, 16, 8, 16)
+            }
+        },{ "RingIsh", new List<Rectangle>()
+            {
+                new Rectangle(176, 0, 8, 16)
+            }
+        },{ "Chain", new List<Rectangle>()
+            {
+                new Rectangle(185, 0, 8, 16)
+            }
+        },{ "Logs", new List<Rectangle>()
+            {
+                new Rectangle(193, 0, 16, 16)
+            }
+        },{ "Ladder", new List<Rectangle>()
+            {
+                new Rectangle(208, 0, 16, 16)
+            }
+        },{ "Wand", new List<Rectangle>()
+            {
+                new Rectangle(225, 0, 7, 16)
+            }
+        },{ "HealthPack", new List<Rectangle>()
+            {
+                new Rectangle(232, 0, 8, 16)
+            }
+        },{ "Key", new List<Rectangle>()
+            {
+                new Rectangle(240, 0, 8, 16)
+            }
+        },{ "Key2", new List<Rectangle>()
+            {
+            new Rectangle(248, 0, 8, 16)
+            }
+        }, {"Compass", new List<Rectangle>()
+            {
+            new Rectangle(258, 0, 16, 16)
+            }
+        },{"Triforce", new List<Rectangle>()
+            {
+            new Rectangle(275, 1, 16, 16)
+            }
+        },{"TriforceBlue", new List<Rectangle>()
+            {
+            new Rectangle(275, 18, 16, 16)
+            }
         },{ "Heart", new List<Rectangle>()
             {
                 // Single orange Rupee
                 new Rectangle(0, 0, 8, 8)
             }
         }
-            ,{ "Clock", new List<Rectangle>()
-            {
-                // Single orange Rupee
-                new Rectangle(60, 0, 8, 16)
-            }
-        }
-            ,{ "BlueRupee", new List<Rectangle>()
-            {
-                // Single orange Rupee
-                new Rectangle(72, 17, 8, 16)
-            }
-}
-            ,{ "Unknown", new List<Rectangle>()
-            {
-                // Single orange Rupee
-                new Rectangle(50, 0, 8, 16),
-                new Rectangle(58, 0, 8, 16),
-            }
-}
     };
 
 
@@ -245,11 +366,184 @@ namespace LegendOfZelda
         {
             return new Sprite(itemSpriteFinal, SpriteFrames["Fire"]);
         }
+
+        //static items
         public ISprite OrangeRupee()
         {
-            Debug.WriteLine("Generated Orange Rupee Sprite");
+            //Debug.WriteLine("Generated Orange Rupee Sprite");
             return new Sprite(itemSpriteFinal, SpriteFrames["OrangeRupee"]);
         }
+
+        public ISprite noItem()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["NoItem"]);
+        }
+
+        public ISprite Bow()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["bow"]);
+        }
+
+        public ISprite HeartRed()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["HeartRed"]);
+        }
+
+        public ISprite HalfHeart()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["HalfHeart"]);
+        }
+
+        public ISprite EmptyHeart()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["EmptyHeart"]);
+        }
+
+        public ISprite HeartBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["HeartBlue"]);
+        }
+
+        public ISprite HeartBig()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["HeartBig"]);
+        }
+
+        public ISprite Fairy()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Fairy"]);
+        }
+
+        public ISprite Clock()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Clock"]);
+        }
+
+        public ISprite BlueRupee()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["JewelBlue"]);
+        }
+
+        public ISprite PotionRed()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["PotionRed"]);
+        }
+
+        public ISprite PotionBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["PotionBlue"]);
+        }
+
+        public ISprite Map()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Scroll"]);
+        }
+
+        public ISprite MapBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["ScrollBlue"]);
+        }
+
+        public ISprite Meat()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Meat"]);
+        }
+
+        public ISprite SwordBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["swordBlue"]);
+        }
+
+        public ISprite SwordFancy()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["swordFancy"]);
+        }
+
+        public ISprite Shield()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["shield"]);
+        }
+
+        public ISprite BoomerangBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["boomerangBlue"]);
+        }
+
+        public ISprite Candle()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Candle"]);
+        }
+
+        public ISprite CandleBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["CandleBlue"]);
+        }
+
+        public ISprite Ring()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Ring"]);
+        }
+
+        public ISprite RingBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["RingBlue"]);
+        }
+
+        public ISprite RingIsh()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["RingIsh"]);
+        }
+
+        public ISprite Chain()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Chain"]);
+        }
+
+        public ISprite Logs()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Logs"]);
+        }
+
+        public ISprite Ladder()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Ladder"]);
+        }
+
+        public ISprite Wand()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Wand"]);
+        }
+
+        public ISprite HealthPack()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["HealthPack"]);
+        }
+
+        public ISprite Key()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Key"]);
+        }
+
+        public ISprite Key2()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Key2"]);
+        }
+
+        public ISprite Compass()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Compass"]);
+        }
+
+        public ISprite Triforce()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["Triforce"]);
+        }
+
+        public ISprite TriforceBlue()
+        {
+            return new Sprite(itemSpriteFinal, SpriteFrames["TriforceBlue"]);
+        }
+
     }
 
 }
