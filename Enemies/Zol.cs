@@ -24,7 +24,7 @@ public class Zol : IEnemy, ICollideable
     private Boolean alive;
     private int hp;
     public Boolean canTakeDamage { get; private set; }
-    private double invincibilityTimer = .5;
+    private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
 
     public bool HasDroppedItem { get; set; } = false;
