@@ -44,9 +44,14 @@ namespace LegendOfZelda
         detectionManager collisionDetector;
         CollisionHandler collHandler;
 
+        private Matrix matrix = Matrix.CreateScale(Constants.ScaleX,Constants.ScaleY,1.0f);
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferHeight = Constants.ScreenHeight,
+                PreferredBackBufferWidth = Constants.ScreenWidth
+            };
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             _graphics.PreferredBackBufferWidth = Constants.ScreenWidth;

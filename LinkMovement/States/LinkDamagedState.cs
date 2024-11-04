@@ -69,7 +69,7 @@ namespace LegendOfZelda.LinkMovement
         public void Draw(SpriteBatch spriteBatch)
         {
             Color color = link.damageAnimation.GetCurrentColor();
-            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
+            Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.LinkWidth, Constants.LinkHeight);
             link.linkSprite.Draw(spriteBatch, destination, color);
         }
     }

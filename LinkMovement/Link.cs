@@ -15,8 +15,8 @@ namespace LegendOfZelda
         public Vector2 direction;
         public LinkSpriteFactory spriteFactory;
         // Magic numbers to be used later
-        private int maxHealth = 10;
-        private int currentHealth = 10;
+        private int maxHealth = Constants.LinkStartingHealth;
+        private int currentHealth = Constants.LinkStartingHealth;
         public IItems boomerang;
         public IItems arrow;
         public IItems fire;
@@ -34,6 +34,7 @@ namespace LegendOfZelda
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
+            //NOTE: I haven't fixed this one since idk where we want her to start. - TJ
             position = new Vector2(370, 330); // Fix magic num later
             direction = new Vector2(0, 1); // Fix magic num later
             // Sets link to be Idle initially
@@ -141,7 +142,7 @@ namespace LegendOfZelda
         {
             //for now assume that Link is 16*4 by 16*4
             //put data in the the hitbox
-            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y+ Constants.MikuHeight / 2, Constants.MikuWidth, Constants.MikuHeight/2);
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y+ Constants.LinkHeight / 2, Constants.LinkWidth, Constants.LinkHeight/2);
             //Debug.WriteLine("Hitbox of Link retrieved!");
             
             //Debug.WriteLine($"Link Hitbox:{position.X} {position.Y} {tempDimension} {tempDimension}");
@@ -160,6 +161,7 @@ namespace LegendOfZelda
             fire.Draw(spriteBatch);
             sword.Draw(spriteBatch);
             bomb.Draw(spriteBatch);
+            destination = new Rectangle((int)position.X, (int)position.Y, Constants.LinkWidth, Constants.LinkHeight);
             linkState.Draw(spriteBatch);
         }
     }

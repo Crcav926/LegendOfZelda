@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,9 +14,9 @@ namespace LegendOfZelda
         private Vector2 direction;
         private Vector2 origin;
         // Adjustable speed vector
-        private Vector2 offSet;
+        private Vector2 offSet = new Vector2(Constants.SwordOffsetX, Constants.SwordOffsetY);
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        private Vector2 maxDistance = new Vector2(Constants.SwordMaxDistanceX, Constants.SwordMaxDistanceY);
         private Rectangle destination;
         private ItemSpriteFactory itemSpriteFactory;
         ISprite swordSprite;
@@ -56,7 +56,7 @@ namespace LegendOfZelda
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 40, 40);
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timeOnScreen)
+            if (timeElapsed > Constants.SwordTimeOnScreen)
             {
                 exists = false;
                 timeElapsed = 0;

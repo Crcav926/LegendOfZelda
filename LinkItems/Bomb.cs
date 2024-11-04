@@ -15,7 +15,7 @@ namespace LegendOfZelda
         private Vector2 itemPosition;
         private Vector2 direction;
         // Adjustable speed vector
-        private Vector2 offSet = new Vector2(50, 50);
+        private Vector2 offSet = new Vector2(Constants.BombOffsetX, Constants.BombOffsetY);
         private Rectangle destination;
         private ItemSpriteFactory itemSpriteFactory;
         public bool exists { get; set; }

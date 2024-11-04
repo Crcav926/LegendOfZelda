@@ -9,7 +9,6 @@ public class Fireball
 {
     private Vector2 position;
     private Vector2 velocity;
-    private float speed = 150f;
     public bool IsActive { get; private set; } = true;  // Track whether the fireball is active
     //private float growthRate = 0.02f;
     //private float maxScale = 5.0f;
@@ -18,7 +17,7 @@ public class Fireball
     public Fireball(Vector2 startPosition, Vector2 direction)
     {
         this.position = startPosition;
-        this.velocity = direction * speed;
+        this.velocity = direction * Constants.FireballSpeed;
         sprite = EnemySpriteFactory.Instance.CreateFireBallSprite();
     }
 
@@ -38,7 +37,7 @@ public class Fireball
         //}
 
         // Mark fireball as inactive if it goes off-screen
-        if (position.X < 0 || position.X > 800 || position.Y < 0 || position.Y > 600)
+        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
         {
             IsActive = false;
         }
@@ -52,8 +51,8 @@ public class Fireball
             Rectangle destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                24,
-                48
+                Constants.FireballWidth,
+                Constants.FireballHeight
             );
 
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
 using LegendOfZelda;
+using System.Reflection.Metadata;
 
 namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
@@ -12,7 +13,7 @@ public class Goriya : IEnemy, ICollideable
     private Vector2 projectileOffset;    // Offset for throwing projectiles
     private List<Projectile> projectiles; // List to keep track of projectiles
     private Random random = new Random();
-    private float throwCooldown = 2f;    // Time between throws
+    //private float throwCooldown = 2f;    // Time between throws
     private float throwTimer = 0f;       // Timer to track when to throw a projectile
     private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
@@ -27,7 +28,7 @@ public class Goriya : IEnemy, ICollideable
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, Constants.GoriyaWidth, Constants.GoriyaHeight);
         alive = true;
         ChangeDirection();
     }
@@ -41,23 +42,23 @@ public class Goriya : IEnemy, ICollideable
         switch (direction)
         {
             case 0: // Up
-                velocity = new Vector2(0, -speed);
-                projectileOffset = new Vector2(0, -10);
+                velocity = new Vector2(0, -Constants.GoriyaSpeed);
+                projectileOffset = new Vector2(0, -Constants.GoriyaProjectileOffset);
                 sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();  // Switch to up-facing frames
                 break;
             case 1: // Down
-                velocity = new Vector2(0, speed);
-                projectileOffset = new Vector2(0, 10);
+                velocity = new Vector2(0, Constants.GoriyaSpeed);
+                projectileOffset = new Vector2(0, Constants.GoriyaProjectileOffset);
                 sprite = EnemySpriteFactory.Instance.CreateDownGoriyaSprite();
                 break;
             case 2: // Left
-                velocity = new Vector2(-speed, 0);
-                projectileOffset = new Vector2(-10, 0);
+                velocity = new Vector2(-Constants.GoriyaSpeed, 0);
+                projectileOffset = new Vector2(-Constants.GoriyaProjectileOffset, 0);
                 sprite = EnemySpriteFactory.Instance.CreateLeftGoriyaSprite();   // Switch to left-facing frames
                 break;
             case 3: // Right
-                velocity = new Vector2(speed, 0);
-                projectileOffset = new Vector2(10, 0);
+                velocity = new Vector2(Constants.GoriyaSpeed, 0);
+                projectileOffset = new Vector2(Constants.GoriyaProjectileOffset, 0);
                 sprite = EnemySpriteFactory.Instance.CreateRightGoriyaSprite();  // Switch to right-facing frames
                 break;
         }
@@ -68,7 +69,7 @@ public class Goriya : IEnemy, ICollideable
         // Update the timer for direction change
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (directionChangeTimer >= directionChangeCooldown)
+        if (directionChangeTimer >= Constants.GoriyaChangeDirectionCooldown)
         {
             ChangeDirection();  // Choose a new random direction
             directionChangeTimer = 0f;  // Reset the direction change timer
@@ -77,7 +78,7 @@ public class Goriya : IEnemy, ICollideable
         // Update the timer for throwing projectiles
         throwTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (throwTimer >= throwCooldown)
+        if (throwTimer >= Constants.GoriyaThrowCooldown)
         {
             // Throw a projectile in the direction Goriya is facing
             ThrowProjectile();
@@ -97,12 +98,12 @@ public class Goriya : IEnemy, ICollideable
         position += velocity;
 
         // Check if Goriya hits the screen edges and reflect direction
-        if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
+        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reflect on the X axis
         }
 
-        if (position.Y <= 0 || position.Y >= 600 - destinationRectangle.Height)
+        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
@@ -127,7 +128,7 @@ public class Goriya : IEnemy, ICollideable
         // Use the current position for the destination rectangle
         if (alive)
         {
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GoriyaWidth, Constants.GoriyaHeight);
 
             sprite.Draw(s, destinationRectangle, Color.White);
             // Draw all the projectiles
@@ -143,7 +144,7 @@ public class Goriya : IEnemy, ICollideable
         //put data in the the hitbox
         if (alive)
         {
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            hitbox = destinationRectangle;
         }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");

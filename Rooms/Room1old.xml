@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
-    <Location>100 88</Location>
+    <Location>33 33</Location>
 </Item>
 <Item>
     <ObjectType>Wall</ObjectType>
@@ -74,83 +74,83 @@
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>350 264</Location>
+    <Location>113 97</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>400 264</Location>
+    <Location>129 97</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>250 308</Location>
+    <Location>81 113</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>350 308</Location>
+    <Location>113 113</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>400 308</Location>
+    <Location>129 113</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>500 308</Location>
+    <Location>161 113</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>250 352</Location>
+    <Location>81 129</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>300 352</Location>
+    <Location>97 129</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>350 352</Location>
+    <Location>113 129</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>400 352</Location>
+    <Location>129 129</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>450 352</Location>
+    <Location>145 129</Location>
 </Item>
 <Item>
     <ObjectType>Background</ObjectType>
     <ObjectName>Dirt</ObjectName>
-    <Location>500 352</Location>
+    <Location>161 129</Location>
 </Item>
 <!--Note that we may need a way to distinguish types of doors. I'll keep the names as they are now, but the XML file shouldn't store what sprite is needed.-->
 <!--Basically this should just say an Up door exists, not whether its locked or open.-->
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>UpDoorLocked</ObjectName>
-    <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>Room4.xml</Room>
+    <Location>113 0</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>LeftDoorOpen</ObjectName>
-    <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room2.xml</Room>
+    <Location>0 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorOpen</ObjectName>
-    <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room3.xml</Room>
+    <Location>225 73</Location>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorOpen</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
+    <Location>113 145</Location>
 </Item>
 </root>

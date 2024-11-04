@@ -26,7 +26,7 @@ public class Stalfol : IEnemy, ICollideable
         this.position = Position;
         sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();
         ChangeDirection();
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
         alive = true;
     }
 
@@ -38,16 +38,16 @@ public class Stalfol : IEnemy, ICollideable
         switch (direction)
         {
             case 0:
-                velocity = new Vector2(0, -speed);
+                velocity = new Vector2(0, -Constants.StalfosSpeed);
                 break;
             case 1:
-                velocity = new Vector2(0, speed);
+                velocity = new Vector2(0, Constants.StalfosSpeed);
                 break;
             case 2:
-                velocity = new Vector2(-speed, 0);
+                velocity = new Vector2(-Constants.StalfosSpeed, 0);
                 break;
             case 3:
-                velocity = new Vector2(speed, 0);
+                velocity = new Vector2(Constants.StalfosSpeed, 0);
                 break;
         }
     }
@@ -58,7 +58,7 @@ public class Stalfol : IEnemy, ICollideable
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         // If it's time to change direction
-        if (directionChangeTimer >= directionChangeCooldown)
+        if (directionChangeTimer >= Constants.StalfosChangeDirectionCooldown)
         {
             // Choose a new random direction and reset the timer
             ChangeDirection(); 
@@ -69,12 +69,12 @@ public class Stalfol : IEnemy, ICollideable
         position += velocity;
         //angle need caculate
         //if the skull hits the screen edges and reflect its direction?????
-        if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
+        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reflect on the X axis
         }
 
-        if (position.Y <= 0 || position.Y >= 600 - destinationRectangle.Height)
+        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
@@ -85,7 +85,7 @@ public class Stalfol : IEnemy, ICollideable
         if (alive)
         {
             // Use the current position for the destination rectangle, and size it appropriately
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 40, 40);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
             sprite.Draw(s, destinationRectangle, Color.White);
         }
     }
@@ -95,7 +95,7 @@ public class Stalfol : IEnemy, ICollideable
         //put data in the the hitbox
         if (alive)
         {
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            hitbox = destinationRectangle;
         }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");

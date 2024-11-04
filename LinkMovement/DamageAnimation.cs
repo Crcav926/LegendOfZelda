@@ -27,10 +27,10 @@ namespace LegendOfZelda.LinkMovement
             // Initializations
             isDamaged = false;
             // How many times it cycles through the colors.
-            maxCycles = 6;
+            maxCycles = Constants.LinkMaxDamageCycles;
             timeElapsed = 0;
             // Time between each color frame change.
-            colorChangeInterval = 0.05;
+            colorChangeInterval = Constants.LinkColorChangeInterval;
         }
 
         public void StartDamageEffect()

@@ -14,6 +14,10 @@ namespace LegendOfZelda
         private Vector2 origin;
         // Adjustable Distance vector
         private Vector2 maxDistance;
+        // Adjustable speed vector
+        private Vector2 speed = new Vector2(Constants.BoomerangSpeedX, Constants.BoomerangSpeedY);
+        // Adjustable Distance vector
+        private Vector2 maxDistance = new Vector2(Constants.BoomerangMaxDistanceX, Constants.BoomerangMaxDistanceY);
         private Rectangle destination;
         public bool exists { get; set; }
         ItemSpriteFactory itemSpriteFactory;

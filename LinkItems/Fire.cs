@@ -14,8 +14,10 @@ namespace LegendOfZelda
         private Vector2 itemPosition;
         private Vector2 direction;
         private Vector2 origin;
+        // Adjustable speed vector
+        private Vector2 speed = new Vector2(Constants.FireSpeedX, Constants.FireSpeedY);
         // Adjustable Distance vector
-        private Vector2 maxDistance;
+        private Vector2 maxDistance = new Vector2(Constants.FireMaxDistanceX, Constants.FireMaxDistanceY);
         private Rectangle destination;
         public bool exists { get; set; }
         private ItemSpriteFactory itemSpriteFactory;

@@ -21,10 +21,10 @@ namespace LegendOfZelda
         public Door(Vector2 position, String doorType, String room, Vector2 newPos) 
         {
             this.position = position;
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 102, 88);
             sprite = BlockSpriteFactory.Instance.CreateSprite(doorType);
             this.room = room;
             this.newPos = newPos;
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.DoorWidth, Constants.DoorHeight);
         }
         public Rectangle getHitbox()
         {
