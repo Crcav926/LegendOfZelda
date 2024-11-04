@@ -10,7 +10,7 @@ namespace LegendOfZelda
     public class Arrow : IItems, ICollideable
     {
         private bool isLingering;
-        private double lingerTime = .5;
+        private double lingerTime = .25;
         double timeElapsed = 0;
         private Vector2 itemPosition;
         private Vector2 direction;

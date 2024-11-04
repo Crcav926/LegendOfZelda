@@ -129,7 +129,7 @@ namespace LegendOfZelda
             string fpsText = $"FPS: {frameRate:0.00}";
             var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
-            _spriteBatch.Begin(transformMatrix: matrix);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)
             {

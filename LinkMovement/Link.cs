@@ -17,7 +17,7 @@ namespace LegendOfZelda
         // Magic numbers to be used later
         private int maxHealth = 10;
         private int currentHealth = 10;
-        public IItems boomerang;
+        public Boomerang boomerang;
         public IItems arrow;
         public IItems fire;
         public IItems sword;

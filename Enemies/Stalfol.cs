@@ -26,7 +26,6 @@ public class Stalfol : IEnemy, ICollideable
         this.position = Position;
         sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();
         ChangeDirection();
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
     }
 

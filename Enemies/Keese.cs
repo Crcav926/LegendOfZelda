@@ -21,7 +21,7 @@ public class Keese : IEnemy, ICollideable
     public Vector2 position { get; set; }
     public Keese(Vector2 position)
     {
-        // Set the initial target position (I dont know so I randomlzie it here
+        // Set the initial target position (I dont know so I randomize it here
         this.position = position;
         targetPosition = position;
         velocity = new Vector2(
