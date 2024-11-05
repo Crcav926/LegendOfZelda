@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class Stalfol : IEnemy, ICollideable
@@ -20,6 +21,14 @@ public class Stalfol : IEnemy, ICollideable
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private Boolean alive;
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
 
     public Stalfol(Vector2 Position)
     {
@@ -27,6 +36,15 @@ public class Stalfol : IEnemy, ICollideable
         sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();
         ChangeDirection();
         alive = true;
+
+        hp = 2;
+        swordDamage = new Dictionary<string, int>
+        {
+            { "WOOD", 1 },
+            { "WHITE", 2 },
+            { "MAGIC", 2 }
+        };
+        canTakeDamage = true;
     }
 
     public void ChangeDirection()
@@ -50,7 +68,14 @@ public class Stalfol : IEnemy, ICollideable
                 break;
         }
     }
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
 
+    }
     public void Update(GameTime gameTime)
     {
         // Update the direction change timer
@@ -63,6 +88,15 @@ public class Stalfol : IEnemy, ICollideable
             ChangeDirection(); 
             directionChangeTimer = 0f; 
         }
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+
+        //if we're invincible undo that
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
+        }
+
         sprite.Update(gameTime);
         // Update position based on velocity
         position += velocity;
@@ -87,6 +121,11 @@ public class Stalfol : IEnemy, ICollideable
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 40, 40);
             sprite.Draw(s, destinationRectangle, Color.White);
         }
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Rectangle getHitbox()
     {
@@ -106,7 +145,32 @@ public class Stalfol : IEnemy, ICollideable
         return "Enemy";
     }
     public Boolean isAlive() { return alive; }
-    public void takendamage() { alive = false; }
+    public void TakeDamage(int damage)
+    {
+        if ( canTakeDamage)
+        {
+            Debug.WriteLine($"{damage} damage done to {this.GetType().Name}");
+            hp -= damage;
 
-    public void attack() { }
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
+        }
+    }
+    public void Attack() { }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+            droppedItem = new ClassItems(position, ItemTobeDroped);
+            HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+        }
+    }
 }

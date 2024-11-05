@@ -30,7 +30,8 @@ namespace LegendOfZelda.Command
                 LevelLoader.Instance.Load(roomName);
                 link.position = door.getNewPosition();
             }
-
+            //lemme just clear the dropped items too...
+            RoomObjectManager.Instance.staticItems.Clear();
         }
     }
 }

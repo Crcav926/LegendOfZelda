@@ -12,6 +12,8 @@ using LegendOfZelda.Collision;
 using System.Xml;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Audio;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda
 {
@@ -33,6 +35,8 @@ namespace LegendOfZelda
         public Texture2D BackgroundTure;
         public Block block;
         private List<ILinkItem> inventory = new List<ILinkItem>();
+        public List<ClassItems> items = new List<ClassItems>();
+        
         public List<IEnemy> enemies = new List<IEnemy>();
         private List<ICollideable> blocks;
         private List<ICollideable> movers;
@@ -43,6 +47,9 @@ namespace LegendOfZelda
         //For collisions
         detectionManager collisionDetector;
         CollisionHandler collHandler;
+
+        SoundMachine soundMachine = SoundMachine.Instance;
+        
 
         public Game1()
         {
@@ -66,6 +73,7 @@ namespace LegendOfZelda
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
+
             
             base.Initialize();
         }
@@ -86,6 +94,25 @@ namespace LegendOfZelda
             LevelLoader.Instance.RegisterAllCommands(controllerK, this);
             LevelLoader.Instance.Load("Room1.xml");
             RoomObjectManager.Instance.Update();
+
+            blocks = LevelLoader.Instance.getBlocks();
+            movers = LevelLoader.Instance.getMovers();
+
+            //I should probably be moving the sound loading to level loader.
+            SoundEffect attack = Content.Load<SoundEffect>("mikuAttack");
+            SoundEffect hurt = Content.Load<SoundEffect>("mikuHurt");
+            SoundEffect ha = Content.Load<SoundEffect>("mikuHa");
+            soundMachine.addSound("attack", attack);
+            soundMachine.addSound("hurt", hurt);
+            soundMachine.addSound("ha", ha);
+
+           
+            SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
+            SoundEffectInstance modifier = mikuSong.CreateInstance();
+            modifier.IsLooped = true;
+            modifier.Play();
+
+         
         }
 
         protected override void Update(GameTime gameTime)
@@ -140,6 +167,13 @@ namespace LegendOfZelda
             {
                 mover.Draw(_spriteBatch);
             }
+
+            //draw the dropped items
+            foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
+            {
+                statItem.Draw(_spriteBatch);
+            }
+
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);

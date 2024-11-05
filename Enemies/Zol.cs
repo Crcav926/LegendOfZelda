@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 // Should have the same movement as Gel
 namespace LegendOfZelda;
@@ -21,6 +22,14 @@ public class Zol : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private ISprite sprite;
     private Boolean alive;
+    private int hp;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
+
     public Zol(Vector2 position)
     {
         this.position = position;
@@ -28,10 +37,19 @@ public class Zol : IEnemy, ICollideable
         targetPosition = position;
         sprite = EnemySpriteFactory.Instance.CreateZolSprite();
         alive = true;
+        hp = 1;
+        canTakeDamage = true;
     }
     public void ChangeDirection()
     {
 
+    }
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
     }
     public void Update(GameTime gameTime)
     {
@@ -55,6 +73,13 @@ public class Zol : IEnemy, ICollideable
             }
         }
 
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
+        }
+
         // Move towards the target position smoothly
         Vector2 direction = targetPosition - position;
 
@@ -75,6 +100,12 @@ public class Zol : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
 
         sprite.Draw(s, destinationRectangle, Color.White);
+
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Rectangle getHitbox()
     {
@@ -89,8 +120,29 @@ public class Zol : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { }
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
 
-    public void attack() { }
+        if (hp <= 0)
+        {
+            alive = false;
+        }
+    }
+
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+            droppedItem = new ClassItems(position, ItemTobeDroped);
+            HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+        }
+    }
 }

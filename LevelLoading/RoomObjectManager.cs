@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,14 @@ namespace LegendOfZelda
         private static RoomObjectManager instance = new RoomObjectManager();
         private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
+        //for any items on the ground
+        public List<ICollideable> staticItems = new List<ICollideable>();
+
         public Link link;
         private string room;
+        //for the drop table
+        private int DeathCounter = 0;
+
         public static RoomObjectManager Instance
         {
             get
@@ -21,6 +28,17 @@ namespace LegendOfZelda
                 return instance;
             }
         }
+
+        //we keep this here because the death counter is kept here.
+        //Also because since this is a singleton its easier to access this method.
+        public String GetItemName (char c)
+        {
+            (int, char) key = (DeathCounter, c);
+            Debug.WriteLine($"Death counter is {DeathCounter}");
+            return DropDictionary.GetDropName(key);
+        }
+
+
         public RoomObjectManager() 
         {
             movers = LevelLoader.Instance.getMovers();
@@ -33,7 +51,24 @@ namespace LegendOfZelda
         }
         public List<ICollideable> getStandStills()
         {
-            return blocks;
+            //This is super scuffed because sometimes (especially on start up) blocks is null.
+            List<ICollideable> standStills = new List<ICollideable>();
+            if (blocks != null)
+            {
+                foreach (ICollideable block in blocks)
+                {
+                    standStills.Add(block);
+                }
+            }
+            foreach (ICollideable item in staticItems)
+            {
+                standStills.Add(item);
+            }
+            return standStills;
+        }
+        public List<ICollideable> getGroundItems()
+        {
+            return staticItems;
         }
         public void Update()
         {
@@ -43,7 +78,7 @@ namespace LegendOfZelda
                 movers = LevelLoader.Instance.getMovers();
                 foreach (ICollideable item in link.inventory)
                 {
-                    movers.Add(item);
+                    movers.Add((ICollideable)item);
                 }
             }
             if (blocks != LevelLoader.Instance.getBlocks())
@@ -58,6 +93,13 @@ namespace LegendOfZelda
                     IEnemy enemy1 = (IEnemy)movers[i];
                     if (!enemy1.isAlive())
                     {
+                        if (DeathCounter < 9)
+                        {
+                            DeathCounter++;
+                        } else
+                        {
+                            DeathCounter  = 0;
+                        }
                         movers.Remove(movers[i]);
                     }
                 }

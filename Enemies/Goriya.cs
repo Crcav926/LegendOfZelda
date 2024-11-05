@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
 using LegendOfZelda;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
@@ -21,15 +22,40 @@ public class Goriya : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private Boolean alive;
 
-    public Goriya(Vector2 Position)
-    {
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = .5;
+    private double timeElapsed = 0;
 
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
+
+    public Goriya(Vector2 Position, string type)
+    {
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
         destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
         ChangeDirection();
+        swordDamage = new Dictionary<string, int>();
+
+        if (type == "Red")
+        {
+            swordDamage["WOOD"] = 1;
+            swordDamage["WHITE"] = 2;
+            swordDamage["MAGIC"] = 3;
+            hp = 3;
+        }
+        else if (type == "Blue")
+        {
+            swordDamage["WOOD"] = 1;
+            swordDamage["WHITE"] = 2;
+            swordDamage["MAGIC"] = 3;
+            hp = 5;
+        }
+        canTakeDamage = true;
     }
 
     //Change the direction of Goriya itself
@@ -62,6 +88,13 @@ public class Goriya : IEnemy, ICollideable
                 break;
         }
     }
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
 
     public void Update(GameTime gameTime)
     {
@@ -82,6 +115,13 @@ public class Goriya : IEnemy, ICollideable
             // Throw a projectile in the direction Goriya is facing
             ThrowProjectile();
             throwTimer = 0f; // Reset the throw timer
+        }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
         }
 
         // Update and remove inactive projectiles
@@ -136,6 +176,12 @@ public class Goriya : IEnemy, ICollideable
                 projectile.Draw(s);
             }
         }
+
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Rectangle getHitbox()
     {
@@ -154,11 +200,33 @@ public class Goriya : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() 
+    public void TakeDamage(int damage)
     {
-        alive = false;
+        if (canTakeDamage)
+        {
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
+        }
     }
 
-    public void attack() { }
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
+            droppedItem = new ClassItems(position, ItemTobeDroped);
+            HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+        }
+    }
 }

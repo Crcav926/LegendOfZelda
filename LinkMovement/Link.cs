@@ -1,8 +1,12 @@
-﻿using LegendOfZelda.LinkMovement;
+﻿using LegendOfZelda.LinkItems;
+using LegendOfZelda.LinkMovement;
+using LegendOfZelda.Sounds;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using System.Timers;
 
 namespace LegendOfZelda
@@ -25,12 +29,15 @@ namespace LegendOfZelda
         public DamageAnimation damageAnimation;
         //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
-        public List<ICollideable> inventory = new List<ICollideable>();
+        //I'm pulling this out for now
+        //public List<ICollideable> inventory = new List<ICollideable>();
         public Boolean canTakeDamage { get; private set; }
         private double invincibilityTimer = 1.5;
         private double timeElapsed = 0;
 
+        public Inventory inventory =new Inventory();
 
+        private SoundMachine soundMachine = SoundMachine.Instance;
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
@@ -47,11 +54,13 @@ namespace LegendOfZelda
             fire = new Fire(direction, position);
             sword = new Sword(direction, position);
             bomb = new Bomb(direction, position);
-            inventory.Add((ICollideable)boomerang);
-            inventory.Add((ICollideable)arrow);
-            inventory.Add((ICollideable)fire);
-            inventory.Add((ICollideable)sword);
-            inventory.Add((ICollideable)bomb);
+            
+            //temporary access to all items
+            inventory.addItem(boomerang);
+            inventory.addItem(arrow);
+            inventory.addItem(fire);
+            inventory.addItem(sword);
+            inventory.addItem(bomb);
 
             //this allows me to get the sprite into for the hitbox.
             hitInfo = (Sprite)linkSprite;
@@ -78,6 +87,7 @@ namespace LegendOfZelda
         {
             if (canTakeDamage)
             {
+                soundMachine.GetSound("hurt").Play();
                 linkState.TakeDamage();
                 currentHealth -= 1;
             }
@@ -85,22 +95,27 @@ namespace LegendOfZelda
 
         public void BoomerangAttack()
         {
+            soundMachine.GetSound("ha").Play();
             linkState.BoomerangAttack();
         }
         public void SwordAttack() 
-        { 
+        {
+            soundMachine.GetSound("ha").Play();
             linkState.SwordAttack();
         }
         public void FireAttack() 
-        { 
+        {
+            soundMachine.GetSound("attack").Play();
             linkState.FireAttack();
         }
         public void ArrowAttack()
         {
+            soundMachine.GetSound("ha").Play();
             linkState.ArrowAttack();
         }
         public void BombAttack()
         {
+            soundMachine.GetSound("attack").Play();
             linkState.BombAttack();
         }
         public void Update(GameTime gameTime)
@@ -128,6 +143,7 @@ namespace LegendOfZelda
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
                 LevelLoader.Instance.Load("Room1.xml");
                 currentHealth = 10;
+                RoomObjectManager.Instance.staticItems.Clear();
             }
         }
         public void invulnerable()

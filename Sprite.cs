@@ -4,6 +4,7 @@ using ObjectManagementExamples;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using System.Diagnostics;
 
 
 namespace LegendOfZelda
@@ -27,6 +28,7 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color)
         {
+            //Debug.WriteLine("Called the Sprite .draw method");
             spriteBatch.Draw(texture, destinationRectangle, framesList[currentFrame], color);
         }
 
