@@ -150,23 +150,18 @@ namespace LegendOfZelda
             new Rectangle(1, 11, 16, 16),
             new Rectangle(1, 11, 16, 16),
             new Rectangle(1, 11, 16, 16),
-            new Rectangle(1, 11, 16, 16),
-            new Rectangle(1, 11, 16, 16),
             //gray
             new Rectangle(126, 224, 16, 16),
             new Rectangle(126, 224, 16, 16),
             new Rectangle(126, 224, 16, 16),
             new Rectangle(126, 224, 16, 16),
-            new Rectangle(126, 224, 16, 16),
-            new Rectangle(126, 224, 16, 16),
-            new Rectangle(126, 224, 16, 16),
-            new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
             //explode
             new Rectangle(143, 224, 16, 16),
-            new Rectangle(143, 224, 16, 16),
             new Rectangle(160, 224, 16, 16),
-            new Rectangle(160, 224, 16, 16),
-            new Rectangle(177, 224, 16, 16),
             new Rectangle(177, 224, 16, 16),
             //we'll start at 3 rotations
         };
