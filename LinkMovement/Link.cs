@@ -16,7 +16,9 @@ namespace LegendOfZelda
         public LinkSpriteFactory spriteFactory;
         // Magic numbers to be used later
         private int maxHealth = 10;
-        private int currentHealth = 10;
+        //NOTE: this shouldn't need to be public, but CommLinkMove can move when at 0 health
+        //once we remove that dependency it can be made private again.
+        public int currentHealth = 3;
         public Boomerang boomerang;
         public IItems arrow;
         public IItems fire;
@@ -81,6 +83,11 @@ namespace LegendOfZelda
                 linkState.TakeDamage();
                 currentHealth -= 1;
             }
+            //in case link gets put to negative hp
+            if (currentHealth <= 0)
+            {
+                linkState.Death();
+            }
         }
 
         public void BoomerangAttack()
@@ -126,8 +133,8 @@ namespace LegendOfZelda
             if (currentHealth == 0)
             {
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
-                LevelLoader.Instance.Load("Room1.xml");
-                currentHealth = 10;
+                LevelLoader.Instance.Load("RoomDeath.xml");
+                currentHealth = 0;
             }
         }
         public void invulnerable()

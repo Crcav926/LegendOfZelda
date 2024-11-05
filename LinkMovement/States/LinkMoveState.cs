@@ -78,5 +78,10 @@ namespace LegendOfZelda
             Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
             link.linkSprite.Draw(spriteBatch, destination, color);
         }
+
+        public void Death()
+        {
+            link.linkState = new LinkDeathState(link);
+        }
     }
 }

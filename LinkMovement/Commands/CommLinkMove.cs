@@ -19,8 +19,12 @@ namespace LegendOfZelda.LinkMovement
         }
         public void Execute()
         {
-            this.link.setState(new LinkMoveState(this.link));
-            this.link.Move(linkDirection);
+            //TODO: remove this, get this check out of CommLinkMove
+            if(this.link.currentHealth != 0)
+            {
+                this.link.setState(new LinkMoveState(this.link));
+                this.link.Move(linkDirection);
+            }
         }
     }
 }
