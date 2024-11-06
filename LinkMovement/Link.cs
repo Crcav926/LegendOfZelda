@@ -15,10 +15,11 @@ namespace LegendOfZelda
         public Vector2 direction;
         public LinkSpriteFactory spriteFactory;
         // Magic numbers to be used later
-        private int maxHealth = 10;
+        //private int maxHealth = 10;
         //NOTE: this shouldn't need to be public, but CommLinkMove can move when at 0 health
         //once we remove that dependency it can be made private again.
-        public int currentHealth = 3;
+        //if link isn't reloaded this should work to put miku's health at max when we first load the game
+        public int currentHealth = Constants.MikuStartingHealth;
         public Boomerang boomerang;
         public IItems arrow;
         public IItems fire;
@@ -29,15 +30,15 @@ namespace LegendOfZelda
         public Sprite hitInfo;
         public List<ICollideable> inventory = new List<ICollideable>();
         public Boolean canTakeDamage { get; private set; }
-        private double invincibilityTimer = 1.5;
+        //private double invincibilityTimer = 1.5;
         private double timeElapsed = 0;
 
 
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
-            position = new Vector2(370, 330); // Fix magic num later
-            direction = new Vector2(0, 1); // Fix magic num later
+            position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
+            direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
@@ -125,7 +126,7 @@ namespace LegendOfZelda
             bomb.Update(gameTime);
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > invincibilityTimer)
+            if (timeElapsed > Constants.MikuInvincibilityTimer)
             {
                 canTakeDamage = true;
                 timeElapsed = 0;

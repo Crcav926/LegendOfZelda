@@ -14,7 +14,7 @@ namespace LegendOfZelda
         private Link link;
         Vector2 newDirection;
         private string name = "Move";
-        private Vector2 speed = new Vector2(2, 2);
+        private Vector2 speed = new Vector2(Constants.MikuSpeedX, Constants.MikuSpeedY);
         public LinkMoveState(Link linkCharacter)
         {
             this.link = linkCharacter;

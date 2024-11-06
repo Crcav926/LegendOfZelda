@@ -15,9 +15,17 @@ namespace LegendOfZelda
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
         public const float ScaleY = (float)ScreenHeight / OriginalHeight;
-        // Miku size
+        // Miku 
         public const int MikuHeight = 40;
         public const int MikuWidth = 40;
+        public const float MikuSpeedX = 2f;
+        public const float MikuSpeedY = 2f;
+        public const int MikuMaxDamageCycles = 6;
+        public const double MikuColorChangeInterval = 0.05;
+        public const int MikuStartingHealth = 10;
+        public const double MikuInvincibilityTimer = 1.5;
+        public const int MikuStartingPositionX = 370;
+        public const int MikuStartingPositionY = 330;
         // Standard size
         public const int StandardHeight = 16;
         public const int StandardWidth = 16;
@@ -33,17 +41,6 @@ namespace LegendOfZelda
         //also not sure if this should be 102; i'm just putting in the magic numbers we have.
         public const int DoorWidth = 102;
         public const int DoorHeight = 88;
-        // Boomerang
-        public const int BoomerangSpeed = 10;
-        public const int BoomerangWidth = 24;
-        public const int BoomerangHeight = 32;
-        public static readonly Vector2 BoomerangMaxDistance = new Vector2(150, 150);
-        public const float BoomerangTimePerFrame = .05f;
-        // Arrow
-        public const int ArrowSpeed = 3;
-        public static readonly Vector2 ArrowMaxDistance = new Vector2(150, 150);
-        // Bomb
-        public const double ExplosionFrameDuration = .5;
         // Aquamentus
         public const int AquamentusHeight = 80;
         public const int AquamentusWidth = 80;
@@ -123,5 +120,36 @@ namespace LegendOfZelda
         public const int ZolWidth = 60;
         public const int ZolHitboxHeight = 60;
         public const int ZolHitboxWidth = 60;
+        // Arrows
+        public const float ArrowLingerTime = .25f;
+        public const int ArrowWidth = 20;
+        public const int ArrowHeight = 20;
+        public const int ArrowSpeed = 3;
+        public static readonly Vector2 ArrowMaxDistance = new Vector2(150, 150);
+        // Bombs
+        public const double BombStillTime = 2;
+        public const double BombLingerTime = .5;
+        public const float BombOffsetX = 50;
+        public const float BombOffsetY = 50;
+        public const double ExplosionFrameDuration = .5;
+        // Boomerang
+        public const int BoomerangSpeed = 10;
+        public const int BoomerangWidth = 24;
+        public const int BoomerangHeight = 32;
+        public static readonly Vector2 BoomerangMaxDistance = new Vector2(150, 150);
+        public const float BoomerangTimePerFrame = .05f;
+        // Fire
+        //maybe we'll need more here, but this is the only magic number in the file.
+        public const double FireLingerTime = 1;
+        // Sword
+        public const double SwordTimeOnScreen = 0.30;
+        public const float SwordOffsetX = 35f;
+        public const float SwordOffsetY = 35f;
+        //these values go unused, but if we need the sword distance vector again they're here.
+        public const float SwordMaxDistanceX = 150f;
+        public const float SwordMaxDistanceY = 150f;
+        //big ol square sword
+        public const int SwordWidth = 40;
+        public const int SwordHeight = 40;
     }
 }

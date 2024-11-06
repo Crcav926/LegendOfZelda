@@ -9,13 +9,13 @@ namespace LegendOfZelda
     public class Bomb : IItems, ICollideable
     {
         private bool isLingering;
-        double bombStillTime = 2;
+        //double bombStillTime = 2;
         double timeElapsed = 0;
-        double lingerTime = 0.5;
+        //double lingerTime = 0.5;
         private Vector2 itemPosition;
         private Vector2 direction;
         // Adjustable speed vector
-        private Vector2 offSet = new Vector2(50, 50);
+        private Vector2 offSet = new Vector2(Constants.BombOffsetX, Constants.BombOffsetY);
         private Rectangle destination;
         private ItemSpriteFactory itemSpriteFactory;
         public bool exists { get; set; }
@@ -52,7 +52,7 @@ namespace LegendOfZelda
             explosionSprite.Update(gameTime);
             if (!isLingering)
             {
-                if (timeElapsed > bombStillTime)
+                if (timeElapsed > Constants.BombStillTime)
                 {
                     isLingering = true ;
                     timeElapsed = 0;
@@ -61,7 +61,7 @@ namespace LegendOfZelda
 
             if (isLingering)
             {
-                if (timeElapsed >= lingerTime)
+                if (timeElapsed >= Constants.BombLingerTime)
                 {
                     isLingering = false;
                     timeElapsed = 0;
