@@ -109,6 +109,12 @@
 /processorParam:Quality=Best
 /build:mikuSong.wav
 
+#begin movingBlockSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:movingBlockSound.wav;moveBlock.wav
+
 #begin throughDoor.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

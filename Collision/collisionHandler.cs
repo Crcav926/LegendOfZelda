@@ -66,13 +66,34 @@ namespace LegendOfZelda.Collision
                     //make it so that order doesn't matter?
                     if (o1 is Link)
                     {
-                        if (o2 is Door || o2 is ClassItems) 
+                        if (o2 is Door || o2 is ClassItems || (o2 is Block)) 
                         {
-                            ICollideable[] p = { o1, o2 };
-                            commandInstance = Activator.CreateInstance(commandType, p);
+                            //convoluted way of seeing if its pushable block
+                            if (o2 is Block)
+                            {
+                                Block b = (Block)o2;
+                                bool pushable = b.movable;
+                                if (!pushable)
+                                {
+                                    //if we can't push it treat as normal block
+                                    commandInstance = Activator.CreateInstance(commandType, o1);
+                                }
+                                else
+                                {
+                                    //if we can treat as pushable block
+                                    ICollideable[] p = { o1, o2 };
+                                    commandInstance = Activator.CreateInstance(commandType, p);
+                                }
+                            }
+                            else
+                            {
+                                ICollideable[] p = { o1, o2 };
+                                commandInstance = Activator.CreateInstance(commandType, p);
+                            }
                         }
                         else //Link and enemy link only passed in, Link and wall link only passed in
                         {
+                            normBlock:
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
                     }else if(o1 is IEnemy)
@@ -153,6 +174,12 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Obstacle", "right", typeof(PlayerBlockRight));
             RegisterCollision("Player", "Obstacle", "top", typeof(PlayerBlockTop));
             RegisterCollision("Player", "Obstacle", "bottom", typeof(PlayerBlockBottom));
+
+            RegisterCollision("Player", "Pushable", "left", typeof(PlayerPushableLeft));
+            RegisterCollision("Player", "Pushable", "right", typeof(PlayerPushableRight));
+            RegisterCollision("Player", "Pushable", "top", typeof(PlayerPushableDown));
+            RegisterCollision("Player", "Pushable", "bottom", typeof(PlayerPushableUp));
+
 
             RegisterCollision("Enemy", "Obstacle", "left", typeof(EnemyBlockLeft));
             RegisterCollision("Enemy", "Obstacle", "right", typeof(EnemyBlockRight));

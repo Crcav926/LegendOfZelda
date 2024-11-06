@@ -60,8 +60,10 @@ namespace LegendOfZelda
             SoundEffectInstance getTriMod = Content.Load<SoundEffect>("getTri").CreateInstance();
             SoundEffectInstance throughDoor = Content.Load<SoundEffect>("thruDoor").CreateInstance();
             SoundEffectInstance unlock = Content.Load<SoundEffect>("unlock").CreateInstance();
+            SoundEffectInstance moveBlock = Content.Load<SoundEffect>("moveBlock").CreateInstance();
 
             soundMachine.addSound("throughDoor", throughDoor);
+            soundMachine.addSound("moveBlock", moveBlock);
             soundMachine.addSound("unlock", unlock);
             soundMachine.addSound("getTri", getTriMod);
             soundMachine.addSound("aquaRoar", aquaRoarMod);

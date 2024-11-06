@@ -13,7 +13,8 @@ namespace LegendOfZelda
     internal class RoomObjectManager
     {
         private static RoomObjectManager instance = new RoomObjectManager();
-        private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
+        //temporary public for testing purposes
+        public List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
         //for any items on the ground
         public List<ICollideable> staticItems = new List<ICollideable>();
