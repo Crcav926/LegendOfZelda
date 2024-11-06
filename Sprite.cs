@@ -28,7 +28,8 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color)
         {
-            //Debug.WriteLine("Called the Sprite .draw method");
+            //This will draw stuff proportionally to the source rectangles just needs the scale factor.
+            //Rectangle dest = new Rectangle(destinationRectangle.X, destinationRectangle.Y, framesList[currentFrame].Width, framesList[currentFrame].Height);
             spriteBatch.Draw(texture, destinationRectangle, framesList[currentFrame], color);
         }
 

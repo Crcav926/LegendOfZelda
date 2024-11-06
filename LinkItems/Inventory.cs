@@ -10,19 +10,29 @@ namespace LegendOfZelda.LinkItems
     public class Inventory
     {
         public List<IItems> items;
+        public List<IItems> weapons;
         public int numKeys;
         public bool hasMap;
         public Inventory() 
         { 
             items = new List<IItems>();
+            weapons= new List<IItems>();
             numKeys = 0;
             hasMap = false;
         }
         public void addItem(IItems item)
         {
             //add item to inventory
-            items.Add(item);
-            
+            if (item is ClassItems)
+            {
+                items.Add(item);
+                //Debug.WriteLine("Added to static items list");
+            }
+            else
+            {
+                weapons.Add(item);
+               //Debug.WriteLine("added to weapons list");
+            }
             //Prints inventory for debugging
             //Debug.WriteLine($"Current inventory is");
             foreach (IItems item2 in items)

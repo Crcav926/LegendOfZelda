@@ -36,7 +36,7 @@ namespace LegendOfZelda.Command
             _link.inventory.addItem(item);
 
             //doing both to be safe
-            item.exists = false;
+            item.makeContact();
             RoomObjectManager.Instance.staticItems.Remove(item);
         }
     }

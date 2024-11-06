@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
@@ -106,6 +107,7 @@ public class Aquamentus : IEnemy, ICollideable
     private void ThrowFireball(Vector2 direction)
     {
         // Create a new fireball at Aquamentus's position and add it to the list
+        SoundMachine.Instance.GetSound("aquaRoar").Play();
         Vector2 fireballStartPosition = new Vector2(position.X + 10, position.Y + 30); // Adjust the offset
         fireballs.Add(new Fireball(fireballStartPosition, direction));
     }
@@ -137,6 +139,7 @@ public class Aquamentus : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
+            SoundMachine.Instance.GetSound("enemyHurt").Play();
 
             if (hp <= 0)
             {

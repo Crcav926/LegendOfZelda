@@ -31,6 +31,12 @@
 /processorParam:Quality=Best
 /build:(miku) uu.wav;mikuAttack.wav
 
+#begin aquamentusRoar.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:aquamentusRoar.wav;aquaRoar.wav
+
 #begin bossSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -54,6 +60,24 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemySpriteSheet.png
+
+#begin enemyTakeDamage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:enemyTakeDamage.wav;enemyHurt.wav
+
+#begin getRupee.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:getRupee.wav;getRupeeSound.wav
+
+#begin getTriforce.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:getTriforce.wav;getTri.wav
 
 #begin itemSpriteFinal.png
 /importer:TextureImporter
@@ -84,6 +108,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:mikuSong.wav
+
+#begin throughDoor.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:throughDoor.wav;thruDoor.wav
+
+#begin unlockDoor.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:unlockDoor.wav;unlock.wav
 
 #begin ZeldaTileSheet.png
 /importer:TextureImporter

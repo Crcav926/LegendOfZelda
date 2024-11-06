@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 // Should have the same movement as Gel
 namespace LegendOfZelda;
@@ -123,7 +124,8 @@ public class Zol : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
-
+        
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
         if (hp <= 0)
         {
             alive = false;

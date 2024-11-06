@@ -165,6 +165,7 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Door", "top", typeof(PlayerDoor));
             RegisterCollision("Player", "Door", "bottom", typeof(PlayerDoor));
 
+
             //item collisions
             RegisterCollision("Enemy", "Item", "left", typeof(EnemyItem));
             RegisterCollision("Enemy", "Item", "right", typeof(EnemyItem));

@@ -49,7 +49,8 @@ namespace LegendOfZelda
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
-        
+
+        ClassItems test;
 
         public Game1()
         {
@@ -98,21 +99,16 @@ namespace LegendOfZelda
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
-            //I should probably be moving the sound loading to level loader.
-            SoundEffect attack = Content.Load<SoundEffect>("mikuAttack");
-            SoundEffect hurt = Content.Load<SoundEffect>("mikuHurt");
-            SoundEffect ha = Content.Load<SoundEffect>("mikuHa");
-            soundMachine.addSound("attack", attack);
-            soundMachine.addSound("hurt", hurt);
-            soundMachine.addSound("ha", ha);
-
-           
+          
+            //I'll keep the theme song loaded here so it doesn't reset on room changes
             SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
             SoundEffectInstance modifier = mikuSong.CreateInstance();
             modifier.IsLooped = true;
+            modifier.Volume = .3f;
             modifier.Play();
 
-         
+            test = new ClassItems(new Vector2(280, 300), "Triforce");
+            RoomObjectManager.Instance.staticItems.Add(test);
         }
 
         protected override void Update(GameTime gameTime)
@@ -167,7 +163,7 @@ namespace LegendOfZelda
             {
                 mover.Draw(_spriteBatch);
             }
-
+            test.Draw(_spriteBatch);
             //draw the dropped items
             foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
             {
