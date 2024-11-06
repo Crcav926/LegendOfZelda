@@ -35,7 +35,7 @@ namespace LegendOfZelda
         private double invincibilityTimer = 1.5;
         private double timeElapsed = 0;
 
-        public Inventory inventory =new Inventory();
+        public Inventory inventory = new Inventory();
 
         private SoundMachine soundMachine = SoundMachine.Instance;
         public Link()

@@ -54,7 +54,6 @@ namespace LegendOfZelda
                 {
                     direction *= new Vector2(-1, -1);
                 }
-                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.BoomerangWidth, Constants.BoomerangHeight);
                 if (itemPosition == origin)
                 {
                     // If the Boomerang reached its max distance, get rid of it
@@ -76,6 +75,7 @@ namespace LegendOfZelda
         {
             if (exists)
             {
+                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.BoomerangWidth, Constants.BoomerangHeight);
                 boomerangSprite.Draw(spriteBatch,destination,Color.White);
             }
         }

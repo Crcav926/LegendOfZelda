@@ -75,6 +75,7 @@ namespace LegendOfZelda
         {
             if (exists)
             {
+                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);
                 if (!isLingering)
                 {
                     bombSprite.Draw(spriteBatch, destination, Color.White);
