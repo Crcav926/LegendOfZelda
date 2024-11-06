@@ -16,7 +16,7 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //move link up one b/c hit top of block
-            _link.position = new Vector2(_link.position.X, _link.position.Y - 2);
+            _link.position = new Vector2(_link.position.X, _link.position.Y - Constants.CollisionPushDistance);
         }
     }
 }

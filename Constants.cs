@@ -23,6 +23,16 @@ namespace LegendOfZelda
         public const int StandardWidth = 16;
         // Animation time
         public const int AnimationTime = 1;
+        // Collision values
+        public const int CollisionPushDistance = 2;
+        // Blocks
+        public const int BlockWidth = 50;
+        //is this height wrong? doors should be twice as tall as blocks; 42 x 2 =/= 88
+        public const int BlockHeight = 42;
+        // Doors
+        //also not sure if this should be 102; i'm just putting in the magic numbers we have.
+        public const int DoorWidth = 102;
+        public const int DoorHeight = 88;
         // Boomerang
         public const int BoomerangSpeed = 10;
         public const int BoomerangWidth = 24;
@@ -35,11 +45,83 @@ namespace LegendOfZelda
         // Bomb
         public const double ExplosionFrameDuration = .5;
         // Aquamentus
-        public const int AquamentusHeight = 100;
-        public const int AquamentusWidth = 100;
+        public const int AquamentusHeight = 80;
+        public const int AquamentusWidth = 80;
+        public const int AquamentusHitboxWidth = 45;
+        public const int AquamentusHitboxHeight = 40;
+        public const float AquamentusMaxX = 100f;
+        public const float AquamentusMinX = 10f;
+        public const float AquamentusSpeed = 80f;
         public const float AquamentusThrowCooldown = 3f;    
-        public const float AquamentusThrowTimer = 0f;       
+        public const int AquamentusFireballXOffset = 10;
+        public const int AquamentusFireballYOffset = 30;
+        //not sure what either of these do, keeping them here.      
         public const float AquamentusFrameTime = 0.1f;
         public const float AquamentusFrameTimer = 0f;
+        // Blade Trap
+        public const float BladeTrapActiveTime = 10f;
+        public const float BladeTrapHiddenTime = 2f;
+        public const int BladeTrapHeight = 60;
+        public const int BladeTrapWidth = 60;
+        // Fireballs
+        public const float FireballSpeed = 150f;
+        public const int FireballHeight = 24;
+        public const int FireballWidth = 48;
+        // Gel
+        public const float GelJumpSpeed = 50f;
+        public const float GelJumpCooldown = 1f;
+        public const float GelJumpRange = 50f;
+        //seems a little tall, idk
+        public const int GelHeight = 60;
+        public const int GelWidth = 32;
+        //should this be this size? I'm just going with what's in the file.
+        public const int GelHitboxWidth = 45;
+        public const int GelHitboxHeight = 40;
+        // Goriya
+        public const float GoriyaSpeed = 2f;
+        public const float GoriyaThrowCooldown = 2f;
+        public const float GoriyaChangeDirectionCooldown = 2f;
+        public const int GoriyaHeight = 16;
+        public const int GoriyaWidth = 16;
+        public const float GoriyaProjectileOffset = 10f;
+        //its at this point that I ask if we need all of these hitboxes to be different
+        //its easier to change this way at least for different sized objects
+        //if we wanna make a REALLY big goriya at least we can just change out the hitbox.
+        public const int GoriyaHitboxWidth = 45;
+        public const int GoriyaHitboxHeight = 40;
+        // Goriya Projectiles
+        public const float GoriyaProjectileSpeed = 200f;
+        public const int GoriyaProjectileHeight = 30;
+        public const int GoriyaProjectileWidth = 30;
+        // Keese
+        public const float KeeseSpeed = 100f;
+        public const int KeeseHeight = 60;
+        public const int KeeseWidth = 60;
+        public const int KeeseHitboxWidth = 45;
+        public const int KeeseHitboxHeight = 40;
+        // Stalfos
+        public const float StalfosSpeed = 100f;
+        public const float StalfosChangeDirectionCooldown = 2f;
+        public const int StalfosHeight = 40;
+        public const int StalfosWidth = 40;
+        public const int StalfosHitboxWidth = 45;
+        public const int StalfosHitboxHeight = 40;
+        // Wallmasters
+        public const float WallmasterJumpSpeed = 80f;
+        public const float WallmasterJumpCooldown = 1f;
+        public const float WallmasterJumpRange = 100f;
+        public const int WallmasterHeight = 30;
+        public const int WallmasterWidth = 30;
+        //different sized hitboxes compared to the others.
+        public const int WallmasterHitboxWidth = 30;
+        public const int WallmasterHitboxHeight = 30;
+        // Zol
+        public const float ZolJumpSpeed = 50f;
+        public const float ZolJumpCooldown = 1f;
+        public const float ZolJumpRange = 50f;
+        public const int ZolHeight = 60;
+        public const int ZolWidth = 60;
+        public const int ZolHitboxHeight = 60;
+        public const int ZolHitboxWidth = 60;
     }
 }

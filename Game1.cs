@@ -130,6 +130,7 @@ namespace LegendOfZelda
             var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
+            //background and walls need to be moved out of game1, can mess with constants then - TJ
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)
             {

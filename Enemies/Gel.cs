@@ -45,14 +45,13 @@ public class Gel : IEnemy, ICollideable
         if (Vector2.Distance(position, targetPosition) < 1f)
         {
             // If the cooldown has passed, set a new target position
-            if (jumpTimer >= jumpCooldown)
+            if (jumpTimer >= Constants.GelJumpCooldown)
             {
                 // Set a new target position in a small area around the current position
                 // I limit the jump to a small range (50 pixels) 
-                float jumpRange = 50f;
                 targetPosition = new Vector2(
-                    position.X + random.Next(-(int)jumpRange, (int)jumpRange),
-                    position.Y + random.Next(-(int)jumpRange, (int)jumpRange)
+                    position.X + random.Next(-(int)Constants.GelJumpRange, (int)Constants.GelJumpRange),
+                    position.Y + random.Next(-(int)Constants.GelJumpRange, (int)Constants.GelJumpRange)
                 );
 
                 // Reset the timer for the next jump
@@ -67,7 +66,7 @@ public class Gel : IEnemy, ICollideable
         if (direction.Length() > 0)
         {
             direction.Normalize();
-            position += direction * jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            position += direction * Constants.GelJumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         sprite.Update(gameTime);
     }
@@ -75,7 +74,7 @@ public class Gel : IEnemy, ICollideable
     public void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle, and size it appropriately
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GelWidth, Constants.GelHeight);
         sprite.Draw(s, destinationRectangle, Color.White);
 
     }
@@ -89,7 +88,7 @@ public class Gel : IEnemy, ICollideable
         //put data in the the hitbox
         if (alive)
         {
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.GelHitboxWidth, Constants.GelHitboxHeight);
         }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
