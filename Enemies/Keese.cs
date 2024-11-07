@@ -23,7 +23,7 @@ public class Keese : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Keese(Vector2 position)
+    public Keese(Vector2 position, bool hasKey)
     {
         // Set the initial target position (I dont know so I randomlzie it here
         this.position = position;

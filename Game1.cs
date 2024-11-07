@@ -14,6 +14,7 @@ using Microsoft.VisualBasic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Audio;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.HUD;
 
 namespace LegendOfZelda
 {
@@ -33,6 +34,7 @@ namespace LegendOfZelda
         public Texture2D blockTexture;
         public Texture2D Bossture;
         public Texture2D BackgroundTure;
+        public Texture2D HUDTexture;
         public Block block;
         public Link LinkCharacter;
         private List<ILinkItem> inventory = new List<ILinkItem>();
@@ -44,13 +46,12 @@ namespace LegendOfZelda
         private ISprite background;
         private ISprite walls;
         private IController controllerK;
-
+        private HUDManager hudManager;
         //For collisions
         detectionManager collisionDetector;
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
-        
 
         public Game1()
         {
@@ -74,7 +75,6 @@ namespace LegendOfZelda
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
-
             
             base.Initialize();
         }
@@ -84,7 +84,9 @@ namespace LegendOfZelda
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
             // font = Content.Load<SpriteFont>("font");
-            // Load the texture for the sprite sheet
+            // Load the texture for the sprite 
+
+
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             texture = Content.Load<Texture2D>("enemySpriteSheet");
             Bossture = Content.Load<Texture2D>("bossSpriteSheet");
@@ -92,7 +94,8 @@ namespace LegendOfZelda
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
-
+            HUDSpriteFactory.Instance.LoadAllTextures(Content);
+            hudManager = new HUDManager(this);
             // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
             background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
             walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
@@ -132,7 +135,7 @@ namespace LegendOfZelda
             // Let the keyboard controller handle input
             keyboardController.Update();
             RoomObjectManager.Instance.Update();
-
+            hudManager.Update(gameTime);
             // Ensure the sprite is correctly referenced
             foreach (IController controller in controllerList)
             {
@@ -149,6 +152,7 @@ namespace LegendOfZelda
             }
             //Update the keyboard controller
             controllerK.Update();
+            
             base.Update(gameTime);
             // Calls link update, which updates his Sprite and Items
             // LinkCharacter.Update(gameTime);
@@ -158,16 +162,19 @@ namespace LegendOfZelda
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
+
 
             // TODO: Add your drawing code here
             // Temp fps check.
             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
             string fpsText = $"FPS: {frameRate:0.00}";
-                //
-            var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
+            var matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+
+            // Draw the game content with the transform matrix applied
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
+
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)
@@ -186,9 +193,13 @@ namespace LegendOfZelda
             {
                 statItem.Draw(_spriteBatch);
             }
+            hudManager.Draw(_spriteBatch);
+
+
 
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

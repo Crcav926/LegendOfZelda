@@ -30,7 +30,7 @@ public class Stalfol : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Stalfol(Vector2 Position)
+    public Stalfol(Vector2 Position, bool hasKey)
     {
         this.position = Position;
         sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();

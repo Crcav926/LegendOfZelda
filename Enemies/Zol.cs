@@ -30,7 +30,7 @@ public class Zol : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Zol(Vector2 position)
+    public Zol(Vector2 position, bool hasKey)
     {
         this.position = position;
         // Set the initial target position

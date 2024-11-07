@@ -30,7 +30,7 @@ public class Wallmaster : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Wallmaster(Vector2 position)
+    public Wallmaster(Vector2 position, bool hasKey)
     {
         // Set the initial target position
         targetPosition = position;

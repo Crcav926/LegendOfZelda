@@ -32,7 +32,7 @@ public class Aquamentus : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Aquamentus(Vector2 position)
+    public Aquamentus(Vector2 position, bool hasKey)
     {
         this.position = position;
         fireballs = new List<Fireball>();

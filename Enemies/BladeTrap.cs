@@ -20,7 +20,7 @@ public class BladeTrap : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public BladeTrap(Vector2 position)
+    public BladeTrap(Vector2 position, bool hasKey)
     {
         this.position = position;
         sprite = EnemySpriteFactory.Instance.CreateBladeTrapSprite();
