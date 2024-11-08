@@ -13,7 +13,7 @@
 <!--Object Types: 1 PUSHABLE Block; not sure what type this needs-->
 <!--Pushing this block is what opens the left door-->
 <Item>
-    <ObjectType>Block</ObjectType>
+    <ObjectType>PushableBlock</ObjectType>
     <ObjectName>PushableBlock</ObjectName>
     <Location>350 220</Location>
 </Item>
