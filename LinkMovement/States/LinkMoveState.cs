@@ -14,6 +14,7 @@ namespace LegendOfZelda
         private Link link;
         Vector2 newDirection;
         private string name = "Move";
+        private Vector2 speed = new Vector2(Constants.MikuSpeedX, Constants.MikuSpeedY);
         public LinkMoveState(Link linkCharacter)
         {
             this.link = linkCharacter;
@@ -43,7 +44,7 @@ namespace LegendOfZelda
                 link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(newDirection);
                 link.direction = newDirection;
             }
-            link.position += link.direction;
+            link.position += link.direction*speed;
             
         }
         public void BoomerangAttack()
@@ -76,6 +77,11 @@ namespace LegendOfZelda
             Color color = link.damageAnimation.GetCurrentColor();
             Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
             link.linkSprite.Draw(spriteBatch, destination, color);
+        }
+
+        public void Death()
+        {
+            link.linkState = new LinkDeathState(link);
         }
     }
 }

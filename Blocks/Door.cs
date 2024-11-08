@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +18,31 @@ namespace LegendOfZelda
         private String room;
         private ISprite sprite;
         private Vector2 newPos;
+        public bool lockedS;
+        public bool unlockable;
 
-        public Door(Vector2 position, String doorType, String room, Vector2 newPos) 
+        public Door(Vector2 position, String doorType, String room, Vector2 newPos, bool locked) 
         {
             this.position = position;
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 88);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.DoorWidth, Constants.DoorHeight);
             sprite = BlockSpriteFactory.Instance.CreateSprite(doorType);
             this.room = room;
             this.newPos = newPos;
+
+            //determines if the door is locked
+            if (locked == null)
+            {
+                lockedS = false;
+            }else if (locked)
+            {
+                lockedS = true;
+            }
+            else
+            {
+                lockedS = false;
+            }
+            //determines if the door can be unlocked by a key (for example doors that lock until all enemies are killed)
+            unlockable = true;
         }
         public Rectangle getHitbox()
         {
@@ -48,9 +66,12 @@ namespace LegendOfZelda
         }
         public String getCollisionType()
         {
-            return "Door";
+               return "Door";
         }
-       
-       
+      
+       public void setLocked(bool lockState)
+        {
+            lockedS = lockState;
+        }
     }
 }

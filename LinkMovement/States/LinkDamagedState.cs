@@ -37,6 +37,10 @@ namespace LegendOfZelda.LinkMovement
 
             }
         }
+        public void Death()
+        {
+            link.linkState = new LinkDeathState(link);
+        }
         public void Move(Vector2 newDirection)
         {
             link.linkState = new LinkMoveState(link);

@@ -66,31 +66,62 @@ namespace LegendOfZelda.Collision
                     //make it so that order doesn't matter?
                     if (o1 is Link)
                     {
-                        if (o2 is Door || o2 is ClassItems) 
+                        if (o2 is Door || o2 is ClassItems || (o2 is Block))
                         {
-                            ICollideable[] p = { o1, o2 };
-                            commandInstance = Activator.CreateInstance(commandType, p);
+                            //convoluted way of seeing if its pushable block
+                            if (o2 is Block)
+                            {
+                                Block b = (Block)o2;
+                                bool pushable = b.movable;
+                                if (!pushable)
+                                {
+                                    //if we can't push it treat as normal block
+                                    commandInstance = Activator.CreateInstance(commandType, o1);
+                                }
+                                else
+                                {
+                                    //if we can treat as pushable block
+                                    ICollideable[] p = { o1, o2 };
+                                    commandInstance = Activator.CreateInstance(commandType, p);
+                                }
+                            }
+                            else
+                            {
+                                ICollideable[] p = { o1, o2 };
+                                commandInstance = Activator.CreateInstance(commandType, p);
+                            }
                         }
                         else //Link and enemy link only passed in, Link and wall link only passed in
                         {
+                        normBlock:
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
-                    }else if(o1 is IEnemy)
+                    } else if (o1 is IEnemy)
                     {
                         //enemy and item pass in both
-                        if (o2.getCollisionType()=="Item")
+                        if (o2.getCollisionType() == "Item")
                         {
                             ICollideable[] p = { o1, o2 };
                             commandInstance = Activator.CreateInstance(commandType, p);
-                        }else if (o2 is Link) //enemy and link pass in link
+                        } else if (o2 is Link) //enemy and link pass in link
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
                         else { //only remaining is Enemy and wall?
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
-                        
-                    }else if (o1.getCollisionType() == "Item")
+
+                    } else if (o1.getCollisionType() == "Projectile") {
+                        //projectiles are movers
+                        if (o2.getCollisionType() == "Player")
+                        {
+                            commandInstance = Activator.CreateInstance(commandType, o2);
+                        }
+                        else
+                        {
+                            commandInstance = Activator.CreateInstance(commandType, o1);
+                        }
+                    } else if (o1.getCollisionType() == "Item")
                     {
                         //item
                         //item and wall pass in item
@@ -154,6 +185,12 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Obstacle", "top", typeof(PlayerBlockTop));
             RegisterCollision("Player", "Obstacle", "bottom", typeof(PlayerBlockBottom));
 
+            RegisterCollision("Player", "Pushable", "left", typeof(PlayerPushableLeft));
+            RegisterCollision("Player", "Pushable", "right", typeof(PlayerPushableRight));
+            RegisterCollision("Player", "Pushable", "top", typeof(PlayerPushableDown));
+            RegisterCollision("Player", "Pushable", "bottom", typeof(PlayerPushableUp));
+
+
             RegisterCollision("Enemy", "Obstacle", "left", typeof(EnemyBlockLeft));
             RegisterCollision("Enemy", "Obstacle", "right", typeof(EnemyBlockRight));
             RegisterCollision("Enemy", "Obstacle", "top", typeof(EnemyBlockTop));
@@ -164,6 +201,7 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Door", "right", typeof(PlayerDoor));
             RegisterCollision("Player", "Door", "top", typeof(PlayerDoor));
             RegisterCollision("Player", "Door", "bottom", typeof(PlayerDoor));
+
 
             //item collisions
             RegisterCollision("Enemy", "Item", "left", typeof(EnemyItem));
@@ -187,6 +225,18 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "statItem", "right", typeof(PlayerStatItem));
             RegisterCollision("Player", "statItem", "top", typeof(PlayerStatItem));
             RegisterCollision("Player", "statItem", "bottom", typeof(PlayerStatItem));
+
+
+            //projectiles
+            RegisterCollision("Projectile", "Player", "left", typeof(PlayerTakeDamage));
+            RegisterCollision("Projectile", "Player", "right", typeof(PlayerTakeDamage));
+            RegisterCollision("Projectile", "Player", "top", typeof(PlayerTakeDamage));
+            RegisterCollision("Projectile", "Player", "bottom", typeof(PlayerTakeDamage));
+
+            RegisterCollision("Projectile", "Obstacle", "left", typeof(ProjectileObstacle));
+            RegisterCollision("Projectile", "Obstacle", "right", typeof(ProjectileObstacle));
+            RegisterCollision("Projectile", "Obstacle", "top", typeof(ProjectileObstacle));
+            RegisterCollision("Projectile", "Obstacle", "bottom", typeof(ProjectileObstacle));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)

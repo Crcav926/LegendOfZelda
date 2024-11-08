@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LegendOfZelda.LinkMovement;
 
 namespace LegendOfZelda
 {
@@ -13,6 +14,7 @@ namespace LegendOfZelda
         void Draw(SpriteBatch spriteBatch);
         void Update(GameTime gameTime);
         void TakeDamage();
+        void Death();
         void Move(Vector2 direction);
         void BoomerangAttack();
         void SwordAttack();

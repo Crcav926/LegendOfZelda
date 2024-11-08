@@ -9,24 +9,24 @@ namespace LegendOfZelda
 {
     internal class CommMoveHeldDown : ICommand
     {
-        Game1 myGame;
+        Link link;
         Vector2 linkDirection;
         Vector2 directionHold;
-        public CommMoveHeldDown(Game1 game, Vector2 direction)
+        public CommMoveHeldDown(Link link, Vector2 direction)
         {
-            myGame = game;
+            this.link = link;
             linkDirection = direction;
 
         }
         public void Execute()
         {
-            directionHold = myGame.LinkCharacter.direction;
+            directionHold = this.link.direction;
             /*
              * Checks if Link is moving, if he is not moving, make him move
              */
-            if (myGame.LinkCharacter.linkState.getState() != "Move")
+            if (this.link.linkState.getState() != "Move")
             {
-                myGame.LinkCharacter.Move(directionHold);
+                this.link.Move(directionHold);
                 directionHold = linkDirection;
             }
             /*
@@ -34,7 +34,7 @@ namespace LegendOfZelda
              */
             if (linkDirection == directionHold)
             {
-                myGame.LinkCharacter.Move(directionHold);
+                this.link.Move(directionHold);
             }
         }
     }

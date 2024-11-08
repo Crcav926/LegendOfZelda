@@ -3,15 +3,15 @@ namespace LegendOfZelda.LinkMovement
 {
     internal class CommLinkDamaged : ICommand
     {
-        Game1 myGame;
-        public CommLinkDamaged(Game1 game)
+        Link link;
+        public CommLinkDamaged(Link link)
         {
-            myGame = game;
+            this.link = link;
 
         }
         public void Execute()
         {
-            myGame.LinkCharacter.TakeDamage();
+            this.link.TakeDamage();
         }
     }
 }

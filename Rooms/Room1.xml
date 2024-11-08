@@ -135,16 +135,19 @@
 <!--Basically this should just say an Up door exists, not whether its locked or open.-->
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked>true</Locked>
     <ObjectName>UpDoorLocked</ObjectName>
     <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>Room4.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked> false</Locked>
     <ObjectName>LeftDoorOpen</ObjectName>
     <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room2.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked> false</Locked>
     <ObjectName>RightDoorOpen</ObjectName>
     <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room3.xml</Room>
 </Item>

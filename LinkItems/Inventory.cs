@@ -10,19 +10,33 @@ namespace LegendOfZelda.LinkItems
     public class Inventory
     {
         public List<IItems> items;
+        public List<IItems> weapons;
         public int numKeys;
         public bool hasMap;
+        public int coins;
+        public int bombs;
         public Inventory() 
         { 
             items = new List<IItems>();
+            weapons= new List<IItems>();
             numKeys = 0;
             hasMap = false;
+            coins= 0;
+            bombs = 0;
         }
         public void addItem(IItems item)
         {
             //add item to inventory
-            items.Add(item);
-            
+            if (item is ClassItems)
+            {
+                items.Add(item);
+                //Debug.WriteLine("Added to static items list");
+            }
+            else
+            {
+                weapons.Add(item);
+               //Debug.WriteLine("added to weapons list");
+            }
             //Prints inventory for debugging
             //Debug.WriteLine($"Current inventory is");
             foreach (IItems item2 in items)
@@ -38,7 +52,10 @@ namespace LegendOfZelda.LinkItems
                 }
             }
         }
-
+        public void addCoins(int amount)
+        {
+            coins = coins + amount;
+        }
         public void setMap(bool mapStatus)
         {
             //when miku picks up a map set to true and maybe set to false on death?
@@ -58,6 +75,10 @@ namespace LegendOfZelda.LinkItems
         {
             // call when miku uses key on a locked door
             numKeys--;
+        }
+        public void addBomb()
+        {
+            bombs++;
         }
     }
 }

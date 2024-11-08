@@ -54,6 +54,7 @@
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
+	<HasKey> true </HasKey>
     <ObjectName>Stalfol</ObjectName>
     <Location>500 308</Location>
 </Item>

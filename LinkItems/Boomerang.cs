@@ -66,7 +66,10 @@ namespace LegendOfZelda
                 }
                 timeElapsed = 0;
             }
-            
+        }
+        public void updatePosition(Vector2 linkPosition)
+        {
+            this.origin = linkPosition;
         }
 
         public void Draw(SpriteBatch spriteBatch)

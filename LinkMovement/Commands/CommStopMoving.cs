@@ -9,16 +9,16 @@ namespace LegendOfZelda.LinkMovement
 {
     internal class CommStopMoving : ICommand
     {
-        Game1 myGame;
+        Link link;
 
-        public CommStopMoving(Game1 game, Vector2 direction)
+        public CommStopMoving(Link link, Vector2 direction)
         {
-            myGame = game;
+            this.link = link;
 
         }
         public void Execute()
         {
-            myGame.LinkCharacter.Idle();
+            this.link.Idle();
         }
 
     }

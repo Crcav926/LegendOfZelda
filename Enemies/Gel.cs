@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Gel : IEnemy, ICollideable
@@ -29,8 +30,9 @@ public class Gel : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private bool keyStatus;
 
-    public Gel(Vector2 Position)
+    public Gel(Vector2 Position, bool hasKey)
     {
         // Set the initial target position
         targetPosition = Position;
@@ -40,6 +42,18 @@ public class Gel : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
+        if (hasKey == null)
+        {
+            keyStatus = false;
+        }
+        else if (hasKey)
+        {
+            keyStatus = true;
+        }
+        else
+        {
+            keyStatus = false;
+        }
     }
     // TODO: Make Gel change direction
     public void ChangeDirection()
@@ -63,14 +77,13 @@ public class Gel : IEnemy, ICollideable
         if (Vector2.Distance(position, targetPosition) < 1f)
         {
             // If the cooldown has passed, set a new target position
-            if (jumpTimer >= jumpCooldown)
+            if (jumpTimer >= Constants.GelJumpCooldown)
             {
                 // Set a new target position in a small area around the current position
                 // I limit the jump to a small range (50 pixels) 
-                float jumpRange = 50f;
                 targetPosition = new Vector2(
-                    position.X + random.Next(-(int)jumpRange, (int)jumpRange),
-                    position.Y + random.Next(-(int)jumpRange, (int)jumpRange)
+                    position.X + random.Next(-(int)Constants.GelJumpRange, (int)Constants.GelJumpRange),
+                    position.Y + random.Next(-(int)Constants.GelJumpRange, (int)Constants.GelJumpRange)
                 );
 
                 // Reset the timer for the next jump
@@ -92,7 +105,7 @@ public class Gel : IEnemy, ICollideable
         if (direction.Length() > 0)
         {
             direction.Normalize();
-            position += direction * jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            position += direction * Constants.GelJumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         sprite.Update(gameTime);
     }
@@ -100,7 +113,7 @@ public class Gel : IEnemy, ICollideable
     public void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle, and size it appropriately
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GelWidth, Constants.GelHeight);
         sprite.Draw(s, destinationRectangle, Color.White);
 
         if (HasDroppedItem)
@@ -119,7 +132,7 @@ public class Gel : IEnemy, ICollideable
         //put data in the the hitbox
         if (alive)
         {
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.GelHitboxWidth, Constants.GelHitboxHeight);
         }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
@@ -133,6 +146,7 @@ public class Gel : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
 
         if (hp <= 0)
         {
@@ -147,12 +161,21 @@ public class Gel : IEnemy, ICollideable
     {
         if (!alive)
         {
-            Debug.WriteLine("DropItem called: Item drop initialized");
-            //for now I'm using Rupees to test drops
-            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
-            droppedItem = new ClassItems(position, ItemTobeDroped);
-            HasDroppedItem = true;
-            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            if (keyStatus)
+            {
+                Debug.WriteLine("Key dropped!");
+                droppedItem = new ClassItems(position, "Key");
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
+            else
+            {
+                Debug.WriteLine("DropItem called: Item drop initialized");
+                //for now I'm using Rupees to test drops
+                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+                droppedItem = new ClassItems(position, ItemTobeDroped);
+                HasDroppedItem = true;
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
         }
 
         

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Data;
 using System.Reflection;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda
 {
@@ -91,6 +92,15 @@ namespace LegendOfZelda
         //call this when link picks up the item
         public void makeContact()
         {
+            Debug.WriteLine("Item made contact");
+            if (itemType == "Triforce" || itemType == "TriforceBlue")
+            {
+                SoundMachine.Instance.GetSound("getTri").Play(); ;
+            }
+            else
+            {
+                SoundMachine.Instance.GetSound("getRupee").Play();
+            }
             exists = false;
         }
 
