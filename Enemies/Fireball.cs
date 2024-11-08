@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 using LegendOfZelda;
+using System.Reflection.Metadata;
 
 namespace LegendOfZelda;
 public class Fireball
@@ -18,7 +19,7 @@ public class Fireball
     public Fireball(Vector2 startPosition, Vector2 direction)
     {
         this.position = startPosition;
-        this.velocity = direction * speed;
+        this.velocity = direction * Constants.FireballSpeed;
         sprite = EnemySpriteFactory.Instance.CreateFireBallSprite();
     }
 
@@ -38,7 +39,8 @@ public class Fireball
         //}
 
         // Mark fireball as inactive if it goes off-screen
-        if (position.X < 0 || position.X > 800 || position.Y < 0 || position.Y > 600)
+        //NOTE: not sure if this should use original width/height or screen width/height. Testing needed. - TJ
+        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
         {
             IsActive = false;
         }
@@ -52,8 +54,8 @@ public class Fireball
             Rectangle destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                24,
-                48
+                Constants.FireballWidth,
+                Constants.FireballHeight
             );
 
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);

@@ -10,7 +10,7 @@ namespace LegendOfZelda
     public class Arrow : IItems, ICollideable
     {
         private bool isLingering;
-        private double lingerTime = .25;
+        //private double lingerTime = .25;
         double timeElapsed = 0;
         private Vector2 itemPosition;
         private Vector2 direction;
@@ -74,7 +74,7 @@ namespace LegendOfZelda
             {
                 timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
                 arrowSprite = itemSpriteFactory.CreateImpactSprite();
-                if (timeElapsed >= lingerTime)
+                if (timeElapsed >= Constants.ArrowLingerTime)
                 {
                     exists = false;
                     isLingering = false;
@@ -87,7 +87,7 @@ namespace LegendOfZelda
                 exists = false;
             }
 
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.ArrowWidth, Constants.ArrowHeight);
         }
 
         public void Draw(SpriteBatch spriteBatch)

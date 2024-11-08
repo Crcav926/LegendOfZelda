@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using LegendOfZelda.LinkMovement;
 using static System.Formats.Asn1.AsnWriter;
+using System.Data;
 
 
 
@@ -122,6 +123,50 @@ namespace LegendOfZelda
         }
         };
 
+        List<Rectangle> deathSpriteFrames = new List<Rectangle>()
+        {
+            //death animation: rotate then face down; explode. Might make the explosion frames a separate list.
+            //rotate clockwise starting at down.
+            //ok so in the original he rotates counterclockwise but close enough
+            //I could make a dictionary that starts the animation in a different direction, but it only changes at most 3 frames so who cares
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(120, 11, 16, 16),
+            new Rectangle(86, 11, 16, 16),
+            new Rectangle(35, 11, 16, 16),
+            //rotation 2
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(120, 11, 16, 16),
+            new Rectangle(86, 11, 16, 16),
+            new Rectangle(35, 11, 16, 16),
+            //rotation 3
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(120, 11, 16, 16),
+            new Rectangle(86, 11, 16, 16),
+            new Rectangle(35, 11, 16, 16),
+            //stand still for gray
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(1, 11, 16, 16),
+            new Rectangle(1, 11, 16, 16),
+            //gray
+            new Rectangle(126, 224, 16, 16),
+            new Rectangle(126, 224, 16, 16),
+            new Rectangle(126, 224, 16, 16),
+            new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            // new Rectangle(126, 224, 16, 16),
+            //explode
+            new Rectangle(143, 224, 16, 16),
+            new Rectangle(160, 224, 16, 16),
+            new Rectangle(177, 224, 16, 16),
+            //we'll start at 3 rotations
+        };
+
+
         // Don't think position should be a factor here, but it is here for simply a lack of time.
         public ISprite CreateLinkStillSprite(Vector2 direction)
         {
@@ -137,6 +182,10 @@ namespace LegendOfZelda
             return new Sprite(linkSpriteSheet, attackSpriteFrames[direction]);
         }
 
+        public ISprite CreateLinkDeathSprite()
+        {
+            return new Sprite(linkSpriteSheet, deathSpriteFrames);
+        }
 
 
     }

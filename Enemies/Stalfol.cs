@@ -14,9 +14,10 @@ public class Stalfol : IEnemy, ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement
-    private float speed = 2f;          // Movement speed
+    //moved to constants
+    //private float speed = 2f;          // Movement speed
     private Random random = new Random();
-    private float directionChangeCooldown = 2f;  // Time between direction changes
+    //private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
     private ISprite sprite;
     public Vector2 position { get; set; }
@@ -56,16 +57,16 @@ public class Stalfol : IEnemy, ICollideable
         switch (direction)
         {
             case 0:
-                velocity = new Vector2(0, -speed);
+                velocity = new Vector2(0, -Constants.StalfosSpeed);
                 break;
             case 1:
-                velocity = new Vector2(0, speed);
+                velocity = new Vector2(0, Constants.StalfosSpeed);
                 break;
             case 2:
-                velocity = new Vector2(-speed, 0);
+                velocity = new Vector2(-Constants.StalfosSpeed, 0);
                 break;
             case 3:
-                velocity = new Vector2(speed, 0);
+                velocity = new Vector2(Constants.StalfosSpeed, 0);
                 break;
         }
     }
@@ -83,7 +84,7 @@ public class Stalfol : IEnemy, ICollideable
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         // If it's time to change direction
-        if (directionChangeTimer >= directionChangeCooldown)
+        if (directionChangeTimer >= Constants.StalfosChangeDirectionCooldown)
         {
             // Choose a new random direction and reset the timer
             ChangeDirection(); 
@@ -103,6 +104,9 @@ public class Stalfol : IEnemy, ICollideable
         position += velocity;
         //angle need caculate
         //if the skull hits the screen edges and reflect its direction?????
+        //NOTE: I've been updating constants starting at the top of the folder and going down
+        //it is at this point that i'm not replacing this anymore, enemies should never collide with the edge of the screen
+        //we can update these to be wall positions, but i'm not putting original/screen values anymore. - TJ
         if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
         {
             velocity.X *= -1; // Reflect on the X axis
@@ -119,7 +123,7 @@ public class Stalfol : IEnemy, ICollideable
         if (alive)
         {
             // Use the current position for the destination rectangle, and size it appropriately
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 40, 40);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
             sprite.Draw(s, destinationRectangle, Color.White);
         }
         if (HasDroppedItem)
@@ -134,7 +138,7 @@ public class Stalfol : IEnemy, ICollideable
         //put data in the the hitbox
         if (alive)
         {
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.StalfosHitboxWidth, Constants.StalfosHitboxHeight);
         }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");

@@ -190,8 +190,8 @@ namespace LegendOfZelda
 
             // Draw the game content with the transform matrix applied
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
-
-
+            
+            //TJ wants this moved out of Game 1 becuase of constants
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
 
 

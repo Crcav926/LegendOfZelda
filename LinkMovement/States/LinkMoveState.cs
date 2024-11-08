@@ -14,7 +14,7 @@ namespace LegendOfZelda
         private Link link;
         Vector2 newDirection;
         private string name = "Move";
-        private Vector2 speed = new Vector2(2, 2);
+        private Vector2 speed = new Vector2(Constants.MikuSpeedX, Constants.MikuSpeedY);
         public LinkMoveState(Link linkCharacter)
         {
             this.link = linkCharacter;
@@ -77,6 +77,11 @@ namespace LegendOfZelda
             Color color = link.damageAnimation.GetCurrentColor();
             Rectangle destination = new Rectangle((int)link.position.X, (int)link.position.Y, Constants.MikuHeight, Constants.MikuHeight);
             link.linkSprite.Draw(spriteBatch, destination, color);
+        }
+
+        public void Death()
+        {
+            link.linkState = new LinkDeathState(link);
         }
     }
 }
