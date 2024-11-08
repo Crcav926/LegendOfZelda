@@ -10,12 +10,13 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
     private ISprite sprite;
     private Rectangle destinationRectangle;
     private Vector2 position;
+    public bool movable;
     public Block(Vector2 position, String blockName)
     {
         sprite = BlockSpriteFactory.Instance.CreateSprite(blockName);
         this.position = position;
         //arbitrary numbers, can change to where we want to put it.
-
+        movable = false;
         //spawn point of rectangle
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 42);
     }
@@ -34,13 +35,24 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 42);
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
     }
-
+    public void moveBlock(Vector2 dist)
+    {
+        // add the change in position to our position.
+        position = position + dist;
+    }
     public void Update(GameTime gameTime)
     {
         sprite.Update(gameTime); //this function currently does nothing. Do blocks even need to update?
     }
     public String getCollisionType()
     {
-        return "Obstacle";
+        if (!movable)
+        {
+            return "Obstacle";
+        }
+        else
+        {
+            return "Pushable";
+        }
     }
 }

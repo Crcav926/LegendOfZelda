@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda.Sounds;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
@@ -25,7 +26,7 @@ public class Keese : IEnemy, ICollideable
 
     public Keese(Vector2 position, bool hasKey)
     {
-        // Set the initial target position (I dont know so I randomlzie it here
+        // Set the initial target position (I dont know so I randomize it here
         this.position = position;
         targetPosition = position;
         velocity = new Vector2(
@@ -124,6 +125,8 @@ public class Keese : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
+      
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
 
         if (hp <= 0)
         {

@@ -10,15 +10,15 @@ namespace LegendOfZelda.LinkItems
 {
     internal class CommPlaceBomb : ICommand
     {
-        Game1 myGame;
-        public CommPlaceBomb(Game1 game)
+        Link link;
+        public CommPlaceBomb(Link link)
         {
-            myGame = game;
+            this.link = link;
         }
         public void Execute()
         {
-            myGame.LinkCharacter.BombAttack();
-            myGame.LinkCharacter.BombAttack();
+            this.link.BombAttack();
+            this.link.BombAttack();
         }
     }
     

@@ -14,6 +14,7 @@ namespace LegendOfZelda
         private Link link;
         Vector2 newDirection;
         private string name = "Move";
+        private Vector2 speed = new Vector2(2, 2);
         public LinkMoveState(Link linkCharacter)
         {
             this.link = linkCharacter;
@@ -43,7 +44,7 @@ namespace LegendOfZelda
                 link.linkSprite = link.spriteFactory.CreateLinkAnimatedSprite(newDirection);
                 link.direction = newDirection;
             }
-            link.position += link.direction;
+            link.position += link.direction*speed;
             
         }
         public void BoomerangAttack()

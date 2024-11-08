@@ -10,15 +10,15 @@ namespace LegendOfZelda.LinkItems
 {
     internal class CommShootArrow : ICommand
     {
-            Game1 myGame;
-            public CommShootArrow(Game1 game)
+            Link link;
+            public CommShootArrow(Link link)
             {
-                myGame = game;
+                this.link = link;
             }
             public void Execute()
             {
-            myGame.LinkCharacter.ArrowAttack();
-            myGame.LinkCharacter.ArrowAttack();
+            this.link.ArrowAttack();
+            this.link.ArrowAttack();
             }
     }
 }

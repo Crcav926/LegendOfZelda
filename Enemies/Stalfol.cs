@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Stalfol : IEnemy, ICollideable
@@ -35,7 +36,6 @@ public class Stalfol : IEnemy, ICollideable
         this.position = Position;
         sprite = EnemySpriteFactory.Instance.CreateStalfolSprite();
         ChangeDirection();
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
 
         hp = 2;
@@ -151,6 +151,7 @@ public class Stalfol : IEnemy, ICollideable
         if ( canTakeDamage)
         {
             Debug.WriteLine($"{damage} damage done to {this.GetType().Name}");
+            SoundMachine.Instance.GetSound("enemyHurt").Play();
             hp -= damage;
 
             if (hp <= 0)

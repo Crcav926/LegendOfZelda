@@ -9,18 +9,18 @@ namespace LegendOfZelda.LinkMovement
 {
     internal class CommLinkMove : ICommand
     {
-        Game1 myGame;
+        Link link;
         Vector2 linkDirection;
-        public CommLinkMove(Game1 game, Vector2 direction)
+        public CommLinkMove(Link link, Vector2 direction)
         {
-            myGame = game;
+            this.link = link;
             linkDirection = direction;
 
         }
         public void Execute()
         {
-            myGame.LinkCharacter.setState(new LinkMoveState(myGame.LinkCharacter));
-            myGame.LinkCharacter.Move(linkDirection);
+            this.link.setState(new LinkMoveState(this.link));
+            this.link.Move(linkDirection);
         }
     }
 }

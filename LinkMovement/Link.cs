@@ -21,7 +21,7 @@ namespace LegendOfZelda
         // Magic numbers to be used later
         private int maxHealth = 10;
         private int currentHealth = 10;
-        public IItems boomerang;
+        public Boomerang boomerang;
         public IItems arrow;
         public IItems fire;
         public IItems sword;
@@ -140,6 +140,7 @@ namespace LegendOfZelda
             }
             if (currentHealth == 0)
             {
+                // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
                 LevelLoader.Instance.Load("Room1.xml");
                 currentHealth = 10;
                 RoomObjectManager.Instance.staticItems.Clear();
@@ -156,7 +157,7 @@ namespace LegendOfZelda
         {
             //for now assume that Link is 16*4 by 16*4
             //put data in the the hitbox
-            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.MikuWidth, Constants.MikuHeight);
+            Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y+ Constants.MikuHeight / 2, Constants.MikuWidth, Constants.MikuHeight/2);
             //Debug.WriteLine("Hitbox of Link retrieved!");
             
             //Debug.WriteLine($"Link Hitbox:{position.X} {position.Y} {tempDimension} {tempDimension}");

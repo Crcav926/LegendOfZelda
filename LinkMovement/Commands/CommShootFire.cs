@@ -10,15 +10,15 @@ namespace LegendOfZelda
 {
     internal class CommShootFire : ICommand
     {
-            Game1 myGame;
-            public CommShootFire(Game1 game)
+            Link link;
+            public CommShootFire(Link link)
             {
-                myGame = game;
+                this.link = link;
             }
             public void Execute()
             {
-            myGame.LinkCharacter.FireAttack();
-            myGame.LinkCharacter.FireAttack();
+            this.link.FireAttack();
+            this.link.FireAttack();
         }
     }
 }
