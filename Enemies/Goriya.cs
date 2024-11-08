@@ -32,7 +32,7 @@ public class Goriya : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Goriya(Vector2 Position, string type)
+    public Goriya(Vector2 Position, string type, bool hasKey)
     {
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();

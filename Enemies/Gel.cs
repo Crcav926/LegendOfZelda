@@ -31,7 +31,7 @@ public class Gel : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Gel(Vector2 Position)
+    public Gel(Vector2 Position, bool hasKey)
     {
         // Set the initial target position
         targetPosition = Position;

@@ -20,7 +20,7 @@ namespace LegendOfZelda
         public bool locked;
         public bool unlockable;
 
-        public Door(Vector2 position, String doorType, String room, Vector2 newPos) 
+        public Door(Vector2 position, String doorType, String room, Vector2 newPos, bool locked) 
         {
             this.position = position;
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 102, 88);

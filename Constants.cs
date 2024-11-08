@@ -8,13 +8,15 @@ namespace LegendOfZelda
     {
         // Screen size
         public const int ScreenWidth = 1600;  // Screen width
-        public const int ScreenHeight = 960;  // Screen height
+        public const int ScreenHeight = 960 + HUDHeight;  // Screen height
+        public const int HUDWidth = 0;
+        public const int HUDHeight = OriginalHeight / 4;
         // Original resolution in which the sprites are scaled to.
         public const int OriginalWidth = 800;
         public const int OriginalHeight = 480;
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
-        public const float ScaleY = (float)ScreenHeight / OriginalHeight;
+        public const float ScaleY = (float)(ScreenHeight) / (OriginalHeight + HUDHeight);
         // Miku size
         public const int MikuHeight = 40;
         public const int MikuWidth = 40;
