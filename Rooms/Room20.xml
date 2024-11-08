@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--yes i know i skipped room 19, that's to make it more obvious this is a test room.-->
+<!--we could make this connect to room 1 through the bottom door.-->
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>Wall</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 1 of everything lol-->
+<!--For real: 1 Block, 1 Water, 1 Bricks, 1 Fish Statue, 1 Dragon Statue, 1 Dirt, 1 Pushable Block-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Water</ObjectName>
+    <Location>150 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Bricks</ObjectName>
+    <Location>200 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>FishStatue</ObjectName>
+    <Location>250 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>DragonStatue</ObjectName>
+    <Location>500 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Dirt</ObjectName>
+    <Location>550 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>PushableBlock</ObjectName>
+    <Location>250 176</Location>
+</Item>
+<!--I could put a ladder here, but we don't use any ladder blocks so do we really need to-->
+<!--ICollideable Types: 1 Keese, 1 Stalfol, 1 Gel, 1 Goriya, 1 Blade Trap, 1 Wallmaster, 1 Aquamentus-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Keese</ObjectName>
+    <Location>250 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Stalfol</ObjectName>
+    <Location>300 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gel</ObjectName>
+    <Location>350 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Aquamentus</ObjectName>
+    <Location>500 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Goriya</ObjectName>
+    <Location>250 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>BladeTrap</ObjectName>
+    <Location>300 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Wallmaster</ObjectName>
+    <Location>350 220</Location>
+</Item>
+<!--Door type will need to be changed-->
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>UpDoorOpen</ObjectName>
+    <Location>350 0</Location>
+	<LinkLocationX>370</LinkLocationX>
+	<LinkLocationY>350</LinkLocationY>
+	<Room></Room>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>LeftDoorWall</ObjectName>
+    <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room></Room>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>RightDoorWall</ObjectName>
+    <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room></Room>
+</Item>
+<Item>
+    <ObjectType>Door</ObjectType>
+    <ObjectName>DownDoorWall</ObjectName>
+    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room></Room>
+</Item>
+</root>

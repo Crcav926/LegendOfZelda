@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Item>
+		<ObjectType>Floor</ObjectType>
+		<ObjectName>Floor1</ObjectName>
+		<Location>33 33</Location>
+	</Item>
+	<Item>
+		<ObjectType>Wall</ObjectType>
+		<ObjectName>Wall</ObjectName>
+		<Location>0 0</Location>
+	</Item>
+	<!--Object Types: 6 Fish, 6 Dragon, 12 Dirt-->
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>FishStatue</ObjectName>
+		<Location>49 49</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>FishStatue</ObjectName>
+		<Location>97 49</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>FishStatue</ObjectName>
+		<Location>49 81</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>FishStatue</ObjectName>
+		<Location>97 81</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>FishStatue</ObjectName>
+		<Location>49 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>FishStatue</ObjectName>
+		<Location>97 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>DragonStatue</ObjectName>
+		<Location>145 49</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>DragonStatue</ObjectName>
+		<Location>193 49</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>DragonStatue</ObjectName>
+		<Location>145 81</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>DragonStatue</ObjectName>
+		<Location>193 81</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>DragonStatue</ObjectName>
+		<Location>145 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>DragonStatue</ObjectName>
+		<Location>193 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>113 97</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>129 97</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>81 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>113 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>129 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>161 113</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>81 129</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>97 129</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>113 129</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>129 129</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>145 129</Location>
+	</Item>
+	<Item>
+		<ObjectType>Block</ObjectType>
+		<ObjectName>Dirt</ObjectName>
+		<Location>161 129</Location>
+	</Item>
+	<!--Note that we may need a way to distinguish types of doors. I'll keep the names as they are now, but the XML file shouldn't store what sprite is needed.-->
+	<!--Basically this should just say an Up door exists, not whether its locked or open.-->
+	<Item>
+		<ObjectType>Door</ObjectType>
+		<ObjectName>UpDoorLocked</ObjectName>
+		<Location>113 0</Location>
+	</Item>
+	<Item>
+		<ObjectType>Door</ObjectType>
+		<ObjectName>LeftDoorOpen</ObjectName>
+		<Location>0 73</Location>
+	</Item>
+	<Item>
+		<ObjectType>Door</ObjectType>
+		<ObjectName>RightDoorOpen</ObjectName>
+		<Location>225 73</Location>
+	</Item>
+	<Item>
+		<ObjectType>Door</ObjectType>
+		<ObjectName>DownDoorOpen</ObjectName>
+		<Location>113 145</Location>
+	</Item>
+</root>
