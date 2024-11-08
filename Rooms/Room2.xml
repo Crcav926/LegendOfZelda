@@ -27,7 +27,7 @@
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-	<HasKey> true </HasKey>
+	<HasKey> false </HasKey>
     <ObjectName>Keese</ObjectName>
     <Location>350 264</Location>
 </Item>

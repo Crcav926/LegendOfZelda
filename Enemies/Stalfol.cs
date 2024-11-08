@@ -189,21 +189,21 @@ public class Stalfol : IEnemy, ICollideable
         {
 
             Debug.WriteLine("DropItem called: Item drop initialized");
-            
+
             //songyu version
             //String Key = RoomObjectManager.Instance.GetKey();
             //droppedKey = new ClassItems(position, Key);
-            
-            
-           if (keyStatus)
+
+
+            String roomDrop = RoomObjectManager.Instance.GetKey();
+            if (roomDrop != null)
             {
-                Debug.WriteLine("Key dropped!");
-                droppedItem = new ClassItems(position, "Key");
-                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                Debug.WriteLine("Counter based key dropped");
+                ClassItems droppedKey = new ClassItems(position, roomDrop);
+                RoomObjectManager.Instance.staticItems.Add(droppedKey);
             }
             else
             {
-                Debug.WriteLine("DropItem called: Item drop initialized");
                 //for now I'm using Rupees to test drops
                 String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                 droppedItem = new ClassItems(position, ItemTobeDroped);

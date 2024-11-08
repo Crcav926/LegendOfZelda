@@ -28,13 +28,16 @@ namespace LegendOfZelda.Command
                 SoundMachine.Instance.GetSound("throughDoor").Play();
                 string roomName = door.getRoom();
                 Debug.WriteLine($"Room is {roomName}");
+  
                 if (roomName != "closed")
                 {
                     LevelLoader.Instance.Load(roomName);
                     link.position = door.getNewPosition();
+                    //lemme just clear the dropped items too...
+                    RoomObjectManager.Instance.staticItems.Clear();
+                    //reset the room by room death counter.
+                    RoomObjectManager.Instance.Localcounter = 0;
                 }
-                //lemme just clear the dropped items too...
-                RoomObjectManager.Instance.staticItems.Clear();
             }
             else
             {
