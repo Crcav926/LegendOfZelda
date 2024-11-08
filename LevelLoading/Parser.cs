@@ -75,6 +75,13 @@ namespace LegendOfZelda
                         con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
                         // Debug.WriteLine(type.FullName);
                         // Debug.WriteLine(con.ToString());
+                    } //THIS DOES NOT WORK AND IDK WHY
+                    else if(objectTypeNode.InnerText == "PushableBlock")
+                    {
+                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
+                        con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
+                        //Debug.WriteLine(type.FullName);
+                        //Debug.WriteLine(con.ToString());
                     }
                     else if(objectTypeNode.InnerText == "ICollideable" && objectNameNode != null)
                     {
@@ -103,7 +110,7 @@ namespace LegendOfZelda
                 }
                 else
                 {
-                    // Debug.WriteLine("Invalid Object Name.");
+                    //Debug.WriteLine("Invalid Object Name.");
                 }
                 if (locationNode != null)
                 {

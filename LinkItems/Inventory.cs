@@ -13,12 +13,14 @@ namespace LegendOfZelda.LinkItems
         public List<IItems> weapons;
         public int numKeys;
         public bool hasMap;
+        public int coins;
         public Inventory() 
         { 
             items = new List<IItems>();
             weapons= new List<IItems>();
             numKeys = 0;
             hasMap = false;
+            coins= 0;
         }
         public void addItem(IItems item)
         {
@@ -48,7 +50,10 @@ namespace LegendOfZelda.LinkItems
                 }
             }
         }
-
+        public void addCoins(int amount)
+        {
+            coins = coins + amount;
+        }
         public void setMap(bool mapStatus)
         {
             //when miku picks up a map set to true and maybe set to false on death?

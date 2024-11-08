@@ -206,7 +206,7 @@ namespace LegendOfZelda
                 mover.Draw(_spriteBatch);
             }
             test.Draw(_spriteBatch);
-            testBlock.Draw(_spriteBatch);
+            //testBlock.Draw(_spriteBatch);
             //draw the dropped items
             foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
             {

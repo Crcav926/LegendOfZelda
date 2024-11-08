@@ -262,6 +262,7 @@
 <!--This one has the key-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
+	<HasKey> true </HasKey>
     <ObjectName>Stalfol</ObjectName>
     <Location>450 132</Location>
 </Item>

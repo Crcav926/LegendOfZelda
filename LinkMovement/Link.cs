@@ -149,12 +149,15 @@ namespace LegendOfZelda
             if (currentHealth == 0)
             {
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
-                 //TJDeathAnimation
-                //LevelLoader.Instance.Load("RoomDeath.xml");
-                //currentHealth = 0;
+                // This pair freezes her on death and has her play the animation
+                LevelLoader.Instance.Load("RoomDeath.xml");
+                currentHealth = 0;
 
-                LevelLoader.Instance.Load("Room1.xml");
-                currentHealth = 10;
+                //this pair restarts you from room 1 on death
+                //LevelLoader.Instance.Load("Room1.xml");
+                //currentHealth = 10;
+
+                //always needed
                 RoomObjectManager.Instance.staticItems.Clear();
 
             }

@@ -102,7 +102,8 @@ namespace LegendOfZelda
         public const int KeeseHitboxWidth = 45;
         public const int KeeseHitboxHeight = 40;
         // Stalfos
-        public const float StalfosSpeed = 100f;
+        //I DONT KNOW WHY BUT THEYRE FAST AS FUCK
+        public const float StalfosSpeed = 2f;
         public const float StalfosChangeDirectionCooldown = 2f;
         public const int StalfosHeight = 40;
         public const int StalfosWidth = 40;

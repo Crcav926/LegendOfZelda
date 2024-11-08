@@ -35,6 +35,8 @@ public class Goriya : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
+    private bool keyStatus;
+
     public Goriya(Vector2 Position, string type, bool hasKey)
     {
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
@@ -60,6 +62,19 @@ public class Goriya : IEnemy, ICollideable
             hp = 5;
         }
         canTakeDamage = true;
+
+        if (hasKey == null)
+        {
+            keyStatus = false;
+        }
+        else if (hasKey)
+        {
+            keyStatus = true;
+        }
+        else
+        {
+            keyStatus = false;
+        }
     }
 
     //Change the direction of Goriya itself
@@ -228,12 +243,21 @@ public class Goriya : IEnemy, ICollideable
     {
         if (!alive)
         {
-            Debug.WriteLine("DropItem called: Item drop initialized");
-            //for now I'm using Rupees to test drops
-            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
-            droppedItem = new ClassItems(position, ItemTobeDroped);
-            HasDroppedItem = true;
-            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            if (keyStatus)
+            {
+                Debug.WriteLine("Key dropped!");
+                droppedItem = new ClassItems(position, "Key");
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
+            else
+            {
+                Debug.WriteLine("DropItem called: Item drop initialized");
+                //for now I'm using Rupees to test drops
+                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
+                droppedItem = new ClassItems(position, ItemTobeDroped);
+                HasDroppedItem = true;
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
         }
     }
 }

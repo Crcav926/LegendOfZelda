@@ -30,7 +30,7 @@ public class Zol : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-
+    private bool keyStatus;
     public Zol(Vector2 position, bool hasKey)
     {
         this.position = position;
@@ -40,6 +40,19 @@ public class Zol : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
+
+        if (hasKey == null)
+        {
+            keyStatus = false;
+        }
+        else if (hasKey)
+        {
+            keyStatus = true;
+        }
+        else
+        {
+            keyStatus = false;
+        }
     }
     public void ChangeDirection()
     {
@@ -139,12 +152,21 @@ public class Zol : IEnemy, ICollideable
     {
         if (!alive)
         {
-            Debug.WriteLine("DropItem called: Item drop initialized");
-            //for now I'm using Rupees to test drops
-            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
-            droppedItem = new ClassItems(position, ItemTobeDroped);
-            HasDroppedItem = true;
-            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            if (keyStatus)
+            {
+                Debug.WriteLine("Key dropped!");
+                droppedItem = new ClassItems(position, "Key");
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
+            else
+            {
+                Debug.WriteLine("DropItem called: Item drop initialized");
+                //for now I'm using Rupees to test drops
+                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+                droppedItem = new ClassItems(position, ItemTobeDroped);
+                HasDroppedItem = true;
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
         }
     }
 }

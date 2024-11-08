@@ -134,7 +134,7 @@
     <ObjectName>Water</ObjectName>
     <Location>600 308</Location>
 </Item>
-<!--ICollideable Types: 3 Goriyas; a key drops upon killing all 3.-->
+<!--ICollideable Types: 3 Goriyas; a key drops upon killing all 3. Lol i just gave one the key for now-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
     <ObjectName>Goriya</ObjectName>
@@ -147,6 +147,7 @@
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
+	<HasKey> true </HasKey>
     <ObjectName>Goriya</ObjectName>
     <Location>400 176</Location>
 </Item>
