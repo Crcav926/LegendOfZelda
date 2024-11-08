@@ -11,7 +11,6 @@ namespace LegendOfZelda.Command
 {
     class PlayerPushableRight : ICommand
     {
-        private readonly Link _link;
         private PushableBlock _block;
         public PlayerPushableRight(PushableBlock block)
         {
