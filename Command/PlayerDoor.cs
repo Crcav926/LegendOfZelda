@@ -25,6 +25,7 @@ namespace LegendOfZelda.Command
 
             string roomName = door.getRoom();
             Debug.WriteLine($"Room is {roomName}");
+            //TODO: CHANGE SO THE CAMERA TRANSITIONS AND THE CURRENT ROOM CHANGES
             if (roomName != "closed")
             {
                 LevelLoader.Instance.Load(roomName);

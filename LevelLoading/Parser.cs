@@ -97,10 +97,6 @@ namespace LegendOfZelda
                 {
                     objectName = objectNameNode.InnerText;
                 }
-                else
-                {
-                    // Debug.WriteLine("Invalid Object Name.");
-                }
                 if (locationNode != null)
                 {
                     // Change this from split to 2 entries in the XML files
@@ -115,10 +111,6 @@ namespace LegendOfZelda
                         // Sets position to a vector.
                         position = new Vector2(x, y);
                     }
-                }
-                else
-                {
-                    // Debug.WriteLine("Invalid Location Type.");
                 }
 
 

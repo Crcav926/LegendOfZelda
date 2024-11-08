@@ -41,12 +41,14 @@ namespace LegendOfZelda
 
         public RoomObjectManager() 
         {
+            // CHANGE THIS TO == THE MOVERS AND BLOCKS OF THE CURRENT ROOM
             movers = LevelLoader.Instance.getMovers();
             blocks = LevelLoader.Instance.getBlocks();
             this.room = LevelLoader.Instance.getRoom();
         }
         public List<ICollideable> getMovers()
         {
+            // NOTE TO SELF - DO NOT CHANGE THIS CLASS IF POSSIBLE
             return movers;
         }
         public List<ICollideable> getStandStills()
