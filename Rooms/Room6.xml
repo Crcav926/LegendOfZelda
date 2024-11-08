@@ -73,6 +73,11 @@
     <Location>250 352</Location>
 </Item>
 <!--The compass starts spawned, so maybe that should be in here?-->
+<Item>
+    <ObjectType>ClassItems</ObjectType>
+    <ObjectName>Compass</ObjectName>
+    <Location>600 220</Location>
+</Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
