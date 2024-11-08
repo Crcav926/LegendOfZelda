@@ -122,7 +122,7 @@ namespace LegendOfZelda.LinkItems
 
         public void addBomb()
         {
-            bombs++;
+            numBombs++;
         }
 
     }
