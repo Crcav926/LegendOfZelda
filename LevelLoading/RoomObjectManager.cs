@@ -23,6 +23,10 @@ namespace LegendOfZelda
         private string room;
         //for the drop table
         private int DeathCounter = 0;
+        private int Localcounter = 0;
+        //Need a method to access the room number
+        private int roomNum = 0;
+
 
         public static RoomObjectManager Instance
         {
@@ -39,6 +43,28 @@ namespace LegendOfZelda
             (int, char) key = (DeathCounter, c);
             Debug.WriteLine($"Death counter is {DeathCounter}");
             return DropDictionary.GetDropName(key);
+        }
+
+        public String GetKey()
+        {
+            try
+            {
+                // Attempt to retrieve the key only if it is in one of the specified rooms.
+                if (this.roomNum == 2 || this.roomNum == 5 || this.roomNum == 12)
+                {
+                    (int, int) key = (Localcounter, this.roomNum);
+                    Debug.WriteLine($"Death counter is {DeathCounter}");
+                    return DropDictionary.GetDropKey(key);
+                }
+
+                // If the room number does not match, throw an exception to handle it gracefully
+                throw new InvalidOperationException("Key drop is not allowed in this room.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error retrieving key: {ex.Message}");
+                return null; // or some other fallback if necessary
+            }
         }
 
 
@@ -116,6 +142,38 @@ namespace LegendOfZelda
                         {
                             DeathCounter  = 0;
                         }
+                        //Need update both roomNum and localDeathCounter when enter a new room
+                        //this.localDeath = DeathCounter
+                        //this.roomNum =.....
+
+                        if (this.roomNum == 2 || this.roomNum == 5 || this.roomNum == 12)
+                        {
+                            if (this.roomNum == 2 || this.roomNum == 12)
+                            {
+                                if (Localcounter < 3)
+                                {
+                                    Localcounter++;
+                                } else
+                                {
+                                    Localcounter = 0;
+                                }
+                            }
+                            if (this.roomNum == 5)
+                            {
+                                if (Localcounter < 5)
+                                {
+                                    Localcounter++;
+                                }
+                                else
+                                {
+                                    Localcounter = 0;
+                                }
+                            }
+
+
+
+                        }
+
                         movers.Remove(movers[i]);
                     }
                 }
