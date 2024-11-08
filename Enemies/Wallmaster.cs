@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Wallmaster : IEnemy, ICollideable
@@ -131,6 +132,7 @@ public class Wallmaster : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
+            SoundMachine.Instance.GetSound("enemyHurt").Play();
 
             if (hp <= 0)
             {

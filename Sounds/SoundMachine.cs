@@ -11,7 +11,7 @@ namespace LegendOfZelda.Sounds
     {
         private static readonly SoundMachine instance = new SoundMachine();
 
-        private Dictionary<String, SoundEffect> soundDictionary = new Dictionary<String, SoundEffect>();
+        private Dictionary<String, SoundEffectInstance> soundDictionary = new Dictionary<String, SoundEffectInstance>();
         public SoundMachine()
         {
             //initialize here
@@ -21,12 +21,12 @@ namespace LegendOfZelda.Sounds
             get { return instance; }
         }
 
-        public void addSound(String name, SoundEffect effect)
+        public void addSound(String name, SoundEffectInstance effect)
         {
             soundDictionary[name] = effect;
         }
 
-        public SoundEffect GetSound(String name)
+        public SoundEffectInstance GetSound(String name)
         {
             return soundDictionary[name];
         }

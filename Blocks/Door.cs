@@ -17,6 +17,8 @@ namespace LegendOfZelda
         private String room;
         private ISprite sprite;
         private Vector2 newPos;
+        public bool locked;
+        public bool unlockable;
 
         public Door(Vector2 position, String doorType, String room, Vector2 newPos) 
         {
@@ -25,6 +27,11 @@ namespace LegendOfZelda
             sprite = BlockSpriteFactory.Instance.CreateSprite(doorType);
             this.room = room;
             this.newPos = newPos;
+            
+            //determines if the door is locked
+            locked = false;
+            //determines if the door can be unlocked by a key (for example doors that lock until all enemies are killed)
+            unlockable = true;
         }
         public Rectangle getHitbox()
         {
@@ -48,9 +55,12 @@ namespace LegendOfZelda
         }
         public String getCollisionType()
         {
-            return "Door";
+               return "Door";
         }
-       
-       
+      
+       public void setLocked(bool lockState)
+        {
+            locked = lockState;
+        }
     }
 }

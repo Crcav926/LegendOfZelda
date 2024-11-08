@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using LegendOfZelda;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
@@ -205,6 +206,7 @@ public class Goriya : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
+            SoundMachine.Instance.GetSound("enemyHurt").Play();
 
             if (hp <= 0)
             {

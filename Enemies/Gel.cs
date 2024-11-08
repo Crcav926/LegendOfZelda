@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Gel : IEnemy, ICollideable
@@ -133,6 +134,7 @@ public class Gel : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
 
         if (hp <= 0)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda.Sounds;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
@@ -124,6 +125,8 @@ public class Keese : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
+      
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
 
         if (hp <= 0)
         {
