@@ -18,7 +18,7 @@ namespace LegendOfZelda
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
         //for any items on the ground
         public List<ICollideable> staticItems = new List<ICollideable>();
-
+        public List<ICollideable> projectiles = new List<ICollideable>();
         public Link link;
         private string room;
         //for the drop table
@@ -50,7 +50,20 @@ namespace LegendOfZelda
         }
         public List<ICollideable> getMovers()
         {
-            return movers;
+            List<ICollideable> moveList = new List<ICollideable>();
+            if (movers != null)
+            {
+                foreach (ICollideable m in movers)
+                {
+                    moveList.Add(m);
+                }
+            }
+            foreach (ICollideable p in projectiles)
+            {
+                //nevermind holy frick no frames
+                //moveList.Add(p);
+            }
+            return moveList;
         }
         public List<ICollideable> getStandStills()
         {
@@ -112,7 +125,10 @@ namespace LegendOfZelda
         {
             this.link = link;
         }
-
+        public void addProjectile(ICollideable proj)
+        {
+            projectiles.Add(proj);
+        }
         private void addWalls()
         {
             // Walls are 100 pixels thick wide and 87 pixels thick tall

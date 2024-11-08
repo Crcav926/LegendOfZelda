@@ -92,6 +92,7 @@ public class Aquamentus : IEnemy, ICollideable
         foreach (Fireball fireball in fireballs)
         {
             fireball.Update(gameTime);
+            RoomObjectManager.Instance.addProjectile(fireball);
         }
 
         // Move Aquamentus horizontally

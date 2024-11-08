@@ -38,7 +38,7 @@ namespace LegendOfZelda.Command
             }
             else
             {
-                Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
+                //Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
                 // if link has keys and it's unlockable unlock the door and play the unlock sound
                 if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {

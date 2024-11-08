@@ -14,6 +14,7 @@ namespace LegendOfZelda.LinkItems
         public int numKeys;
         public bool hasMap;
         public int coins;
+        public int bombs;
         public Inventory() 
         { 
             items = new List<IItems>();
@@ -21,6 +22,7 @@ namespace LegendOfZelda.LinkItems
             numKeys = 0;
             hasMap = false;
             coins= 0;
+            bombs = 0;
         }
         public void addItem(IItems item)
         {
