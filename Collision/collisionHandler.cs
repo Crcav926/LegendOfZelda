@@ -57,27 +57,76 @@ namespace LegendOfZelda.Collision
             if (collisionDictionary.TryGetValue(key, out Type commandType))
             {
                 // Reflection to instantiate the command and invoke its Execute method
-                MethodInfo executeMethod = commandType.GetMethod("Execute"); 
+                MethodInfo executeMethod = commandType.GetMethod("Execute");
                 if (executeMethod != null)
                 {
                     object commandInstance;
                     // we need to be able to pass in the correct object for the command we're trying to make...
-
-                    //b/c currently the first object is the one that responds
-                    // this will definitely  need to be changed later
-
-                    if ((o1 is Link && !(o2 is Door)) || (o1 is IEnemy && !(o2 is Link)) || o1 is IItems)
+                    // this is less messy but is a lot of decision making code need to ask if there's a way to 
+                    //make it so that order doesn't matter?
+                    if (o1 is Link)
                     {
-                        commandInstance = Activator.CreateInstance(commandType, o1);
-                    }else if(o1 is Link && o2 is Door)
+                        if (o2 is Door || o2 is ClassItems || (o2 is Block)) 
+                        {
+                            //convoluted way of seeing if its pushable block
+                            if (o2 is Block)
+                            {
+                                Block b = (Block)o2;
+                                bool pushable = b.movable;
+                                if (!pushable)
+                                {
+                                    //if we can't push it treat as normal block
+                                    commandInstance = Activator.CreateInstance(commandType, o1);
+                                }
+                                else
+                                {
+                                    //if we can treat as pushable block
+                                    ICollideable[] p = { o1, o2 };
+                                    commandInstance = Activator.CreateInstance(commandType, p);
+                                }
+                            }
+                            else
+                            {
+                                ICollideable[] p = { o1, o2 };
+                                commandInstance = Activator.CreateInstance(commandType, p);
+                            }
+                        }
+                        else //Link and enemy link only passed in, Link and wall link only passed in
+                        {
+                            normBlock:
+                            commandInstance = Activator.CreateInstance(commandType, o1);
+                        }
+                    }else if(o1 is IEnemy)
                     {
-                        ICollideable[] parameters= { o1, o2 };
-                        commandInstance = Activator.CreateInstance(commandType, parameters);
-                    }else if(o1 is EnemyBlockBottom && o2 is Link)
+                        //enemy and item pass in both
+                        if (o2.getCollisionType()=="Item")
+                        {
+                            ICollideable[] p = { o1, o2 };
+                            commandInstance = Activator.CreateInstance(commandType, p);
+                        }else if (o2 is Link) //enemy and link pass in link
+                        {
+                            commandInstance = Activator.CreateInstance(commandType, o2);
+                        }
+                        else { //only remaining is Enemy and wall?
+                            commandInstance = Activator.CreateInstance(commandType, o1);
+                        }
+                        
+                    }else if (o1.getCollisionType() == "Item")
                     {
-                        commandInstance = Activator.CreateInstance(commandType, o2);
-                    }
-                    else
+                        //item
+                        //item and wall pass in item
+                        if (o2.getCollisionType() == "Obstacle")
+                        {
+                            commandInstance = Activator.CreateInstance(commandType, o1);
+                        }else if (o2 is IEnemy) //if enemy pass in enemy then item
+                        {
+                            ICollideable[] p = { o2, o1 };
+                            commandInstance = Activator.CreateInstance(commandType, p);
+                        }else {
+                            Debug.WriteLine("Somehow Item collided with something that wasn't a wall or an enemy?");
+                            commandInstance = Activator.CreateInstance(commandType, o1);
+                        }
+                    }else
                     {
                         Debug.WriteLine($"Object 1 is {o1.GetType().Name} o2 is {o2.GetType().Name}");
                         commandInstance = Activator.CreateInstance(commandType, o2);
@@ -92,12 +141,12 @@ namespace LegendOfZelda.Collision
             }
             else
             {
-                Debug.WriteLine($"Couldn't Find {o1.GetType().Name} and {o2.GetType().Name} and {direction}");
-                Debug.WriteLine("No collision action found for the given types and direction.");
+               // Debug.WriteLine($"Couldn't Find {o1.GetType().Name} and {o2.GetType().Name} and {direction}");
+               // Debug.WriteLine("No collision action found for the given types and direction.");
             }
 
         }
-
+        
         //all this could probably be moved to a level loader
         private void BuildDictionary()
         {
@@ -126,6 +175,12 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Obstacle", "top", typeof(PlayerBlockTop));
             RegisterCollision("Player", "Obstacle", "bottom", typeof(PlayerBlockBottom));
 
+            RegisterCollision("Player", "Pushable", "left", typeof(PlayerPushableLeft));
+            RegisterCollision("Player", "Pushable", "right", typeof(PlayerPushableRight));
+            RegisterCollision("Player", "Pushable", "top", typeof(PlayerPushableDown));
+            RegisterCollision("Player", "Pushable", "bottom", typeof(PlayerPushableUp));
+
+
             RegisterCollision("Enemy", "Obstacle", "left", typeof(EnemyBlockLeft));
             RegisterCollision("Enemy", "Obstacle", "right", typeof(EnemyBlockRight));
             RegisterCollision("Enemy", "Obstacle", "top", typeof(EnemyBlockTop));
@@ -137,21 +192,29 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "Door", "top", typeof(PlayerDoor));
             RegisterCollision("Player", "Door", "bottom", typeof(PlayerDoor));
 
+
             //item collisions
             RegisterCollision("Enemy", "Item", "left", typeof(EnemyItem));
             RegisterCollision("Enemy", "Item", "right", typeof(EnemyItem));
             RegisterCollision("Enemy", "Item", "top", typeof(EnemyItem));
             RegisterCollision("Enemy", "Item", "bottom", typeof(EnemyItem));
-            //this probably won't trigger because enemies are probably before items in the list, but to be safe
-            RegisterCollision("Item", "Enemy", "left", typeof(EnemyItem));
+
+            RegisterCollision("Item","Enemy", "left", typeof(EnemyItem));
             RegisterCollision("Item", "Enemy", "right", typeof(EnemyItem));
             RegisterCollision("Item", "Enemy", "top", typeof(EnemyItem));
             RegisterCollision("Item", "Enemy", "bottom", typeof(EnemyItem));
+
 
             RegisterCollision("Item", "Obstacle", "left", typeof(ItemObstacle));
             RegisterCollision("Item", "Obstacle", "right", typeof(ItemObstacle));
             RegisterCollision("Item", "Obstacle", "top", typeof(ItemObstacle));
             RegisterCollision("Item", "Obstacle", "bottom", typeof(ItemObstacle));
+            
+            //when the player collides with static items add them to the their inventory
+            RegisterCollision("Player", "statItem", "left", typeof(PlayerStatItem));
+            RegisterCollision("Player", "statItem", "right", typeof(PlayerStatItem));
+            RegisterCollision("Player", "statItem", "top", typeof(PlayerStatItem));
+            RegisterCollision("Player", "statItem", "bottom", typeof(PlayerStatItem));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)

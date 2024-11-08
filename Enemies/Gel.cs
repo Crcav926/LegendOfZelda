@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Gel : IEnemy, ICollideable
@@ -21,7 +23,15 @@ public class Gel : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private ISprite sprite;
     private Boolean alive;
-    public Gel(Vector2 Position)
+    private int hp;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
+
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
+
+    public Gel(Vector2 Position, bool hasKey)
     {
         // Set the initial target position
         targetPosition = Position;
@@ -29,10 +39,19 @@ public class Gel : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 60);
         sprite = EnemySpriteFactory.Instance.CreateGelSprite();
         alive = true;
+        hp = 1;
+        canTakeDamage = true;
     }
     // TODO: Make Gel change direction
     public void ChangeDirection()
     {
+    }
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
     }
     public void Update(GameTime gameTime)
     {
@@ -59,6 +78,13 @@ public class Gel : IEnemy, ICollideable
             }
         }
 
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
+        }
+
         // Move towards the target position smoothly
         Vector2 direction = targetPosition - position;
 
@@ -77,6 +103,11 @@ public class Gel : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GelWidth, Constants.GelHeight);
         sprite.Draw(s, destinationRectangle, Color.White);
 
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Vector2 getPosition()
     {
@@ -99,8 +130,30 @@ public class Gel : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { alive = false; }
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
 
-    public void attack() { }
+        if (hp <= 0)
+        {
+            alive = false;
+        }
+    }
+
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+            droppedItem = new ClassItems(position, ItemTobeDroped);
+            HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+        }
+    }
 }

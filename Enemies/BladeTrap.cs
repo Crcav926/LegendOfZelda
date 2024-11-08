@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace LegendOfZelda;
 public class BladeTrap : IEnemy, ICollideable
@@ -17,7 +18,10 @@ public class BladeTrap : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private Boolean alive;
 
-    public BladeTrap(Vector2 position)
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
+
+    public BladeTrap(Vector2 position, bool hasKey)
     {
         this.position = position;
         sprite = EnemySpriteFactory.Instance.CreateBladeTrapSprite();
@@ -67,18 +71,30 @@ public class BladeTrap : IEnemy, ICollideable
         return hitbox;
     }
 
-    public void takendamage() 
+    public void TakeDamage(int damage)
     {
         // Does nothing, Bladetraps can't take damage
     }
 
-    public void attack() 
+    public void Attack()
     {
         // Worry about later
     }
+        
     public Boolean isAlive() { return alive; }
     public String getCollisionType()
     {
         return "Enemy";
+    }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            droppedItem = new ClassItems(position, "OrangeRupee");
+            HasDroppedItem = true;
+        }
     }
 }

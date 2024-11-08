@@ -81,7 +81,11 @@ namespace LegendOfZelda
                 return new Rectangle(0, 0, 0, 0);
             }
         }
-
+        public int getDamage()
+        {
+            // for wood for now we can do an if else depending on the sword
+            return 1;
+        }
         public String getCollisionType()
         {
             return "Item";

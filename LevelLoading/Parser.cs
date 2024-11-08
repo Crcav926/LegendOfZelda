@@ -24,7 +24,8 @@ namespace LegendOfZelda
         private List<ICollideable> colliders = new List<ICollideable>();
         private Type type;
         private string roomName;
-
+        private bool keyBool;
+        private bool lockedDoor;
         public Parsing(string fileName)
         {
             LoadObjects(fileName);
@@ -59,7 +60,10 @@ namespace LegendOfZelda
                 XmlNode locationNode = node.SelectSingleNode("Location");
                 XmlNode linkLocationX = node.SelectSingleNode("LinkLocationX");
                 XmlNode linkLocationY = node.SelectSingleNode("LinkLocationY");
+                XmlNode hasKey = node.SelectSingleNode("HasKey");
+                XmlNode locked = node.SelectSingleNode("Locked");
                 XmlNode room = node.SelectSingleNode("Room");
+                
 
                 // Checks for null, if not null find the inner text.
                 if (objectTypeNode != null)
@@ -75,7 +79,7 @@ namespace LegendOfZelda
                     else if(objectTypeNode.InnerText == "ICollideable" && objectNameNode != null)
                     {
                         type = Type.GetType("LegendOfZelda." + objectNameNode.InnerText);
-                        con2 = type.GetConstructor(new[] { typeof(Vector2)});
+                        con2 = type.GetConstructor(new[] { typeof(Vector2), typeof(bool)});
                         // Debug.WriteLine(con2.ToString());
                         objectName = objectNameNode.InnerText;
                     }
@@ -83,7 +87,7 @@ namespace LegendOfZelda
                     else if (objectTypeNode.InnerText == "Door" && objectNameNode != null)
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
-                        con3 = type.GetConstructor(new[] { typeof(Vector2), typeof(String), typeof(String), typeof(Vector2) });
+                        con3 = type.GetConstructor(new[] { typeof(Vector2), typeof(String), typeof(String), typeof(Vector2) , typeof(bool) });
                         // Debug.WriteLine(con3.ToString());
                         objectName = objectNameNode.InnerText;
                         int x = int.Parse(linkLocationX.InnerText);
@@ -116,9 +120,14 @@ namespace LegendOfZelda
                         position = new Vector2(x, y);
                     }
                 }
-                else
+                if (hasKey != null)
                 {
-                    // Debug.WriteLine("Invalid Location Type.");
+                    keyBool = bool.Parse(hasKey.InnerText);
+                }
+
+                if (locked !=  null)
+                {
+                    lockedDoor = bool.Parse(locked.InnerText);
                 }
 
 
@@ -130,13 +139,13 @@ namespace LegendOfZelda
                 else if (con2 != null && objectTypeNode != null && objectTypeNode.InnerText == "ICollideable")
                 {
                     // Populates list of non-moving collideable objects
-                    colliders.Add((ICollideable)con2.Invoke(new object[] { position }));
+                    colliders.Add((ICollideable)con2.Invoke(new object[] { position, keyBool }));
                     // Debug.WriteLine("Lil guy added");
                 }
                 if (con3 != null && objectTypeNode != null && objectTypeNode.InnerText == "Door")
                 {
                     // Populates list of non-moving collideable objects
-                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition }));
+                    blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition, lockedDoor }));
                 }
             }
         }

@@ -4,6 +4,7 @@ using ObjectManagementExamples;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using System.Diagnostics;
 
 
 namespace LegendOfZelda
@@ -27,6 +28,8 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch, Rectangle destinationRectangle, Color color)
         {
+            //This will draw stuff proportionally to the source rectangles just needs the scale factor.
+            //Rectangle dest = new Rectangle(destinationRectangle.X, destinationRectangle.Y, framesList[currentFrame].Width, framesList[currentFrame].Height);
             spriteBatch.Draw(texture, destinationRectangle, framesList[currentFrame], color);
         }
 

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Wallmaster : IEnemy, ICollideable
@@ -20,21 +22,44 @@ public class Wallmaster : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private ISprite sprite;
     private Boolean alive;
+    private int hp;
+    private readonly Dictionary<string, int> swordDamage;
+    public Boolean canTakeDamage { get; private set; }
+    private double invincibilityTimer = 1.5;
+    private double timeElapsed = 0;
 
-    public Wallmaster(Vector2 position)
+    public bool HasDroppedItem { get; set; } = false;
+    private ClassItems droppedItem;
+
+    public Wallmaster(Vector2 position, bool hasKey)
     {
         // Set the initial target position
         targetPosition = position;
         this.position = position;
         this.sprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
         alive = true;
+
+        hp = 3;
+        swordDamage = new Dictionary<string, int>
+        {
+            { "WOOD", 1 },
+            { "WHITE", 2 },
+            { "MAGIC", 3 }
+        };
+        canTakeDamage = true;
     }
     public void ChangeDirection() { }
 
+    public void invulnerable()
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+        }
+    }
+
     public void Update(GameTime gameTime)
     {
-
-        //????????????????????????
         // Update the jump timer
         jumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         // If the sprite is close enough to the target position, wait for the cooldown to set a new target position
@@ -52,6 +77,13 @@ public class Wallmaster : IEnemy, ICollideable
                 // Reset the timer for the next jump
                 jumpTimer = 0f;
             }
+        }
+
+        timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (timeElapsed > invincibilityTimer)
+        {
+            canTakeDamage = true;
+            timeElapsed = 0;
         }
 
         // Move towards the target position smoothly
@@ -73,6 +105,12 @@ public class Wallmaster : IEnemy, ICollideable
         // I change the size of the rectangle since it is closest to the real size
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.WallmasterWidth, Constants.WallmasterHeight);
         sprite.Draw(s, destinationRectangle, Color.White);
+
+        if (HasDroppedItem)
+        {
+            //this should only be called when the droppedItem has been assigned a value...
+            droppedItem.Draw(s);
+        }
     }
     public Rectangle getHitbox()
     {
@@ -88,8 +126,35 @@ public class Wallmaster : IEnemy, ICollideable
     {
         return "Enemy";
     }
-    public void takendamage() { }
+    public void TakeDamage(int damage)
+    {
+        if (canTakeDamage)
+        {
+            hp -= damage;
+            SoundMachine.Instance.GetSound("enemyHurt").Play();
 
-    public void attack() { }
+            if (hp <= 0)
+            {
+                alive = false;
+            }
+            invulnerable();
+        }
+    }
+
+
+    public void Attack() { }
     public Boolean isAlive() { return alive; }
+
+    public void DropItem()
+    {
+        if (!alive)
+        {
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            //for now I'm using Rupees to test drops
+            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+            droppedItem = new ClassItems(position, ItemTobeDroped);
+            HasDroppedItem = true;
+            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+        }
+    }
 }
