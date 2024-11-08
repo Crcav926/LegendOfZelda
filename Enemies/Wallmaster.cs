@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.LinkMovement;
 
 namespace LegendOfZelda;
 public class Wallmaster : IEnemy, ICollideable
@@ -31,6 +32,7 @@ public class Wallmaster : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
     private bool keyStatus;
+    DamageAnimation damageAnimation;
 
     public Wallmaster(Vector2 position, bool hasKey)
     {
@@ -61,6 +63,7 @@ public class Wallmaster : IEnemy, ICollideable
         {
             keyStatus = false;
         }
+        damageAnimation = new DamageAnimation();
     }
     public void ChangeDirection() { }
 
@@ -74,6 +77,7 @@ public class Wallmaster : IEnemy, ICollideable
 
     public void Update(GameTime gameTime)
     {
+        damageAnimation.Update(gameTime);
         // Update the jump timer
         jumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         // If the sprite is close enough to the target position, wait for the cooldown to set a new target position
@@ -117,8 +121,9 @@ public class Wallmaster : IEnemy, ICollideable
     {
         // Use the current position for the destination rectangle, and size it appropriately
         // I change the size of the rectangle since it is closest to the real size
+        Color color = damageAnimation.GetCurrentColor();
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.WallmasterWidth, Constants.WallmasterHeight);
-        sprite.Draw(s, destinationRectangle, Color.White);
+        sprite.Draw(s, destinationRectangle, color);
 
         if (HasDroppedItem)
         {
@@ -146,6 +151,7 @@ public class Wallmaster : IEnemy, ICollideable
         {
             hp -= damage;
             SoundMachine.Instance.GetSound("enemyHurt").Play();
+            damageAnimation.StartDamageEffect();
 
             if (hp <= 0)
             {

@@ -61,7 +61,7 @@ namespace LegendOfZelda
         //gets info from the dictionary,
         public static string GetDropKey((string s, int c) key)
         {
-            Debug.WriteLine("Accessed Key Dictionary");
+            //Debug.WriteLine("Accessed Key Dictionary");
             if (DropkeyDictionary.TryGetValue(key, out var value))
             {
                 return value; // Return the corresponding value
