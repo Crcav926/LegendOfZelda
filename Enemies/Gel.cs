@@ -154,5 +154,7 @@ public class Gel : IEnemy, ICollideable
             HasDroppedItem = true;
             RoomObjectManager.Instance.staticItems.Add(droppedItem);
         }
+
+        
     }
 }

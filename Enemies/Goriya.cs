@@ -30,6 +30,7 @@ public class Goriya : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private ClassItems droppedKey;
 
     public Goriya(Vector2 Position, string type)
     {
@@ -227,6 +228,10 @@ public class Goriya : IEnemy, ICollideable
             droppedItem = new ClassItems(position, ItemTobeDroped);
             HasDroppedItem = true;
             RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            String Key = RoomObjectManager.Instance.GetKey();
+            droppedKey = new ClassItems(position, Key);
+            RoomObjectManager.Instance.staticItems.Add(droppedKey);
         }
+
     }
 }

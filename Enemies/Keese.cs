@@ -22,6 +22,7 @@ public class Keese : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private ClassItems droppedKey;
 
     public Keese(Vector2 position)
     {
@@ -144,6 +145,9 @@ public class Keese : IEnemy, ICollideable
             droppedItem = new ClassItems(position, ItemTobeDroped);
             HasDroppedItem = true;
             RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            String Key = RoomObjectManager.Instance.GetKey();
+            droppedKey = new ClassItems(position, Key);
+            RoomObjectManager.Instance.staticItems.Add(droppedKey);
         }
     }
 }

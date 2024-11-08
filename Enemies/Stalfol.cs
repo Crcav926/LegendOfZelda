@@ -29,6 +29,7 @@ public class Stalfol : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private ClassItems droppedKey;
 
     public Stalfol(Vector2 Position)
     {
@@ -172,6 +173,9 @@ public class Stalfol : IEnemy, ICollideable
             droppedItem = new ClassItems(position, ItemTobeDroped);
             HasDroppedItem = true;
             RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            String Key = RoomObjectManager.Instance.GetKey();
+            droppedKey = new ClassItems(position, Key);
+            RoomObjectManager.Instance.staticItems.Add(droppedKey);
         }
     }
 }
