@@ -8,7 +8,8 @@ public class Projectile
 {
     private Vector2 position;
     private Vector2 velocity;
-    private float speed = 200f;      // Speed of the projectile
+    //moved to constants.
+    //private float speed = 200f;      // Speed of the projectile
     private ISprite sprite;
     public bool IsActive { get; private set; } = true;  // Track whether the projectile is active
 
@@ -16,7 +17,7 @@ public class Projectile
     public Projectile(Vector2 startPosition, Vector2 direction, ISprite sprite)
     {
         this.position = startPosition;
-        this.velocity = direction * speed;
+        this.velocity = direction * Constants.GoriyaProjectileSpeed;
         this.sprite = sprite;
     }
 
@@ -26,7 +27,7 @@ public class Projectile
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         sprite.Update(gameTime);
         // Mark as inactive if it goes off-screen
-        if (position.X < 0 || position.X > 800 || position.Y < 0 || position.Y > 600)
+        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
         {
             IsActive = false;
         }
@@ -41,8 +42,8 @@ public class Projectile
             Rectangle destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                (int)(30),  
-                (int)(30)  
+                Constants.GoriyaProjectileWidth,  
+                Constants.GoriyaProjectileHeight  
             );
 
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);

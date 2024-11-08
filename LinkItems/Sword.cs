@@ -8,7 +8,7 @@ namespace LegendOfZelda
 {
     public class Sword : IItems, ICollideable
     {
-        double timeOnScreen = .3; // Adjustable data
+        //double timeOnScreen = .3; // Adjustable data
         double timeElapsed = 0;
         private Vector2 itemPosition;
         private Vector2 direction;
@@ -16,7 +16,7 @@ namespace LegendOfZelda
         // Adjustable speed vector
         private Vector2 offSet;
         // Adjustable Distance vector
-        private Vector2 maxDistance = new Vector2(150, 150);
+        //private Vector2 maxDistance = new Vector2(150, 150);
         private Rectangle destination;
         private ItemSpriteFactory itemSpriteFactory;
         ISprite swordSprite;
@@ -35,7 +35,7 @@ namespace LegendOfZelda
         }
         public void Use(Vector2 newDirection, Vector2 newPosition)
         {
-            offSet = new Vector2(35 * newDirection.X, 35 * newDirection.Y);
+            offSet = new Vector2(Constants.SwordOffsetX * newDirection.X, Constants.SwordOffsetY * newDirection.Y);
             vectorToInt = SpriteDirectionData.GetDirection(newDirection);
             swordSprite = itemSpriteFactory.CreateSwordSprite(vectorToInt);
             itemPosition = newPosition;
@@ -53,10 +53,10 @@ namespace LegendOfZelda
 
             itemPosition = origin + offSet;
             swordSprite.Update(gameTime);
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 40, 40);
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.SwordWidth, Constants.SwordHeight);
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > timeOnScreen)
+            if (timeElapsed > Constants.SwordTimeOnScreen)
             {
                 exists = false;
                 timeElapsed = 0;

@@ -134,7 +134,7 @@
     <ObjectName>Water</ObjectName>
     <Location>600 308</Location>
 </Item>
-<!--ICollideable Types: 3 Goriyas; a key drops upon killing all 3.-->
+<!--ICollideable Types: 3 Goriyas; a key drops upon killing all 3. Lol i just gave one the key for now-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
     <ObjectName>Goriya</ObjectName>
@@ -147,27 +147,32 @@
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
+	<HasKey> true </HasKey>
     <ObjectName>Goriya</ObjectName>
     <Location>400 176</Location>
 </Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked>false</Locked>
     <ObjectName>UpDoorWall</ObjectName>
     <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>closed</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked>true</Locked>
     <ObjectName>LeftDoorLocked</ObjectName>
     <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room13.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked>false</Locked>
     <ObjectName>RightDoorWall</ObjectName>
     <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>closed</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
+	<Locked>false</Locked>
     <ObjectName>DownDoorOpen</ObjectName>
     <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room11.xml</Room>
 </Item>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda.Command
 {
@@ -21,18 +22,31 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            Debug.WriteLine("Door Command Triggered");
-
-            string roomName = door.getRoom();
-            Debug.WriteLine($"Room is {roomName}");
-            //TODO: CHANGE SO THE CAMERA TRANSITIONS AND THE CURRENT ROOM CHANGES
-            if (roomName != "closed")
+            //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
+            if (door.lockedS == false)
             {
-                LevelLoader.Instance.Load(roomName);
-                link.position = door.getNewPosition();
+                SoundMachine.Instance.GetSound("throughDoor").Play();
+                string roomName = door.getRoom();
+                Debug.WriteLine($"Room is {roomName}");
+                if (roomName != "closed")
+                {
+                    LevelLoader.Instance.Load(roomName);
+                    link.position = door.getNewPosition();
+                }
+                //lemme just clear the dropped items too...
+                RoomObjectManager.Instance.staticItems.Clear();
             }
-            //lemme just clear the dropped items too...
-            RoomObjectManager.Instance.staticItems.Clear();
+            else
+            {
+                Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
+                // if link has keys and it's unlockable unlock the door and play the unlock sound
+                if (door.unlockable && link.inventory.getNumKeys() > 0)
+                {
+                    SoundMachine.Instance.GetSound("unlock").Play();
+                    door.setLocked(false);
+                    link.inventory.removeKey();
+                }
+            }
         }
     }
 }

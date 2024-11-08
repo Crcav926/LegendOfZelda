@@ -8,14 +8,17 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
 {
     private Vector2 velocity;
-    private float speed = 80f;
+    //put into constants file.
+    //private float speed = 80f;
     private List<Fireball> fireballs;    // List to track active fireballs
-    private float throwCooldown = 3f;    // Time between fireball throws
+    //moved to constants file.
+    //private float throwCooldown = 3f;    // Time between fireball throws
     private float throwTimer = 0f;       // Timer to track when to throw a fireball
     private float minX;  // Left boundary for movement
     private float maxX;  // Right boundary for movement
@@ -32,16 +35,16 @@ public class Aquamentus : IEnemy, ICollideable
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
 
-    public Aquamentus(Vector2 position)
+    public Aquamentus(Vector2 position, bool hasKey)
     {
         this.position = position;
         fireballs = new List<Fireball>();
         sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
-        velocity = new Vector2(speed, 0);  // ontly Horizontal movement
+        velocity = new Vector2(Constants.AquamentusSpeed, 0);  // ontly Horizontal movement
         // Define the movement range (minX and maxX)
-        minX = position.X - 10;
-        maxX = position.X + 100;
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
+        minX = position.X - Constants.AquamentusMinX;
+        maxX = position.X + Constants.AquamentusMaxX;
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
         alive = true;
         hp = 6;
         swordDamage = new Dictionary<string, int>
@@ -67,7 +70,7 @@ public class Aquamentus : IEnemy, ICollideable
     {
         // Update the timer for throwing fireballs
         throwTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (throwTimer >= throwCooldown)
+        if (throwTimer >= Constants.AquamentusThrowCooldown)
         {
             // Throw 3 fireballs in different directions
             ThrowFireball(new Vector2(-1, -1));
@@ -106,14 +109,17 @@ public class Aquamentus : IEnemy, ICollideable
     private void ThrowFireball(Vector2 direction)
     {
         // Create a new fireball at Aquamentus's position and add it to the list
-        Vector2 fireballStartPosition = new Vector2(position.X + 10, position.Y + 30); // Adjust the offset
+        Vector2 fireballStartPosition = new Vector2(position.X + Constants.AquamentusFireballXOffset, position.Y + Constants.AquamentusFireballYOffset); // Adjust the offset
+
+        SoundMachine.Instance.GetSound("aquaRoar").Play();
+
         fireballs.Add(new Fireball(fireballStartPosition, direction));
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         if (alive) {
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 80, 80);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
 
         sprite.Draw(spriteBatch, destinationRectangle, Color.White);
 
@@ -137,6 +143,7 @@ public class Aquamentus : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
+            SoundMachine.Instance.GetSound("enemyHurt").Play();
 
             if (hp <= 0)
             {
@@ -153,7 +160,7 @@ public class Aquamentus : IEnemy, ICollideable
         //put data in the the hitbox
         if (alive)
         {
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 45, 40);
+            hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusHitboxWidth, Constants.AquamentusHitboxHeight);
         }
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 // Should have the same movement as Gel
 namespace LegendOfZelda;
@@ -14,8 +15,8 @@ public class Zol : IEnemy, ICollideable
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
-    private float jumpSpeed = 50f;   // Speed of the jump
-    private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
+    //private float jumpSpeed = 50f;   // Speed of the jump
+    //private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
     private Random random = new Random();
     public Vector2 position { get; set; }
@@ -29,8 +30,8 @@ public class Zol : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-
-    public Zol(Vector2 position)
+    private bool keyStatus;
+    public Zol(Vector2 position, bool hasKey)
     {
         this.position = position;
         // Set the initial target position
@@ -39,6 +40,19 @@ public class Zol : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
+
+        if (hasKey == null)
+        {
+            keyStatus = false;
+        }
+        else if (hasKey)
+        {
+            keyStatus = true;
+        }
+        else
+        {
+            keyStatus = false;
+        }
     }
     public void ChangeDirection()
     {
@@ -59,13 +73,13 @@ public class Zol : IEnemy, ICollideable
         if (Vector2.Distance(position, targetPosition) < 1f)
         {
             // If the cooldown has passed, set a new target position
-            if (jumpTimer >= jumpCooldown)
+            if (jumpTimer >= Constants.ZolJumpCooldown)
             {
                 // Set a new target position in a small area around the current position
-                float jumpRange = 50f; // Limit the jump to a small range
+                // Limit the jump to a small range
                 targetPosition = new Vector2(
-                    position.X + random.Next(-(int)jumpRange, (int)jumpRange),
-                    position.Y + random.Next(-(int)jumpRange, (int)jumpRange)
+                    position.X + random.Next(-(int)Constants.ZolJumpRange, (int)Constants.ZolJumpRange),
+                    position.Y + random.Next(-(int)Constants.ZolJumpRange, (int)Constants.ZolJumpRange)
                 );
 
                 // Reset the timer for the next jump
@@ -87,7 +101,7 @@ public class Zol : IEnemy, ICollideable
         if (direction.Length() > 0)
         {
             direction.Normalize();
-            position += direction * jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            position += direction * Constants.ZolJumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         // Animate the sprite
@@ -97,7 +111,7 @@ public class Zol : IEnemy, ICollideable
     public void Draw(SpriteBatch s)
     {
         // Use the current position for the destination rectangle, and size it appropriately
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.ZolWidth, Constants.ZolHeight);
 
         sprite.Draw(s, destinationRectangle, Color.White);
 
@@ -110,7 +124,7 @@ public class Zol : IEnemy, ICollideable
     public Rectangle getHitbox()
     {
         //put data in the the hitbox
-        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, 60, 60);
+        Rectangle hitbox = new Rectangle((int)position.X, (int)position.Y, Constants.ZolHitboxWidth, Constants.ZolHitboxHeight);
         //Debug.WriteLine("Hitbox of block retrieved!");
         //Debug.WriteLine($"Rectangle hitbox:{destinationRectangle.X} {destinationRectangle.Y} {destinationRectangle.Width} {destinationRectangle.Height}");
         //return it
@@ -123,7 +137,8 @@ public class Zol : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
-
+        
+        SoundMachine.Instance.GetSound("enemyHurt").Play();
         if (hp <= 0)
         {
             alive = false;
@@ -137,12 +152,21 @@ public class Zol : IEnemy, ICollideable
     {
         if (!alive)
         {
-            Debug.WriteLine("DropItem called: Item drop initialized");
-            //for now I'm using Rupees to test drops
-            String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
-            droppedItem = new ClassItems(position, ItemTobeDroped);
-            HasDroppedItem = true;
-            RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            if (keyStatus)
+            {
+                Debug.WriteLine("Key dropped!");
+                droppedItem = new ClassItems(position, "Key");
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
+            else
+            {
+                Debug.WriteLine("DropItem called: Item drop initialized");
+                //for now I'm using Rupees to test drops
+                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+                droppedItem = new ClassItems(position, ItemTobeDroped);
+                HasDroppedItem = true;
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+            }
         }
     }
 }

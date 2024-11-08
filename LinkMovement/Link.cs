@@ -19,8 +19,11 @@ namespace LegendOfZelda
         public Vector2 direction;
         public LinkSpriteFactory spriteFactory;
         // Magic numbers to be used later
-        private int maxHealth = 10;
-        private int currentHealth = 10;
+        //private int maxHealth = 10;
+        //NOTE: this shouldn't need to be public, but CommLinkMove can move when at 0 health
+        //once we remove that dependency it can be made private again.
+        //if link isn't reloaded this should work to put miku's health at max when we first load the game
+        public int currentHealth = Constants.MikuStartingHealth;
         public Boomerang boomerang;
         public IItems arrow;
         public IItems fire;
@@ -32,7 +35,7 @@ namespace LegendOfZelda
         //I'm pulling this out for now
         //public List<ICollideable> inventory = new List<ICollideable>();
         public Boolean canTakeDamage { get; private set; }
-        private double invincibilityTimer = 1.5;
+        //private double invincibilityTimer = 1.5;
         private double timeElapsed = 0;
 
         public Inventory inventory = new Inventory();
@@ -41,8 +44,8 @@ namespace LegendOfZelda
         public Link()
         { 
             spriteFactory = LinkSpriteFactory.Instance;
-            position = new Vector2(370, 330); // Fix magic num later
-            direction = new Vector2(0, 1); // Fix magic num later
+            position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
+            direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
@@ -91,6 +94,11 @@ namespace LegendOfZelda
                 linkState.TakeDamage();
                 currentHealth -= 1;
             }
+            //in case link gets put to negative hp
+            if (currentHealth <= 0)
+            {
+                linkState.Death();
+            }
         }
 
         public void BoomerangAttack()
@@ -133,7 +141,7 @@ namespace LegendOfZelda
             bomb.Update(gameTime);
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeElapsed > invincibilityTimer)
+            if (timeElapsed > Constants.MikuInvincibilityTimer)
             {
                 canTakeDamage = true;
                 timeElapsed = 0;
@@ -141,9 +149,17 @@ namespace LegendOfZelda
             if (currentHealth == 0)
             {
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
-                LevelLoader.Instance.Load("Room1.xml");
-                currentHealth = 10;
+                // This pair freezes her on death and has her play the animation
+                LevelLoader.Instance.Load("RoomDeath.xml");
+                currentHealth = 0;
+
+                //this pair restarts you from room 1 on death
+                //LevelLoader.Instance.Load("Room1.xml");
+                //currentHealth = 10;
+
+                //always needed
                 RoomObjectManager.Instance.staticItems.Clear();
+
             }
         }
         public void invulnerable()

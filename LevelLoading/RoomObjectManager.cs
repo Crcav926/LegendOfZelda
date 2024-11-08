@@ -5,13 +5,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Audio;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda
 {
     internal class RoomObjectManager
     {
         private static RoomObjectManager instance = new RoomObjectManager();
-        private List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
+        //temporary public for testing purposes
+        public List<ICollideable> blocks = LevelLoader.Instance.getBlocks();
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
         //for any items on the ground
         public List<ICollideable> staticItems = new List<ICollideable>();
@@ -78,7 +81,7 @@ namespace LegendOfZelda
             if (movers != LevelLoader.Instance.getMovers())
             {
                 movers = LevelLoader.Instance.getMovers();
-                foreach (ICollideable item in link.inventory.items)
+                foreach (ICollideable item in link.inventory.weapons)
                 {
                     movers.Add((ICollideable)item);
                 }

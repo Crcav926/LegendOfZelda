@@ -12,6 +12,8 @@ using System.IO.Enumeration;
 using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using System.Xml;
+using Microsoft.Xna.Framework.Audio;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda
 {
@@ -21,6 +23,7 @@ namespace LegendOfZelda
         private List<ICollideable> movers = new List<ICollideable>();
         private String room;
         private Link link;
+        SoundMachine soundMachine = SoundMachine.Instance;
         private Room currRoom;
         private Dictionary<String, Room> roomMapping = new Dictionary<string, Room>();
 
@@ -44,7 +47,34 @@ namespace LegendOfZelda
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
+
             this.link = new Link();
+
+            //the instances must be made to allow us to modify the sounds. (make miku quieter)
+            //sounds
+            SoundEffectInstance attackMod = Content.Load<SoundEffect>("mikuAttack").CreateInstance();
+            attackMod.Volume = .5f;
+            SoundEffectInstance hurtMod = Content.Load<SoundEffect>("mikuHurt").CreateInstance();
+            SoundEffectInstance haMod = Content.Load<SoundEffect>("mikuHa").CreateInstance();
+            SoundEffectInstance enemyHurtMod = Content.Load<SoundEffect>("enemyHurt").CreateInstance();
+            SoundEffectInstance getRupeeMod = Content.Load<SoundEffect>("getRupeeSound").CreateInstance();
+            SoundEffectInstance aquaRoarMod = Content.Load<SoundEffect>("aquaRoar").CreateInstance();
+            SoundEffectInstance getTriMod = Content.Load<SoundEffect>("getTri").CreateInstance();
+            SoundEffectInstance throughDoor = Content.Load<SoundEffect>("thruDoor").CreateInstance();
+            SoundEffectInstance unlock = Content.Load<SoundEffect>("unlock").CreateInstance();
+            SoundEffectInstance moveBlock = Content.Load<SoundEffect>("moveBlock").CreateInstance();
+
+            soundMachine.addSound("throughDoor", throughDoor);
+            soundMachine.addSound("moveBlock", moveBlock);
+            soundMachine.addSound("unlock", unlock);
+            soundMachine.addSound("getTri", getTriMod);
+            soundMachine.addSound("aquaRoar", aquaRoarMod);
+            soundMachine.addSound("getRupee", getRupeeMod);
+            soundMachine.addSound("enemyHurt", enemyHurtMod);
+            soundMachine.addSound("attack", attackMod);
+            soundMachine.addSound("hurt", hurtMod);
+            soundMachine.addSound("ha", haMod);
+
         }
         public void Load(String room)
         {
@@ -60,6 +90,10 @@ namespace LegendOfZelda
             {
                 roomMapping.Add(room, currRoom);
             }
+        }
+        private void loadSounds()
+        {
+
         }
         public void RegisterAllCommands(KeyboardCont cont, Game1 game)
         {
