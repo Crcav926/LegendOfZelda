@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using LegendOfZelda.Command;
+using System.Runtime.InteropServices;
 
 
 namespace LegendOfZelda.Collision
@@ -66,24 +67,18 @@ namespace LegendOfZelda.Collision
                     //make it so that order doesn't matter?
                     if (o1 is Link)
                     {
-                        if (o2 is Door || o2 is ClassItems || (o2 is Block))
+                        if (o2 is Door || o2 is ClassItems || (o2 is Block) || o2 is PushableBlock)
                         {
                             //convoluted way of seeing if its pushable block
                             if (o2 is Block)
                             {
-                                Block b = (Block)o2;
-                                bool pushable = b.movable;
-                                if (!pushable)
-                                {
                                     //if we can't push it treat as normal block
                                     commandInstance = Activator.CreateInstance(commandType, o1);
-                                }
-                                else
-                                {
-                                    //if we can treat as pushable block
-                                    ICollideable[] p = { o1, o2 };
-                                    commandInstance = Activator.CreateInstance(commandType, p);
-                                }
+                            }
+                            else if (o2 is PushableBlock)
+                            {
+                                //HAS TO BE o2 IN THE SECOND SLOT; The command doesn't care about link, only the block.
+                                commandInstance = Activator.CreateInstance(commandType, o2);
                             }
                             else
                             {
