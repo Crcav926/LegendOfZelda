@@ -18,11 +18,14 @@ namespace LegendOfZelda
         private List<ICollideable> movers = LevelLoader.Instance.getMovers();
         //for any items on the ground
         public List<ICollideable> staticItems = new List<ICollideable>();
-
+        public List<ICollideable> projectiles = new List<ICollideable>();
         public Link link;
         private string room;
         //for the drop table
         private int DeathCounter = 0;
+        public int Localcounter = 0;
+
+
 
         public static RoomObjectManager Instance
         {
@@ -41,6 +44,24 @@ namespace LegendOfZelda
             return DropDictionary.GetDropName(key);
         }
 
+        // Called everytime to see if you want to be dropping a key on last enemy death
+        public String GetKey()
+        {
+            string roomNumber = LevelLoader.Instance.room;
+            Debug.WriteLine($"Checking if its a drop room, room: {roomNumber}");
+            // Attempt to retrieve the key only if it is in one of the specified rooms.
+            if (roomNumber == "Room2.xml" || roomNumber == "Room5.xml" || roomNumber == "Room12.xml" || roomNumber == "Room15.xml")
+            {
+                (string, int) key = (roomNumber, Localcounter);
+                Debug.WriteLine($"Local counter is {Localcounter}");
+                return DropDictionary.GetDropKey(key);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         public RoomObjectManager() 
         {
@@ -50,7 +71,20 @@ namespace LegendOfZelda
         }
         public List<ICollideable> getMovers()
         {
-            return movers;
+            List<ICollideable> moveList = new List<ICollideable>();
+            if (movers != null)
+            {
+                foreach (ICollideable m in movers)
+                {
+                    moveList.Add(m);
+                }
+            }
+            foreach (ICollideable p in projectiles)
+            {
+                //nevermind holy frick no frames
+                //moveList.Add(p);
+            }
+            return moveList;
         }
         public List<ICollideable> getStandStills()
         {
@@ -103,6 +137,9 @@ namespace LegendOfZelda
                         {
                             DeathCounter  = 0;
                         }
+                        //update the local death counter
+                        Localcounter++;
+
                         movers.Remove(movers[i]);
                     }
                 }
@@ -112,7 +149,10 @@ namespace LegendOfZelda
         {
             this.link = link;
         }
-
+        public void addProjectile(ICollideable proj)
+        {
+            projectiles.Add(proj);
+        }
         private void addWalls()
         {
             // Walls are 100 pixels thick wide and 87 pixels thick tall

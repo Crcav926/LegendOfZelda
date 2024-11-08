@@ -25,20 +25,23 @@ namespace LegendOfZelda.Command
             //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
             if (door.lockedS == false)
             {
-                SoundMachine.Instance.GetSound("throughDoor").Play();
                 string roomName = door.getRoom();
                 Debug.WriteLine($"Room is {roomName}");
+  
                 if (roomName != "closed")
                 {
+                    SoundMachine.Instance.GetSound("throughDoor").Play();
                     LevelLoader.Instance.Load(roomName);
                     link.position = door.getNewPosition();
+                    //lemme just clear the dropped items too...
+                    RoomObjectManager.Instance.staticItems.Clear();
+                    //reset the room by room death counter.
+                    RoomObjectManager.Instance.Localcounter = 0;
                 }
-                //lemme just clear the dropped items too...
-                RoomObjectManager.Instance.staticItems.Clear();
             }
             else
             {
-                Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
+                //Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
                 // if link has keys and it's unlockable unlock the door and play the unlock sound
                 if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {

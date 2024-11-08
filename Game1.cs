@@ -205,8 +205,6 @@ namespace LegendOfZelda
             {
                 mover.Draw(_spriteBatch);
             }
-            test.Draw(_spriteBatch);
-            //testBlock.Draw(_spriteBatch);
             //draw the dropped items
             foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
             {
@@ -216,7 +214,10 @@ namespace LegendOfZelda
 
             hudManager.Draw(_spriteBatch);
 
+
+
              _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

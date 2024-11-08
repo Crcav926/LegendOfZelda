@@ -105,6 +105,11 @@
 <!--For now, I'm just gonna put them near the walls in random spots-->
 <!--Also note the key sitting in the room, it can be grabbed without killing the Wallmasters-->
 <Item>
+    <ObjectType>ClassItems</ObjectType>
+    <ObjectName>Key</ObjectName>
+    <Location>500 352</Location>
+</Item>
+<Item>
     <ObjectType>ICollideable</ObjectType>
     <ObjectName>Wallmaster</ObjectName>
     <Location>450 88</Location>

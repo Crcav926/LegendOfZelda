@@ -39,7 +39,6 @@ namespace LegendOfZelda.LinkItems
             hasMap = false;
             coins= 0;
             numBombs = 0;
-
         }
         public void addItem(IItems item)
         {
@@ -121,7 +120,10 @@ namespace LegendOfZelda.LinkItems
             numKeys--;
         }
 
-
+        public void addBomb()
+        {
+            bombs++;
+        }
 
     }
 }

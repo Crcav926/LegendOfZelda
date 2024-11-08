@@ -84,8 +84,8 @@ namespace LegendOfZelda
         public const float GoriyaSpeed = 2f;
         public const float GoriyaThrowCooldown = 2f;
         public const float GoriyaChangeDirectionCooldown = 2f;
-        public const int GoriyaHeight = 16;
-        public const int GoriyaWidth = 16;
+        public const int GoriyaHeight = 40;
+        public const int GoriyaWidth = 45;
         public const float GoriyaProjectileOffset = 10f;
         //its at this point that I ask if we need all of these hitboxes to be different
         //its easier to change this way at least for different sized objects

@@ -152,6 +152,11 @@
     <Location>500 220</Location>
 </Item>
 <!--The Triforce piece will need to be placed somehow.-->
+<Item>
+    <ObjectType>ClassItems</ObjectType>
+    <ObjectName>Triforce</ObjectName>
+    <Location>375 220</Location>
+</Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
