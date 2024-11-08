@@ -34,6 +34,7 @@ public class Goriya : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private ClassItems droppedKey;
 
     private bool keyStatus;
 
@@ -242,7 +243,13 @@ public class Goriya : IEnemy, ICollideable
     public void DropItem()
     {
         if (!alive)
-        {
+
+            Debug.WriteLine("DropItem called: Item drop initialized");
+           
+            //String Key = RoomObjectManager.Instance.GetKey();
+           // droppedKey = new ClassItems(position, Key);
+            //RoomObjectManager.Instance.staticItems.Add(droppedKey);
+
             if (keyStatus)
             {
                 Debug.WriteLine("Key dropped!");
@@ -259,5 +266,6 @@ public class Goriya : IEnemy, ICollideable
                 RoomObjectManager.Instance.staticItems.Add(droppedItem);
             }
         }
+
     }
 }

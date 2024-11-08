@@ -31,6 +31,7 @@ public class Stalfol : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private ClassItems droppedKey;
 
     private bool keyStatus;
 
@@ -186,7 +187,15 @@ public class Stalfol : IEnemy, ICollideable
     {
         if (!alive)
         {
-            if (keyStatus)
+
+            Debug.WriteLine("DropItem called: Item drop initialized");
+            
+            //songyu version
+            //String Key = RoomObjectManager.Instance.GetKey();
+            //droppedKey = new ClassItems(position, Key);
+            
+            
+           if (keyStatus)
             {
                 Debug.WriteLine("Key dropped!");
                 droppedItem = new ClassItems(position, "Key");
@@ -201,6 +210,7 @@ public class Stalfol : IEnemy, ICollideable
                 HasDroppedItem = true;
                 RoomObjectManager.Instance.staticItems.Add(droppedItem);
             }
+
         }
     }
 }

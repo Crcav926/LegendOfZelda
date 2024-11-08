@@ -177,5 +177,7 @@ public class Gel : IEnemy, ICollideable
                 RoomObjectManager.Instance.staticItems.Add(droppedItem);
             }
         }
+
+        
     }
 }

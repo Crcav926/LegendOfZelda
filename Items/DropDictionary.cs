@@ -42,6 +42,32 @@ public class DropDictionary
             {(0, 'D'), "HeartRed"}
     };
 
+
+    public static Dictionary<(int, int), string> DropkeyDictionary = new Dictionary<(int, int), string>()
+        {
+            {(2, 3), "Key"},
+            //{(3, 5), "Key"},
+            {(5, 5), "Key"},
+            //{(11, 2), "Key"},
+            {(12, 3), "Key"},
+            //for the last one it just automaticly spawn a key, so I am not sure if zero local deathcount is appropriate
+            //{(16, 0), "Key"}
+    };
+
+    public static string GetDropKey((int i, int c) key)
+    {
+        if (DropkeyDictionary.TryGetValue(key, out var value))
+        {
+            return value; // Return the corresponding value
+        }
+        else
+        {
+            Debug.WriteLine("No item found in drop table");
+            return "noItem";
+        }
+    }
+
+
     public static string GetDropName((int i, char c) key)
     {
         if (theDropDictionary.TryGetValue(key, out var value))
