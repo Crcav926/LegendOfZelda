@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda.LinkItems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ObjectManagementExamples;
 using System;
@@ -11,24 +12,42 @@ namespace LegendOfZelda.HUD
     {
 
         ISprite HUDSprite;
-        public HUDManager(Game1 game)
+        InventoryCounter invenCount;
+        Health hp;
+        HUDMap hudMap;
+        public HUDManager()
         {
             HUDSprite = HUDSpriteFactory.Instance.CreateHUD();
+            invenCount = new InventoryCounter();
+            hp = new Health();
+            hudMap = new HUDMap();
+            Debug.WriteLine("Weapons List: ");
+            for (int i = 0; i < Inventory.Instance.weapons.Count; i++)
+            {
+                Debug.WriteLine(Inventory.Instance.weapons[i]);
+            }
         }
 
         public void HUDBuilding()
         {
-
+            
 
         }
 
         public void Update(GameTime gameTime)
         {
             HUDSprite.Update(gameTime);
+            hp.Update(gameTime);
+            hudMap.Update(gameTime);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight/4), Color.White);
+            
+            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
+            invenCount.Draw(spriteBatch);
+            hp.Draw(spriteBatch);
+            hudMap.Draw(spriteBatch);
+
         }
     }
 }
