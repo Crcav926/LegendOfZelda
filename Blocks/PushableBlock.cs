@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace LegendOfZelda;
 //as a quick note, the base of this code was taken from Link.cs, to maintain general code structure.
-public class Block : IBlock , ICollideable //IBlock currently does nothing, but depending on what we do with collision, it may be necessary.
+public class PushableBlock : IBlock , ICollideable //IBlock currently does nothing, but depending on what we do with collision, it may be necessary.
 {
     private ISprite sprite;
     private Rectangle destinationRectangle;
@@ -13,12 +13,12 @@ public class Block : IBlock , ICollideable //IBlock currently does nothing, but 
 
     public bool movable;
 
-    public Block(Vector2 position, String blockName)
+    public PushableBlock(Vector2 position, String blockName)
     {
         sprite = BlockSpriteFactory.Instance.CreateSprite(blockName);
         this.position = position;
         //arbitrary numbers, can change to where we want to put it.
-        movable = false;
+        movable = true;
         //spawn point of rectangle
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 50, 42);
     }

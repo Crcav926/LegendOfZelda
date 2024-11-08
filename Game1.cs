@@ -45,7 +45,7 @@ namespace LegendOfZelda
         private ISprite background;
         private ISprite walls;
 
-        private IController controllerK;
+        //private IController controllerK;
         private HUDManager hudManager;
 
         private KeyboardCont controllerK;
@@ -183,7 +183,7 @@ namespace LegendOfZelda
             string fpsText = $"FPS: {frameRate:0.00}";
 
 
-            var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+            //var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
 
             var matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
