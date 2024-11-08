@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace LegendOfZelda
         private String room;
         private ISprite sprite;
         private Vector2 newPos;
-        public bool locked;
+        public bool lockedS;
         public bool unlockable;
 
         public Door(Vector2 position, String doorType, String room, Vector2 newPos, bool locked) 
@@ -27,9 +28,19 @@ namespace LegendOfZelda
             sprite = BlockSpriteFactory.Instance.CreateSprite(doorType);
             this.room = room;
             this.newPos = newPos;
-            
+
             //determines if the door is locked
-            locked = false;
+            if (locked == null)
+            {
+                lockedS = false;
+            }else if (locked)
+            {
+                lockedS = true;
+            }
+            else
+            {
+                lockedS = false;
+            }
             //determines if the door can be unlocked by a key (for example doors that lock until all enemies are killed)
             unlockable = true;
         }
@@ -60,7 +71,7 @@ namespace LegendOfZelda
       
        public void setLocked(bool lockState)
         {
-            locked = lockState;
+            lockedS = lockState;
         }
     }
 }

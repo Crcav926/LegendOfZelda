@@ -20,14 +20,14 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            //Debug.WriteLine("Miku picked up an Item!");
+            //Debug.WriteLine($"Miku picked up {item.getItemType()} ");
            
             //add the item to link's inventory and delete it off the screen
-            if (item.getItemType() == "key")
+            if (item.getItemType() == "Key")
             {
                 _link.inventory.addKey();
             }
-            if (item.getItemType() == "map")
+            if (item.getItemType() == "Map")
             {
                 _link.inventory.setMap(true);
             }

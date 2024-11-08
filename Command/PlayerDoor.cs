@@ -22,8 +22,8 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            //Debug.WriteLine("Door Command Triggered");
-            if (door.locked == false)
+            //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
+            if (door.lockedS == false)
             {
                 SoundMachine.Instance.GetSound("throughDoor").Play();
                 string roomName = door.getRoom();
@@ -38,7 +38,7 @@ namespace LegendOfZelda.Command
             }
             else
             {
-                Debug.WriteLine("Door Locked");
+                Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
                 // if link has keys and it's unlockable unlock the door and play the unlock sound
                 if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {
