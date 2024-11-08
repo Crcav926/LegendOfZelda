@@ -37,16 +37,16 @@ public class Goriya : IEnemy, ICollideable
 
     private bool keyStatus;
 
-    public Goriya(Vector2 Position, string type, bool hasKey)
+    public Goriya(Vector2 Position, bool hasKey)
     {
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        //destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
         ChangeDirection();
         swordDamage = new Dictionary<string, int>();
-
+        String type = "Red";
         if (type == "Red")
         {
             swordDamage["WOOD"] = 1;

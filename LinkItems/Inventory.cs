@@ -76,5 +76,9 @@ namespace LegendOfZelda.LinkItems
             // call when miku uses key on a locked door
             numKeys--;
         }
+        public void addBomb()
+        {
+            bombs++;
+        }
     }
 }

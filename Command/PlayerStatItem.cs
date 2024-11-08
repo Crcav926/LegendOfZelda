@@ -35,6 +35,10 @@ namespace LegendOfZelda.Command
             {
                 _link.inventory.addCoins(1);
             }
+            if (itemType == "CreateBombSprite")
+            {
+                _link.inventory.addBomb();
+            }
             //I'm still adding the keys to the inventory because they should probably show up in the HUD?
             //Debug.WriteLine($"Added {item.getItemType()} to inventory");
             _link.inventory.addItem(item);

@@ -67,7 +67,7 @@ public class Projectile : ICollideable
 
     public String getCollisionType()
     {
-        return "Enemy";
+        return "Projectile";
     }
 
 
