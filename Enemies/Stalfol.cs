@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.LinkMovement;
 
 namespace LegendOfZelda;
 public class Stalfol : IEnemy, ICollideable
@@ -34,6 +35,8 @@ public class Stalfol : IEnemy, ICollideable
     private ClassItems droppedKey;
 
     private bool keyStatus;
+
+    DamageAnimation damageAnimation;
 
     public Stalfol(Vector2 Position, bool hasKey)
     {
@@ -63,6 +66,7 @@ public class Stalfol : IEnemy, ICollideable
         {
             keyStatus = false;
         }
+        damageAnimation = new DamageAnimation();
     }
 
     public void ChangeDirection()
@@ -98,7 +102,7 @@ public class Stalfol : IEnemy, ICollideable
     {
         // Update the direction change timer
         directionChangeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+        damageAnimation.Update(gameTime);
         // If it's time to change direction
         if (directionChangeTimer >= Constants.StalfosChangeDirectionCooldown)
         {
@@ -138,9 +142,10 @@ public class Stalfol : IEnemy, ICollideable
     {
         if (alive)
         {
+            Color color = damageAnimation.GetCurrentColor();
             // Use the current position for the destination rectangle, and size it appropriately
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.StalfosWidth, Constants.StalfosHeight);
-            sprite.Draw(s, destinationRectangle, Color.White);
+            sprite.Draw(s, destinationRectangle, color);
         }
         if (HasDroppedItem)
         {
@@ -172,6 +177,7 @@ public class Stalfol : IEnemy, ICollideable
         {
             Debug.WriteLine($"{damage} damage done to {this.GetType().Name}");
             SoundMachine.Instance.GetSound("enemyHurt").Play();
+            damageAnimation.StartDamageEffect();
             hp -= damage;
 
             if (hp <= 0)
@@ -188,27 +194,31 @@ public class Stalfol : IEnemy, ICollideable
         if (!alive)
         {
 
-            Debug.WriteLine("DropItem called: Item drop initialized");
-
-            //songyu version
-            //String Key = RoomObjectManager.Instance.GetKey();
-            //droppedKey = new ClassItems(position, Key);
-
-
-            String roomDrop = RoomObjectManager.Instance.GetKey();
-            if (roomDrop != null)
+            if (keyStatus)
             {
-                Debug.WriteLine("Counter based key dropped");
-                ClassItems droppedKey = new ClassItems(position, roomDrop);
-                RoomObjectManager.Instance.staticItems.Add(droppedKey);
+                Debug.WriteLine("Key dropped!");
+                droppedItem = new ClassItems(position, "Key");
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
             }
             else
             {
-                //for now I'm using Rupees to test drops
-                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
-                droppedItem = new ClassItems(position, ItemTobeDroped);
-                HasDroppedItem = true;
-                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                Debug.WriteLine("DropItem called: Item drop initialized");
+
+                String roomDrop = RoomObjectManager.Instance.GetKey();
+                if (roomDrop != null)
+                {
+                    Debug.WriteLine("Counter based key dropped");
+                    ClassItems droppedKey = new ClassItems(position, roomDrop);
+                    RoomObjectManager.Instance.staticItems.Add(droppedKey);
+                }
+                else
+                {
+                    //for now I'm using Rupees to test drops
+                    String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+                    droppedItem = new ClassItems(position, ItemTobeDroped);
+                    HasDroppedItem = true;
+                    RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                }
             }
 
         }

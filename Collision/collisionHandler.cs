@@ -62,6 +62,7 @@ namespace LegendOfZelda.Collision
                 if (executeMethod != null)
                 {
                     object commandInstance;
+                    //Refactor this so I'm not calling getCOllisionType every time.
                     // we need to be able to pass in the correct object for the command we're trying to make...
                     // this is less messy but is a lot of decision making code need to ask if there's a way to 
                     //make it so that order doesn't matter?
@@ -70,12 +71,12 @@ namespace LegendOfZelda.Collision
                         if (o2 is Door || o2 is ClassItems || (o2 is Block) || o2 is PushableBlock)
                         {
                             //convoluted way of seeing if its pushable block
-                            if (o2 is Block)
+                            if (o2.getCollisionType() == "Obstacle")
                             {
                                     //if we can't push it treat as normal block
                                     commandInstance = Activator.CreateInstance(commandType, o1);
                             }
-                            else if (o2 is PushableBlock)
+                            else if (o2.getCollisionType() == "Pushable")
                             {
                                 //HAS TO BE o2 IN THE SECOND SLOT; The command doesn't care about link, only the block.
                                 commandInstance = Activator.CreateInstance(commandType, o2);

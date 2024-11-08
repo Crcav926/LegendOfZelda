@@ -5,6 +5,7 @@ using System;
 using LegendOfZelda;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.LinkMovement;
 
 namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
@@ -37,9 +38,10 @@ public class Goriya : IEnemy, ICollideable
     private ClassItems droppedKey;
 
     private bool keyStatus;
-
+    DamageAnimation damageAnimation;
     public Goriya(Vector2 Position, bool hasKey)
     {
+        damageAnimation = new DamageAnimation();
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
@@ -168,6 +170,7 @@ public class Goriya : IEnemy, ICollideable
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
+        damageAnimation.Update(gameTime);
     }
 
     private void ThrowProjectile()
@@ -189,9 +192,10 @@ public class Goriya : IEnemy, ICollideable
         // Use the current position for the destination rectangle
         if (alive)
         {
+            Color color = damageAnimation.GetCurrentColor();
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GoriyaWidth, Constants.GoriyaHeight);
 
-            sprite.Draw(s, destinationRectangle, Color.White);
+            sprite.Draw(s, destinationRectangle, color);
             // Draw all the projectiles
             foreach (Projectile projectile in projectiles)
             {
@@ -228,7 +232,7 @@ public class Goriya : IEnemy, ICollideable
         {
             hp -= damage;
             SoundMachine.Instance.GetSound("enemyHurt").Play();
-
+            damageAnimation.StartDamageEffect();
             if (hp <= 0)
             {
                 alive = false;

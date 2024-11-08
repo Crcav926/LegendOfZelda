@@ -161,20 +161,31 @@ public class Gel : IEnemy, ICollideable
     {
         if (!alive)
         {
-            String roomDrop = RoomObjectManager.Instance.GetKey();
-            if (roomDrop != null)
+            if (keyStatus)
             {
-                Debug.WriteLine("Counter based key dropped");
-                ClassItems droppedKey = new ClassItems(position, roomDrop);
-                RoomObjectManager.Instance.staticItems.Add(droppedKey);
+                Debug.WriteLine("Key dropped!");
+                droppedItem = new ClassItems(position, "Key");
+                RoomObjectManager.Instance.staticItems.Add(droppedItem);
             }
             else
             {
-                //for now I'm using Rupees to test drops
-                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
-                droppedItem = new ClassItems(position, ItemTobeDroped);
-                HasDroppedItem = true;
-                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                Debug.WriteLine("DropItem called: Item drop initialized");
+
+                String roomDrop = RoomObjectManager.Instance.GetKey();
+                if (roomDrop != null)
+                {
+                    Debug.WriteLine("Counter based key dropped");
+                    ClassItems droppedKey = new ClassItems(position, roomDrop);
+                    RoomObjectManager.Instance.staticItems.Add(droppedKey);
+                }
+                else
+                {
+                    //for now I'm using Rupees to test drops
+                    String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+                    droppedItem = new ClassItems(position, ItemTobeDroped);
+                    HasDroppedItem = true;
+                    RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                }
             }
         }
 

@@ -25,12 +25,12 @@ namespace LegendOfZelda.Command
             //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
             if (door.lockedS == false)
             {
-                SoundMachine.Instance.GetSound("throughDoor").Play();
                 string roomName = door.getRoom();
                 Debug.WriteLine($"Room is {roomName}");
   
                 if (roomName != "closed")
                 {
+                    SoundMachine.Instance.GetSound("throughDoor").Play();
                     LevelLoader.Instance.Load(roomName);
                     link.position = door.getNewPosition();
                     //lemme just clear the dropped items too...
