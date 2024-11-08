@@ -1,4 +1,5 @@
-﻿using LegendOfZelda.LinkItems;
+﻿using LegendOfZelda.HUD;
+using LegendOfZelda.LinkItems;
 using LegendOfZelda.LinkMovement;
 using LegendOfZelda.Sounds;
 using Microsoft.Xna.Framework;
@@ -23,12 +24,14 @@ namespace LegendOfZelda
         //NOTE: this shouldn't need to be public, but CommLinkMove can move when at 0 health
         //once we remove that dependency it can be made private again.
         //if link isn't reloaded this should work to put miku's health at max when we first load the game
-        public int currentHealth = Constants.MikuStartingHealth;
+        public int maxHealth;
+        public int currentHealth;
         public Boomerang boomerang;
         public IItems arrow;
         public IItems fire;
         public IItems sword;
         public IItems bomb;
+        public Health hp;
         public DamageAnimation damageAnimation;
         //this gives me access to the sprite to take its info for hitboxes
         public Sprite hitInfo;
@@ -41,12 +44,26 @@ namespace LegendOfZelda
         public Inventory inventory =new Inventory();
 
         private SoundMachine soundMachine = SoundMachine.Instance;
+
+        private static Link instance = new Link();
+
+        public static Link Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public Link()
-        { 
+        {
+
+
             spriteFactory = LinkSpriteFactory.Instance;
             position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
             direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
+            maxHealth = Constants.MikuStartingHealth;
+            currentHealth = Constants.MikuStartingHealth;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
@@ -57,13 +74,15 @@ namespace LegendOfZelda
             fire = new Fire(direction, position);
             sword = new Sword(direction, position);
             bomb = new Bomb(direction, position);
-            
-            //temporary access to all items
+
+        //temporary access to all items
             inventory.addItem(boomerang);
             inventory.addItem(arrow);
             inventory.addItem(fire);
             inventory.addItem(sword);
             inventory.addItem(bomb);
+
+            
 
             //this allows me to get the sprite into for the hitbox.
             hitInfo = (Sprite)linkSprite;
@@ -92,7 +111,7 @@ namespace LegendOfZelda
             {
                 soundMachine.GetSound("hurt").Play();
                 linkState.TakeDamage();
-                currentHealth -= 1;
+                currentHealth -= 2;
             }
             //in case link gets put to negative hp
             if (currentHealth <= 0)
@@ -139,6 +158,8 @@ namespace LegendOfZelda
             fire.Update(gameTime);
             sword.Update(gameTime);
             bomb.Update(gameTime);
+
+
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > Constants.MikuInvincibilityTimer)

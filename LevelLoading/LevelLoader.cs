@@ -46,8 +46,8 @@ namespace LegendOfZelda
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
 
-            this.link = new Link();
-
+            this.link = Link.Instance;
+            
             //the instances must be made to allow us to modify the sounds. (make miku quieter)
             //sounds
             SoundEffectInstance attackMod = Content.Load<SoundEffect>("mikuAttack").CreateInstance();

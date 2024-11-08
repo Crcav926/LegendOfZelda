@@ -57,7 +57,6 @@ namespace LegendOfZelda
 
         SoundMachine soundMachine = SoundMachine.Instance;
 
-
         ClassItems test;
         Block testBlock;
 
@@ -105,7 +104,7 @@ namespace LegendOfZelda
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
             HUDSpriteFactory.Instance.LoadAllTextures(Content);
-            hudManager = new HUDManager(this);
+            
 
             // TODO: Absorb into level loader
             BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
@@ -137,7 +136,8 @@ namespace LegendOfZelda
             testBlock = new Block(new Vector2(250, 300), "PushableBlock");
             testBlock.movable = true;
             RoomObjectManager.Instance.blocks.Add(testBlock);
-            
+            hudManager = new HUDManager();
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -212,9 +212,9 @@ namespace LegendOfZelda
             {
                 statItem.Draw(_spriteBatch);
             }
+
+
             hudManager.Draw(_spriteBatch);
-
-
 
             // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();

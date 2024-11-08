@@ -7,13 +7,27 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda.LinkItems
 {
+
+    
     public class Inventory
     {
+
+        private static Inventory instance = new Inventory();
+
+        public static Inventory Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
         public List<IItems> items;
         public List<IItems> weapons;
         public int numKeys;
         public bool hasMap;
         public int coins;
+        public int numBombs;
         public Inventory() 
         { 
             items = new List<IItems>();
@@ -21,6 +35,7 @@ namespace LegendOfZelda.LinkItems
             numKeys = 0;
             hasMap = false;
             coins= 0;
+            numBombs = 0;
         }
         public void addItem(IItems item)
         {

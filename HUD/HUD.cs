@@ -11,24 +11,34 @@ namespace LegendOfZelda.HUD
     {
 
         ISprite HUDSprite;
-        public HUDManager(Game1 game)
+        InventoryCounter invenCount;
+        Health hp;
+        public HUDManager()
         {
             HUDSprite = HUDSpriteFactory.Instance.CreateHUD();
+            invenCount = new InventoryCounter();
+            hp = new Health();
         }
 
         public void HUDBuilding()
         {
-
+            
 
         }
 
         public void Update(GameTime gameTime)
         {
             HUDSprite.Update(gameTime);
+            hp.Update(gameTime);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight/4), Color.White);
+            
+            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
+            invenCount.Draw(spriteBatch);
+            hp.Draw(spriteBatch);
+
+
         }
     }
 }
