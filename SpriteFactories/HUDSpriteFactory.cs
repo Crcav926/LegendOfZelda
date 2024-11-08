@@ -102,6 +102,10 @@ namespace LegendOfZelda
             {
                 new Rectangle(645, 117, 8, 8)
             }
+        },{ "Level", new List<Rectangle>()
+            {
+                new Rectangle(584, 1, 64, 40)
+            }
         }
     };
 
@@ -188,6 +192,13 @@ namespace LegendOfZelda
         public ISprite CreateFullHP()
         {
             return new Sprite(HUDSpriteSheet, SpriteFrames["Full"]);
+
+        }
+
+
+        public ISprite CreateLevelCount()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["Level"]);
 
         }
 

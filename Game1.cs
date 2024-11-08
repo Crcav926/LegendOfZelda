@@ -59,7 +59,7 @@ namespace LegendOfZelda
 
         ClassItems test;
         Block testBlock;
-
+        SpriteFont font;
 
         public Game1()
         {
@@ -91,7 +91,7 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
-            // font = Content.Load<SpriteFont>("font");
+             font = Content.Load<SpriteFont>("font");
 
             // Load the texture for the sprite 
 
@@ -174,7 +174,7 @@ namespace LegendOfZelda
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Red);
 
 
             // TODO: Add your drawing code here
@@ -194,7 +194,7 @@ namespace LegendOfZelda
             //TJ wants this moved out of Game 1 becuase of constants
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
 
-
+            
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)
             {
@@ -216,7 +216,7 @@ namespace LegendOfZelda
 
             hudManager.Draw(_spriteBatch);
 
-            // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+             _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

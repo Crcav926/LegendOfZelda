@@ -28,14 +28,18 @@ namespace LegendOfZelda.LinkItems
         public bool hasMap;
         public int coins;
         public int numBombs;
+        public IItems key1Item;
+        public IItems key2Item;
         public Inventory() 
         { 
             items = new List<IItems>();
             weapons= new List<IItems>();
+            
             numKeys = 0;
             hasMap = false;
             coins= 0;
             numBombs = 0;
+
         }
         public void addItem(IItems item)
         {
@@ -43,12 +47,25 @@ namespace LegendOfZelda.LinkItems
             if (item is ClassItems)
             {
                 items.Add(item);
-                //Debug.WriteLine("Added to static items list");
+                Debug.WriteLine("Added to static items list");
             }
             else
             {
-                weapons.Add(item);
-               //Debug.WriteLine("added to weapons list");
+                if (key1Item == null)
+                {
+                    key1Item = item;
+                    weapons.Add(item);
+                    Debug.WriteLine("added to key1");
+                } else if (key2Item == null) {
+                    key2Item = item;
+                    weapons.Add(item);
+                    Debug.WriteLine("Added to key2");
+                } else
+                {
+                    weapons.Add(item);
+                    Debug.WriteLine("added to weapons list");
+                }
+                
             }
             //Prints inventory for debugging
             //Debug.WriteLine($"Current inventory is");
@@ -65,6 +82,20 @@ namespace LegendOfZelda.LinkItems
                 }
             }
         }
+
+        public IItems removeItem(IItems item)
+        {
+            IItems removedItem = item;
+            if (weapons.Remove(item))
+            {
+                Debug.WriteLine("Returned " + removedItem.ToString());
+                return removedItem;
+            }
+
+
+            return null;
+        }
+
         public void addCoins(int amount)
         {
             coins = coins + amount;
@@ -89,5 +120,8 @@ namespace LegendOfZelda.LinkItems
             // call when miku uses key on a locked door
             numKeys--;
         }
+
+
+
     }
 }

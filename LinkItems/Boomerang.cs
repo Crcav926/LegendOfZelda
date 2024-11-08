@@ -53,6 +53,7 @@ namespace LegendOfZelda
                 itemPosition += direction * Constants.BoomerangSpeed;
                 if(itemPosition == maxDistance)
                 {
+
                     direction *= new Vector2(-1, -1);
                 }
                 destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.BoomerangWidth, Constants.BoomerangHeight);

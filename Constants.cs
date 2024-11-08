@@ -8,7 +8,7 @@ namespace LegendOfZelda
     {
         // Screen size
         public const int ScreenWidth = 1600;  // Screen width
-        public const int ScreenHeight = 900;  // Screen height
+        public const int ScreenHeight = 900 + HUDHeight;  // Screen height
         public const int HUDWidth = 0;
         public const int HUDHeight = OriginalHeight / 4;
         // Original resolution in which the sprites are scaled to.

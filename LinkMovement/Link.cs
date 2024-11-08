@@ -26,7 +26,7 @@ namespace LegendOfZelda
         //if link isn't reloaded this should work to put miku's health at max when we first load the game
         public int maxHealth;
         public int currentHealth;
-        public Boomerang boomerang;
+        public IItems boomerang;
         public IItems arrow;
         public IItems fire;
         public IItems sword;
@@ -41,7 +41,7 @@ namespace LegendOfZelda
         //private double invincibilityTimer = 1.5;
         private double timeElapsed = 0;
 
-        public Inventory inventory =new Inventory();
+        public Inventory inventory;
 
         private SoundMachine soundMachine = SoundMachine.Instance;
 
@@ -57,7 +57,7 @@ namespace LegendOfZelda
         public Link()
         {
 
-
+            inventory = Inventory.Instance;
             spriteFactory = LinkSpriteFactory.Instance;
             position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
             direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
@@ -75,7 +75,7 @@ namespace LegendOfZelda
             sword = new Sword(direction, position);
             bomb = new Bomb(direction, position);
 
-        //temporary access to all items
+            //temporary access to all items
             inventory.addItem(boomerang);
             inventory.addItem(arrow);
             inventory.addItem(fire);
