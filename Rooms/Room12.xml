@@ -147,7 +147,6 @@
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-	<HasKey> true </HasKey>
     <ObjectName>Goriya</ObjectName>
     <Location>400 176</Location>
 </Item>

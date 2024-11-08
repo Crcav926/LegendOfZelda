@@ -216,7 +216,7 @@ namespace LegendOfZelda
 
 
 
-            // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+            //_spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

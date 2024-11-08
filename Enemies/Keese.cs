@@ -157,13 +157,6 @@ public class Keese : IEnemy, ICollideable
     {
         if (!alive)
         {
-            Debug.WriteLine("DropItem called: Item drop initialized");
-            
-            //songyu vers
-            //String Key = RoomObjectManager.Instance.GetKey();
-            //droppedKey = new ClassItems(position, Key);
-            //RoomObjectManager.Instance.staticItems.Add(droppedKey);
-
             if (keyStatus)
             {
                 Debug.WriteLine("Key dropped!");
@@ -172,12 +165,22 @@ public class Keese : IEnemy, ICollideable
             }else
             {
                 Debug.WriteLine("DropItem called: Item drop initialized");
-                //for now I'm using Rupees to test drops
-                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
-                //Debug.WriteLine(ItemTobeDroped);
-                droppedItem = new ClassItems(position, ItemTobeDroped);
-                HasDroppedItem = true;
-                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+
+                String roomDrop = RoomObjectManager.Instance.GetKey();
+                if (roomDrop != null)
+                {
+                    Debug.WriteLine("Counter based key dropped");
+                    ClassItems droppedKey = new ClassItems(position, roomDrop);
+                    RoomObjectManager.Instance.staticItems.Add(droppedKey);
+                }
+                else
+                {
+                    //for now I'm using Rupees to test drops
+                    String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
+                    droppedItem = new ClassItems(position, ItemTobeDroped);
+                    HasDroppedItem = true;
+                    RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                }
             }
 
         }

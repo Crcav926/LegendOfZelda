@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-public class DropDictionary
+namespace LegendOfZelda
 {
-    public static Dictionary<(int, char), string>  theDropDictionary = new Dictionary<(int, char), string>()
+    public class DropDictionary
+    {
+        public static Dictionary<(int, char), string> theDropDictionary = new Dictionary<(int, char), string>()
         {
             {(1, 'B'), "CreateBombSprite"},
             {(2, 'B'), "OrangeRupee"},
@@ -42,43 +44,48 @@ public class DropDictionary
             {(0, 'D'), "HeartRed"}
     };
 
-
-    public static Dictionary<(int, int), string> DropkeyDictionary = new Dictionary<(int, int), string>()
+        // Stores room number, number of enemies, and what needs to be dropped, this is actually for any kill all the enemies to drop blank
+        public static Dictionary<(string, int), string> DropkeyDictionary = new Dictionary<(string, int), string>()
         {
-            {(2, 3), "Key"},
+            //ALL THE NUMBER OF DEATHS IS 1 LESS TO WORK AND IDK WHY LMAO BUT IT WORKS
+            {("Room2.xml", 2), "Key"},
             //{(3, 5), "Key"},
-            {(5, 5), "Key"},
+            {("Room5.xml", 4), "Key"},
             //{(11, 2), "Key"},
-            {(12, 3), "Key"},
+            {("Room12.xml", 2), "Key"},
+            { ("Room15.xml",2), "CreateBoomerangSprite"}
             //for the last one it just automaticly spawn a key, so I am not sure if zero local deathcount is appropriate
             //{(16, 0), "Key"}
     };
 
-    public static string GetDropKey((int i, int c) key)
-    {
-        if (DropkeyDictionary.TryGetValue(key, out var value))
+        //gets info from the dictionary,
+        public static string GetDropKey((string s, int c) key)
         {
-            return value; // Return the corresponding value
+            Debug.WriteLine("Accessed Key Dictionary");
+            if (DropkeyDictionary.TryGetValue(key, out var value))
+            {
+                return value; // Return the corresponding value
+            }
+            else
+            {
+                Debug.WriteLine($"Death Counter not reached yet count: {RoomObjectManager.Instance.Localcounter}");
+                return null;
+            }
         }
-        else
+
+
+        public static string GetDropName((int i, char c) key)
         {
-            Debug.WriteLine("No item found in drop table");
-            return "noItem";
+            if (theDropDictionary.TryGetValue(key, out var value))
+            {
+                return value; // Return the corresponding value
+            }
+            else
+            {
+                Debug.WriteLine("No item found in drop table");
+                return "noItem";
+            }
         }
+
     }
-
-
-    public static string GetDropName((int i, char c) key)
-    {
-        if (theDropDictionary.TryGetValue(key, out var value))
-        {
-            return value; // Return the corresponding value
-        }
-        else
-        {
-            Debug.WriteLine("No item found in drop table");
-            return "noItem";
-        }
-    }
-
 }
