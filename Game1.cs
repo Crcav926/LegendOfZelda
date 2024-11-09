@@ -119,14 +119,7 @@ namespace LegendOfZelda
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
-          
-            //I'll keep the theme song loaded here so it doesn't reset on room changes
-            mikuSong = Content.Load<SoundEffect>("mikuSong");
-            modifier = mikuSong.CreateInstance();
-            modifier.IsLooped = true;
-            modifier.Volume = .3f;
-            modifier.Play();
-
+            SoundMachine.Instance.GetSound("theme").Play();
       
             hudManager = new HUDManager();
 
@@ -216,7 +209,7 @@ namespace LegendOfZelda
         }
         public void Reset()
         {
-            modifier.Stop();
+            SoundMachine.Instance.GetSound("theme").Stop();
             this.Initialize();
         }
     }

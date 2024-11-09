@@ -74,6 +74,13 @@ namespace LegendOfZelda
             soundMachine.addSound("hurt", hurtMod);
             soundMachine.addSound("ha", haMod);
 
+            //I'll keep the theme song loaded here so it doesn't reset on room changes
+            SoundEffectInstance mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
+            mikuSong.IsLooped = true;
+            mikuSong.Volume = .3f;
+
+            soundMachine.addSound("theme", mikuSong);
+
         }
         public void Load(String room)
         {
