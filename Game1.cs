@@ -56,6 +56,8 @@ namespace LegendOfZelda
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
+        SoundEffect mikuSong;
+        SoundEffectInstance modifier;
         SpriteFont font;
 
         public Game1()
