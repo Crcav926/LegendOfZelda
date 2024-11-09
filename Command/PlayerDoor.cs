@@ -23,10 +23,10 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            if (!Camera2D.Instance.isSliding)
-            {
-                //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
-                if (door.lockedS == false)
+            //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
+            if (door.lockedS == false)
+                {
+                if (!Camera2D.Instance.isSliding)
                 {
                     string roomName = door.getRoom();
                     Debug.WriteLine($"Room is {roomName}");
@@ -62,40 +62,39 @@ namespace LegendOfZelda.Command
                         RoomObjectManager.Instance.Localcounter = 0;
                     }
                 }
-                else
+            }else
+            {
+                //Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
+                // if link has keys and it's unlockable unlock the door and play the unlock sound
+                if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {
-                    //Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
-                    // if link has keys and it's unlockable unlock the door and play the unlock sound
-                    if (door.unlockable && link.inventory.getNumKeys() > 0)
+                    SoundMachine.Instance.GetSound("unlock").Play();
+                    //pause the game to play sound and see door change
+                    String currentDoor = door.doorSprite;
+                    Debug.WriteLine($"Current door is {currentDoor}");
+                    switch (currentDoor[0])
                     {
-                        SoundMachine.Instance.GetSound("unlock").Play();
-                        //pause the game to play sound and see door change
-                        String currentDoor = door.doorSprite;
-                        Debug.WriteLine($"Current door is {currentDoor}");
-                        switch (currentDoor[0])
-                        {
-                            case 'R':
-                                door.doorSprite = "RightDoorOpen";
-                                break;
-                            case 'L':
-                                door.doorSprite = "LeftDoorOpen";
-                                break;
-                            case 'U':
-                                Debug.WriteLine("Swapping to open door");
-                                door.doorSprite = "UpDoorOpen";
-                                break;
-                            case 'D':
-                                door.doorSprite = "DownDoorOpen";
-                                break;
-                        }
-                        currentDoor = door.doorSprite;
-                        Debug.WriteLine($"Updated door is {currentDoor}");
-                        Thread.Sleep(1500);
-                        door.setLocked(false);
-                        link.inventory.removeKey();
+                        case 'R':
+                            door.doorSprite = "RightDoorOpen";
+                            break;
+                        case 'L':
+                            door.doorSprite = "LeftDoorOpen";
+                            break;
+                        case 'U':
+                            Debug.WriteLine("Swapping to open door");
+                            door.doorSprite = "UpDoorOpen";
+                            break;
+                        case 'D':
+                            door.doorSprite = "DownDoorOpen";
+                            break;
                     }
+                    Debug.WriteLine($"Updated door is {currentDoor}");
+                    Thread.Sleep(1500);
+                    door.setLocked(false);
+                    link.inventory.removeKey();
                 }
             }
+    
         }
     }
 }

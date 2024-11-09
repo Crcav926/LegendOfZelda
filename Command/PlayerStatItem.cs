@@ -55,6 +55,7 @@ namespace LegendOfZelda.Command
                 {
                     _link.currentHealth = _link.maxHealth;
                 }
+            }
                 //I'm still adding the keys to the inventory because they should probably show up in the HUD?
                 //Debug.WriteLine($"Added {item.getItemType()} to inventory");
                 _link.inventory.addItem(item);
@@ -62,7 +63,7 @@ namespace LegendOfZelda.Command
                 //doing both to be safe
                 item.makeContact();
                 RoomObjectManager.Instance.staticItems.Remove(item);
-            }
+            
         }
     }
 }
