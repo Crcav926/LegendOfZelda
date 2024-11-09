@@ -180,20 +180,19 @@ namespace LegendOfZelda
             GraphicsDevice.Clear(Color.Black);
 
 
-             // TODO: Add your drawing code here
-             // Temp fps check.
-             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
-             string fpsText = $"FPS: {frameRate:0.00}";
+            // TODO: Add your drawing code here
+            // Temp fps check.
+            double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
+            string fpsText = $"FPS: {frameRate:0.00}";
 
 
             Matrix matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
             // Draw the game content with the transform matrix applied
+
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: Camera2D.Instance.getMatrix());
-
-            if (!paused){
-
-                //TJ wants this moved out of Game 1 becuase of constants
+            if (!paused)
+            {
                 foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
                 {
                     entry.Value.Draw(_spriteBatch);
@@ -211,22 +210,24 @@ namespace LegendOfZelda
                 {
                     statItem.Draw(_spriteBatch);
                 }
+            }
 
-                hudManager.Draw(_spriteBatch);
 
-            }else
+            _spriteBatch.End();
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
+            hudManager.Draw(_spriteBatch);
+
+            if (paused)
             {
                 //THIS IS THE MOST JANK PAUSE EVER BUT IT DO WORK
                 Rectangle destinationRectangle = new Rectangle(-(int)Camera2D.Instance.getPosition().X, (int)Camera2D.Instance.getPosition().Y, 1000, 1000);
                 blackRectangle = new Texture2D(GraphicsDevice, 1, 1);
                 blackRectangle.SetData(new[] { Color.Black });
+                //hudManager.Draw(_spriteBatch, new Rectangle(100, Constants.HUDHeight ,Constants.OriginalWidth, Constants.OriginalHeight / 4));
                 _spriteBatch.Draw(blackRectangle, destinationRectangle, Color.White);
                 _spriteBatch.DrawString(font, "PAUSED", new Vector2(360, 200), Color.White);
             }
-            _spriteBatch.DrawString(font, fpsText, new Vector2(680, 0), Color.White);
-
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
         public void Reset()

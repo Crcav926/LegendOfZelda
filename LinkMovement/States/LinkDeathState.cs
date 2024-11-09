@@ -42,7 +42,7 @@ namespace LegendOfZelda.LinkMovement
         public void Death()
         {
             //we'll figure something out
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void Draw(SpriteBatch spriteBatch)

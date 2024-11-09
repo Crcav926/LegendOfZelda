@@ -30,10 +30,6 @@ public class Projectile : ICollideable
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         sprite.Update(gameTime);
         // Mark as inactive if it goes off-screen
-        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
-        {
-            IsActive = false;
-        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
