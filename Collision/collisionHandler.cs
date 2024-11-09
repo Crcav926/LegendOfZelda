@@ -163,7 +163,7 @@ namespace LegendOfZelda.Collision
 
             Type[] enemyTypes = { typeof(Aquamentus), typeof(BladeTrap), typeof(Gel), typeof(Goriya), typeof(Keese), typeof(Stalfol), typeof(Wallmaster), typeof(Zol) };
             Type[] projectileTypes = { typeof(Projectile), typeof(Fireball) }; // add stafol's sword?
-            Type[] obstacleTypes = { typeof(Block), typeof(Wall) }; // add wall and door?
+            Type[] obstacleTypes = { typeof(Block), typeof(collideWall) }; // add wall and door?
 
             // new dictionary that is more compact but im also ignoring items
             RegisterCollision("Player", "Enemy", "left", typeof(PlayerTakeDamage));

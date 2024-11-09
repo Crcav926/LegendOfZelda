@@ -13,7 +13,13 @@ namespace LegendOfZelda
         public static Dictionary<String, List<Rectangle>> frames = new Dictionary<String, List<Rectangle>>()
             {
             {
-            "Floor", new List<Rectangle> { new Rectangle(984, 11, 16, 16) }
+            "Floor1", new List<Rectangle> {  new Rectangle(1, 192, 192, 112) }
+            },
+            {
+            "FloorVoid", new List<Rectangle> {  new Rectangle(1, 192, 192, 112) }
+            },
+            {
+            "FloorItemRoom", new List<Rectangle> {  new Rectangle(1, 192, 192, 112) }
             },
             {
             "Block", new List<Rectangle>{ new Rectangle(1001, 11, 16, 16) }

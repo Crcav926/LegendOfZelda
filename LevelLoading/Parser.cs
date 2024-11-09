@@ -77,7 +77,7 @@ namespace LegendOfZelda
                 if (objectTypeNode != null)
                 {
                     objectType = objectTypeNode.InnerText;
-                    if (objectTypeNode.InnerText == "Block")
+                    if (objectTypeNode.InnerText == "Block" || objectTypeNode.InnerText == "Floor")
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
                         con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
@@ -150,6 +150,11 @@ namespace LegendOfZelda
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
                 }
+                if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Floor")
+                {
+                    // Populates list of non-moving collideable objects
+                    blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
+                }
                 else if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "PushableBlock")
                 {
                     // Populates list of non-moving collideable objects
@@ -179,21 +184,29 @@ namespace LegendOfZelda
             Vector2 positions = Constants.top1Position;
             Vector2 size = Constants.horizontalWallSize;
             positions += offSet * multiplier;
-            Wall top1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            collideWall top1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
             positions = Constants.top2Position + offSet * multiplier;
-            Wall top2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            collideWall top2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
             positions = Constants.bot1Position + offSet * multiplier;
-            Wall bot1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            collideWall bot1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
             positions = Constants.bot2Position + offSet * multiplier;
-            Wall bot2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            collideWall bot2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
             positions = Constants.left1Position + offSet * multiplier;
-            Wall left1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            collideWall left1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
             positions = Constants.left2Position + offSet * multiplier;
-            Wall left2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            collideWall left2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
             positions = Constants.right1Position + offSet * multiplier;
-            Wall right1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            collideWall right1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
             positions = Constants.right2Position + offSet * multiplier;
-            Wall right2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            collideWall right2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.topMiddlePosition + offSet * multiplier;
+            collideWall topMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalMiddleSize.X, (int)Constants.horizontalMiddleSize.Y));
+            positions = Constants.botMiddlePosition + offSet * multiplier;
+            collideWall botMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalMiddleSize.X, (int)Constants.horizontalMiddleSize.Y));
+            positions = Constants.leftMiddlePosition + offSet * multiplier;
+            collideWall leftMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalMiddleSize.X, (int)Constants.verticalMiddleSize.Y));
+            positions = Constants.rightMiddlePosition + offSet * multiplier;
+            collideWall rightMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalMiddleSize.X, (int)Constants.verticalMiddleSize.Y));
 
             blocks.Add(top1);
             blocks.Add(top2);
@@ -203,6 +216,10 @@ namespace LegendOfZelda
             blocks.Add(left2);
             blocks.Add(right1);
             blocks.Add(right2);
+            blocks.Add(topMiddle);
+            blocks.Add(botMiddle);
+            blocks.Add(leftMiddle);
+            blocks.Add(rightMiddle);
         }
     }
 }

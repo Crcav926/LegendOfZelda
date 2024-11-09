@@ -13,6 +13,7 @@ namespace LegendOfZelda
         Matrix cameraMatrix;
         Vector2 position = new Vector2(0, Constants.HUDHeight);
         Vector2 targetPosition = new Vector2(0, Constants.HUDHeight);
+        public Boolean isSliding;
 
         private static Camera2D instance = new Camera2D();
 
@@ -34,28 +35,56 @@ namespace LegendOfZelda
         }
         public void slideLeft()
         {
-            targetPosition.X = (int)position.X + 800;
+            if (!isSliding)
+            {
+                isSliding = true;
+                targetPosition.X = (int)position.X + 800;
+            }
         }
         public void slideRight()
         {
-            targetPosition.X = (int)position.X - 800;
+            if (!isSliding)
+            {
+                isSliding = true;
+                targetPosition.X = (int)position.X - 800;
+            }
         }
         public void slideUp()
         {
-            targetPosition.Y = (int)position.Y - 480;
+            if (!isSliding)
+            {
+                isSliding = true;
+                targetPosition.Y = (int)position.Y + 480;
+            }
         }
         public void slideDown() 
         {
-            targetPosition.Y = (int)position.Y + 480;
+            if (!isSliding)
+            {
+                isSliding = true;
+                targetPosition.Y = (int)position.Y - 480;
+            }
         }
         public void Update()
         {
-            position = Vector2.Lerp(position, targetPosition, .05f);
+            if (isSliding)
+            {
+                float threshold = 5f; // Set a threshold, e.g., 1 pixel
+
+                // Smoothly interpolate the position towards the target
+                position = Vector2.Lerp(position, targetPosition, .03f);
+
+                // Check if the camera is close enough to the target position
+                if (Vector2.Distance(position, targetPosition) < threshold)
+                {
+                    position = targetPosition; // Snap to the exact target
+                    isSliding = false; // Stop sliding
+                }
+            }
         }
         public Vector2 getPosition()
         {
-            Debug.WriteLine(position);
-            return position;
+            return targetPosition;
         }
     }
 }
