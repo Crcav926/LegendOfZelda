@@ -23,8 +23,8 @@ namespace LegendOfZelda
         private string room;
         //for the drop table
         private int DeathCounter = 0;
+        public Room currentRoom = new Room(LevelLoader.Instance.getBlocks(), LevelLoader.Instance.getMovers(), "testRoom");
         public int Localcounter = 0;
-
 
 
         public static RoomObjectManager Instance
@@ -65,26 +65,20 @@ namespace LegendOfZelda
 
         public RoomObjectManager() 
         {
+            // CHANGE THIS TO == THE MOVERS AND BLOCKS OF THE CURRENT ROOM
             movers = LevelLoader.Instance.getMovers();
             blocks = LevelLoader.Instance.getBlocks();
             this.room = LevelLoader.Instance.getRoom();
         }
         public List<ICollideable> getMovers()
         {
-            List<ICollideable> moveList = new List<ICollideable>();
-            if (movers != null)
-            {
-                foreach (ICollideable m in movers)
-                {
-                    moveList.Add(m);
-                }
-            }
-            foreach (ICollideable p in projectiles)
-            {
+            // NOTE TO SELF - DO NOT CHANGE THIS CLASS IF POSSIBLE
+            return movers;
+            //foreach (ICollideable p in projectiles)
+            //{
                 //nevermind holy frick no frames
                 //moveList.Add(p);
-            }
-            return moveList;
+            //}
         }
         public List<ICollideable> getStandStills()
         {
@@ -109,19 +103,19 @@ namespace LegendOfZelda
         }
         public void Update()
         {
+            currentRoom = LevelLoader.Instance.getCurrentRoom();
             // TODO: Check if the room changed instead of if they're the same list, in case we want to remove enemies (will add in morning)
-            if (movers != LevelLoader.Instance.getMovers())
+            if (movers != currentRoom.getMovers())
             {
-                movers = LevelLoader.Instance.getMovers();
+                movers = currentRoom.getMovers();
                 foreach (ICollideable item in link.inventory.weapons)
                 {
                     movers.Add((ICollideable)item);
                 }
             }
-            if (blocks != LevelLoader.Instance.getBlocks())
+            if (blocks != currentRoom.getStatics())
             {
-                blocks = LevelLoader.Instance.getBlocks();
-                addWalls();
+                blocks = currentRoom.getStatics();
             }
             for(int i = 0; i < movers.Count; i++)
             {
@@ -157,32 +151,10 @@ namespace LegendOfZelda
         {
             // Walls are 100 pixels thick wide and 87 pixels thick tall
             // Dimensions of the rooms are 800 / 480
-
-            Wall top1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 350, 87));
-            Wall topMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 0, 100, 80));
-            Wall top2 = new Wall(new Microsoft.Xna.Framework.Rectangle(450, 0, 350, 87));
-            Wall bot1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 392, 350, 87));
-            Wall botMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 392, 100, 80));
-            Wall bot2 = new Wall(new Microsoft.Xna.Framework.Rectangle(450, 392, 350, 87));
-            Wall left1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 100, 196));
-            Wall leftMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 196, 90, 88));
-            Wall left2 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 284, 100, 196));
-            Wall right1 = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 0, 100, 196));
-            Wall rightMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 196, 90, 88));
-            Wall right2 = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 284, 100, 196));
-
-            blocks.Add(top1);
-            blocks.Add(topMiddle);
-            blocks.Add(top2);
-            blocks.Add(bot1);
-            blocks.Add(botMiddle);
-            blocks.Add(bot2);
-            blocks.Add(left1);
-            blocks.Add(leftMiddle);
-            blocks.Add(left2);
-            blocks.Add(right1);
-            blocks.Add(rightMiddle);
-            blocks.Add(right2);
+            // Wall topMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 0, 100, 80));
+            // Wall botMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 392, 100, 80));
+            // Wall leftMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 196, 90, 88));
+            // Wall rightMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 196, 90, 88));
 
         }
     }

@@ -20,11 +20,13 @@ namespace LegendOfZelda
 {
     internal class LevelLoader
     {
-        private List<ICollideable> statics;
-        private List<ICollideable> movers;
+        private List<ICollideable> statics = new List<ICollideable>();
+        private List<ICollideable> movers = new List<ICollideable>();
         public String room;
         private Link link;
         SoundMachine soundMachine = SoundMachine.Instance;
+        private Room currRoom;
+        private Dictionary<String, Room> roomMapping = new Dictionary<string, Room>();
 
         public LevelLoader() 
         {
@@ -92,8 +94,12 @@ namespace LegendOfZelda
             movers = parseIt.getMovers();
             movers.Add(link);
             RoomObjectManager.Instance.addLink(link);
+            currRoom = new Room(statics, movers, room);
             // Sorts through each item in the list and parses through.
-            // Mainly testing by parsing through all rooms, but eventually have only cetain rooms have their information loaded.
+            if (!roomMapping.ContainsKey(room))
+            {
+                roomMapping.Add(room, currRoom);
+            }
         }
         private void loadSounds()
         {
@@ -114,6 +120,7 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.R, new CommReset(game, link));
             cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
             cont.RegisterCommand(Keys.D3, new RotateItems());
+            cont.RegisterCommand(Keys.P, new CommPause(game));
 
 
             cont.registerHeldDown(Keys.A, new CommMoveHeldDown(link, new Vector2(-1, 0)));
@@ -137,6 +144,18 @@ namespace LegendOfZelda
         public string getRoom()
         {
             return room;
+        }
+        public Dictionary<String, Room> getRooms()
+        {
+            return roomMapping;
+        }
+        public void changeCurrentRoom(String s)
+        {
+            currRoom =  roomMapping[s];
+        }
+        public Room getCurrentRoom()
+        {
+            return currRoom;
         }
     }
 }

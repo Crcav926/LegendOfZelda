@@ -15,6 +15,7 @@ namespace LegendOfZelda
         private string objectName { get; set; }
         private Vector2 position { get; set; }
         private Vector2 newPosition { get; set; }
+        private Vector2 offSet {  get; set; }
         private Tuple <String,String,Vector2> objectData { get; set; }
         public List<Tuple<string, string, Vector2>> objectList { get; set; } = new List<Tuple<string, string, Vector2>>();
         private ConstructorInfo con;
@@ -26,6 +27,7 @@ namespace LegendOfZelda
         private string roomName;
         private bool keyBool;
         private bool lockedDoor;
+        private Vector2 multiplier = new Vector2(Constants.OriginalWidth, Constants.OriginalHeight);
         public Parsing(string fileName)
         {
             LoadObjects(fileName);
@@ -63,13 +65,19 @@ namespace LegendOfZelda
                 XmlNode hasKey = node.SelectSingleNode("HasKey");
                 XmlNode locked = node.SelectSingleNode("Locked");
                 XmlNode room = node.SelectSingleNode("Room");
-                
+                XmlNode offSetX = node.SelectSingleNode("OffsetX");
+                XmlNode offSetY = node.SelectSingleNode("OffsetY");
+                if (offSetX != null)
+                {
+                    offSet = new Vector2(int.Parse(offSetX.InnerText), int.Parse(offSetY.InnerText));
+                }
+
 
                 // Checks for null, if not null find the inner text.
                 if (objectTypeNode != null)
                 {
                     objectType = objectTypeNode.InnerText;
-                    if (objectTypeNode.InnerText == "Block")
+                    if (objectTypeNode.InnerText == "Block" || objectTypeNode.InnerText == "Floor")
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
                         con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
@@ -129,10 +137,6 @@ namespace LegendOfZelda
                 {
                     objectName = objectNameNode.InnerText;
                 }
-                else
-                {
-                    //Debug.WriteLine("Invalid Object Name.");
-                }
                 if (locationNode != null)
                 {
                     // Change this from split to 2 entries in the XML files
@@ -146,6 +150,7 @@ namespace LegendOfZelda
 
                         // Sets position to a vector.
                         position = new Vector2(x, y);
+                        position += (offSet * multiplier);
                     }
                 }
                 if (hasKey != null)
@@ -153,13 +158,13 @@ namespace LegendOfZelda
                     keyBool = bool.Parse(hasKey.InnerText);
                 }
 
-                if (locked !=  null)
-                {
-                    lockedDoor = bool.Parse(locked.InnerText);
-                }
-
 
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
+                {
+                    // Populates list of non-moving collideable objects
+                    blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
+                }
+                if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Floor")
                 {
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
@@ -196,6 +201,49 @@ namespace LegendOfZelda
                     blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition, lockedDoor }));
                 }
             }
+            addWalls(offSet);
+        }
+        private void addWalls(Vector2 offSet)
+        {
+            Vector2 positions = Constants.top1Position;
+            Vector2 size = Constants.horizontalWallSize;
+            positions += offSet * multiplier;
+            collideWall top1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.top2Position + offSet * multiplier;
+            collideWall top2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.bot1Position + offSet * multiplier;
+            collideWall bot1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.bot2Position + offSet * multiplier;
+            collideWall bot2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.left1Position + offSet * multiplier;
+            collideWall left1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.left2Position + offSet * multiplier;
+            collideWall left2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.right1Position + offSet * multiplier;
+            collideWall right1 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.right2Position + offSet * multiplier;
+            collideWall right2 = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.topMiddlePosition + offSet * multiplier;
+            collideWall topMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalMiddleSize.X, (int)Constants.horizontalMiddleSize.Y));
+            positions = Constants.botMiddlePosition + offSet * multiplier;
+            collideWall botMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalMiddleSize.X, (int)Constants.horizontalMiddleSize.Y));
+            positions = Constants.leftMiddlePosition + offSet * multiplier;
+            collideWall leftMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalMiddleSize.X, (int)Constants.verticalMiddleSize.Y));
+            positions = Constants.rightMiddlePosition + offSet * multiplier;
+            collideWall rightMiddle = new collideWall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalMiddleSize.X, (int)Constants.verticalMiddleSize.Y));
+
+            blocks.Add(top1);
+            blocks.Add(top2);
+            blocks.Add(bot1);
+            blocks.Add(bot2);
+            blocks.Add(left1);
+            blocks.Add(left2);
+            blocks.Add(right1);
+            blocks.Add(right2);
+            blocks.Add(topMiddle);
+            blocks.Add(botMiddle);
+            blocks.Add(leftMiddle);
+            blocks.Add(rightMiddle);
         }
     }
 }

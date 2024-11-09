@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+	<!--Puts the test room underneath room 1.-->
+	<item>
+		<OffsetX>0</OffsetX>
+		<OffsetY>1</OffsetY>
+	</item>
 <!--yes i know i skipped room 19, that's to make it more obvious this is a test room.-->
 <!--we could make this connect to room 1 through the bottom door.-->
 <Item>

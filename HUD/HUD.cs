@@ -74,8 +74,7 @@ namespace LegendOfZelda.HUD
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
+            HUDSprite.Draw(spriteBatch, new Rectangle((int)Camera2D.Instance.getPosition().X, (int)Camera2D.Instance.getPosition().Y - Constants.HUDHeight*2, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
             invenCount.Draw(spriteBatch);
             hp.Draw(spriteBatch);
             hudMap.Draw(spriteBatch);

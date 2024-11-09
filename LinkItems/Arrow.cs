@@ -94,6 +94,7 @@ namespace LegendOfZelda
         {
             if (exists)
             {
+                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 20, 20);
                 arrowSprite.Draw(spriteBatch, destination, Color.White);
             }
 

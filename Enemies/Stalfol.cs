@@ -122,20 +122,6 @@ public class Stalfol : IEnemy, ICollideable
         sprite.Update(gameTime);
         // Update position based on velocity
         position += velocity;
-        //angle need caculate
-        //if the skull hits the screen edges and reflect its direction?????
-        //NOTE: I've been updating constants starting at the top of the folder and going down
-        //it is at this point that i'm not replacing this anymore, enemies should never collide with the edge of the screen
-        //we can update these to be wall positions, but i'm not putting original/screen values anymore. - TJ
-        if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
-        {
-            velocity.X *= -1; // Reflect on the X axis
-        }
-
-        if (position.Y <= 0 || position.Y >= 600 - destinationRectangle.Height)
-        {
-            velocity.Y *= -1; // Reflect on the Y axis
-        }
     }
 
     public void Draw(SpriteBatch s)
