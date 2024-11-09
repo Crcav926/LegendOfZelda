@@ -57,8 +57,7 @@ namespace LegendOfZelda
 
         SoundMachine soundMachine = SoundMachine.Instance;
 
-        ClassItems test;
-        Block testBlock;
+    
         SpriteFont font;
 
         public Game1()
@@ -91,7 +90,7 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
-             font = Content.Load<SpriteFont>("font");
+            font = Content.Load<SpriteFont>("font");
 
             // Load the texture for the sprite 
 
@@ -130,12 +129,6 @@ namespace LegendOfZelda
             modifier.Volume = .3f;
             modifier.Play();
 
-            test = new ClassItems(new Vector2(280, 300), "Triforce");
-            RoomObjectManager.Instance.staticItems.Add(test);
-
-            testBlock = new Block(new Vector2(250, 300), "PushableBlock");
-            testBlock.movable = true;
-            RoomObjectManager.Instance.blocks.Add(testBlock);
             hudManager = new HUDManager();
 
         }

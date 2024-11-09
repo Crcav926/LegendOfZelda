@@ -29,7 +29,7 @@ namespace LegendOfZelda
         public const double MikuColorChangeInterval = 0.05;
         public const int MikuStartingHealth = 12;
         public const int PointsPerHP = 4;
-        public const double MikuInvincibilityTimer = 1.5;
+        public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
         public const int MikuStartingPositionY = 330;
         // Standard size
