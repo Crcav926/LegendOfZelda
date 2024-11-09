@@ -76,11 +76,11 @@ namespace LegendOfZelda
             bomb = new Bomb(direction, position);
 
             //temporary access to all items
-            inventory.addItem(boomerang);
-            inventory.addItem(arrow);
-            inventory.addItem(fire);
+            //inventory.addItem(boomerang);
+            //inventory.addItem(arrow);
+            //inventory.addItem(fire);
             inventory.addItem(sword);
-            inventory.addItem(bomb);
+            //inventory.addItem(bomb);
 
             
 

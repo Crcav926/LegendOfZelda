@@ -30,19 +30,23 @@ namespace LegendOfZelda.HUD
         {
             // HOTFIX - Call attack twice, one to change the state and one to throw the boomerang
             // Formerly would just change states than instantly change back
-            string key = inven.key2Item.ToString();
-            Debug.WriteLine("KEY 2 ITEM IS " + inven.key1Item);
+            if (inven.key2Item != null)
+            {
+                string key = inven.key2Item.ToString();
+                Debug.WriteLine("KEY 2 ITEM IS " + inven.key2Item);
 
-            
-            if (inven.key2Item != null && attackActions.ContainsKey(key))
-            {
-                // Invokes the player attack based on key.
-                attackActions[key].Invoke();
-                attackActions[key].Invoke();
-            }
-            else
-            {
-                Debug.WriteLine($"Attack '{key}' not found or inventory item is missing.");
+
+                if (attackActions.ContainsKey(key))
+                {
+                    // Invokes the player attack based on key.
+                    attackActions[key].Invoke();
+                    attackActions[key].Invoke();
+                }
+                else
+                {
+                    Debug.WriteLine($"Attack '{key}' not found or inventory item is missing.");
+                }
+
             }
         }
     }
