@@ -65,7 +65,7 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Debug.WriteLine($"Door is {doorSprite}");
+
             sprite = BlockSpriteFactory.Instance.CreateSprite(doorSprite);
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }

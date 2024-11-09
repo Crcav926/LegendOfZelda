@@ -15,6 +15,11 @@
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
+	<Item>
+		<ObjectType>ICollideable</ObjectType>
+		<ObjectName>Gel</ObjectName>
+		<Location>350 176</Location>
+	</Item>
 <!--Not sure how to code this just yet, but we need 2 fire, 1 old man, and some text.-->
 <!--Door type will need to be changed-->
 <Item>

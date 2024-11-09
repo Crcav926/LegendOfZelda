@@ -106,8 +106,32 @@ namespace LegendOfZelda
             {
                 new Rectangle(584, 1, 64, 40)
             }
+        },{ "LegendOfZelda.Boomerang", new List<Rectangle>()
+            {
+                new Rectangle(584, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Sword", new List<Rectangle>()
+            {
+                new Rectangle(555, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Fire", new List<Rectangle>()
+            {
+                new Rectangle(653, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Bomb", new List<Rectangle>()
+            {
+                new Rectangle(604, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Arrow", new List<Rectangle>()
+            {
+                new Rectangle(633, 137, 8, 16)
+            }
+        },{ "MapBlock", new List<Rectangle>()
+            {
+                new Rectangle(663, 108, 7, 3)
         }
-    };
+            }
+        };
 
 
         public ISprite CreateHUD()
@@ -199,6 +223,17 @@ namespace LegendOfZelda
         public ISprite CreateLevelCount()
         {
             return new Sprite(HUDSpriteSheet, SpriteFrames["Level"]);
+
+        }
+
+        public ISprite CreateHUDWeaponSprite(String weaponName)
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames[weaponName]);
+
+        }
+        public ISprite CreateHUDMapBlock()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["MapBlock"]);
 
         }
 
