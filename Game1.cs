@@ -121,8 +121,8 @@ namespace LegendOfZelda
 
           
             //I'll keep the theme song loaded here so it doesn't reset on room changes
-            SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
-            SoundEffectInstance modifier = mikuSong.CreateInstance();
+            mikuSong = Content.Load<SoundEffect>("mikuSong");
+            modifier = mikuSong.CreateInstance();
             modifier.IsLooped = true;
             modifier.Volume = .3f;
             modifier.Play();
@@ -213,6 +213,11 @@ namespace LegendOfZelda
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        public void Reset()
+        {
+            modifier.Stop();
+            this.Initialize();
         }
     }
 }

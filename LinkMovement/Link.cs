@@ -181,8 +181,24 @@ namespace LegendOfZelda
 
                 //always needed
                 RoomObjectManager.Instance.staticItems.Clear();
-
+                Reset();
             }
+        }
+        public void Reset()
+        {
+            currentHealth = Constants.MikuStartingHealth;
+            position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
+            direction = new Vector2(0, 1); // Adjust if needed
+            linkSprite = spriteFactory.CreateLinkStillSprite(direction);
+            linkState = new LinkIdleState(this);
+            damageAnimation = new DamageAnimation();
+            timeElapsed = 0;
+            canTakeDamage = true;
+            inventory.addItem(boomerang);
+            inventory.addItem(arrow);
+            inventory.addItem(fire);
+            inventory.addItem(sword);
+            inventory.addItem(bomb);
         }
         public void invulnerable()
         {
