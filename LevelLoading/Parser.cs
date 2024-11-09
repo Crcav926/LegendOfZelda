@@ -98,13 +98,6 @@ namespace LegendOfZelda
                         //Debug.WriteLine(type.FullName);
                         //Debug.WriteLine(con.ToString());
                     }
-                    else if(objectTypeNode.InnerText == "Floor")
-                    {
-                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
-                        con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
-                        //Debug.WriteLine(type.FullName);
-                        //Debug.WriteLine(con.ToString());
-                    }
                     else if(objectTypeNode.InnerText == "ClassItems")
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
