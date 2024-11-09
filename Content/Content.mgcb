@@ -122,6 +122,12 @@
 /processorParam:TextureFormat=Color
 /build:LinkSpriteSheet.png
 
+#begin LOZ_Link_Die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZ_Link_Die.wav;death.wav
+
 #begin mikuSong.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

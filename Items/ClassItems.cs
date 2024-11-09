@@ -95,7 +95,7 @@ namespace LegendOfZelda
             //Debug.WriteLine("Item made contact");
             if (itemType == "Triforce" || itemType == "TriforceBlue")
             {
-                SoundMachine.Instance.GetSound("getTri").Play(); ;
+                SoundMachine.Instance.GetSound("getTri").Play();
             }
             else
             {

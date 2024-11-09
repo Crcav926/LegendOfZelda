@@ -41,12 +41,18 @@ namespace LegendOfZelda
         public const int CollisionPushDistance = 2;
         // Blocks
         public const int BlockWidth = 50;
-        //is this height wrong? doors should be twice as tall as blocks; 42 x 2 =/= 88
-        public const int BlockHeight = 42;
+        public const int BlockHeight = 44;
         // Doors
         //also not sure if this should be 102; i'm just putting in the magic numbers we have.
-        public const int DoorWidth = 102;
+        public const int DoorWidth = 100;
         public const int DoorHeight = 88;
+        // Walls
+        //this is used for the wall sprite, NOT the hitboxes.
+        public const int WallsWidth = 800;
+        public const int WallsHeight = 480;
+        // Floor
+        public const int FloorWidth = 600;
+        public const int FloorHeight = 304;
         // Aquamentus
         public const int AquamentusHeight = 80;
         public const int AquamentusWidth = 80;

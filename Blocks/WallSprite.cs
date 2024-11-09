@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    //unlike the walls, i actually think this is the best way to do floors.
-    internal class Floor : ICollideable
+    //this is incredibly inefficient, but this is the easiest way I can think of to draw the walls without interfering with the hitboxes.
+    internal class WallSprite : ICollideable
     {
          private ISprite sprite;
         private Rectangle destinationRectangle;
         private Vector2 position;
-        public Floor(Vector2 position, String blockName)
+        public WallSprite(Vector2 position, String blockName)
         {
             sprite = BlockSpriteFactory.Instance.CreateSprite(blockName);
             this.position = position;
-            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.FloorWidth, Constants.FloorHeight);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.WallsWidth, Constants.WallsHeight);
         }
         public void Update(GameTime gameTime)
         {
-            //floors dont update for now.
+            //walls dont update for now.
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -33,12 +33,14 @@ namespace LegendOfZelda
 
         public Rectangle getHitbox()
         {
+            //this shouldn't be used
             return new Rectangle(0,0,0,0);
         }
 
         public string getCollisionType()
         {
+            //this shouldn't be used
             throw new NotImplementedException();
         }
-  }
+    }
 }

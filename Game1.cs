@@ -56,9 +56,9 @@ namespace LegendOfZelda
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
-
+        SoundEffect mikuSong;
+        SoundEffectInstance modifier;
         public bool paused;
-    
         SpriteFont font;
         Texture2D blackRectangle;
 
@@ -112,9 +112,6 @@ namespace LegendOfZelda
             BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
 
 
-            // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
-            background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
-            walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
             LevelLoader.Instance.LoadAllContent(Content);
             LevelLoader.Instance.RegisterAllCommands(controllerK, this);
@@ -134,14 +131,12 @@ namespace LegendOfZelda
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
-          
             //I'll keep the theme song loaded here so it doesn't reset on room changes
             SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
             SoundEffectInstance modifier = mikuSong.CreateInstance();
             modifier.IsLooped = true;
             modifier.Volume = .3f;
             modifier.Play();
-
             hudManager = new HUDManager();
 
         }
@@ -181,8 +176,8 @@ namespace LegendOfZelda
         }
 
         protected override void Draw(GameTime gameTime)
-        { 
-            GraphicsDevice.Clear(Color.Red);
+        {
+            GraphicsDevice.Clear(Color.Black);
 
 
              // TODO: Add your drawing code here
@@ -236,6 +231,11 @@ namespace LegendOfZelda
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        public void Reset()
+        {
+            SoundMachine.Instance.GetSound("theme").Stop();
+            this.Initialize();
         }
 
         public void setPause(bool pauseState)

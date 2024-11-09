@@ -30,6 +30,7 @@ namespace LegendOfZelda
         public int numBombs;
         public IItems key1Item;
         public IItems key2Item;
+    
         public Inventory() 
         { 
             items = new List<IItems>();
@@ -40,11 +41,53 @@ namespace LegendOfZelda
             coins= 0;
             numBombs = 0;
         }
+        public void UpdateInventory()
+        {
+            key1Item = weapons[0];
+            if (weapons.Count > 1)
+            {
+                key2Item = weapons[1];
+            }
+        }
+        public void rotateItems()
+        {
+            foreach (IItems weapon in weapons)
+            {
+                Debug.WriteLine($"In inventory {weapon.ToString}");
+            }
+            if (weapons.Count > 1)
+            {
+                List<IItems> temp  = new List<IItems>();
+                temp.Add(weapons[weapons.Count - 1]);
+               
+                for (int i = 0; i < weapons.Count-1; i++)
+                {
+                    temp.Add(weapons[i]);
+                }
+                weapons = temp;
+            }
+            else
+            {
+                Debug.WriteLine("Cannot rotate, you only have 1 item!");
+            }
+        }
         public void addItem(IItems item)
         {
             //add item to inventory
+            //All of the ground items are class items because of how the parser,xml, and collsion works.
             if (item is ClassItems)
             {
+                ClassItems temp = (ClassItems)item;
+                String itemName = temp.getItemType();
+                //these are currently the 2 weapons we can pick up.
+                if (itemName == "CreateBoomerangSprite")
+                {
+                    weapons.Add(Link.Instance.boomerang);
+                }
+                if (itemName == "Bow")
+                {
+                    weapons.Add(Link.Instance.arrow);
+                }
                 items.Add(item);
                 Debug.WriteLine("Added to static items list");
             }

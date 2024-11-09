@@ -91,6 +91,20 @@ namespace LegendOfZelda
                         //Debug.WriteLine(type.FullName);
                         //Debug.WriteLine(con.ToString());
                     }
+                    else if(objectTypeNode.InnerText == "WallSprite")
+                    {
+                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
+                        con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
+                        //Debug.WriteLine(type.FullName);
+                        //Debug.WriteLine(con.ToString());
+                    }
+                    else if(objectTypeNode.InnerText == "Floor")
+                    {
+                        type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
+                        con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
+                        //Debug.WriteLine(type.FullName);
+                        //Debug.WriteLine(con.ToString());
+                    }
                     else if(objectTypeNode.InnerText == "ClassItems")
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
@@ -156,6 +170,16 @@ namespace LegendOfZelda
                     blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
                 }
                 else if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "PushableBlock")
+                {
+                    // Populates list of non-moving collideable objects
+                    blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
+                }
+                else if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "WallSprite")
+                {
+                    // Populates list of non-moving collideable objects
+                    blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
+                }
+                else if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Floor")
                 {
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));

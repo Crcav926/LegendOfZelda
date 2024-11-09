@@ -39,6 +39,9 @@ namespace LegendOfZelda.Command
             {
                 _link.inventory.addBomb();
             }
+            if (itemType == "Triforce")
+            {
+                _link.Reset();
             if (itemType == "HeartRed")
             {
                 Debug.WriteLine($"Health was {_link.currentHealth}");

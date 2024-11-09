@@ -64,6 +64,7 @@ namespace LegendOfZelda
             SoundEffectInstance throughDoor = Content.Load<SoundEffect>("thruDoor").CreateInstance();
             SoundEffectInstance unlock = Content.Load<SoundEffect>("unlock").CreateInstance();
             SoundEffectInstance moveBlock = Content.Load<SoundEffect>("moveBlock").CreateInstance();
+            SoundEffectInstance deathMod = Content.Load<SoundEffect>("death").CreateInstance();
 
             soundMachine.addSound("throughDoor", throughDoor);
             soundMachine.addSound("moveBlock", moveBlock);
@@ -75,6 +76,14 @@ namespace LegendOfZelda
             soundMachine.addSound("attack", attackMod);
             soundMachine.addSound("hurt", hurtMod);
             soundMachine.addSound("ha", haMod);
+            soundMachine.addSound("death", deathMod);
+
+            //I'll keep the theme song loaded here so it doesn't reset on room changes
+            SoundEffectInstance mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
+            mikuSong.IsLooped = true;
+            mikuSong.Volume = .3f;
+
+            soundMachine.addSound("theme", mikuSong);
 
         }
         public void Load(String room)
@@ -108,8 +117,9 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.D1, new LinkAttack1());
             cont.RegisterCommand(Keys.D2, new LinkAttack2());
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
-            cont.RegisterCommand(Keys.R, new CommReset(game));
+            cont.RegisterCommand(Keys.R, new CommReset(game, link));
             cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
+            cont.RegisterCommand(Keys.D3, new RotateItems());
             cont.RegisterCommand(Keys.P, new CommPause(game));
 
 

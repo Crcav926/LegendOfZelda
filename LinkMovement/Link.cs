@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Threading;
 using System.Timers;
 
 namespace LegendOfZelda
@@ -44,6 +45,8 @@ namespace LegendOfZelda
         public Inventory inventory;
 
         private SoundMachine soundMachine = SoundMachine.Instance;
+        private static double test;
+        public bool test1 = false;
 
         private static Link instance = new Link();
 
@@ -63,6 +66,7 @@ namespace LegendOfZelda
             direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
+            //currentHealth = Constants.MikuStartingHealth;
             currentHealth = Constants.MikuStartingHealth;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
@@ -76,11 +80,11 @@ namespace LegendOfZelda
             bomb = new Bomb(direction, position);
 
             //temporary access to all items
-            inventory.addItem(boomerang);
-            inventory.addItem(arrow);
-            inventory.addItem(fire);
+            //inventory.addItem(boomerang);
+            //inventory.addItem(arrow);
+            //inventory.addItem(fire);
             inventory.addItem(sword);
-            inventory.addItem(bomb);
+            //inventory.addItem(bomb);
 
             
 
@@ -117,6 +121,7 @@ namespace LegendOfZelda
             if (currentHealth <= 0)
             {
                 linkState.Death();
+                //test1 = true;
             }
         }
 
@@ -159,7 +164,7 @@ namespace LegendOfZelda
             sword.Update(gameTime);
             bomb.Update(gameTime);
 
-
+            inventory.UpdateInventory();
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > Constants.MikuInvincibilityTimer)
@@ -172,7 +177,7 @@ namespace LegendOfZelda
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
                 // This pair freezes her on death and has her play the animation
                 LevelLoader.Instance.Load("RoomDeath.xml");
-                currentHealth = 0;
+                //currentHealth = 0;
 
                 //this pair restarts you from room 1 on death
                 //LevelLoader.Instance.Load("Room1.xml");
@@ -180,8 +185,34 @@ namespace LegendOfZelda
 
                 //always needed
                 RoomObjectManager.Instance.staticItems.Clear();
-
+                if(test1 == true)
+                {
+                    test = gameTime.ElapsedGameTime.TotalSeconds;
+                    test1 = false;
+                }
+                if((gameTime.ElapsedGameTime.TotalSeconds - test) > 1.5)
+                {
+                    LevelLoader.Instance.Load("Room1.xml");
+                    Reset();
+                }
             }
+        }
+        public void Reset()
+        {
+            currentHealth = Constants.MikuStartingHealth;
+            position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
+            direction = new Vector2(0, 1); // Adjust if needed
+            linkSprite = spriteFactory.CreateLinkStillSprite(direction);
+            linkState = new LinkIdleState(this);
+            damageAnimation = new DamageAnimation();
+            timeElapsed = 0;
+            canTakeDamage = true;
+            //inventory.addItem(boomerang);
+            //inventory.addItem(arrow);
+            //inventory.addItem(fire);
+            inventory.addItem(sword);
+            //inventory.addItem(bomb);
+            LevelLoader.Instance.Load("Room1.xml");
         }
         public void invulnerable()
         {
