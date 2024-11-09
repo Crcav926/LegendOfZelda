@@ -1,5 +1,4 @@
-﻿using LegendOfZelda.LinkItems;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ObjectManagementExamples;
 using System;

@@ -31,7 +31,7 @@ namespace LegendOfZelda.Command
             {
                 _link.inventory.setMap(true);
             }
-            if (itemType == "OrangeRupee" || itemType == "BlueRupee" )
+            if (itemType == "OrangeRupee" || itemType == "BlueRupee")
             {
                 _link.inventory.addCoins(1);
             }
@@ -42,26 +42,27 @@ namespace LegendOfZelda.Command
             if (itemType == "Triforce")
             {
                 _link.Reset();
-            if (itemType == "HeartRed")
-            {
-                Debug.WriteLine($"Health was {_link.currentHealth}");
-                if(!(_link.currentHealth == _link.maxHealth))
+                if (itemType == "HeartRed")
                 {
-                    _link.currentHealth += 2 ;
+                    Debug.WriteLine($"Health was {_link.currentHealth}");
+                    if (!(_link.currentHealth == _link.maxHealth))
+                    {
+                        _link.currentHealth += 2;
+                    }
+                    Debug.WriteLine($"Health now is {_link.currentHealth}");
                 }
-                Debug.WriteLine($"Health now is {_link.currentHealth}");
-            }
-            if (itemType == "Fairy")
-            {
-                _link.currentHealth = _link.maxHealth;
-            }
-            //I'm still adding the keys to the inventory because they should probably show up in the HUD?
-            //Debug.WriteLine($"Added {item.getItemType()} to inventory");
-            _link.inventory.addItem(item);
+                if (itemType == "Fairy")
+                {
+                    _link.currentHealth = _link.maxHealth;
+                }
+                //I'm still adding the keys to the inventory because they should probably show up in the HUD?
+                //Debug.WriteLine($"Added {item.getItemType()} to inventory");
+                _link.inventory.addItem(item);
 
-            //doing both to be safe
-            item.makeContact();
-            RoomObjectManager.Instance.staticItems.Remove(item);
+                //doing both to be safe
+                item.makeContact();
+                RoomObjectManager.Instance.staticItems.Remove(item);
+            }
         }
     }
 }

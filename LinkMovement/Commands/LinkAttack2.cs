@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System;
-using LegendOfZelda.LinkItems;
 using System.Diagnostics;
 
 namespace LegendOfZelda.HUD

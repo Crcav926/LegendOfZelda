@@ -194,8 +194,6 @@ namespace LegendOfZelda
             if (!paused){
 
                 //TJ wants this moved out of Game 1 becuase of constants
-                walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-                background.Draw(_spriteBatch, new Rectangle(100, 87, 600, 306), Color.White);
                 foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
                 {
                     entry.Value.Draw(_spriteBatch);
@@ -204,7 +202,6 @@ namespace LegendOfZelda
                 {
                     block.Draw(_spriteBatch);
                 }
-                walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
                 foreach (ICollideable mover in RoomObjectManager.Instance.getMovers())
                 {
                     mover.Draw(_spriteBatch);

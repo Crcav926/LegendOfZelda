@@ -1,5 +1,4 @@
 ﻿using LegendOfZelda.HUD;
-using LegendOfZelda.LinkItems;
 using LegendOfZelda.LinkMovement;
 using LegendOfZelda.Sounds;
 using Microsoft.Xna.Framework;

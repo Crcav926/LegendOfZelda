@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LegendOfZelda.LinkMovement;
-using LegendOfZelda.LinkItems;
 using LegendOfZelda.Command;
 using Microsoft.Xna.Framework;
 

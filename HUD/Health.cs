@@ -1,4 +1,3 @@
-using LegendOfZelda.LinkItems;
 using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
