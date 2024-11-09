@@ -10,9 +10,10 @@ namespace LegendOfZelda
 {
     public class Room
     {
-        private List<ICollideable> statics;
-        private List<ICollideable> movers;
+        private List<ICollideable> statics = new List<ICollideable>();
+        private List<ICollideable> movers = new List<ICollideable>();
         private String name;
+        private Vector2 offSet;
         public Room(List<ICollideable> statics, List<ICollideable> movers, String RoomName) 
         {
             this.statics = statics;

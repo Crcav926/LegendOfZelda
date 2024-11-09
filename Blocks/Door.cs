@@ -49,7 +49,7 @@ namespace LegendOfZelda
         }
         public Rectangle getHitbox()
         {
-            return destinationRectangle;
+            return new Rectangle((int)position.X, (int)position.Y, Constants.DoorWidth/2, Constants.DoorHeight/2); ;
         }
         public void Update(GameTime gameTime) 
         {

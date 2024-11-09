@@ -2,7 +2,7 @@
 <root>
 	<item>
 		<OffsetX>-2</OffsetX>
-		<OffsetY>3</OffsetY>
+		<OffsetY>-3</OffsetY>
 	</item>
 <!--Note the different floor for this room-->
 <Item>

@@ -2,7 +2,7 @@
 <root>
 	<item>
 		<OffsetX>1</OffsetX>
-		<OffsetY>2</OffsetY>
+		<OffsetY>-2</OffsetY>
 	</item>
 <Item>
     <ObjectType>Floor</ObjectType>

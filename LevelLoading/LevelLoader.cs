@@ -22,7 +22,7 @@ namespace LegendOfZelda
     {
         private List<ICollideable> statics = new List<ICollideable>();
         private List<ICollideable> movers = new List<ICollideable>();
-        private String room;
+        public String room;
         private Link link;
         SoundMachine soundMachine = SoundMachine.Instance;
         private Room currRoom;

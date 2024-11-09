@@ -118,9 +118,8 @@ namespace LegendOfZelda
             List<String> listOfRooms = new List<string>()
             {
                 "Room1.xml", "Room2.xml", "Room3.xml", "Room4.xml", "Room5.xml", "Room6.xml",
-                "Room7.xml", "Room8.xml", "Room9.xml"
-                // "Room10.xml", "Room11.xml",
-                // "Room12.xml", "Room13.xml", "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml"
+                "Room7.xml", "Room8.xml", "Room9.xml", "Room10.xml", "Room11.xml",
+                "Room12.xml", "Room13.xml", "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml", "Room20.xml"
             };
             foreach (string room in listOfRooms)
             {
@@ -146,8 +145,6 @@ namespace LegendOfZelda
 
         protected override void Update(GameTime gameTime)
         {
-            blocks = LevelLoader.Instance.getBlocks();
-            movers = LevelLoader.Instance.getMovers();
             // Let the keyboard controller handle input
             keyboardController.Update();
             RoomObjectManager.Instance.Update();
@@ -162,10 +159,11 @@ namespace LegendOfZelda
             //collHandler.update();
             //Update the current enemy to have the correct sprite and draw it
             // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
-            foreach (ICollideable mover in LevelLoader.Instance.getMovers())
+            foreach (ICollideable mover in RoomObjectManager.Instance.getMovers())
             {
                 mover.Update(gameTime);
             }
+            Camera2D.Instance.Update();
             //Update the keyboard controller
             controllerK.Update();
             
@@ -190,25 +188,25 @@ namespace LegendOfZelda
             //var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
 
-            var matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+            Matrix matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
             // Draw the game content with the transform matrix applied
-            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: Camera2D.Instance.getMatrix());
 
             //TJ wants this moved out of Game 1 becuase of constants
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-            background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
+            background.Draw(_spriteBatch, new Rectangle(100, 87, 600, 306), Color.White);
             foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
             {
                 entry.Value.Draw(_spriteBatch);
             }
 
-            foreach (ICollideable block in blocks)
+            foreach (ICollideable block in RoomObjectManager.Instance.getStandStills())
             {
                 block.Draw(_spriteBatch);
             }
             // CHANGE TO DRAW WITH ROOMS
-            foreach (ICollideable mover in LevelLoader.Instance.getMovers())
+            foreach (ICollideable mover in RoomObjectManager.Instance.getMovers())
             {
                 mover.Draw(_spriteBatch);
             }

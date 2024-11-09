@@ -23,7 +23,7 @@ namespace LegendOfZelda
         private string room;
         //for the drop table
         private int DeathCounter = 0;
-        Room currentRoom;
+        public Room currentRoom = new Room(LevelLoader.Instance.getBlocks(), LevelLoader.Instance.getMovers(), "testRoom");
         public int Localcounter = 0;
 
 
@@ -103,18 +103,19 @@ namespace LegendOfZelda
         }
         public void Update()
         {
+            currentRoom = LevelLoader.Instance.getCurrentRoom();
             // TODO: Check if the room changed instead of if they're the same list, in case we want to remove enemies (will add in morning)
-            if (movers != LevelLoader.Instance.getMovers())
+            if (movers != currentRoom.getMovers())
             {
-                movers = LevelLoader.Instance.getMovers();
+                movers = currentRoom.getMovers();
                 foreach (ICollideable item in link.inventory.weapons)
                 {
                     movers.Add((ICollideable)item);
                 }
             }
-            if (blocks != LevelLoader.Instance.getBlocks())
+            if (blocks != currentRoom.getStatics())
             {
-                blocks = LevelLoader.Instance.getBlocks();
+                blocks = currentRoom.getStatics();
                 // addWalls();
             }
             for(int i = 0; i < movers.Count; i++)
@@ -156,7 +157,7 @@ namespace LegendOfZelda
             Wall topMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 0, 100, 80));
             Wall top2 = new Wall(new Microsoft.Xna.Framework.Rectangle(450, 0, 350, 87));
             Wall bot1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 392, 350, 87));
-            Wall botMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 392, 100, 80));
+            // Wall botMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 392, 100, 80));
             Wall bot2 = new Wall(new Microsoft.Xna.Framework.Rectangle(450, 392, 350, 87));
             Wall left1 = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 0, 100, 196));
             Wall leftMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 196, 90, 88));
@@ -169,7 +170,7 @@ namespace LegendOfZelda
             blocks.Add(topMiddle);
             blocks.Add(top2);
             blocks.Add(bot1);
-            blocks.Add(botMiddle);
+            // blocks.Add(botMiddle);
             blocks.Add(bot2);
             blocks.Add(left1);
             blocks.Add(leftMiddle);

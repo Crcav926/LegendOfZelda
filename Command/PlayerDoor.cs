@@ -32,8 +32,28 @@ namespace LegendOfZelda.Command
                 if (roomName != "closed")
                 {
                     SoundMachine.Instance.GetSound("throughDoor").Play();
-                    LevelLoader.Instance.Load(roomName);
-                    link.position = door.getNewPosition();
+                    String currentDoor = door.doorSprite;
+                    Debug.WriteLine($"Current door is {currentDoor}");
+                    switch (currentDoor[0])
+                    {
+                        case 'R':
+                            Camera2D.Instance.slideRight();
+                            link.position.X += 200;
+                            break;
+                        case 'L':
+                            Camera2D.Instance.slideLeft();
+                            link.position.X -= 200;
+                            break;
+                        case 'U':
+                            Camera2D.Instance.slideUp();
+                            link.position.Y -= 200;
+                            break;
+                        case 'D':
+                            Camera2D.Instance.slideDown();
+                            link.position.Y += 200;
+                            break;
+                    }
+                    LevelLoader.Instance.changeCurrentRoom(roomName);
                     //lemme just clear the dropped items too...
                     RoomObjectManager.Instance.staticItems.Clear();
                     //reset the room by room death counter.

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+	<item>
+		<OffsetX>-2</OffsetX>
+		<OffsetY>-4</OffsetY>
+	</item>
 <!--Time for the funny room. Note the different floor and no wall.-->
 <!--I'm being honest here, I don't wanna place 170 blocks, so I'm just using the item room as a floor.-->
 <!--I'm still gonna place blocks for collision, but the walls are still 32px around, just a brick texture instead.-->

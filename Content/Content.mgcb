@@ -13,13 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../File.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:../../File.spritefont;font.spritefont
-
 #begin (miku) laugh.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -73,6 +66,13 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:enemyTakeDamage.wav;enemyHurt.wav
+
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont
 
 #begin getRupee.wav
 /importer:WavImporter
