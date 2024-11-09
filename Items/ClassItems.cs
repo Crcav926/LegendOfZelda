@@ -92,7 +92,7 @@ namespace LegendOfZelda
         //call this when link picks up the item
         public void makeContact()
         {
-            Debug.WriteLine("Item made contact");
+            //Debug.WriteLine("Item made contact");
             if (itemType == "Triforce" || itemType == "TriforceBlue")
             {
                 SoundMachine.Instance.GetSound("getTri").Play(); ;

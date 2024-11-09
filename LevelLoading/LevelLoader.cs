@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using Microsoft.Xna.Framework.Audio;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.HUD;
 
 namespace LegendOfZelda
 {
@@ -48,8 +49,8 @@ namespace LegendOfZelda
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
 
-            this.link = new Link();
-
+            this.link = Link.Instance;
+            
             //the instances must be made to allow us to modify the sounds. (make miku quieter)
             //sounds
             SoundEffectInstance attackMod = Content.Load<SoundEffect>("mikuAttack").CreateInstance();
@@ -104,11 +105,8 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.A, new CommLinkMove(link, new Vector2(-1, 0)));
             cont.RegisterCommand(Keys.D, new CommLinkMove(link, new Vector2(1, 0)));
             cont.RegisterCommand(Keys.E, new CommLinkDamaged(link));
-            cont.RegisterCommand(Keys.D1, new CommThrowBoomerang(link));
-            cont.RegisterCommand(Keys.D2, new CommShootArrow(link));
-            cont.RegisterCommand(Keys.D3, new CommShootFire(link));
-            cont.RegisterCommand(Keys.D4, new CommUseSword(link));
-            cont.RegisterCommand(Keys.D5, new CommPlaceBomb(link));
+            cont.RegisterCommand(Keys.D1, new LinkAttack1());
+            cont.RegisterCommand(Keys.D2, new LinkAttack2());
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
             cont.RegisterCommand(Keys.R, new CommReset(game));
             cont.RegisterCommand(Keys.Enter, new CommChangeRoom());

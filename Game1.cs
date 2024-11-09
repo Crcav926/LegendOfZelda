@@ -57,10 +57,8 @@ namespace LegendOfZelda
 
         SoundMachine soundMachine = SoundMachine.Instance;
 
-
-        ClassItems test;
-        Block testBlock;
-
+    
+        SpriteFont font;
 
         public Game1()
         {
@@ -92,7 +90,7 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
-            // font = Content.Load<SpriteFont>("font");
+            font = Content.Load<SpriteFont>("font");
 
             // Load the texture for the sprite 
 
@@ -105,7 +103,7 @@ namespace LegendOfZelda
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
             HUDSpriteFactory.Instance.LoadAllTextures(Content);
-            hudManager = new HUDManager(this);
+            
 
             // TODO: Absorb into level loader
             BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
@@ -142,13 +140,8 @@ namespace LegendOfZelda
             modifier.Volume = .3f;
             modifier.Play();
 
-            test = new ClassItems(new Vector2(280, 300), "Triforce");
-            RoomObjectManager.Instance.staticItems.Add(test);
+            hudManager = new HUDManager();
 
-            testBlock = new Block(new Vector2(250, 300), "PushableBlock");
-            testBlock.movable = true;
-            RoomObjectManager.Instance.blocks.Add(testBlock);
-            
         }
 
         protected override void Update(GameTime gameTime)
@@ -185,7 +178,7 @@ namespace LegendOfZelda
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Red);
 
 
             // TODO: Add your drawing code here
@@ -203,8 +196,6 @@ namespace LegendOfZelda
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
 
             //TJ wants this moved out of Game 1 becuase of constants
-
-
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
@@ -221,18 +212,19 @@ namespace LegendOfZelda
             {
                 mover.Draw(_spriteBatch);
             }
-            test.Draw(_spriteBatch);
-            //testBlock.Draw(_spriteBatch);
             //draw the dropped items
             foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
             {
                 statItem.Draw(_spriteBatch);
             }
+
+
             hudManager.Draw(_spriteBatch);
 
 
 
-            // _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+             _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

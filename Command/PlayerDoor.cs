@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using System.Threading;
 
 namespace LegendOfZelda.Command
 {
@@ -25,24 +26,48 @@ namespace LegendOfZelda.Command
             //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
             if (door.lockedS == false)
             {
-                SoundMachine.Instance.GetSound("throughDoor").Play();
                 string roomName = door.getRoom();
                 Debug.WriteLine($"Room is {roomName}");
+  
                 if (roomName != "closed")
                 {
+                    SoundMachine.Instance.GetSound("throughDoor").Play();
                     LevelLoader.Instance.Load(roomName);
                     link.position = door.getNewPosition();
+                    //lemme just clear the dropped items too...
+                    RoomObjectManager.Instance.staticItems.Clear();
+                    //reset the room by room death counter.
+                    RoomObjectManager.Instance.Localcounter = 0;
                 }
-                //lemme just clear the dropped items too...
-                RoomObjectManager.Instance.staticItems.Clear();
             }
             else
             {
-                Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
+                //Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
                 // if link has keys and it's unlockable unlock the door and play the unlock sound
                 if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {
                     SoundMachine.Instance.GetSound("unlock").Play();
+                    //pause the game to play sound and see door change
+                    String currentDoor = door.doorSprite;
+                    Debug.WriteLine($"Current door is {currentDoor}");
+                    switch (currentDoor[0]) {
+                        case 'R':
+                            door.doorSprite = "RightDoorOpen";
+                            break;
+                        case 'L':
+                            door.doorSprite = "LeftDoorOpen";
+                            break;
+                        case 'U':
+                            Debug.WriteLine("Swapping to open door");
+                            door.doorSprite = "UpDoorOpen";
+                            break;
+                        case 'D':
+                            door.doorSprite = "DownDoorOpen";
+                            break;
+                    }
+                    currentDoor = door.doorSprite;
+                    Debug.WriteLine($"Updated door is {currentDoor}");
+                    Thread.Sleep(1500);
                     door.setLocked(false);
                     link.inventory.removeKey();
                 }

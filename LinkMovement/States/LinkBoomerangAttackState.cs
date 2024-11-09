@@ -25,7 +25,6 @@ namespace LegendOfZelda.LinkMovement
             // Constructing Link sprite here.
             link.linkSprite = LinkSpriteFactory.Instance.CreateLinkAttackSprite(link.direction);
             boomerang = link.boomerang;
-            Debug.WriteLine(boomerang);
         }
 
         public string getState() { return name; }
@@ -52,7 +51,6 @@ namespace LegendOfZelda.LinkMovement
         }
         public void BoomerangAttack()
         {
-            Debug.WriteLine("Boomer4");
             if (!boomerang.exists)
             {
                 boomerang.Use(this.direction,this.position);

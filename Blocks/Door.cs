@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -20,11 +21,13 @@ namespace LegendOfZelda
         private Vector2 newPos;
         public bool lockedS;
         public bool unlockable;
+        public String doorSprite;
 
         public Door(Vector2 position, String doorType, String room, Vector2 newPos, bool locked) 
         {
             this.position = position;
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.DoorWidth, Constants.DoorHeight);
+            doorSprite = doorType;
             sprite = BlockSpriteFactory.Instance.CreateSprite(doorType);
             this.room = room;
             this.newPos = newPos;
@@ -62,6 +65,8 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            //Debug.WriteLine($"Door is {doorSprite}");
+            sprite = BlockSpriteFactory.Instance.CreateSprite(doorSprite);
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
         public String getCollisionType()
@@ -73,5 +78,9 @@ namespace LegendOfZelda
         {
             lockedS = lockState;
         }
+
+    
+
+      
     }
 }

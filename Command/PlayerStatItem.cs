@@ -21,15 +21,36 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //Debug.WriteLine($"Miku picked up {item.getItemType()} ");
-           
+            String itemType = item.getItemType();
             //add the item to link's inventory and delete it off the screen
-            if (item.getItemType() == "Key")
+            if (itemType == "Key")
             {
                 _link.inventory.addKey();
             }
-            if (item.getItemType() == "Map")
+            if (itemType == "Map")
             {
                 _link.inventory.setMap(true);
+            }
+            if (itemType == "OrangeRupee" || itemType == "BlueRupee" )
+            {
+                _link.inventory.addCoins(1);
+            }
+            if (itemType == "CreateBombSprite")
+            {
+                _link.inventory.addBomb();
+            }
+            if (itemType == "HeartRed")
+            {
+                Debug.WriteLine($"Health was {_link.currentHealth}");
+                if(!(_link.currentHealth == _link.maxHealth))
+                {
+                    _link.currentHealth += 2 ;
+                }
+                Debug.WriteLine($"Health now is {_link.currentHealth}");
+            }
+            if (itemType == "Fairy")
+            {
+                _link.currentHealth = _link.maxHealth;
             }
             //I'm still adding the keys to the inventory because they should probably show up in the HUD?
             //Debug.WriteLine($"Added {item.getItemType()} to inventory");

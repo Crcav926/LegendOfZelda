@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.LinkMovement;
 
 namespace LegendOfZelda;
 public class Aquamentus : IEnemy, ICollideable
@@ -34,9 +35,10 @@ public class Aquamentus : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-
+    DamageAnimation damageAnimation;
     public Aquamentus(Vector2 position, bool hasKey)
     {
+        damageAnimation = new DamageAnimation();
         this.position = position;
         fireballs = new List<Fireball>();
         sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
@@ -68,6 +70,7 @@ public class Aquamentus : IEnemy, ICollideable
     }
     public void Update(GameTime gameTime)
     {
+        damageAnimation.Update(gameTime);
         // Update the timer for throwing fireballs
         throwTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         if (throwTimer >= Constants.AquamentusThrowCooldown)
@@ -92,6 +95,7 @@ public class Aquamentus : IEnemy, ICollideable
         foreach (Fireball fireball in fireballs)
         {
             fireball.Update(gameTime);
+            RoomObjectManager.Instance.addProjectile(fireball);
         }
 
         // Move Aquamentus horizontally
@@ -119,9 +123,10 @@ public class Aquamentus : IEnemy, ICollideable
     public void Draw(SpriteBatch spriteBatch)
     {
         if (alive) {
-        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
+            Color color = damageAnimation.GetCurrentColor();
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
 
-        sprite.Draw(spriteBatch, destinationRectangle, Color.White);
+        sprite.Draw(spriteBatch, destinationRectangle, color);
 
         // Draw all the fireballs
         foreach (Fireball fireball in fireballs)
@@ -140,11 +145,12 @@ public class Aquamentus : IEnemy, ICollideable
 
     public void TakeDamage(int damage)
     {
+        //Note: aq only takes damage from headshots.
         if (canTakeDamage)
         {
             hp -= damage;
             SoundMachine.Instance.GetSound("enemyHurt").Play();
-
+            damageAnimation.StartDamageEffect();
             if (hp <= 0)
             {
                 alive = false;

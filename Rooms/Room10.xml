@@ -88,6 +88,11 @@
     <Location>550 220</Location>
 </Item>
 <!--This room has the map, same deal as the compass.-->
+<Item>
+    <ObjectType>ClassItems</ObjectType>
+    <ObjectName>Map</ObjectName>
+    <Location>600 220</Location>
+</Item>
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>

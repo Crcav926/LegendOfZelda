@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZelda.LinkItems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
@@ -52,6 +53,7 @@ namespace LegendOfZelda
                 itemPosition += direction * Constants.BoomerangSpeed;
                 if(itemPosition == maxDistance)
                 {
+
                     direction *= new Vector2(-1, -1);
                 }
                 if (itemPosition == origin)

@@ -2,9 +2,10 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using LegendOfZelda;
+using System;
 
 //This projectile is for Goriya
-public class Projectile
+public class Projectile : ICollideable
 {
     private Vector2 position;
     private Vector2 velocity;
@@ -12,6 +13,8 @@ public class Projectile
     //private float speed = 200f;      // Speed of the projectile
     private ISprite sprite;
     public bool IsActive { get; private set; } = true;  // Track whether the projectile is active
+
+    private Rectangle destinationRectangle;
 
 
     public Projectile(Vector2 startPosition, Vector2 direction, ISprite sprite)
@@ -39,7 +42,7 @@ public class Projectile
         if (IsActive)
         {
             // Calculate the destination rectangle with scaling
-            Rectangle destinationRectangle = new Rectangle(
+            destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
                 Constants.GoriyaProjectileWidth,  
@@ -49,4 +52,24 @@ public class Projectile
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
     }
+
+    public Rectangle getHitbox()
+    {
+        if (IsActive)
+        {
+            return destinationRectangle;
+        }
+        else
+        {
+            return new Rectangle(0, 0, 0, 0);
+        }
+    }
+
+    public String getCollisionType()
+    {
+        return "Projectile";
+    }
+
+
+
 }

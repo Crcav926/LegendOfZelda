@@ -5,6 +5,7 @@ using System;
 using LegendOfZelda;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using LegendOfZelda.LinkMovement;
 
 namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
@@ -34,19 +35,21 @@ public class Goriya : IEnemy, ICollideable
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
+    private ClassItems droppedKey;
 
     private bool keyStatus;
-
-    public Goriya(Vector2 Position, string type, bool hasKey)
+    DamageAnimation damageAnimation;
+    public Goriya(Vector2 Position, bool hasKey)
     {
+        damageAnimation = new DamageAnimation();
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
-        destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
+        //destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
         ChangeDirection();
         swordDamage = new Dictionary<string, int>();
-
+        String type = "Red";
         if (type == "Red")
         {
             swordDamage["WOOD"] = 1;
@@ -167,6 +170,7 @@ public class Goriya : IEnemy, ICollideable
         {
             velocity.Y *= -1; // Reflect on the Y axis
         }
+        damageAnimation.Update(gameTime);
     }
 
     private void ThrowProjectile()
@@ -188,9 +192,10 @@ public class Goriya : IEnemy, ICollideable
         // Use the current position for the destination rectangle
         if (alive)
         {
+            Color color = damageAnimation.GetCurrentColor();
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GoriyaWidth, Constants.GoriyaHeight);
 
-            sprite.Draw(s, destinationRectangle, Color.White);
+            sprite.Draw(s, destinationRectangle, color);
             // Draw all the projectiles
             foreach (Projectile projectile in projectiles)
             {
@@ -227,7 +232,7 @@ public class Goriya : IEnemy, ICollideable
         {
             hp -= damage;
             SoundMachine.Instance.GetSound("enemyHurt").Play();
-
+            damageAnimation.StartDamageEffect();
             if (hp <= 0)
             {
                 alive = false;
@@ -241,8 +246,9 @@ public class Goriya : IEnemy, ICollideable
 
     public void DropItem()
     {
-        if (!alive)
-        {
+        if (!alive) { 
+            Debug.WriteLine("DropItem called: Item drop initialized");
+           
             if (keyStatus)
             {
                 Debug.WriteLine("Key dropped!");
@@ -252,12 +258,24 @@ public class Goriya : IEnemy, ICollideable
             else
             {
                 Debug.WriteLine("DropItem called: Item drop initialized");
-                //for now I'm using Rupees to test drops
-                String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
-                droppedItem = new ClassItems(position, ItemTobeDroped);
-                HasDroppedItem = true;
-                RoomObjectManager.Instance.staticItems.Add(droppedItem);
+
+                String roomDrop = RoomObjectManager.Instance.GetKey();
+                if (roomDrop != null)
+                {
+                    Debug.WriteLine("Counter based key dropped");
+                    ClassItems droppedKey = new ClassItems(position, roomDrop);
+                    RoomObjectManager.Instance.staticItems.Add(droppedKey);
+                }
+                else
+                {
+                    //for now I'm using Rupees to test drops
+                    String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
+                    droppedItem = new ClassItems(position, ItemTobeDroped);
+                    HasDroppedItem = true;
+                    RoomObjectManager.Instance.staticItems.Add(droppedItem);
+                }
             }
         }
+
     }
 }

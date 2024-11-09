@@ -73,7 +73,7 @@
     <ObjectName>BladeTrap</ObjectName>
     <Location>650 352</Location>
 </Item>
-<!--STAIRCASE DOOR-->
+<!--STAIRCASE DOOR just needs it's info changed-->
 <Item>
     <ObjectType>Block</ObjectType>
     <ObjectName>Staircase</ObjectName>

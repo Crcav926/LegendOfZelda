@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using LegendOfZelda.Command;
+using System.Runtime.InteropServices;
 
 
 namespace LegendOfZelda.Collision
@@ -61,29 +62,24 @@ namespace LegendOfZelda.Collision
                 if (executeMethod != null)
                 {
                     object commandInstance;
+                    //Refactor this so I'm not calling getCOllisionType every time.
                     // we need to be able to pass in the correct object for the command we're trying to make...
                     // this is less messy but is a lot of decision making code need to ask if there's a way to 
                     //make it so that order doesn't matter?
                     if (o1 is Link)
                     {
-                        if (o2 is Door || o2 is ClassItems || (o2 is Block)) 
+                        if (o2 is Door || o2 is ClassItems || (o2 is Block) || o2 is PushableBlock)
                         {
                             //convoluted way of seeing if its pushable block
-                            if (o2 is Block)
+                            if (o2.getCollisionType() == "Obstacle")
                             {
-                                Block b = (Block)o2;
-                                bool pushable = b.movable;
-                                if (!pushable)
-                                {
                                     //if we can't push it treat as normal block
                                     commandInstance = Activator.CreateInstance(commandType, o1);
-                                }
-                                else
-                                {
-                                    //if we can treat as pushable block
-                                    ICollideable[] p = { o1, o2 };
-                                    commandInstance = Activator.CreateInstance(commandType, p);
-                                }
+                            }
+                            else if (o2.getCollisionType() == "Pushable")
+                            {
+                                //HAS TO BE o2 IN THE SECOND SLOT; The command doesn't care about link, only the block.
+                                commandInstance = Activator.CreateInstance(commandType, o2);
                             }
                             else
                             {
@@ -93,25 +89,35 @@ namespace LegendOfZelda.Collision
                         }
                         else //Link and enemy link only passed in, Link and wall link only passed in
                         {
-                            normBlock:
+                        normBlock:
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
-                    }else if(o1 is IEnemy)
+                    } else if (o1 is IEnemy)
                     {
                         //enemy and item pass in both
-                        if (o2.getCollisionType()=="Item")
+                        if (o2.getCollisionType() == "Item")
                         {
                             ICollideable[] p = { o1, o2 };
                             commandInstance = Activator.CreateInstance(commandType, p);
-                        }else if (o2 is Link) //enemy and link pass in link
+                        } else if (o2 is Link) //enemy and link pass in link
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
                         else { //only remaining is Enemy and wall?
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
-                        
-                    }else if (o1.getCollisionType() == "Item")
+
+                    } else if (o1.getCollisionType() == "Projectile") {
+                        //projectiles are movers
+                        if (o2.getCollisionType() == "Player")
+                        {
+                            commandInstance = Activator.CreateInstance(commandType, o2);
+                        }
+                        else
+                        {
+                            commandInstance = Activator.CreateInstance(commandType, o1);
+                        }
+                    } else if (o1.getCollisionType() == "Item")
                     {
                         //item
                         //item and wall pass in item
@@ -215,6 +221,18 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Player", "statItem", "right", typeof(PlayerStatItem));
             RegisterCollision("Player", "statItem", "top", typeof(PlayerStatItem));
             RegisterCollision("Player", "statItem", "bottom", typeof(PlayerStatItem));
+
+
+            //projectiles
+            RegisterCollision("Projectile", "Player", "left", typeof(PlayerTakeDamage));
+            RegisterCollision("Projectile", "Player", "right", typeof(PlayerTakeDamage));
+            RegisterCollision("Projectile", "Player", "top", typeof(PlayerTakeDamage));
+            RegisterCollision("Projectile", "Player", "bottom", typeof(PlayerTakeDamage));
+
+            RegisterCollision("Projectile", "Obstacle", "left", typeof(ProjectileObstacle));
+            RegisterCollision("Projectile", "Obstacle", "right", typeof(ProjectileObstacle));
+            RegisterCollision("Projectile", "Obstacle", "top", typeof(ProjectileObstacle));
+            RegisterCollision("Projectile", "Obstacle", "bottom", typeof(ProjectileObstacle));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)

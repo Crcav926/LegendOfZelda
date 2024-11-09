@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 using LegendOfZelda;
 using System.Reflection.Metadata;
+using System;
 
 namespace LegendOfZelda;
-public class Fireball
+public class Fireball : ICollideable, IProjectile
 {
     private Vector2 position;
     private Vector2 velocity;
@@ -16,6 +17,9 @@ public class Fireball
     //private float maxScale = 5.0f;
     private ISprite sprite;
 
+    private Rectangle destinationRectangle;
+
+   
     public Fireball(Vector2 startPosition, Vector2 direction)
     {
         this.position = startPosition;
@@ -51,7 +55,7 @@ public class Fireball
         // Draw the fireball only if it is active
         if (IsActive)
         {
-            Rectangle destinationRectangle = new Rectangle(
+            destinationRectangle = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
                 Constants.FireballWidth,
@@ -60,5 +64,28 @@ public class Fireball
 
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
+    }
+
+    public Rectangle getHitbox()
+    {
+        if (IsActive)
+        {
+            return destinationRectangle;
+        }
+        else
+        {
+            return new Rectangle(0, 0, 0, 0);
+        }
+    }
+
+    public String getCollisionType()
+    {
+        return "Projectile";
+    }
+
+
+    public void deleteSelf()
+    {
+        IsActive = false;
     }
 }

@@ -141,6 +141,12 @@
     <ObjectName>Keese</ObjectName>
     <Location>500 132</Location>
 </Item>
+<!--Bow-->
+<Item>
+    <ObjectType>ClassItems</ObjectType>
+    <ObjectName>Bow</ObjectName>
+    <Location>450 176</Location>
+</Item>
 <!--Door type will need to be changed-->
 <!--No door visual here, just a transition.-->
 <Item>

@@ -8,7 +8,7 @@ namespace LegendOfZelda
     {
         // Screen size
         public const int ScreenWidth = 1600;  // Screen width
-        public const int ScreenHeight = 760 + HUDHeight;  // Screen height
+        public const int ScreenHeight = 900 + HUDHeight;  // Screen height
         public const int HUDWidth = 0;
         public const int HUDHeight = OriginalHeight / 4;
         // Original resolution in which the sprites are scaled to.
@@ -27,8 +27,9 @@ namespace LegendOfZelda
         public const float MikuSpeedY = 2f;
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
-        public const int MikuStartingHealth = 10;
-        public const double MikuInvincibilityTimer = 1.5;
+        public const int MikuStartingHealth = 12;
+        public const int PointsPerHP = 4;
+        public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
         public const int MikuStartingPositionY = 330;
         // Standard size
@@ -83,8 +84,8 @@ namespace LegendOfZelda
         public const float GoriyaSpeed = 2f;
         public const float GoriyaThrowCooldown = 2f;
         public const float GoriyaChangeDirectionCooldown = 2f;
-        public const int GoriyaHeight = 16;
-        public const int GoriyaWidth = 16;
+        public const int GoriyaHeight = 40;
+        public const int GoriyaWidth = 45;
         public const float GoriyaProjectileOffset = 10f;
         //its at this point that I ask if we need all of these hitboxes to be different
         //its easier to change this way at least for different sized objects
@@ -172,5 +173,20 @@ namespace LegendOfZelda
         public static readonly Vector2 horizontalWallSize = new Vector2(350, 87);
         public static readonly Vector2 verticalWallSize = new Vector2(100, 196);
 
+        // HUD Inventory Counter
+        public const int HUDNumberSpriteDimensionX = 25;
+        public const int HUDNumberSpriteDimensionY = 20;
+        public const int coinsHUDPosX = 300;
+        public const int coinsHUDPosY = -86;
+        public const int keysHUDPosX = 300;
+        public const int keysHUDPosY = -54;
+        public const int bombsHUDPosX = 300;
+        public const int bombsHUDPosY = -34;
+
+        // HUD Health
+        public const int hpHUDPosX = 550;
+        public const int hpHUDPosY = -35;
+        public const int HUDHPSpriteDimensionX = 25;
+        public const int HUDHPSpriteDimensionY = 18;
     }
 }
