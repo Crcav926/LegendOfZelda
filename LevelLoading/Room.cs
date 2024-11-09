@@ -42,5 +42,9 @@ namespace LegendOfZelda
         {
             return statics;
         }
+        public String getRoomName()
+        {
+            return name;
+        }
     }
 }
