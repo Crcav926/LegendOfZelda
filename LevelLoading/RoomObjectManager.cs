@@ -23,6 +23,7 @@ namespace LegendOfZelda
         private string room;
         //for the drop table
         private int DeathCounter = 0;
+        Room currentRoom;
 
         public static RoomObjectManager Instance
         {
@@ -89,7 +90,7 @@ namespace LegendOfZelda
             if (blocks != LevelLoader.Instance.getBlocks())
             {
                 blocks = LevelLoader.Instance.getBlocks();
-                addWalls();
+                // addWalls();
             }
             for(int i = 0; i < movers.Count; i++)
             {

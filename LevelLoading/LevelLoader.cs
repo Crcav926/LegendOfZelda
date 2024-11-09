@@ -140,5 +140,13 @@ namespace LegendOfZelda
         {
             return roomMapping;
         }
+        public void changeCurrentRoom(String s)
+        {
+            currRoom =  roomMapping[s];
+        }
+        public Room getCurrentRoom()
+        {
+            return currRoom;
+        }
     }
 }

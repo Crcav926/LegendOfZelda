@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,21 @@ namespace LegendOfZelda
             {
                 mover.Update(gameTime);
             }
+        }
+        public void Draw(SpriteBatch s)
+        {
+            foreach (ICollideable block in statics)
+            {
+                block.Draw(s);
+            }
+        }
+        public List<ICollideable> getMovers()
+        {
+            return movers;
+        }
+        public List<ICollideable> getStatics()
+        {
+            return statics;
         }
     }
 }

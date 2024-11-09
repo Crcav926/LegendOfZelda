@@ -120,8 +120,9 @@ namespace LegendOfZelda
             List<String> listOfRooms = new List<string>()
             {
                 "Room1.xml", "Room2.xml", "Room3.xml", "Room4.xml", "Room5.xml", "Room6.xml",
-                "Room7.xml", "Room8.xml", "Room9.xml", "Room10.xml", "Room11.xml",
-                "Room12.xml", "Room13.xml", "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml"
+                "Room7.xml", "Room8.xml", "Room9.xml"
+                // "Room10.xml", "Room11.xml",
+                // "Room12.xml", "Room13.xml", "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml"
             };
             foreach (string room in listOfRooms)
             {
@@ -200,17 +201,22 @@ namespace LegendOfZelda
 
             // Draw the game content with the transform matrix applied
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
-            
+
             //TJ wants this moved out of Game 1 becuase of constants
+
+
             walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-
-
             background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
+            foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
+            {
+                entry.Value.Draw(_spriteBatch);
+            }
+
             foreach (ICollideable block in blocks)
             {
                 block.Draw(_spriteBatch);
             }
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
+            // CHANGE TO DRAW WITH ROOMS
             foreach (ICollideable mover in LevelLoader.Instance.getMovers())
             {
                 mover.Draw(_spriteBatch);

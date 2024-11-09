@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LegendOfZelda.LinkItems
+namespace LegendOfZelda
 {
     public class Inventory
     {

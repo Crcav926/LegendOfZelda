@@ -15,6 +15,7 @@ namespace LegendOfZelda
         private string objectName { get; set; }
         private Vector2 position { get; set; }
         private Vector2 newPosition { get; set; }
+        private Vector2 offSet {  get; set; }
         private Tuple <String,String,Vector2> objectData { get; set; }
         public List<Tuple<string, string, Vector2>> objectList { get; set; } = new List<Tuple<string, string, Vector2>>();
         private ConstructorInfo con;
@@ -26,6 +27,7 @@ namespace LegendOfZelda
         private string roomName;
         private bool keyBool;
         private bool lockedDoor;
+        private Vector2 multiplier = new Vector2(Constants.OriginalWidth, Constants.OriginalHeight);
         public Parsing(string fileName)
         {
             LoadObjects(fileName);
@@ -63,7 +65,13 @@ namespace LegendOfZelda
                 XmlNode hasKey = node.SelectSingleNode("HasKey");
                 XmlNode locked = node.SelectSingleNode("Locked");
                 XmlNode room = node.SelectSingleNode("Room");
-                
+                XmlNode offSetX = node.SelectSingleNode("OffsetX");
+                XmlNode offSetY = node.SelectSingleNode("OffsetY");
+                if (offSetX != null)
+                {
+                    offSet = new Vector2(int.Parse(offSetX.InnerText), int.Parse(offSetY.InnerText));
+                }
+
 
                 // Checks for null, if not null find the inner text.
                 if (objectTypeNode != null)
@@ -121,6 +129,7 @@ namespace LegendOfZelda
 
                         // Sets position to a vector.
                         position = new Vector2(x, y);
+                        position += (offSet * multiplier);
                     }
                 }
                 if (hasKey != null)
@@ -146,6 +155,37 @@ namespace LegendOfZelda
                     blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition, lockedDoor }));
                 }
             }
+            addWalls(offSet);
+        }
+        private void addWalls(Vector2 offSet)
+        {
+            Vector2 positions = Constants.top1Position;
+            Vector2 size = Constants.horizontalWallSize;
+            positions += offSet * multiplier;
+            Wall top1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.top2Position + offSet * multiplier;
+            Wall top2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.bot1Position + offSet * multiplier;
+            Wall bot1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.bot2Position + offSet * multiplier;
+            Wall bot2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.horizontalWallSize.X, (int)Constants.horizontalWallSize.Y));
+            positions = Constants.left1Position + offSet * multiplier;
+            Wall left1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.left2Position + offSet * multiplier;
+            Wall left2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.right1Position + offSet * multiplier;
+            Wall right1 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+            positions = Constants.right2Position + offSet * multiplier;
+            Wall right2 = new Wall(new Microsoft.Xna.Framework.Rectangle((int)positions.X, (int)positions.Y, (int)Constants.verticalWallSize.X, (int)Constants.verticalWallSize.Y));
+
+            blocks.Add(top1);
+            blocks.Add(top2);
+            blocks.Add(bot1);
+            blocks.Add(bot2);
+            blocks.Add(left1);
+            blocks.Add(left2);
+            blocks.Add(right1);
+            blocks.Add(right2);
         }
     }
 }
