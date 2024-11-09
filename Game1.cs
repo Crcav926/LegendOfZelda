@@ -57,8 +57,10 @@ namespace LegendOfZelda
 
         SoundMachine soundMachine = SoundMachine.Instance;
 
+        public bool paused;
     
         SpriteFont font;
+        Texture2D blackRectangle;
 
         public Game1()
         {
@@ -67,6 +69,7 @@ namespace LegendOfZelda
             IsMouseVisible = true;
             _graphics.PreferredBackBufferWidth = Constants.ScreenWidth;
             _graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
+            paused = false; 
         }
         
         protected override void Initialize()
@@ -135,85 +138,104 @@ namespace LegendOfZelda
 
         protected override void Update(GameTime gameTime)
         {
-            blocks = LevelLoader.Instance.getBlocks();
-            movers = LevelLoader.Instance.getMovers();
-            // Let the keyboard controller handle input
-            keyboardController.Update();
-            RoomObjectManager.Instance.Update();
-            hudManager.Update(gameTime);
-            // Ensure the sprite is correctly referenced
-            foreach (IController controller in controllerList)
+            if (!paused)
             {
-                controller.Update();
-            }
-            // update collision
-            collisionDetector.update();
-            //collHandler.update();
-            //Update the current enemy to have the correct sprite and draw it
-            // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
-            foreach (ICollideable mover in LevelLoader.Instance.getMovers())
-            {
-                mover.Update(gameTime);
-            }
-            //Update the keyboard controller
-            controllerK.Update();
-            
-            base.Update(gameTime);
-            // Calls link update, which updates his Sprite and Items
-            // LinkCharacter.Update(gameTime);
-            // Updates sprites in Item classes
+                blocks = LevelLoader.Instance.getBlocks();
+                movers = LevelLoader.Instance.getMovers();
+                // Let the keyboard controller handle input
+                keyboardController.Update();
+                RoomObjectManager.Instance.Update();
+                hudManager.Update(gameTime);
+                // Ensure the sprite is correctly referenced
+                foreach (IController controller in controllerList)
+                {
+                    controller.Update();
+                }
+                // update collision
+                collisionDetector.update();
+                //collHandler.update();
+                //Update the current enemy to have the correct sprite and draw it
+                // The enemies use their own sprite batch so this must be outside the other sprite batch begin.
+                foreach (ICollideable mover in LevelLoader.Instance.getMovers())
+                {
+                    mover.Update(gameTime);
+                }
 
+                base.Update(gameTime);
+                // Calls link update, which updates his Sprite and Items
+                // LinkCharacter.Update(gameTime);
+                // Updates sprites in Item classes
+            }
+            //Update the keyboard controller outside because we need it
+            controllerK.Update();
         }
 
         protected override void Draw(GameTime gameTime)
-        {
+        { 
             GraphicsDevice.Clear(Color.Red);
 
 
-            // TODO: Add your drawing code here
-            // Temp fps check.
-            double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
-            string fpsText = $"FPS: {frameRate:0.00}";
+             // TODO: Add your drawing code here
+             // Temp fps check.
+             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
+             string fpsText = $"FPS: {frameRate:0.00}";
 
 
-            //var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+              //var matrix = Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
 
 
-            var matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+             var matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+                
+             // Draw the game content with the transform matrix applied
+             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
 
-            // Draw the game content with the transform matrix applied
-            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
-            
-            //TJ wants this moved out of Game 1 becuase of constants
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-
-            
-            background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
-            foreach (ICollideable block in blocks)
+            if (!paused)
             {
-                block.Draw(_spriteBatch);
-            }
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-            foreach (ICollideable mover in LevelLoader.Instance.getMovers())
+                //TJ wants this moved out of Game 1 becuase of constants
+                walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
+
+
+                background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
+                foreach (ICollideable block in blocks)
+                {
+                    block.Draw(_spriteBatch);
+                }
+                walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
+                foreach (ICollideable mover in LevelLoader.Instance.getMovers())
+                {
+                    mover.Draw(_spriteBatch);
+                }
+                //draw the dropped items
+                foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
+                {
+                    statItem.Draw(_spriteBatch);
+                }
+
+
+                hudManager.Draw(_spriteBatch);
+
+            }else
             {
-                mover.Draw(_spriteBatch);
+                //THIS IS THE MOST JANK PAUSE EVER BUT IT DO WORK
+                blackRectangle = new Texture2D(GraphicsDevice, 1, 1);
+                blackRectangle.SetData(new[] { Color.Black });
+                _spriteBatch.Draw(blackRectangle, new Rectangle(0, 0, 1000, 1000),Color.White);
+                _spriteBatch.DrawString(font, "PAUSED", new Vector2(360, 200), Color.White);
             }
-            //draw the dropped items
-            foreach (ClassItems statItem in RoomObjectManager.Instance.getGroundItems())
-            {
-                statItem.Draw(_spriteBatch);
-            }
-
-
-            hudManager.Draw(_spriteBatch);
-
-
-
-             _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+            _spriteBatch.DrawString(font, fpsText, new Vector2(680, 0), Color.White);
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void setPause(bool pauseState)
+        {
+            paused = pauseState;
+            if (pauseState == false)
+            {
+                blackRectangle.Dispose();
+            }
         }
     }
 }
