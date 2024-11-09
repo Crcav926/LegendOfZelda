@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using System.Threading;
 
 namespace LegendOfZelda.Command
 {
@@ -46,6 +47,27 @@ namespace LegendOfZelda.Command
                 if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {
                     SoundMachine.Instance.GetSound("unlock").Play();
+                    //pause the game to play sound and see door change
+                    String currentDoor = door.doorSprite;
+                    Debug.WriteLine($"Current door is {currentDoor}");
+                    switch (currentDoor[0]) {
+                        case 'R':
+                            door.doorSprite = "RightDoorOpen";
+                            break;
+                        case 'L':
+                            door.doorSprite = "LeftDoorOpen";
+                            break;
+                        case 'U':
+                            Debug.WriteLine("Swapping to open door");
+                            door.doorSprite = "UpDoorOpen";
+                            break;
+                        case 'D':
+                            door.doorSprite = "DownDoorOpen";
+                            break;
+                    }
+                    currentDoor = door.doorSprite;
+                    Debug.WriteLine($"Updated door is {currentDoor}");
+                    Thread.Sleep(1500);
                     door.setLocked(false);
                     link.inventory.removeKey();
                 }
