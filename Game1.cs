@@ -88,7 +88,7 @@ namespace LegendOfZelda
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
-             font = Content.Load<SpriteFont>("font");
+            font = Content.Load<SpriteFont>("font");
 
             // Load the texture for the sprite 
 
@@ -201,7 +201,7 @@ namespace LegendOfZelda
 
 
 
-             _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
+            _spriteBatch.DrawString(font, fpsText, new Vector2(680,0), Color.White);
 
             _spriteBatch.End();
 

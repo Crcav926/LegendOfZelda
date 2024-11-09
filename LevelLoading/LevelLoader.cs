@@ -62,6 +62,7 @@ namespace LegendOfZelda
             SoundEffectInstance throughDoor = Content.Load<SoundEffect>("thruDoor").CreateInstance();
             SoundEffectInstance unlock = Content.Load<SoundEffect>("unlock").CreateInstance();
             SoundEffectInstance moveBlock = Content.Load<SoundEffect>("moveBlock").CreateInstance();
+            SoundEffectInstance deathMod = Content.Load<SoundEffect>("death").CreateInstance();
 
             soundMachine.addSound("throughDoor", throughDoor);
             soundMachine.addSound("moveBlock", moveBlock);
@@ -73,6 +74,7 @@ namespace LegendOfZelda
             soundMachine.addSound("attack", attackMod);
             soundMachine.addSound("hurt", hurtMod);
             soundMachine.addSound("ha", haMod);
+            soundMachine.addSound("death", deathMod);
 
             //I'll keep the theme song loaded here so it doesn't reset on room changes
             SoundEffectInstance mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
