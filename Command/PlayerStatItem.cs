@@ -39,6 +39,10 @@ namespace LegendOfZelda.Command
             {
                 _link.inventory.addBomb();
             }
+            if (itemType == "Triforce")
+            {
+                _link.Reset();
+            }
             //I'm still adding the keys to the inventory because they should probably show up in the HUD?
             //Debug.WriteLine($"Added {item.getItemType()} to inventory");
             _link.inventory.addItem(item);

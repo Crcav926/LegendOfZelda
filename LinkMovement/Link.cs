@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Threading;
 using System.Timers;
 
 namespace LegendOfZelda
@@ -44,6 +45,8 @@ namespace LegendOfZelda
         public Inventory inventory;
 
         private SoundMachine soundMachine = SoundMachine.Instance;
+        private static double test;
+        public bool test1 = false;
 
         private static Link instance = new Link();
 
@@ -64,7 +67,7 @@ namespace LegendOfZelda
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
             //currentHealth = Constants.MikuStartingHealth;
-            currentHealth = 50;
+            currentHealth = 10;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
@@ -118,6 +121,7 @@ namespace LegendOfZelda
             if (currentHealth <= 0)
             {
                 linkState.Death();
+                //test1 = true;
             }
         }
 
@@ -173,7 +177,7 @@ namespace LegendOfZelda
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
                 // This pair freezes her on death and has her play the animation
                 LevelLoader.Instance.Load("RoomDeath.xml");
-                currentHealth = 0;
+                //currentHealth = 0;
 
                 //this pair restarts you from room 1 on death
                 //LevelLoader.Instance.Load("Room1.xml");
@@ -181,7 +185,16 @@ namespace LegendOfZelda
 
                 //always needed
                 RoomObjectManager.Instance.staticItems.Clear();
-                Reset();
+                if(test1 == true)
+                {
+                    test = gameTime.ElapsedGameTime.TotalSeconds;
+                    test1 = false;
+                }
+                if((gameTime.ElapsedGameTime.TotalSeconds - test) > 1.5)
+                {
+                    LevelLoader.Instance.Load("Room1.xml");
+                    Reset();
+                }
             }
         }
         public void Reset()
@@ -199,6 +212,7 @@ namespace LegendOfZelda
             //inventory.addItem(fire);
             inventory.addItem(sword);
             //inventory.addItem(bomb);
+            LevelLoader.Instance.Load("Room1.xml");
         }
         public void invulnerable()
         {
