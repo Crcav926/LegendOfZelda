@@ -102,7 +102,7 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.D1, new LinkAttack1());
             cont.RegisterCommand(Keys.D2, new LinkAttack2());
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
-            cont.RegisterCommand(Keys.R, new CommReset(game));
+            cont.RegisterCommand(Keys.R, new CommReset(game, link));
             cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
 
 

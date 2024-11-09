@@ -66,8 +66,9 @@ namespace LegendOfZelda
         {
             List<Rectangle> stalfolFrames = new List<Rectangle>
         {
-            new Rectangle(1, 59, 16, 16)
+            new Rectangle(1, 59, 16, 16),
             // TODO: Find a second frame for the Stafols
+            new Rectangle(53, 45, 16, 16)
         };
             return new Sprite(enemySpriteSheet, stalfolFrames);
         }
@@ -116,6 +117,7 @@ namespace LegendOfZelda
             List<Rectangle> upFrames = new List<Rectangle>
             {
                 new Rectangle(238, 11, 16, 16),
+                new Rectangle(306, 28, 16, 16)
             };
             return new Sprite(enemySpriteSheet, upFrames);
         }
@@ -123,6 +125,7 @@ namespace LegendOfZelda
             List<Rectangle> downFrames = new List<Rectangle>
             {
                  new Rectangle(221, 11, 16, 16),
+                 new Rectangle(289, 28, 16, 16)
             };
             return new Sprite(enemySpriteSheet, downFrames);
         }
