@@ -67,7 +67,7 @@ namespace LegendOfZelda
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
             //currentHealth = Constants.MikuStartingHealth;
-            currentHealth = 10;
+            currentHealth = 50;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();

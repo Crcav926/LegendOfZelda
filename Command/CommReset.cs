@@ -16,7 +16,7 @@ namespace LegendOfZelda
         {
             // I'm not sure how to do this quite yet, calling game constructor again doesn't work so...
             myGame.Reset();
-            //link.Reset(game);
+            link.Reset();
             LevelLoader.Instance.Load("Room1.xml");
             RoomObjectManager.Instance.staticItems.Clear();
             RoomObjectManager.Instance.Update();
