@@ -56,11 +56,6 @@ namespace LegendOfZelda
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
-        SoundEffect mikuSong;
-        SoundEffectInstance modifier;
-
-        ClassItems test;
-        Block testBlock;
         SpriteFont font;
 
         public Game1()
@@ -132,12 +127,7 @@ namespace LegendOfZelda
             modifier.Volume = .3f;
             modifier.Play();
 
-            test = new ClassItems(new Vector2(280, 300), "Triforce");
-            RoomObjectManager.Instance.staticItems.Add(test);
-
-            testBlock = new Block(new Vector2(250, 300), "PushableBlock");
-            testBlock.movable = true;
-            RoomObjectManager.Instance.blocks.Add(testBlock);
+      
             hudManager = new HUDManager();
 
         }

@@ -61,6 +61,13 @@ namespace LegendOfZelda.HUD
 
         public void Update(GameTime gameTime)
         {
+            key1Item = inven.key1Item;
+            key2Item = inven.key2Item;
+            sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
+            if (sprite2 != null)
+            {
+                sprite2 = sprite2 = hudSF.CreateHUDWeaponSprite(key2Item.ToString());
+            }
             HUDSprite.Update(gameTime);
             hp.Update(gameTime);
             hudMap.Update(gameTime);

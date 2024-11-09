@@ -106,6 +106,7 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
             cont.RegisterCommand(Keys.R, new CommReset(game, link));
             cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
+            cont.RegisterCommand(Keys.D3, new RotateItems());
 
 
             cont.registerHeldDown(Keys.A, new CommMoveHeldDown(link, new Vector2(-1, 0)));

@@ -63,7 +63,8 @@ namespace LegendOfZelda
             direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
-            currentHealth = Constants.MikuStartingHealth;
+            //currentHealth = Constants.MikuStartingHealth;
+            currentHealth = 50;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
@@ -159,7 +160,7 @@ namespace LegendOfZelda
             sword.Update(gameTime);
             bomb.Update(gameTime);
 
-
+            inventory.UpdateInventory();
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > Constants.MikuInvincibilityTimer)

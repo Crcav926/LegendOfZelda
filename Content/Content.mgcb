@@ -67,6 +67,13 @@
 /processorParam:Quality=Best
 /build:enemyTakeDamage.wav;enemyHurt.wav
 
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont;font.spritefont
+
 #begin getRupee.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
