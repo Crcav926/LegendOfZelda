@@ -1,16 +1,22 @@
 # LegendOfZelda
 
-Current Sprint2 necessary documentation:
-Known bugs: 
-- Sometimes when a you throw a boomerang, it will spawn way behind the player and instantly collide with a wall, causing weird interactions, same with arrow.
-- Some enemies will linger after death
-- Some enemies do not die
-- There is a very very very small chance that a Goriya can clip into the wall and spin in a circle in perpetuity.
-- Room 14 is otherwise inaccessible and is currently bugged with how LevelLoader works
-- Stalfos is missing a frame
-- Goriya doesn't have a second movement frame when moving up and down
+Current Sprint4 necessary documentation:
+
+Backlog / Known Bugs
+● Need to add full map implementations
+● Pause screen inventory (Currently uses the key ‘3’ to swap between inventory items)
+● Rooms 7,8,13 don’t collide for some strange reason. Specifically rooms to the left and above the
+first room.
+11
+● The reset after the death has not been implemented yet. The game just permanently stays on the
+death animation
+● Old man's room needs to be completed.
+● Previous backlog tasks are not finished.
+● There is a very very very small chance that a Goriya can clip into the wall and spin in a circle in perpetuity.
+● Stalfos is missing a frame
+● Goriya doesn't have a second movement frame when moving up and down
 
 Controls:
-Use WASD to move, 1 to throw a boomerang, 2 to shoot an arrow, 3 to throw fire, 4 to use the sword, and 5 to place a bomb.
-Use "enter" key to rotate through doors
+Use WASD to move, 1 to use weapon 1, and 2 to use weapon 2.
 Press "q" key to quit game.
+Use 3 to cycle between weapons.
