@@ -72,8 +72,9 @@ namespace LegendOfZelda
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (exists) { 
-
+            if (exists) 
+            {
+                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuHeight, Constants.MikuHeight);
                 fireSprite.Draw(spriteBatch,destination,Color.White);
             }
         }
