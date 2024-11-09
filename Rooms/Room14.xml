@@ -5,9 +5,9 @@
 <!--I'm still gonna place blocks for collision, but the walls are still 32px around, just a brick texture instead.-->
 <!--Essentially, there will be blocks drawn over the background that we can put collision on.-->
 <Item>
-    <ObjectType>Floor</ObjectType>
-    <ObjectName>FloorItemRoom</ObjectName>
-    <Location>0 0</Location>
+    <ObjectType>WallSprite</ObjectType>
+    <ObjectName>ItemRoom</ObjectName>
+    <Location>0 44</Location>
 </Item>
 <!--Object Types: 22 Bricks. More may be needed for the upper ladder section, but I'm hoping that's solved by wall hitboxes.-->
 <Item>

@@ -109,9 +109,6 @@ namespace LegendOfZelda
             BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
 
 
-            // TODO: Get absorbed by Level Loader as well so it can support custom backgrounds and walls
-            background = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(1, 192, 192, 112) });
-            walls = new Sprite(BackgroundTure, new List<Rectangle>() { new Rectangle(521, 11, 256, 176) });
 
             LevelLoader.Instance.LoadAllContent(Content);
             LevelLoader.Instance.RegisterAllCommands(controllerK, this);
@@ -161,7 +158,7 @@ namespace LegendOfZelda
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(Color.Black);
 
 
             // TODO: Add your drawing code here
@@ -178,16 +175,10 @@ namespace LegendOfZelda
             // Draw the game content with the transform matrix applied
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
             
-            //TJ wants this moved out of Game 1 becuase of constants
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-
-            
-            background.Draw(_spriteBatch, new Rectangle(100, 88, 600, 305), Color.White);
             foreach (ICollideable block in blocks)
             {
                 block.Draw(_spriteBatch);
             }
-            walls.Draw(_spriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
             foreach (ICollideable mover in LevelLoader.Instance.getMovers())
             {
                 mover.Draw(_spriteBatch);

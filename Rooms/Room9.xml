@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
 <!--Note the different floor for this room-->
+
 <Item>
-    <ObjectType>Floor</ObjectType>
-    <ObjectName>FloorVoid</ObjectName>
-    <Location>100 88</Location>
-</Item>
-<Item>
-    <ObjectType>Wall</ObjectType>
+    <ObjectType>WallSprite</ObjectType>
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>

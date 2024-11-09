@@ -108,6 +108,15 @@ namespace LegendOfZelda
             {
             "DownDoorSecretBombableWall", new List<Rectangle>{ new Rectangle(947, 110, 32, 32) }
             },
+            {
+            "Wall", new List<Rectangle>() { new Rectangle(521, 11, 256, 176) }
+            },
+            {
+            "Floor1", new List<Rectangle>() { new Rectangle(1, 192, 192, 112) }
+            },
+            {
+            "ItemRoom", new List<Rectangle>() { new Rectangle(421, 1009, 256, 160) }
+            }
 
 
         };
