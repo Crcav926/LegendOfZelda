@@ -20,7 +20,7 @@ namespace LegendOfZelda
         private Vector2 newPos;
         public bool lockedS;
         public bool unlockable;
-
+        public String doorSprite;
         public Door(Vector2 position, String doorType, String room, Vector2 newPos, bool locked) 
         {
             this.position = position;
@@ -62,6 +62,7 @@ namespace LegendOfZelda
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            sprite = BlockSpriteFactory.Instance.CreateSprite(doorSprite);
             sprite.Draw(spriteBatch, destinationRectangle, Color.White);
         }
         public String getCollisionType()

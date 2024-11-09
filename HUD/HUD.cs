@@ -64,6 +64,7 @@ namespace LegendOfZelda.HUD
             HUDSprite.Update(gameTime);
             hp.Update(gameTime);
             hudMap.Update(gameTime);
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
