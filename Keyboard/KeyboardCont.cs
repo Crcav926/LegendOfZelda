@@ -9,6 +9,7 @@ using System.Windows.Input;
 using LegendOfZelda.LinkMovement;
 using LegendOfZelda.LinkItems;
 using LegendOfZelda.Command;
+using Microsoft.Xna.Framework;
 
 
 namespace LegendOfZelda
@@ -53,50 +54,85 @@ namespace LegendOfZelda
 
         public void Update()
         {
+            
             // get the keys that are currently pressed
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-
-            foreach (Keys key in pressedKeys)
+            if (myGame.paused == false)
             {
-                // if the key has an on transition command mapped to it
-                if (controllerMappings.ContainsKey(key))
+                foreach (Keys key in pressedKeys)
                 {
-                    //and its transitioning and not being held
-                    if (!alrPressed.Contains(key))
+                    // if the key has an on transition command mapped to it
+                    if (controllerMappings.ContainsKey(key))
                     {
-                        //execute the on transition command and add it to alr Pressed so that the transition command wont re-trigger
-                        controllerMappings[key].Execute();
-                        alrPressed.Add(key);
+                        //and its transitioning and not being held
+                        if (!alrPressed.Contains(key))
+                        {
+                            //execute the on transition command and add it to alr Pressed so that the transition command wont re-trigger
+                            controllerMappings[key].Execute();
+                            alrPressed.Add(key);
+                        }
+
                     }
+                    //also any key that is being pressed should execute its held down command if it has one
+                    if (heldDownMappings.ContainsKey(key))
+                    {
+                        heldDownMappings[key].Execute();
+                    }
+                }
+                // remove unpressed keys
 
-                }
-                //also any key that is being pressed should execute its held down command if it has one
-                if (heldDownMappings.ContainsKey(key))
+                //get a list of keys that were released
+                unPressList = new List<Keys>();
+                foreach (Keys key in alrPressed)
                 {
-                    heldDownMappings[key].Execute();
+                    if (!pressedKeys.Contains(key))
+                    {
+                        unPressList.Add(key);
+                    }
+                }
+                // execute their commands if they had them and remove them from the list of keys that were pressed
+                foreach (Keys key in unPressList)
+                {
+                    // This executes the command on key release
+                    if (releaseMappings.ContainsKey(key))
+                    {
+                        releaseMappings[key].Execute();
+                    }
+                    alrPressed.Remove(key);
                 }
             }
-            // remove unpressed keys
+            else
+            {
+                foreach (Keys key in pressedKeys)
+                {
+                    if (key == Keys.P)
+                    {
+                        //and its transitioning and not being held
+                        if (!alrPressed.Contains(key))
+                        {
+                            //execute the on transition command and add it to alr Pressed so that the transition command wont re-trigger
+                            controllerMappings[key].Execute();
+                            alrPressed.Add(key);
+                        }
+                    }
+                }
+                //get a list of keys that were released
+                unPressList = new List<Keys>();
+                foreach (Keys key in alrPressed)
+                {
+                    if (!pressedKeys.Contains(key))
+                    {
+                        unPressList.Add(key);
+                    }
+                }
+                foreach (Keys key in unPressList)
+                {
+                    alrPressed.Remove(key);
+                }
 
-            //get a list of keys that were released
-            unPressList = new List<Keys>();
-            foreach (Keys key in alrPressed)
-            {
-                if (!pressedKeys.Contains(key))
-                {
-                    unPressList.Add(key);
-                }
             }
-            // execute their commands if they had them and remove them from the list of keys that were pressed
-            foreach (Keys key in unPressList)
-            {
-                // This executes the command on key release
-                if (releaseMappings.ContainsKey(key))
-                {
-                    releaseMappings[key].Execute();
-                }
-                alrPressed.Remove(key);
-            }
+                
+            
         }
     }
 }
