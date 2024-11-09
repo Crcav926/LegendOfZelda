@@ -67,6 +67,7 @@ namespace LegendOfZelda
         {
             if (exists)
             {
+                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, 40, 40);
                 swordSprite.Draw(spriteBatch, destination, Color.White);
             }
         }

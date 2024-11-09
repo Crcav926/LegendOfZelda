@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+	<item>
+		<OffsetX>-1</OffsetX>
+		<OffsetY>2</OffsetY>
+	</item>
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>

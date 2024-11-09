@@ -23,8 +23,8 @@ namespace LegendOfZelda
         private string room;
         //for the drop table
         private int DeathCounter = 0;
+        Room currentRoom;
         public int Localcounter = 0;
-
 
 
         public static RoomObjectManager Instance
@@ -65,26 +65,20 @@ namespace LegendOfZelda
 
         public RoomObjectManager() 
         {
+            // CHANGE THIS TO == THE MOVERS AND BLOCKS OF THE CURRENT ROOM
             movers = LevelLoader.Instance.getMovers();
             blocks = LevelLoader.Instance.getBlocks();
             this.room = LevelLoader.Instance.getRoom();
         }
         public List<ICollideable> getMovers()
         {
-            List<ICollideable> moveList = new List<ICollideable>();
-            if (movers != null)
-            {
-                foreach (ICollideable m in movers)
-                {
-                    moveList.Add(m);
-                }
-            }
-            foreach (ICollideable p in projectiles)
-            {
+            // NOTE TO SELF - DO NOT CHANGE THIS CLASS IF POSSIBLE
+            return movers;
+            //foreach (ICollideable p in projectiles)
+            //{
                 //nevermind holy frick no frames
                 //moveList.Add(p);
-            }
-            return moveList;
+            //}
         }
         public List<ICollideable> getStandStills()
         {
@@ -121,7 +115,7 @@ namespace LegendOfZelda
             if (blocks != LevelLoader.Instance.getBlocks())
             {
                 blocks = LevelLoader.Instance.getBlocks();
-                addWalls();
+                // addWalls();
             }
             for(int i = 0; i < movers.Count; i++)
             {

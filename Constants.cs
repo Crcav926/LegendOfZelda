@@ -50,8 +50,8 @@ namespace LegendOfZelda
         // Aquamentus
         public const int AquamentusHeight = 80;
         public const int AquamentusWidth = 80;
-        public const int AquamentusHitboxWidth = 45;
-        public const int AquamentusHitboxHeight = 40;
+        public const int AquamentusHitboxWidth = 80;
+        public const int AquamentusHitboxHeight = 80;
         public const float AquamentusMaxX = 100f;
         public const float AquamentusMinX = 10f;
         public const float AquamentusSpeed = 80f;
@@ -158,6 +158,21 @@ namespace LegendOfZelda
         //big ol square sword
         public const int SwordWidth = 40;
         public const int SwordHeight = 40;
+        //Wall Constants
+        public static readonly Vector2 top1Position = new Vector2(0, 0);
+        public static readonly Vector2 topMiddlePosition = new Vector2(350, 0);
+        public static readonly Vector2 top2Position = new Vector2(450, 0);
+        public static readonly Vector2 bot1Position = new Vector2(0, 392);
+        public static readonly Vector2 bot2Position = new Vector2(350, 392);
+        public static readonly Vector2 left1Position = new Vector2(0, 0);
+        public static readonly Vector2 left2Position = new Vector2(0, 284);
+        public static readonly Vector2 right1Position = new Vector2(700, 0);
+        public static readonly Vector2 right2Position = new Vector2(700, 284);
+        public static readonly Vector2 middleHorizontalSize = new Vector2(100, 80);
+        public static readonly Vector2 middleVerticalSize = new Vector2(90, 88);
+        public static readonly Vector2 horizontalWallSize = new Vector2(350, 87);
+        public static readonly Vector2 verticalWallSize = new Vector2(100, 196);
+
         // HUD Inventory Counter
         public const int HUDNumberSpriteDimensionX = 25;
         public const int HUDNumberSpriteDimensionY = 20;
