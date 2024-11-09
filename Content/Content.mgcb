@@ -61,19 +61,6 @@
 /processorParam:TextureFormat=Color
 /build:enemySpriteSheet.png
 
-
-#begin HUDSpriteSheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=228,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:HUDSpriteSheet.png
-
 #begin enemyTakeDamage.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -92,6 +79,17 @@
 /processorParam:Quality=Best
 /build:getTriforce.wav;getTri.wav
 
+#begin HUDSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=228,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUDSpriteSheet.png
 
 #begin itemSpriteFinal.png
 /importer:TextureImporter
@@ -116,6 +114,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:LinkSpriteSheet.png
+
+#begin LOZ_Link_Die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LOZ_Link_Die.wav;death.wav
 
 #begin mikuSong.wav
 /importer:WavImporter

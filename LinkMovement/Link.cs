@@ -193,11 +193,11 @@ namespace LegendOfZelda
             damageAnimation = new DamageAnimation();
             timeElapsed = 0;
             canTakeDamage = true;
-            inventory.addItem(boomerang);
-            inventory.addItem(arrow);
-            inventory.addItem(fire);
+            //inventory.addItem(boomerang);
+            //inventory.addItem(arrow);
+            //inventory.addItem(fire);
             inventory.addItem(sword);
-            inventory.addItem(bomb);
+            //inventory.addItem(bomb);
         }
         public void invulnerable()
         {
