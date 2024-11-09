@@ -61,24 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:enemySpriteSheet.png
 
-
-#begin HUDSpriteSheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=228,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:HUDSpriteSheet.png
-
 #begin enemyTakeDamage.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:enemyTakeDamage.wav;enemyHurt.wav
+
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont;font.spritefont
 
 #begin getRupee.wav
 /importer:WavImporter
@@ -92,6 +86,17 @@
 /processorParam:Quality=Best
 /build:getTriforce.wav;getTri.wav
 
+#begin HUDSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=228,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUDSpriteSheet.png
 
 #begin itemSpriteFinal.png
 /importer:TextureImporter
