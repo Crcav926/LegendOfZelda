@@ -91,8 +91,8 @@ namespace LegendOfZelda.Collision
                     //calculate where they collide and add that rectangle to the collides list
                     //this is temporary ill fix it later
                     //Debug.WriteLine("Collision Detected");
-                    Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, secondHitbox);
-
+                    Microsoft.Xna.Framework.Rectangle overlapT = getOverlap(firstHitbox, secondHitbox);
+                    Microsoft.Xna.Framework.Rectangle overlap = new Microsoft.Xna.Framework.Rectangle(Math.Abs(overlapT.X), Math.Abs(overlapT.Y), Math.Abs(overlapT.Width), Math.Abs(overlapT.Height));
                     //this version got rid of doIntersect while the stationary one hasn't
                     //if there's overlap we collided so add to collision list.
                     if (overlap.X > 0 || overlap.Y > 0)
@@ -120,7 +120,9 @@ namespace LegendOfZelda.Collision
                         //calculate where they collide and add that rectangle to the collides list
                         //this is temporary ill fix it later
                         //Debug.WriteLine("Collision Detected");
-                        Microsoft.Xna.Framework.Rectangle overlap = getOverlap(firstHitbox, stationaryHitbox);
+                        Microsoft.Xna.Framework.Rectangle overlapT = getOverlap(firstHitbox, stationaryHitbox);
+                        Microsoft.Xna.Framework.Rectangle overlap = new Microsoft.Xna.Framework.Rectangle(Math.Abs(overlapT.X), Math.Abs(overlapT.Y), Math.Abs(overlapT.Width), Math.Abs(overlapT.Height));
+
                         if (overlap.X > 0 || overlap.Y > 0)
                         {
                             String direction = "null";

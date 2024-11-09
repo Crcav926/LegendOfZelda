@@ -19,9 +19,6 @@ namespace LegendOfZelda.HUD
         Inventory inven;
         ISprite sprite1;
         ISprite sprite2;
-        ISprite sprite3;
-        ISprite sprite4;
-        ISprite sprite5;
         HUDSpriteFactory hudSF;
         public HUDManager()
         {
@@ -79,11 +76,11 @@ namespace LegendOfZelda.HUD
             hudMap.Draw(spriteBatch);
             if (sprite1 != null)
             {
-                sprite1.Draw(spriteBatch, new Rectangle(400, -69, 25, 40), Color.White);
+                sprite1.Draw(spriteBatch, new Rectangle(Constants.HUDSprite1X, Constants.HUDSprite1Y, Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
             }
             if (sprite2 != null)
             {
-                sprite2.Draw(spriteBatch, new Rectangle(475, -69, 25, 40), Color.White);
+                sprite2.Draw(spriteBatch, new Rectangle(Constants.HUDSprite2X, Constants.HUDSprite2Y, Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
             }
 
         }

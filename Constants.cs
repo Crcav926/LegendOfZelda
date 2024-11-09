@@ -27,7 +27,7 @@ namespace LegendOfZelda
         public const float MikuSpeedY = 2f;
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
-        public const int MikuStartingHealth = 12;
+        public const int MikuStartingHealth = 1200;
         public const int PointsPerHP = 4;
         public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
@@ -193,6 +193,14 @@ namespace LegendOfZelda
         public const int keysHUDPosY = -54;
         public const int bombsHUDPosX = 300;
         public const int bombsHUDPosY = -34;
+        // Sprite 1 HUD values
+        public const int HUDSprite1X = 400;
+        public const int HUDSprite1Y = -69;
+        public const int HUDSprite2X = 475;
+        public const int HUDSprite2Y = -69;
+        public const int HUDSpriteWidth = 25;
+        public const int HUDSpriteHeight = 40;
+
 
         // HUD Health
         public const int hpHUDPosX = 550;
