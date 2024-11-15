@@ -117,7 +117,8 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.D2, new LinkAttack2());
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
             cont.RegisterCommand(Keys.R, new CommReset(game, link));
-            cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
+            //this was for testing but now pressing it breaks the game lol.
+            //cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
             cont.RegisterCommand(Keys.D3, new RotateItems());
             cont.RegisterCommand(Keys.P, new CommPause(game));
 

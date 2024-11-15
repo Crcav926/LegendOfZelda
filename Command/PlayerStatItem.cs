@@ -42,19 +42,21 @@ namespace LegendOfZelda.Command
             if (itemType == "Triforce")
             {
                 _link.Reset();
-                if (itemType == "HeartRed")
-                {
-                    Debug.WriteLine($"Health was {_link.currentHealth}");
-                    if (!(_link.currentHealth == _link.maxHealth))
-                    {
-                        _link.currentHealth += 2;
-                    }
-                    Debug.WriteLine($"Health now is {_link.currentHealth}");
-                }
+            }
+            if (itemType == "HeartRed")
+            {
+               Debug.WriteLine($"Health was {_link.currentHealth}");
+               if (!(_link.currentHealth == _link.maxHealth))
+               {
+                  _link.currentHealth += 2;
+               }
+                  Debug.WriteLine($"Health now is {_link.currentHealth}");
+            }
                 if (itemType == "Fairy")
                 {
                     _link.currentHealth = _link.maxHealth;
                 }
+            
                 //I'm still adding the keys to the inventory because they should probably show up in the HUD?
                 //Debug.WriteLine($"Added {item.getItemType()} to inventory");
                 _link.inventory.addItem(item);
@@ -62,7 +64,7 @@ namespace LegendOfZelda.Command
                 //doing both to be safe
                 item.makeContact();
                 RoomObjectManager.Instance.staticItems.Remove(item);
-            }
+            
         }
     }
 }

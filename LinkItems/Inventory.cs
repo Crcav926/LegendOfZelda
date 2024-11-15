@@ -53,7 +53,7 @@ namespace LegendOfZelda
         {
             foreach (IItems weapon in weapons)
             {
-                Debug.WriteLine($"In inventory {weapon.ToString}");
+                //Debug.WriteLine($"In inventory {weapon.ToString}");
             }
             if (weapons.Count > 1)
             {
