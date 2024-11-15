@@ -66,7 +66,7 @@ namespace LegendOfZelda.Collision
             }
             foreach (ICollideable mov in RoomObjectManager.Instance.getMovers())
             {
-                // Debug.WriteLine($"{mov.GetType().Name}");
+                Debug.WriteLine($"{mov.GetType().Name}");
             }
             //only moving items can initiate collision
             // so for all moving hitboxes
