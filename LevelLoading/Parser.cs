@@ -6,11 +6,23 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 namespace LegendOfZelda
 {
     internal class Parsing
     {
+
+        private XmlNode objectTypeNode;
+        private XmlNode objectNameNode;
+        private XmlNode locationNode;
+        private XmlNode linkLocationX;
+        private XmlNode linkLocationY;
+        private XmlNode hasKey;
+        private XmlNode locked;
+        private XmlNode room;
+        private XmlNode offSetX;
+        private XmlNode offSetY;
         private string objectType { get; set; }
         private string objectName { get; set; }
         private Vector2 position { get; set; }
@@ -39,7 +51,7 @@ namespace LegendOfZelda
         private void LoadObjects(string fileName)
         {
             //TODO: FOR DEBUGGING ONLY DELETE ONCE XML IS CREATED
-            newPosition = new Vector2(0, 0);
+           // newPosition = new Vector2(0, 0);
 
 
             // Finds files in content and loads it.
@@ -55,24 +67,21 @@ namespace LegendOfZelda
             // Foreach through each node in the document.
             foreach (XmlNode node in doc.DocumentElement)
             {
-
                 // Checks for node with same name
-                XmlNode objectTypeNode = node.SelectSingleNode("ObjectType");
-                XmlNode objectNameNode = node.SelectSingleNode("ObjectName");
-                XmlNode locationNode = node.SelectSingleNode("Location");
-                XmlNode linkLocationX = node.SelectSingleNode("LinkLocationX");
-                XmlNode linkLocationY = node.SelectSingleNode("LinkLocationY");
-                XmlNode hasKey = node.SelectSingleNode("HasKey");
-                XmlNode locked = node.SelectSingleNode("Locked");
-                XmlNode room = node.SelectSingleNode("Room");
-                XmlNode offSetX = node.SelectSingleNode("OffsetX");
-                XmlNode offSetY = node.SelectSingleNode("OffsetY");
+                objectTypeNode = node.SelectSingleNode("ObjectType");
+                objectNameNode = node.SelectSingleNode("ObjectName");
+                locationNode = node.SelectSingleNode("Location");
+                linkLocationX = node.SelectSingleNode("LinkLocationX");
+                linkLocationY = node.SelectSingleNode("LinkLocationY");
+                hasKey = node.SelectSingleNode("HasKey");
+                locked = node.SelectSingleNode("Locked");
+                room = node.SelectSingleNode("Room");
+                offSetX = node.SelectSingleNode("OffsetX");
+                offSetY = node.SelectSingleNode("OffsetY");
                 if (offSetX != null)
                 {
                     offSet = new Vector2(int.Parse(offSetX.InnerText), int.Parse(offSetY.InnerText));
                 }
-
-
                 // Checks for null, if not null find the inner text.
                 if (objectTypeNode != null)
                 {
@@ -150,7 +159,11 @@ namespace LegendOfZelda
                 {
                     keyBool = bool.Parse(hasKey.InnerText);
                 }
-
+                if (locked != null)
+                {
+                    lockedDoor = bool.Parse(locked.InnerText);
+                    Debug.WriteLine(locked.InnerText);
+                }
 
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
                 {
@@ -190,6 +203,7 @@ namespace LegendOfZelda
                 }
                 if (con3 != null && objectTypeNode != null && objectTypeNode.InnerText == "Door")
                 {
+                    Debug.WriteLine("populating");
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition, lockedDoor }));
                 }

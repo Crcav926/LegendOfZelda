@@ -24,6 +24,7 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
+            
             if (door.lockedS == false)
                 {
                 if (!Camera2D.Instance.isSliding)
@@ -41,19 +42,19 @@ namespace LegendOfZelda.Command
                         {
                             case 'R':
                                 Camera2D.Instance.slideRight();
-                                link.position.X += 250;
+                                link.position.X += 200;
                                 break;
                             case 'L':
                                 Camera2D.Instance.slideLeft();
-                                link.position.X -= 250;
+                                link.position.X -= 200;
                                 break;
                             case 'U':
                                 Camera2D.Instance.slideUp();
-                                link.position.Y -= 200;
+                                link.position.Y -= 160;
                                 break;
                             case 'D':
                                 Camera2D.Instance.slideDown();
-                                link.position.Y += 200;
+                                link.position.Y += 185;
                                 break;
                         }
                         //lemme just clear the dropped items too...
@@ -89,7 +90,7 @@ namespace LegendOfZelda.Command
                             break;
                     }
                     Debug.WriteLine($"Updated door is {currentDoor}");
-                    Thread.Sleep(1500);
+                   // Thread.Sleep(1500);
                     door.setLocked(false);
                     link.inventory.removeKey();
                 }

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-<item>
-	<OffsetX>0</OffsetX>
-	<OffsetY>0</OffsetY>
-</item>
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
@@ -139,7 +135,7 @@
 <!--Basically this should just say an Up door exists, not whether its locked or open.-->
 <Item>
     <ObjectType>Door</ObjectType>
-	<Locked>true</Locked>
+	<Locked> true</Locked>
     <ObjectName>UpDoorLocked</ObjectName>
     <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>Room4.xml</Room>
 </Item>
