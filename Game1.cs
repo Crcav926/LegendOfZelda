@@ -145,8 +145,6 @@ namespace LegendOfZelda
         {
             if (!paused)
             {
-                blocks = LevelLoader.Instance.getBlocks();
-                movers = LevelLoader.Instance.getMovers();
                 // Let the keyboard controller handle input
                 keyboardController.Update();
                 RoomObjectManager.Instance.Update();

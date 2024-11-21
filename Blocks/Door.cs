@@ -33,17 +33,7 @@ namespace LegendOfZelda
             this.newPos = newPos;
 
             //determines if the door is locked
-            if (locked == null)
-            {
-                lockedS = false;
-            }else if (locked)
-            {
-                lockedS = true;
-            }
-            else
-            {
-                lockedS = false;
-            }
+            locked = lockedS;
             //determines if the door can be unlocked by a key (for example doors that lock until all enemies are killed)
             unlockable = true;
         }

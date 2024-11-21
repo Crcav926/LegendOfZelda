@@ -86,14 +86,15 @@ namespace LegendOfZelda
             List<ICollideable> standStills = new List<ICollideable>();
             if (blocks != null)
             {
-                foreach (ICollideable block in blocks)
+                foreach (ICollideable item in staticItems)
                 {
-                    standStills.Add(block);
+                    blocks.Add(item);
                 }
             }
             foreach (ICollideable item in staticItems)
             {
                 standStills.Add(item);
+                Debug.WriteLine("StandStill");
             }
             return standStills;
         }
@@ -119,9 +120,9 @@ namespace LegendOfZelda
             }
             for(int i = 0; i < movers.Count; i++)
             {
-                if(movers[i] is IEnemy)
+                if(currentRoom.getMovers()[i] is IEnemy)
                 {
-                    IEnemy enemy1 = (IEnemy)movers[i];
+                    IEnemy enemy1 = (IEnemy)currentRoom.getMovers()[i];
                     if (!enemy1.isAlive())
                     {
                         if (DeathCounter < 9)
@@ -134,7 +135,8 @@ namespace LegendOfZelda
                         //update the local death counter
                         Localcounter++;
 
-                        movers.Remove(movers[i]);
+                        currentRoom.getMovers().Remove(currentRoom.getMovers()[i]);
+                        // movers.Remove(movers[i]);
                     }
                 }
             }

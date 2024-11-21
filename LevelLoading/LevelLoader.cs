@@ -151,11 +151,11 @@ namespace LegendOfZelda
         }
         public void changeCurrentRoom(String s)
         {
+            int i = 0;
             currRoom =  roomMapping[s];
-            Debug.WriteLine(currRoom.getRoomName());
             foreach (ICollideable mover in currRoom.getMovers())
             {
-                Debug.WriteLine(mover.ToString());
+                Debug.WriteLine(i++);
             }
         }
         public Room getCurrentRoom()

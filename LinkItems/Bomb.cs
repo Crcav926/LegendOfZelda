@@ -73,6 +73,7 @@ namespace LegendOfZelda
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);
             if (exists)
             {
                 destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);

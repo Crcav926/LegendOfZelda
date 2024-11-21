@@ -53,7 +53,6 @@ namespace LegendOfZelda
 
             itemPosition = origin + offSet;
             swordSprite.Update(gameTime);
-            destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.SwordWidth, Constants.SwordHeight);
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > Constants.SwordTimeOnScreen)

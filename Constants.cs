@@ -155,7 +155,7 @@ namespace LegendOfZelda
         //maybe we'll need more here, but this is the only magic number in the file.
         public const double FireLingerTime = 1;
         // Sword
-        public const double SwordTimeOnScreen = 0.30;
+        public const double SwordTimeOnScreen = 0.50;
         public const float SwordOffsetX = 35f;
         public const float SwordOffsetY = 35f;
         //these values go unused, but if we need the sword distance vector again they're here.
@@ -163,7 +163,7 @@ namespace LegendOfZelda
         public const float SwordMaxDistanceY = 150f;
         //big ol square sword
         public const int SwordWidth = 40;
-        public const int SwordHeight = 40;
+        public const int SwordHeight = 20;
         //Wall Constants
         public static readonly Vector2 top1Position = new Vector2(0, 0);
         public static readonly Vector2 top2Position = new Vector2(450, 0);
