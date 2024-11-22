@@ -5,7 +5,7 @@ using LegendOfZelda;
 using System;
 
 //This projectile is for Goriya
-public class Projectile : ICollideable
+public class Projectile : ICollideable, IProjectile
 {
     private Vector2 position;
     private Vector2 velocity;
@@ -30,6 +30,10 @@ public class Projectile : ICollideable
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         sprite.Update(gameTime);
         // Mark as inactive if it goes off-screen
+        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
+        {
+            IsActive = false;
+        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -66,6 +70,10 @@ public class Projectile : ICollideable
         return "Projectile";
     }
 
-
+    public void deleteSelf()
+    {
+        IsActive = false;
+        RoomObjectManager.Instance.removeProjectileFromMovers(this);
+    }
 
 }

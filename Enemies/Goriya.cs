@@ -147,12 +147,12 @@ public class Goriya : IEnemy, ICollideable
         }
 
         // Update and remove inactive projectiles
-        projectiles.RemoveAll(p => !p.IsActive);
+        //projectiles.RemoveAll(p => !p.IsActive);
 
-        foreach (Projectile projectile in projectiles)
-        {
-            projectile.Update(gameTime);
-        }
+        // foreach (Projectile projectile in projectiles)
+        // {
+        //     projectile.Update(gameTime);
+        // }
 
         sprite.Update(gameTime);
         // Move Goriya
@@ -170,7 +170,7 @@ public class Goriya : IEnemy, ICollideable
 
             // Create a new projectile at Goriya's position
             Vector2 projectileStartPosition = new Vector2(position.X + projectileOffset.X, position.Y + projectileOffset.Y);
-            projectiles.Add(new Projectile(projectileStartPosition, direction, EnemySpriteFactory.Instance.CreateGoriyaProjectileSprite()));
+            RoomObjectManager.Instance.addProjectile(new Projectile(projectileStartPosition, direction, EnemySpriteFactory.Instance.CreateGoriyaProjectileSprite()));
         }
     }
 
@@ -184,10 +184,10 @@ public class Goriya : IEnemy, ICollideable
 
             sprite.Draw(s, destinationRectangle, color);
             // Draw all the projectiles
-            foreach (Projectile projectile in projectiles)
-            {
-                projectile.Draw(s);
-            }
+            // foreach (Projectile projectile in projectiles)
+            // {
+            //     projectile.Draw(s);
+            // }
         }
 
         if (HasDroppedItem)

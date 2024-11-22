@@ -109,13 +109,14 @@ namespace LegendOfZelda.Collision
 
                     } else if (o1.getCollisionType() == "Projectile") {
                         //projectiles are movers
-                        Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
+                        
                         if (o2 is Link)
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
                         else
                         {
+                            Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
                     } else if (o1.getCollisionType() == "Item")
@@ -240,6 +241,11 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Projectile", "Obstacle", "right", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "top", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "bottom", typeof(ProjectileObstacle));
+
+            // RegisterCollision("Projectile", "Door", "left", typeof(ProjectileObstacle));
+            // RegisterCollision("Projectile", "Door", "right", typeof(ProjectileObstacle));
+            // RegisterCollision("Projectile", "Door", "top", typeof(ProjectileObstacle));
+            // RegisterCollision("Projectile", "Door", "bottom", typeof(ProjectileObstacle));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)
