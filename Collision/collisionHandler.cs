@@ -109,7 +109,8 @@ namespace LegendOfZelda.Collision
 
                     } else if (o1.getCollisionType() == "Projectile") {
                         //projectiles are movers
-                        if (o2.getCollisionType() == "Player")
+                        Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
+                        if (o2 is Link)
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
@@ -228,6 +229,12 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Projectile", "Player", "right", typeof(PlayerTakeDamage));
             RegisterCollision("Projectile", "Player", "top", typeof(PlayerTakeDamage));
             RegisterCollision("Projectile", "Player", "bottom", typeof(PlayerTakeDamage));
+            //this is the only way player - projectile collisions work.
+            //to remove this would be a massive undertaking - TJ
+            RegisterCollision("Player", "Projectile", "left", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Projectile", "right", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Projectile", "top", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Projectile", "bottom", typeof(PlayerTakeDamage));
 
             RegisterCollision("Projectile", "Obstacle", "left", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "right", typeof(ProjectileObstacle));

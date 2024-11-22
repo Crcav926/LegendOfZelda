@@ -87,5 +87,6 @@ public class Fireball : ICollideable, IProjectile
     public void deleteSelf()
     {
         IsActive = false;
+        RoomObjectManager.Instance.removeProjectileFromMovers(this);
     }
 }

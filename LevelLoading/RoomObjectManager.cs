@@ -147,6 +147,18 @@ namespace LegendOfZelda
         {
             projectiles.Add(proj);
         }
+        public void addProjectileToMovers()
+        {
+            foreach(ICollideable test in projectiles)
+            {
+                movers.Add(test);
+            }
+            projectiles.Clear();
+        }
+        public void removeProjectileFromMovers(ICollideable proj)
+        {
+            movers.Remove(proj);
+        }
         private void addWalls()
         {
             // Walls are 100 pixels thick wide and 87 pixels thick tall

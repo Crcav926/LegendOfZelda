@@ -165,6 +165,7 @@ namespace LegendOfZelda
                 {
                     mover.Update(gameTime);
                 }
+                RoomObjectManager.Instance.addProjectileToMovers(); //if we can remove this somehow, that'd be great.
                 Camera2D.Instance.Update();
                 base.Update(gameTime);
                 // Calls link update, which updates his Sprite and Items

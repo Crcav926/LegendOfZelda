@@ -90,13 +90,13 @@ public class Aquamentus : IEnemy, ICollideable
         }
 
         // Update and remove inactive fireballs
-        fireballs.RemoveAll(f => !f.IsActive);
+        //fireballs.RemoveAll(f => !f.IsActive);
 
-        foreach (Fireball fireball in fireballs)
-        {
-            fireball.Update(gameTime);
-            RoomObjectManager.Instance.addProjectile(fireball);
-        }
+        // foreach (Fireball fireball in fireballs)
+        // {
+        //     fireball.Update(gameTime);
+        //     RoomObjectManager.Instance.addProjectile(fireball);
+        // }
 
         // Move Aquamentus horizontally
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -117,7 +117,8 @@ public class Aquamentus : IEnemy, ICollideable
 
         SoundMachine.Instance.GetSound("aquaRoar").Play();
 
-        fireballs.Add(new Fireball(fireballStartPosition, direction));
+        //fireballs.Add(new Fireball(fireballStartPosition, direction));
+        RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, direction));
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -129,10 +130,10 @@ public class Aquamentus : IEnemy, ICollideable
         sprite.Draw(spriteBatch, destinationRectangle, color);
 
         // Draw all the fireballs
-        foreach (Fireball fireball in fireballs)
-        {
-            fireball.Draw(spriteBatch);
-        }
+        // foreach (Fireball fireball in fireballs)
+        // {
+        //     fireball.Draw(spriteBatch);
+        // }
         }
 
         //draw the item drops
