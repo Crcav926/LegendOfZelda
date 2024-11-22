@@ -161,7 +161,7 @@ namespace LegendOfZelda.Collision
             Type playerType = typeof(Link);
             Type[] itemTypes = { typeof(Arrow), typeof(Bomb), typeof(Boomerang), typeof(Fire), typeof(Sword) };
 
-            Type[] enemyTypes = { typeof(Aquamentus), typeof(BladeTrap), typeof(Gel), typeof(Goriya), typeof(Keese), typeof(Stalfol), typeof(Wallmaster), typeof(Zol) };
+            Type[] enemyTypes = { typeof(Gohma), typeof(Dodongo), typeof(DarkNut),typeof(Aquamentus), typeof(BladeTrap), typeof(Gel), typeof(Goriya), typeof(Keese), typeof(Stalfol), typeof(Wallmaster), typeof(Zol) };
             Type[] projectileTypes = { typeof(Projectile), typeof(Fireball) }; // add stafol's sword?
             Type[] obstacleTypes = { typeof(Block), typeof(Wall) }; // add wall and door?
 

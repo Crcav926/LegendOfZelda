@@ -27,7 +27,7 @@ namespace LegendOfZelda
 
        public void LoadAllTextures(ContentManager content)
             {
-                bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheet");
+                bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheetNew");
                 enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet");
 
             // More Content.Load calls follow
@@ -111,6 +111,23 @@ namespace LegendOfZelda
         };
             return new Sprite(enemySpriteSheet, keeseFrames);
         }
+
+        public ISprite CreateGohmaSprite()
+        {
+            List<Rectangle> keeseFrames = new List<Rectangle>
+        {
+            new Rectangle(298, 104, 49, 17),
+            new Rectangle(298, 122, 49, 17),
+            new Rectangle(348, 104, 49, 17),
+            new Rectangle(348, 122, 49, 17),
+            new Rectangle(398, 104, 49, 17),
+            new Rectangle(398, 122, 49, 17),
+            new Rectangle(448, 104, 49, 17),
+            new Rectangle(448, 122, 49, 17),
+        };
+            return new Sprite(bossSpriteSheet, keeseFrames);
+        }
+
         public ISprite CreateUpGoriyaSprite()
         {
             List<Rectangle> upFrames = new List<Rectangle>
@@ -119,6 +136,57 @@ namespace LegendOfZelda
             };
             return new Sprite(enemySpriteSheet, upFrames);
         }
+
+        public ISprite CreateUpDarkNutSprite()
+        {
+            List<Rectangle> upFrames = new List<Rectangle>
+            {
+                new Rectangle(35, 90, 16, 16),
+                new Rectangle(35, 107, 16, 16),
+            };
+            return new Sprite(enemySpriteSheet, upFrames);
+        }
+
+        public ISprite CreateDefaultDarkNutSprite()
+        {
+            List<Rectangle> downFrames = new List<Rectangle>
+            {
+                new Rectangle(0, 90, 16, 16),
+                new Rectangle(0, 107, 16, 16),
+            };
+            return new Sprite(enemySpriteSheet, downFrames);
+        }
+
+        public ISprite CreateDownDarkNutSprite()
+        {
+            List<Rectangle> downFrames = new List<Rectangle>
+            {
+                 new Rectangle(19, 90, 16, 16),
+                new Rectangle(19, 107, 16, 16),
+            };
+            return new Sprite(enemySpriteSheet, downFrames);
+        }
+
+        public ISprite CreateDownDodongoSprite()
+        {
+            List<Rectangle> downFrames = new List<Rectangle>
+            {
+                 new Rectangle(0, 57, 16, 17),
+                new Rectangle(18, 57, 17, 18),
+            };
+            return new Sprite(bossSpriteSheet, downFrames);
+        }
+
+        public ISprite CreateUpDodongoSprite()
+        {
+            List<Rectangle> downFrames = new List<Rectangle>
+            {
+                 new Rectangle(35, 57, 16, 17),
+                new Rectangle(52, 57, 17, 18),
+            };
+            return new Sprite(bossSpriteSheet, downFrames);
+        }
+
         public ISprite CreateDownGoriyaSprite() {
             List<Rectangle> downFrames = new List<Rectangle>
             {
@@ -135,12 +203,58 @@ namespace LegendOfZelda
             };
             return new Sprite(enemySpriteSheet, leftFrames);
         }
+        //Current there is no left framework for this enemy
+        public ISprite CreateLeftDodongoSprite()
+        {
+            List<Rectangle> downFrames = new List<Rectangle>
+            {
+                 new Rectangle(102, 39, 29, 17),
+                new Rectangle(162, 27, 29, 17),
+                new Rectangle(125, 27, 33, 18),
+            };
+            return new Sprite(bossSpriteSheet, downFrames);
+        }
+
+        public ISprite CreateRightDodongoSprite()
+        {
+            List<Rectangle> downFrames = new List<Rectangle>
+            {
+                 new Rectangle(68, 57, 29, 17),
+                new Rectangle(101, 57, 29, 17),
+                new Rectangle(133, 57, 33, 18),
+            };
+            return new Sprite(bossSpriteSheet, downFrames);
+        }
+
+        public ISprite CreateLeftDarkNutSprite()
+        {
+            List<Rectangle> leftFrames = new List<Rectangle>
+            {
+                new Rectangle(408, 146, 16, 16),
+                new Rectangle(425, 146, 16, 16),
+
+            };
+            return new Sprite(enemySpriteSheet, leftFrames);
+        }
+
         public ISprite CreateRightGoriyaSprite()
         {
             List<Rectangle> rightFrames = new List<Rectangle>
             {
                 new Rectangle(255, 11, 16, 16),
                 new Rectangle(272, 11, 16, 16),
+            };
+            return new Sprite(enemySpriteSheet, rightFrames);
+        } 
+        public ISprite CreateRightDarkNutSprite()
+        {
+            List<Rectangle> rightFrames = new List<Rectangle>
+            {
+                new Rectangle(52, 90, 16, 16),
+                new Rectangle(69, 90, 16, 16),
+                //optional for another color
+                //new Rectangle(52, 107, 16, 16),
+                //new Rectangle(69, 107, 16, 16),
             };
             return new Sprite(enemySpriteSheet, rightFrames);
         }
