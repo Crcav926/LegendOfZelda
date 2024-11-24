@@ -1,13 +1,13 @@
-<XnaContent>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 <!--Sample file to copy, most of this should be the same for rooms.-->
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
-    <Location>33 33</Location>
+    <Location>100 88</Location>
 </Item>
 <Item>
-    <ObjectType>Wall</ObjectType>
+    <ObjectType>WallSprite</ObjectType>
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
@@ -33,4 +33,3 @@
     <Location>113 145</Location>
 </Item>
 </root>
-</XnaContent>
