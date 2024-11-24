@@ -71,7 +71,7 @@ namespace LegendOfZelda.Collision
             //only moving items can initiate collision
             // so for all moving hitboxes
             for (int i = 0; i < RoomObjectManager.Instance.getMovers().Count; i++)
-            {
+            {          
                 //get first hitbox
                 Microsoft.Xna.Framework.Rectangle firstHitbox = RoomObjectManager.Instance.getMovers()[i].getHitbox();
                 //Debug.WriteLine("First Hitbox retrieved");
@@ -117,12 +117,17 @@ namespace LegendOfZelda.Collision
                     //only collide with "bottom triangle"
                     
                     
-                        //calculate where they collide and add that rectangle to the collides list
-                        //this is temporary ill fix it later
-                        //Debug.WriteLine("Collision Detected");
-                        Microsoft.Xna.Framework.Rectangle overlapT = getOverlap(firstHitbox, stationaryHitbox);
-                        Microsoft.Xna.Framework.Rectangle overlap = new Microsoft.Xna.Framework.Rectangle(Math.Abs(overlapT.X), Math.Abs(overlapT.Y), Math.Abs(overlapT.Width), Math.Abs(overlapT.Height));
-
+                    //calculate where they collide and add that rectangle to the collides list
+                    //this is temporary ill fix it later
+                    //Debug.WriteLine("Collision Detected");
+                    Microsoft.Xna.Framework.Rectangle overlapT = getOverlap(firstHitbox, stationaryHitbox);
+                    Microsoft.Xna.Framework.Rectangle overlap = new Microsoft.Xna.Framework.Rectangle(Math.Abs(overlapT.X), Math.Abs(overlapT.Y), Math.Abs(overlapT.Width), Math.Abs(overlapT.Height));
+                    //this if statement protects against trying to get collision for an object (projectile) that has already been deleted
+                    //basically if a projectile gets deleted it may check for another collision, but it's already out of the movers list
+                    //this seemed to only happen at doors though. My guess is the second check on the wall broke it after it got deleted
+                    //by touching the door. - TJ
+                    if(i < RoomObjectManager.Instance.getMovers().Count)
+                    {
                         if (overlap.X > 0 || overlap.Y > 0)
                         {
                             String direction = "null";
@@ -131,7 +136,7 @@ namespace LegendOfZelda.Collision
                             info = new collObject(RoomObjectManager.Instance.getMovers()[i], RoomObjectManager.Instance.getStandStills()[j], overlap, direction);
                             handler.HandleCollision(info);
                         }
-                        
+                    }
                 }
             }
             // var className = movingHitboxes[0].GetType().Name;

@@ -89,7 +89,7 @@ namespace LegendOfZelda.Collision
                         }
                         else //Link and enemy link only passed in, Link and wall link only passed in
                         {
-                        normBlock:
+                            //normBlock:
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
                     } else if (o1 is IEnemy)
@@ -116,7 +116,6 @@ namespace LegendOfZelda.Collision
                         }
                         else
                         {
-                            Debug.WriteLine($"Handling {o1.GetType().Name} and {o2.GetType().Name} {direction} {c.overlap}");
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
                     } else if (o1.getCollisionType() == "Item")
