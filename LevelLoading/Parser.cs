@@ -86,7 +86,7 @@ namespace LegendOfZelda
                 if (objectTypeNode != null)
                 {
                     objectType = objectTypeNode.InnerText;
-                    if (objectTypeNode.InnerText == "Block" || objectTypeNode.InnerText == "Floor")
+                    if (objectTypeNode.InnerText == "Block" || objectTypeNode.InnerText == "Floor" || objectTypeNode.InnerText == "Background")
                     {
                         type = Type.GetType("LegendOfZelda." + objectTypeNode.InnerText);
                         con = type.GetConstructor(new[] { typeof(Vector2), typeof(String) });
@@ -170,7 +170,12 @@ namespace LegendOfZelda
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
                 }
-                if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Floor")
+                if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Background")
+                {
+                    // Populates list of non-moving collideable objects
+                    blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
+                }
+                else if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Floor")
                 {
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName }));
