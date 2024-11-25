@@ -27,7 +27,7 @@ namespace LegendOfZelda
         public const float MikuSpeedY = 2f;
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
-        public const int MikuStartingHealth = 1200;
+        public const int MikuStartingHealth = 4;
         public const int PointsPerHP = 4;
         public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
