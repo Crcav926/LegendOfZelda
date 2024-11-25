@@ -40,7 +40,7 @@ public class Ganon : IEnemy, ICollideable
         fireballs = new List<Fireball>();
         normalSprite = EnemySpriteFactory.Instance.CreateGanonSprite();
         vulnerableSprite = EnemySpriteFactory.Instance.CreateGanonVulnerableSprite();
-        velocity = Vector2.Zero;
+        velocity = new Vector2(50f, 50f);
         hitsTaken = 0;
         hp = 4;
         isVisible = false;
@@ -53,6 +53,7 @@ public class Ganon : IEnemy, ICollideable
     {
         damageAnimation.Update(gameTime);
 
+        // fireball throwing
         fireballTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         if (fireballTimer >= fireballCooldown)
         {
@@ -60,14 +61,25 @@ public class Ganon : IEnemy, ICollideable
             fireballTimer = 0f;
         }
 
-        // Handle visibility
-        if (!isVulnerable && !isVisible)
+        // visibility
+        if (!isVulnerable)
         {
             visibleTimeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (visibleTimeElapsed >= visibilityDuration)
             {
+                isVisible = !isVisible;
                 visibleTimeElapsed = 0;
             }
+        }
+        position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        if (position.X <= 0 || position.X + Constants.GanonWidth >= Constants.ScreenWidth)
+        {
+            velocity.X = -velocity.X; // Reverse horizontal direction
+        }
+        if (position.Y <= 0 || position.Y + Constants.GanonHeight >= Constants.ScreenHeight)
+        {
+            velocity.Y = -velocity.Y; // Reverse vertical direction
         }
 
         // Handle vulnerability
@@ -76,7 +88,7 @@ public class Ganon : IEnemy, ICollideable
             vulnerableTimeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (vulnerableTimeElapsed >= vulnerableTimer)
             {
-                ResetState();
+                ResetState(); // Reset to full strength
             }
         }
 
@@ -90,8 +102,6 @@ public class Ganon : IEnemy, ICollideable
                 invincibilityElapsed = 0;
             }
         }
-
-        // Update fireballs
         fireballs.RemoveAll(f => !f.IsActive);
         foreach (Fireball fireball in fireballs)
         {
@@ -106,7 +116,7 @@ public class Ganon : IEnemy, ICollideable
             position.Y + Constants.GanonFireballYOffset
         );
 
-        //ganon fire sound ?
+        //ganon fire sound ??
 
         RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(0, -1)));  // Up
         RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(1, -1))); // Up-Right
@@ -120,17 +130,17 @@ public class Ganon : IEnemy, ICollideable
         if (canTakeDamage && !isVulnerable)
         {
             SoundMachine.Instance.GetSound("enemyHurt").Play();
-            //damageAnimation.StartDamageEffect();
+            damageAnimation.StartDamageEffect();
             hitsTaken++;
 
             if (hitsTaken >= 3)
             {
                 isVulnerable = true;
-                isVisible = true; // becomes visible when vulnerable
+                isVisible = true; // Becomes visible when vulnerable
             }
             else
             {
-                isVisible = true; // briefly becomes visible when hit
+                isVisible = true; // Briefly visible when hit
             }
 
             canTakeDamage = false; // Trigger invincibility
@@ -142,7 +152,7 @@ public class Ganon : IEnemy, ICollideable
             if (hp <= 0)
             {
                 alive = false;
-                isVisible = true; // remains visible after defeat
+                isVisible = true; // Stays visible after defeat
             }
         }
     }
@@ -157,16 +167,7 @@ public class Ganon : IEnemy, ICollideable
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        ISprite currentSprite;
-        
-        if (isVulnerable)
-        {
-            currentSprite = vulnerableSprite;
-        }
-        else
-        {
-            currentSprite = normalSprite;
-        }
+        ISprite currentSprite = isVulnerable ? vulnerableSprite : normalSprite;
 
         if (isVisible)
         {
@@ -193,8 +194,6 @@ public class Ganon : IEnemy, ICollideable
     public bool isAlive() => alive;
     public string getCollisionType() => "Enemy";
     public void Attack() { }
-
     public void ChangeDirection() { }
     public void DropItem() { }
 }
-
