@@ -157,5 +157,15 @@ namespace LegendOfZelda
         {
             return currRoom;
         }
+
+        //for reset
+        public void Reset()
+        {
+            statics.Clear();
+            movers.Clear();
+            roomMapping.Clear();
+            currRoom = null;
+            room = null;
+        }
     }
 }

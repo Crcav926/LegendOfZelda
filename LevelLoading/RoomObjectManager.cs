@@ -169,5 +169,11 @@ namespace LegendOfZelda
             // Wall rightMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 196, 90, 88));
 
         }
+        //for reset
+        public void Clear()
+        {
+            staticItems.Clear();
+            movers.Clear();
+        }
     }
 }

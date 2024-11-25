@@ -168,5 +168,18 @@ namespace LegendOfZelda
             numBombs++;
         }
 
+        //for reset
+        public void Clear()
+        {
+            items.Clear();
+            weapons.Clear();
+            numKeys = 0;
+            hasMap = false;
+            coins = 0;
+            numBombs = 0;
+            key1Item = null;
+            key2Item = null;
+        }
+
     }
 }

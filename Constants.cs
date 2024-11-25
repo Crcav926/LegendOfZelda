@@ -13,7 +13,7 @@ namespace LegendOfZelda
         public const int HUDHeight = OriginalHeight / 4;
         // Original resolution in which the sprites are scaled to.
         public const int OriginalWidth = 800;
-        public const int OriginalHeight = 480;
+        public const int OriginalHeight = 484;
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
         // Miku 
@@ -27,7 +27,7 @@ namespace LegendOfZelda
         public const float MikuSpeedY = 2f;
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
-        public const int MikuStartingHealth = 12;
+        public const int MikuStartingHealth = 1200;
         public const int PointsPerHP = 4;
         public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
@@ -49,10 +49,10 @@ namespace LegendOfZelda
         // Walls
         //this is used for the wall sprite, NOT the hitboxes.
         public const int WallsWidth = 800;
-        public const int WallsHeight = 480;
+        public const int WallsHeight = 484;
         // Floor
         public const int FloorWidth = 600;
-        public const int FloorHeight = 304;
+        public const int FloorHeight = 308;
         // Aquamentus
         public const int AquamentusHeight = 80;
         public const int AquamentusWidth = 80;
@@ -76,6 +76,13 @@ namespace LegendOfZelda
         public const float FireballSpeed = 150f;
         public const int FireballHeight = 24;
         public const int FireballWidth = 48;
+        //Ganon
+        public const int GanonHeight = 80;
+        public const int GanonWidth = 80;
+        public const int GanonFireballXOffset = 10;
+        public const int GanonFireballYOffset = 30;
+        public const int GanonHitboxWidth = 80;
+        public const int GanonHitboxHeight = 80;
         // Gel
         public const float GelJumpSpeed = 50f;
         public const float GelJumpCooldown = 1f;
@@ -86,13 +93,6 @@ namespace LegendOfZelda
         //should this be this size? I'm just going with what's in the file.
         public const int GelHitboxWidth = 45;
         public const int GelHitboxHeight = 40;
-        //Ganon
-        public const int GanonHeight = 80;
-        public const int GanonWidth = 80;
-        public const int GanonFireballXOffset = 10;
-        public const int GanonFireballYOffset = 30;
-        public const int GanonHitboxWidth = 80;
-        public const int GanonHitboxHeight = 80;
         // Goriya
         public const float GoriyaSpeed = 2f;
         public const float GoriyaThrowCooldown = 2f;
@@ -200,6 +200,14 @@ namespace LegendOfZelda
         public const int keysHUDPosY = -54;
         public const int bombsHUDPosX = 300;
         public const int bombsHUDPosY = -34;
+        // Sprite 1 HUD values
+        public const int HUDSprite1X = 400;
+        public const int HUDSprite1Y = -69;
+        public const int HUDSprite2X = 475;
+        public const int HUDSprite2Y = -69;
+        public const int HUDSpriteWidth = 25;
+        public const int HUDSpriteHeight = 40;
+
 
         // HUD Health
         public const int hpHUDPosX = 550;

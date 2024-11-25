@@ -234,8 +234,17 @@ namespace LegendOfZelda
         public void Reset()
         {
             SoundMachine.Instance.GetSound("theme").Stop();
-            this.Initialize();
+            RoomObjectManager.Instance.Clear();
+            LevelLoader.Instance.Load("Room1.xml");
+            blocks = LevelLoader.Instance.getBlocks();
+            movers = LevelLoader.Instance.getMovers();
+            hudManager = new HUDManager();
+            Link.Instance.Reset();
+            collHandler = new CollisionHandler();
+            collisionDetector = new detectionManager(collHandler);
+            Initialize();
         }
+
 
         public void setPause(bool pauseState)
         {

@@ -206,13 +206,11 @@ namespace LegendOfZelda
             damageAnimation = new DamageAnimation();
             timeElapsed = 0;
             canTakeDamage = true;
-            //inventory.addItem(boomerang);
-            //inventory.addItem(arrow);
-            //inventory.addItem(fire);
+
+            inventory.Clear();
             inventory.addItem(sword);
-            //inventory.addItem(bomb);
-            LevelLoader.Instance.Load("Room1.xml");
         }
+
         public void invulnerable()
         {
             if (canTakeDamage)
