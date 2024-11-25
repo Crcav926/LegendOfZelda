@@ -49,12 +49,7 @@ public class Aquamentus : IEnemy, ICollideable
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
         alive = true;
         hp = 6;
-        swordDamage = new Dictionary<string, int>
-        {
-            { "WOOD", 1 },
-            { "WHITE", 2 }
-            //MAGIC??
-        };
+
         canTakeDamage = true;
     }
     public void ChangeDirection()
@@ -88,16 +83,6 @@ public class Aquamentus : IEnemy, ICollideable
             canTakeDamage = true;
             timeElapsed = 0;
         }
-
-        // Update and remove inactive fireballs
-        //fireballs.RemoveAll(f => !f.IsActive);
-
-        // foreach (Fireball fireball in fireballs)
-        // {
-        //     fireball.Update(gameTime);
-        //     RoomObjectManager.Instance.addProjectile(fireball);
-        // }
-
         // Move Aquamentus horizontally
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -127,13 +112,7 @@ public class Aquamentus : IEnemy, ICollideable
             Color color = damageAnimation.GetCurrentColor();
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.AquamentusWidth, Constants.AquamentusHeight);
 
-        sprite.Draw(spriteBatch, destinationRectangle, color);
-
-        // Draw all the fireballs
-        // foreach (Fireball fireball in fireballs)
-        // {
-        //     fireball.Draw(spriteBatch);
-        // }
+            sprite.Draw(spriteBatch, destinationRectangle, color);
         }
 
         //draw the item drops
@@ -183,7 +162,7 @@ public class Aquamentus : IEnemy, ICollideable
         if (!alive)
         {
             Debug.WriteLine("DropItem called: Item drop initialized");
-            //for now I'm using Rupees to test drops
+            //The single letter indicates which DropTable GetItemName will get an item name from.
             String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('D');
             droppedItem = new ClassItems(position, ItemTobeDroped);
             HasDroppedItem = true;

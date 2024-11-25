@@ -9,9 +9,6 @@ namespace LegendOfZelda;
 public class BladeTrap : IEnemy, ICollideable
 {
     private bool isActive = true;        // Whether the BladeTrap is currently active
-    //both moved into constants file.
-    //private float activeTime = 10f;      // Time to stay active in seconds
-    //private float hiddenTime = 2f;        // Time to stay hidden in seconds
     private float timer = 0f;             // Timer to track visibility
     private ISprite sprite;
     public Vector2 position { get; set; }
@@ -91,10 +88,7 @@ public class BladeTrap : IEnemy, ICollideable
     {
         if (!alive)
         {
-            Debug.WriteLine("DropItem called: Item drop initialized");
-            //for now I'm using Rupees to test drops
-            droppedItem = new ClassItems(position, "OrangeRupee");
-            HasDroppedItem = true;
+            //Blade Traps cannot die, and therefore cannot drop items.
         }
     }
 }

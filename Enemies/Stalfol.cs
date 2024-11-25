@@ -15,10 +15,7 @@ public class Stalfol : IEnemy, ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement
-    //moved to constants
-    //private float speed = 2f;          // Movement speed
     private Random random = new Random();
-    //private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
     private ISprite sprite;
     public Vector2 position { get; set; }
@@ -46,12 +43,7 @@ public class Stalfol : IEnemy, ICollideable
         alive = true;
 
         hp = 2;
-        swordDamage = new Dictionary<string, int>
-        {
-            { "WOOD", 1 },
-            { "WHITE", 2 },
-            { "MAGIC", 2 }
-        };
+
         canTakeDamage = true;
 
         if (hasKey == null)
@@ -199,7 +191,7 @@ public class Stalfol : IEnemy, ICollideable
                 }
                 else
                 {
-                    //for now I'm using Rupees to test drops
+                    //The single letter indicates which DropTable GetItemName will get an item name from.
                     String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                     droppedItem = new ClassItems(position, ItemTobeDroped);
                     HasDroppedItem = true;

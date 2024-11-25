@@ -11,16 +11,10 @@ namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement
-    //moved to constants
-    //private float speed = 2f;          // Movement speed
     private Vector2 projectileOffset;    // Offset for throwing projectiles
     private List<Projectile> projectiles; // List to keep track of projectiles
     private Random random = new Random();
-    //moved to constants
-    //private float throwCooldown = 2f;    // Time between throws
     private float throwTimer = 0f;       // Timer to track when to throw a projectile
-    //moved to constants
-    //private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
     private ISprite sprite;
     public Vector2 position { get; set; }
@@ -45,25 +39,10 @@ public class Goriya : IEnemy, ICollideable
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
-        //destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
         ChangeDirection();
-        swordDamage = new Dictionary<string, int>();
-        String type = "Red";
-        if (type == "Red")
-        {
-            swordDamage["WOOD"] = 1;
-            swordDamage["WHITE"] = 2;
-            swordDamage["MAGIC"] = 3;
-            hp = 3;
-        }
-        else if (type == "Blue")
-        {
-            swordDamage["WOOD"] = 1;
-            swordDamage["WHITE"] = 2;
-            swordDamage["MAGIC"] = 3;
-            hp = 5;
-        }
+
+        hp = 3;
         canTakeDamage = true;
 
         if (hasKey == null)
@@ -146,14 +125,6 @@ public class Goriya : IEnemy, ICollideable
             timeElapsed = 0;
         }
 
-        // Update and remove inactive projectiles
-        //projectiles.RemoveAll(p => !p.IsActive);
-
-        // foreach (Projectile projectile in projectiles)
-        // {
-        //     projectile.Update(gameTime);
-        // }
-
         sprite.Update(gameTime);
         // Move Goriya
         position += velocity;
@@ -183,11 +154,6 @@ public class Goriya : IEnemy, ICollideable
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GoriyaWidth, Constants.GoriyaHeight);
 
             sprite.Draw(s, destinationRectangle, color);
-            // Draw all the projectiles
-            // foreach (Projectile projectile in projectiles)
-            // {
-            //     projectile.Draw(s);
-            // }
         }
 
         if (HasDroppedItem)
@@ -255,7 +221,7 @@ public class Goriya : IEnemy, ICollideable
                 }
                 else
                 {
-                    //for now I'm using Rupees to test drops
+                    //The single letter indicates which DropTable GetItemName will get an item name from.
                     String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
                     droppedItem = new ClassItems(position, ItemTobeDroped);
                     HasDroppedItem = true;

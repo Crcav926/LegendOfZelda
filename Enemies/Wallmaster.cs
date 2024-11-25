@@ -15,8 +15,6 @@ public class Wallmaster : IEnemy, ICollideable
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
-    //private float jumpSpeed = 80f;   // Speed of the jump
-    //private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
     private Random random = new Random();
     public Vector2 position { get; set; }
@@ -43,12 +41,7 @@ public class Wallmaster : IEnemy, ICollideable
         alive = true;
 
         hp = 3;
-        swordDamage = new Dictionary<string, int>
-        {
-            { "WOOD", 1 },
-            { "WHITE", 2 },
-            { "MAGIC", 3 }
-        };
+
         canTakeDamage = true;
 
         if (hasKey == null)
@@ -178,7 +171,7 @@ public class Wallmaster : IEnemy, ICollideable
             else
             {
                 Debug.WriteLine("DropItem called: Item drop initialized");
-                //for now I'm using Rupees to test drops
+                //The single letter indicates which DropTable GetItemName will get an item name from.
                 String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                 droppedItem = new ClassItems(position, ItemTobeDroped);
                 HasDroppedItem = true;

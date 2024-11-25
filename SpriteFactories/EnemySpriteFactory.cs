@@ -28,7 +28,7 @@ namespace LegendOfZelda
         public void LoadAllTextures(ContentManager content)
         {
             bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheet");
-            enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet");
+            enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet2");
 
             // More Content.Load calls follow
             //...

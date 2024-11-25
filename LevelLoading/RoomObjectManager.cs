@@ -50,16 +50,11 @@ namespace LegendOfZelda
             string roomNumber = LevelLoader.Instance.room;
             Debug.WriteLine($"Checking if its a drop room, room: {roomNumber}");
             // Attempt to retrieve the key only if it is in one of the specified rooms.
-            if (roomNumber == "Room2.xml" || roomNumber == "Room5.xml" || roomNumber == "Room12.xml" || roomNumber == "Room15.xml")
-            {
+
                 (string, int) key = (roomNumber, Localcounter);
                 Debug.WriteLine($"Local counter is {Localcounter}");
                 return DropDictionary.GetDropKey(key);
-            }
-            else
-            {
-                return null;
-            }
+          
         }
 
 

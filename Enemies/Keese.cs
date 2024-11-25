@@ -164,7 +164,7 @@ public class Keese : IEnemy, ICollideable
                 }
                 else
                 {
-                    //for now I'm using Rupees to test drops
+                    //The single letter indicates which DropTable GetItemName will get an item name from.
                     String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                     droppedItem = new ClassItems(position, ItemTobeDroped);
                     HasDroppedItem = true;
