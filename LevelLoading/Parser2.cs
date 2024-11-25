@@ -113,8 +113,8 @@ namespace LegendOfZelda
                         if (coords.Length == 2)
                         {
                             // x = first num. y = second num.
-                            float x = (float)int.Parse(coords[0]);
-                            float y = (float)int.Parse(coords[1]);
+                            float x = float.Parse(coords[0]);
+                            float y = float.Parse(coords[1]);
                             // Sets position to a vector.
                             position = new Vector2(x, y);
                             position += (offSet * multiplier);

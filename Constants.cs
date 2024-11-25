@@ -13,7 +13,7 @@ namespace LegendOfZelda
         public const int HUDHeight = OriginalHeight / 4;
         // Original resolution in which the sprites are scaled to.
         public const int OriginalWidth = 800;
-        public const int OriginalHeight = 480;
+        public const int OriginalHeight = 484;
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
         // Miku 
@@ -49,10 +49,10 @@ namespace LegendOfZelda
         // Walls
         //this is used for the wall sprite, NOT the hitboxes.
         public const int WallsWidth = 800;
-        public const int WallsHeight = 480;
+        public const int WallsHeight = 484;
         // Floor
         public const int FloorWidth = 600;
-        public const int FloorHeight = 304;
+        public const int FloorHeight = 308;
         // Aquamentus
         public const int AquamentusHeight = 80;
         public const int AquamentusWidth = 80;

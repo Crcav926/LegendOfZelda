@@ -144,17 +144,17 @@
     <ObjectType>Door</ObjectType>
 	<Locked> false</Locked>
     <ObjectName>LeftDoorOpen</ObjectName>
-    <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room2.xml</Room>
+    <Location>0 198</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room2.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
 	<Locked> false</Locked>
     <ObjectName>RightDoorOpen</ObjectName>
-    <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room3.xml</Room>
+    <Location>700 198</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room3.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorOpen</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
 </Item>
 </root>
