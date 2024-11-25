@@ -9,41 +9,41 @@ namespace LegendOfZelda
 {
     internal class EnemySpriteFactory
     {
-            private static EnemySpriteFactory instance = new EnemySpriteFactory();
-            private static Texture2D enemySpriteSheet;
-            private static Texture2D bossSpriteSheet;
+        private static EnemySpriteFactory instance = new EnemySpriteFactory();
+        private static Texture2D enemySpriteSheet;
+        private static Texture2D bossSpriteSheet;
 
         public static EnemySpriteFactory Instance
+        {
+            get
             {
-                get
-                {
-                    return instance;
-                }
+                return instance;
+            }
         }
 
-            private EnemySpriteFactory()
-            {
-            }
+        private EnemySpriteFactory()
+        {
+        }
 
-       public void LoadAllTextures(ContentManager content)
-            {
-                bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheet");
-                enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet");
+        public void LoadAllTextures(ContentManager content)
+        {
+            bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheet");
+            enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet");
 
             // More Content.Load calls follow
             //...
-            }
-       public ISprite CreateBladeTrapSprite()
-       {
+        }
+        public ISprite CreateBladeTrapSprite()
+        {
             List<Rectangle> bladeTrapFrames = new List<Rectangle>
             {
                 new Rectangle(162, 59, 20, 20)
             };
             return new Sprite(enemySpriteSheet, bladeTrapFrames);
-       }
+        }
         public ISprite CreateGelSprite()
         {
-                List<Rectangle> gelFrames = new List<Rectangle>
+            List<Rectangle> gelFrames = new List<Rectangle>
             {
                 new Rectangle(1, 11, 8, 15),
                 new Rectangle(10, 11, 8, 15),
@@ -60,7 +60,7 @@ namespace LegendOfZelda
                 new Rectangle(55, 28, 8, 15),
                 new Rectangle(64, 28, 8, 15)
             };
-                return new Sprite(enemySpriteSheet, gelFrames);
+            return new Sprite(enemySpriteSheet, gelFrames);
         }
         public ISprite CreateStalfolSprite()
         {
@@ -121,7 +121,8 @@ namespace LegendOfZelda
             };
             return new Sprite(enemySpriteSheet, upFrames);
         }
-        public ISprite CreateDownGoriyaSprite() {
+        public ISprite CreateDownGoriyaSprite()
+        {
             List<Rectangle> downFrames = new List<Rectangle>
             {
                  new Rectangle(221, 11, 16, 16),
@@ -161,7 +162,7 @@ namespace LegendOfZelda
         public ISprite CreateAquamentusSprite()
         {
 
-                List<Rectangle> AquamentusFrames = new List<Rectangle>
+            List<Rectangle> AquamentusFrames = new List<Rectangle>
             {
                     new Rectangle(1, 11, 24, 32),
                     new Rectangle(26, 11, 24, 32),
@@ -169,7 +170,7 @@ namespace LegendOfZelda
                     new Rectangle(76, 11, 24, 32)
 
              };
-                return new Sprite(bossSpriteSheet, AquamentusFrames);
+            return new Sprite(bossSpriteSheet, AquamentusFrames);
         }
         public ISprite CreateFireBallSprite()
         {
@@ -181,7 +182,29 @@ namespace LegendOfZelda
                     new Rectangle(128, 11, 8, 16)
             };
 
-                return new Sprite(bossSpriteSheet, fireball);
+            return new Sprite(bossSpriteSheet, fireball);
+        }
+        public ISprite CreateGanonSprite()
+        {
+
+            List<Rectangle> GanonFrames = new List<Rectangle>
+            {
+                    new Rectangle(40, 154, 32, 32),
+                    new Rectangle(73, 154, 32, 32),
+                    new Rectangle(106, 154, 32, 32),
+                    new Rectangle(139, 154, 32, 32),
+                    new Rectangle(172, 154, 32, 32)
+             };
+            return new Sprite(bossSpriteSheet, GanonFrames);
+        }
+        public ISprite CreateGanonVulnerableSprite()
+        {
+
+            List<Rectangle> GanonVulnerableFrames = new List<Rectangle>
+            {
+                    new Rectangle(205, 154, 32, 32)
+             };
+            return new Sprite(bossSpriteSheet, GanonVulnerableFrames);
         }
     }
 }
