@@ -86,5 +86,11 @@ namespace LegendOfZelda
         {
             return targetPosition;
         }
+        public void Reset()
+        {
+            position = new Vector2(0, Constants.HUDHeight);
+            targetPosition = new Vector2(0, Constants.HUDHeight);
+            isSliding = false;
+        }
     }
 }

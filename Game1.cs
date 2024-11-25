@@ -240,6 +240,7 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
             hudManager = new HUDManager();
             Link.Instance.Reset();
+            Camera2D.Instance.Reset();
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
             Initialize();
