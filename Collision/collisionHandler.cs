@@ -57,6 +57,8 @@ namespace LegendOfZelda.Collision
 
             if (collisionDictionary.TryGetValue(key, out Type commandType))
             {
+                String o1Type = o1.getCollisionType();
+                String o2Type = o2.getCollisionType();
                 // Reflection to instantiate the command and invoke its Execute method
                 MethodInfo executeMethod = commandType.GetMethod("Execute");
                 if (executeMethod != null)
@@ -66,17 +68,17 @@ namespace LegendOfZelda.Collision
                     // we need to be able to pass in the correct object for the command we're trying to make...
                     // this is less messy but is a lot of decision making code need to ask if there's a way to 
                     //make it so that order doesn't matter?
-                    if (o1 is Link)
+                    if (o1Type == "Player")
                     {
-                        if (o2 is Door || o2 is ClassItems || (o2 is Block) || o2 is PushableBlock)
+                        if (o2Type == "Door" || o2Type == "statItem" || (o2Type == "Obstacle") || o2Type == "Pushable")
                         {
                             //convoluted way of seeing if its pushable block
-                            if (o2.getCollisionType() == "Obstacle")
+                            if (o2Type == "Obstacle")
                             {
                                     //if we can't push it treat as normal block
                                     commandInstance = Activator.CreateInstance(commandType, o1);
                             }
-                            else if (o2.getCollisionType() == "Pushable")
+                            else if (o2Type == "Pushable")
                             {
                                 //HAS TO BE o2 IN THE SECOND SLOT; The command doesn't care about link, only the block.
                                 commandInstance = Activator.CreateInstance(commandType, o2);
@@ -95,11 +97,11 @@ namespace LegendOfZelda.Collision
                     } else if (o1 is IEnemy)
                     {
                         //enemy and item pass in both
-                        if (o2.getCollisionType() == "Item")
+                        if (o2Type == "Item")
                         {
                             ICollideable[] p = { o1, o2 };
                             commandInstance = Activator.CreateInstance(commandType, p);
-                        } else if (o2 is Link) //enemy and link pass in link
+                        } else if (o2Type == "Player") //enemy and link pass in link
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
@@ -107,10 +109,10 @@ namespace LegendOfZelda.Collision
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
 
-                    } else if (o1.getCollisionType() == "Projectile") {
+                    } else if (o1Type == "Projectile") {
                         //projectiles are movers
                         
-                        if (o2 is Link)
+                        if (o2Type == "Player") 
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
@@ -118,14 +120,14 @@ namespace LegendOfZelda.Collision
                         {
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
-                    } else if (o1.getCollisionType() == "Item")
+                    } else if (o1Type == "Item")
                     {
                         //item
                         //item and wall pass in item
-                        if (o2.getCollisionType() == "Obstacle")
+                        if (o2Type == "Obstacle")
                         {
                             commandInstance = Activator.CreateInstance(commandType, o1);
-                        }else if (o2 is IEnemy) //if enemy pass in enemy then item
+                        }else if (o2Type == "Enemy") //if enemy pass in enemy then item
                         {
                             ICollideable[] p = { o2, o1 };
                             commandInstance = Activator.CreateInstance(commandType, p);
