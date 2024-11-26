@@ -62,6 +62,8 @@ namespace LegendOfZelda
         SpriteFont font;
         Texture2D blackRectangle;
 
+        IEnemy ganon;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -139,6 +141,7 @@ namespace LegendOfZelda
             modifier.Play();
             hudManager = new HUDManager();
 
+            ganon = new Ganon(new Vector2(200,200));    
         }
 
         protected override void Update(GameTime gameTime)
@@ -171,6 +174,7 @@ namespace LegendOfZelda
                 // Calls link update, which updates his Sprite and Items
                 // LinkCharacter.Update(gameTime);
                 // Updates sprites in Item classes
+                ganon.Update(gameTime);
             }
             //Update the keyboard controller outside because we need it
             controllerK.Update();
@@ -211,6 +215,7 @@ namespace LegendOfZelda
                 {
                     statItem.Draw(_spriteBatch);
                 }
+                ganon.Draw(_spriteBatch);
             }
 
 

@@ -36,7 +36,7 @@ namespace LegendOfZelda
             items = new List<IItems>();
             weapons= new List<IItems>();
             
-            numKeys = 0;
+            numKeys = 10;
             hasMap = false;
             coins= 0;
             numBombs = 0;
