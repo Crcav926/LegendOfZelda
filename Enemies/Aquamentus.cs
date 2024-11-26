@@ -100,7 +100,7 @@ public class Aquamentus : IEnemy, ICollideable
         // Create a new fireball at Aquamentus's position and add it to the list
         Vector2 fireballStartPosition = new Vector2(position.X + Constants.AquamentusFireballXOffset, position.Y + Constants.AquamentusFireballYOffset); // Adjust the offset
 
-        SoundMachine.Instance.GetSound("aquaRoar").Play();
+        SoundMachine.Instance.PlaySound("aquaRoar");
 
         //fireballs.Add(new Fireball(fireballStartPosition, direction));
         RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, direction));
@@ -129,7 +129,7 @@ public class Aquamentus : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
-            SoundMachine.Instance.GetSound("enemyHurt").Play();
+            SoundMachine.Instance.PlaySound("enemyHurt");
             damageAnimation.StartDamageEffect();
             if (hp <= 0)
             {

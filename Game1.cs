@@ -56,11 +56,11 @@ namespace LegendOfZelda
         CollisionHandler collHandler;
 
         SoundMachine soundMachine = SoundMachine.Instance;
-        SoundEffect mikuSong;
-        SoundEffectInstance modifier;
+        SoundEffectInstance mikuSong;
         public bool paused;
         SpriteFont font;
         Texture2D blackRectangle;
+
 
         IEnemy ganon;
 
@@ -134,11 +134,10 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
 
             //I'll keep the theme song loaded here so it doesn't reset on room changes
-            SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
-            SoundEffectInstance modifier = mikuSong.CreateInstance();
-            modifier.IsLooped = true;
-            modifier.Volume = .3f;
-            modifier.Play();
+            mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
+            mikuSong.IsLooped = true;
+            mikuSong.Volume = .3f;
+            mikuSong.Play();
             hudManager = new HUDManager();
 
             ganon = new Ganon(new Vector2(200,200));    
@@ -174,7 +173,7 @@ namespace LegendOfZelda
                 // Calls link update, which updates his Sprite and Items
                 // LinkCharacter.Update(gameTime);
                 // Updates sprites in Item classes
-                ganon.Update(gameTime);
+                //ganon.Update(gameTime);
             }
             //Update the keyboard controller outside because we need it
             controllerK.Update();
@@ -215,7 +214,7 @@ namespace LegendOfZelda
                 {
                     statItem.Draw(_spriteBatch);
                 }
-                ganon.Draw(_spriteBatch);
+                //ganon.Draw(_spriteBatch);
             }
 
 
@@ -238,7 +237,7 @@ namespace LegendOfZelda
         }
         public void Reset()
         {
-            SoundMachine.Instance.GetSound("theme").Stop();
+            mikuSong.Stop();
             RoomObjectManager.Instance.Clear();
             LevelLoader.Instance.Load("Room1.xml");
             blocks = LevelLoader.Instance.getBlocks();

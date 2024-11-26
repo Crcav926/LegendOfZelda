@@ -95,11 +95,11 @@ namespace LegendOfZelda
             Debug.WriteLine("Item made contact");
             if (itemType == "Triforce" || itemType == "TriforceBlue")
             {
-                SoundMachine.Instance.GetSound("getTri").Play();
+                SoundMachine.Instance.PlaySound("getTri");
             }
             else
             {
-                SoundMachine.Instance.GetSound("getRupee").Play();
+                SoundMachine.Instance.PlaySound("getRupee");
             }
             exists = false;
         }

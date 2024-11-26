@@ -105,7 +105,7 @@ public class Ganon : IEnemy, ICollideable
 
     public void TakeDamage(int damage)
     {
-        SoundMachine.Instance.GetSound("enemyHurt").Play();
+        SoundMachine.Instance.PlaySound("enemyHurt");
         isVisible = true;
         if (!isVulnerable)
         {

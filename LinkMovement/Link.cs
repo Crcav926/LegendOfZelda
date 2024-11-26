@@ -112,7 +112,7 @@ namespace LegendOfZelda
         {
             if (canTakeDamage)
             {
-                soundMachine.GetSound("hurt").Play();
+                soundMachine.PlaySound("hurt");
                 linkState.TakeDamage();
                 currentHealth -= 2;
             }
@@ -126,27 +126,27 @@ namespace LegendOfZelda
 
         public void BoomerangAttack()
         {
-            soundMachine.GetSound("ha").Play();
+            soundMachine.PlaySound("ha");
             linkState.BoomerangAttack();
         }
         public void SwordAttack() 
         {
-            soundMachine.GetSound("ha").Play();
+            soundMachine.PlaySound("ha");
             linkState.SwordAttack();
         }
         public void FireAttack() 
         {
-            soundMachine.GetSound("attack").Play();
+            soundMachine.PlaySound("attack");
             linkState.FireAttack();
         }
         public void ArrowAttack()
         {
-            soundMachine.GetSound("ha").Play();
+            soundMachine.PlaySound("ha");
             linkState.ArrowAttack();
         }
         public void BombAttack()
         {
-            soundMachine.GetSound("attack").Play();
+            soundMachine.PlaySound("attack");
             linkState.BombAttack();
         }
         public void Update(GameTime gameTime)

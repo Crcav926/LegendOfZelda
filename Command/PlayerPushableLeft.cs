@@ -20,7 +20,7 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //push the block to the right because the collision is on the left side.
-            SoundMachine.Instance.GetSound("moveBlock").Play();
+            SoundMachine.Instance.PlaySound("moveBlock");
             Debug.WriteLine("Collided with pusable on the left");
             _block.moveBlock(new Vector2(1, 0));
         }

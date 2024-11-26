@@ -154,7 +154,7 @@ public class Stalfol : IEnemy, ICollideable
         if ( canTakeDamage)
         {
             Debug.WriteLine($"{damage} damage done to {this.GetType().Name}");
-            SoundMachine.Instance.GetSound("enemyHurt").Play();
+            SoundMachine.Instance.PlaySound("enemyHurt");
             damageAnimation.StartDamageEffect();
             hp -= damage;
 

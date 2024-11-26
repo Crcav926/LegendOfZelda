@@ -35,7 +35,7 @@ namespace LegendOfZelda.Command
                     if (roomName != "closed")
                     {
                         LevelLoader.Instance.changeCurrentRoom(roomName);
-                        SoundMachine.Instance.GetSound("throughDoor").Play();
+                        SoundMachine.Instance.PlaySound("throughDoor");
                         String currentDoor = door.doorSprite;
                         Debug.WriteLine($"Current door is {currentDoor}");
                         switch (currentDoor[0])
@@ -69,7 +69,7 @@ namespace LegendOfZelda.Command
                 // if link has keys and it's unlockable unlock the door and play the unlock sound
                 if (door.unlockable && link.inventory.getNumKeys() > 0)
                 {
-                    SoundMachine.Instance.GetSound("unlock").Play();
+                    SoundMachine.Instance.PlaySound("unlock");
                     //pause the game to play sound and see door change
                     String currentDoor = door.doorSprite;
                     Debug.WriteLine($"Current door is {currentDoor}");
