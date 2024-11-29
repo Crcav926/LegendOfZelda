@@ -20,7 +20,7 @@ namespace LegendOfZelda.LinkMovement
             this.link = link;
             this.link.linkSprite = link.spriteFactory.CreateLinkDeathSprite();
             SoundMachine.Instance.PlaySound("death");
-            link.test1 = true;
+            link.deathFlag = true;
         }
         //not sure if these need implemented since there's no coming back from this state
         //unless we add revives or something idk

@@ -62,6 +62,9 @@ namespace LegendOfZelda
         private SpriteFont font;
         private Texture2D blackRectangle;
 
+        //Reset Testing
+        ResetWatchdog resetWatchdog;
+
         //for testing move him when done.
         IEnemy ganon;
         public Menu menu;
@@ -90,7 +93,8 @@ namespace LegendOfZelda
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
-
+            //reset
+            resetWatchdog = new ResetWatchdog(this);
             //reset fix?
             Globals.inMenus = true;
 
