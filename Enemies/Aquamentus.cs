@@ -28,7 +28,6 @@ public class Aquamentus : IEnemy, ICollideable
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;

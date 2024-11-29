@@ -47,6 +47,7 @@ public class Keese : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
+        //see Gel.cs about this - TJ
         if (hasKey == null)
         {
             keyStatus = false;

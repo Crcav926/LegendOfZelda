@@ -23,7 +23,6 @@ namespace LegendOfZelda.HUD
         int pausedOffset;
         private bool paused;
         Game1 myGame;
-        Texture2D blackRectangle;
         public HUDManager(Game1 game)
         {
             hudSF = HUDSpriteFactory.Instance;

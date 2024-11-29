@@ -22,14 +22,12 @@ public class Stalfol : IEnemy, ICollideable
     private Rectangle destinationRectangle;
     private Boolean alive;
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-    private ClassItems droppedKey;
 
     private bool keyStatus;
 
@@ -45,7 +43,7 @@ public class Stalfol : IEnemy, ICollideable
         hp = 2;
 
         canTakeDamage = true;
-
+        //see Gel.cs - TJ
         if (hasKey == null)
         {
             keyStatus = false;

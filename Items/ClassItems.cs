@@ -14,8 +14,7 @@ namespace LegendOfZelda
 {
     public class ClassItems :ICollideable, IItems
     {
-        double timePerFrame = 0.05; // Adjustable data
-        double timeElapsed = 0;
+
 
         private Vector2 itemPosition;
         private Rectangle destination;

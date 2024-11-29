@@ -16,8 +16,6 @@ public class BladeTrap : IEnemy, ICollideable
     private Boolean alive;
 
     public bool HasDroppedItem { get; set; } = false;
-    private ClassItems droppedItem;
-
     public BladeTrap(Vector2 position, bool hasKey)
     {
         this.position = position;

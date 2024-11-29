@@ -11,9 +11,6 @@ namespace LegendOfZelda.HUD
 {
     public class Health
     {
-
-        ISprite HUDSprite;
-
         private Inventory inven;
         private HUDSpriteFactory hudSF;
         private Dictionary<char, ISprite> HUDHPSprites;

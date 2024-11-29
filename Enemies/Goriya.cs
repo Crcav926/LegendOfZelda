@@ -22,14 +22,12 @@ public class Goriya : IEnemy, ICollideable
     private Boolean alive;
 
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = .5;
     private double timeElapsed = 0;
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-    private ClassItems droppedKey;
 
     private bool keyStatus;
     DamageAnimation damageAnimation;
@@ -44,7 +42,7 @@ public class Goriya : IEnemy, ICollideable
 
         hp = 3;
         canTakeDamage = true;
-
+        //see my message in Gel.cs about this - TJ
         if (hasKey == null)
         {
             keyStatus = false;

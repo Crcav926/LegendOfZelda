@@ -14,8 +14,6 @@ public class Gel : IEnemy, ICollideable
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
-    private float jumpSpeed = 50f;   // Speed of the jump
-    private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
     private Random random = new Random();
     private float frameTimer = 0f;  // Timer to track time since last frame change
@@ -42,6 +40,7 @@ public class Gel : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
+        //i think this is not a problem? I think the way we read the xml just makes this mark as a problem even though hasKey gets a value there. - TJ
         if (hasKey == null)
         {
             keyStatus = false;

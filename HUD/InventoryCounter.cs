@@ -10,8 +10,6 @@ namespace LegendOfZelda.HUD
     public class InventoryCounter
     {
 
-        ISprite HUDSprite;
-
         private Inventory inven;
         private HUDSpriteFactory hudSF;
         private Dictionary<char, ISprite> HUDNumSprites;

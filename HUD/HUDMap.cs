@@ -29,7 +29,6 @@ namespace LegendOfZelda.HUD
         private ISprite dot;
         public Vector2 miniMapPos;
 
-        private Link link;
         public HUDMap()
         {
             miniMapPos = new Vector2(Constants.miniMapStartX, Constants.miniMapStartY);

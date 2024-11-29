@@ -43,8 +43,6 @@ namespace LegendOfZelda
         public List<IEnemy> enemies = new List<IEnemy>();
         private List<ICollideable> blocks;
         private List<ICollideable> movers;
-        private ISprite background;
-        private ISprite walls;
 
         //private IController controllerK;
         private HUDManager hudManager;
@@ -57,7 +55,6 @@ namespace LegendOfZelda
         private CollisionHandler collHandler;
 
         private SoundMachine soundMachine = SoundMachine.Instance;
-        private SoundEffectInstance mikuSong;
         public bool paused;
         private SpriteFont font;
         private Texture2D blackRectangle;

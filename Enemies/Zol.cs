@@ -38,7 +38,7 @@ public class Zol : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
-
+        //see Gel.cs
         if (hasKey == null)
         {
             keyStatus = false;

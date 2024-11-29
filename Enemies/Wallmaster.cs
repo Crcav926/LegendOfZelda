@@ -22,7 +22,6 @@ public class Wallmaster : IEnemy, ICollideable
     private ISprite sprite;
     private Boolean alive;
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
@@ -43,7 +42,7 @@ public class Wallmaster : IEnemy, ICollideable
         hp = 3;
 
         canTakeDamage = true;
-
+        //see Gel.cs - TJ
         if (hasKey == null)
         {
             keyStatus = false;
