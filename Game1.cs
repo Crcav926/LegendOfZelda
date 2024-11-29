@@ -62,6 +62,9 @@ namespace LegendOfZelda
         SpriteFont font;
         Texture2D blackRectangle;
 
+        //Reset Testing
+        ResetWatchdog resetWatchdog;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -85,7 +88,8 @@ namespace LegendOfZelda
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
-            
+            //reset
+            resetWatchdog = new ResetWatchdog(this);
             base.Initialize();
         }
 
@@ -132,8 +136,8 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
 
             //I'll keep the theme song loaded here so it doesn't reset on room changes
-            SoundEffect mikuSong = Content.Load<SoundEffect>("mikuSong");
-            SoundEffectInstance modifier = mikuSong.CreateInstance();
+            mikuSong = Content.Load<SoundEffect>("mikuSong");
+            modifier = mikuSong.CreateInstance();
             modifier.IsLooped = true;
             modifier.Volume = .3f;
             modifier.Play();
@@ -233,7 +237,9 @@ namespace LegendOfZelda
         }
         public void Reset()
         {
-            SoundMachine.Instance.GetSound("theme").Stop();
+            modifier.Stop();
+            //SoundMachine.Instance.stopSound("theme");
+            //SoundMachine.Instance.GetSound("theme").Stop();
             RoomObjectManager.Instance.Clear();
             LevelLoader.Instance.Load("Room1.xml");
             blocks = LevelLoader.Instance.getBlocks();

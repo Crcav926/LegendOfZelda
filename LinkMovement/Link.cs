@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Reflection;
 using System.Threading;
 using System.Timers;
 
@@ -44,8 +45,9 @@ namespace LegendOfZelda
         public Inventory inventory;
 
         private SoundMachine soundMachine = SoundMachine.Instance;
-        private static double test;
-        public bool test1 = false;
+        private static double deathTimer;
+        public bool deathFlag = false;
+        private bool deathFlag2 = false;
 
         private static Link instance = new Link();
 
@@ -171,7 +173,7 @@ namespace LegendOfZelda
                 canTakeDamage = true;
                 timeElapsed = 0;
             }
-            if (currentHealth == 0)
+            if (currentHealth <= 0)
             {
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
                 // This pair freezes her on death and has her play the animation
@@ -183,16 +185,19 @@ namespace LegendOfZelda
                 //currentHealth = 10;
 
                 //always needed
-                RoomObjectManager.Instance.staticItems.Clear();
-                if(test1 == true)
+                
+                if(deathFlag == true)
                 {
-                    test = gameTime.ElapsedGameTime.TotalSeconds;
-                    test1 = false;
+                    //RoomObjectManager.Instance.Clear();
+                    deathTimer = gameTime.TotalGameTime.TotalSeconds;
+                    deathFlag = false;
+                    deathFlag2 = true;
                 }
-                if((gameTime.ElapsedGameTime.TotalSeconds - test) > 1.5)
+                if((gameTime.TotalGameTime.TotalSeconds - deathTimer) > Constants.MikuDeathTime && deathFlag2 == true)
                 {
-                    LevelLoader.Instance.Load("Room1.xml");
-                    Reset();
+                    //not sure if this deathFlag2 is needed, but i'm keeping it until it works.
+                    deathFlag2 = false; 
+                    ResetWatchdog.Instance.ResetGame();
                 }
             }
         }
@@ -209,6 +214,7 @@ namespace LegendOfZelda
 
             inventory.Clear();
             inventory.addItem(sword);
+            inventory.addItem(bomb);
         }
 
         public void invulnerable()
