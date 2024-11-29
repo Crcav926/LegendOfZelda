@@ -91,7 +91,8 @@ namespace LegendOfZelda
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
 
-       
+            //reset fix?
+            Globals.inMenus = true;
 
 
             base.Initialize();
@@ -254,7 +255,7 @@ namespace LegendOfZelda
         }
         public void Reset()
         {
-            mikuSong.Stop();
+            SoundMachine.Instance.StopSound("theme");
             RoomObjectManager.Instance.Clear();
             LevelLoader.Instance.Load("Room1.xml");
             blocks = LevelLoader.Instance.getBlocks();
