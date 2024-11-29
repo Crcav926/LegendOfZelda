@@ -17,10 +17,8 @@ namespace LegendOfZelda
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
         // Miku 
-
         public const float ScaleY = (float)(ScreenHeight) / (OriginalHeight + HUDHeight);
         // Miku size
-
         public const int MikuHeight = 40;
         public const int MikuWidth = 40;
         public const float MikuSpeedX = 2f;
@@ -190,7 +188,6 @@ namespace LegendOfZelda
         public static readonly Vector2 leftMiddlePosition = new Vector2(0, 196);
         public static readonly Vector2 horizontalMiddleSize = new Vector2(100, 65);
         public static readonly Vector2 verticalMiddleSize = new Vector2(80, 88);
-
         // HUD Inventory Counter
         public const int HUDNumberSpriteDimensionX = 25;
         public const int HUDNumberSpriteDimensionY = 20;
@@ -207,15 +204,26 @@ namespace LegendOfZelda
         public const int HUDSprite2Y = -69;
         public const int HUDSpriteWidth = 25;
         public const int HUDSpriteHeight = 40;
-
-
         // HUD Health
         public const int hpHUDPosX = 550;
         public const int hpHUDPosY = -35;
         public const int HUDHPSpriteDimensionX = 25;
         public const int HUDHPSpriteDimensionY = 18;
-
         public const int FloorSizeX = 600;
         public const int FloorSizeY = 306;
+        // HUD Map
+        public const int MapSpriteX = 50;
+        public const int MapSpriteY = -105;
+        public const int MapSpriteWidth = 200;
+        public const int MapSpriteHeight = 88;
+        public const int LevelCountSpriteX = 200;
+        public const int LevelCountSpriteY = -105;
+        public const int LevelCountSpriteWidth = 25;
+        public const int LevelCountSpriteHeight = 18;
+        // Camera2D
+        public const int HorizontalSlideDistance = 800;
+        public const int VerticalSlideDistance = 480;
+        public const float SlidingThreshold = 5f;
+        public const float LerpFactor = 0.03f;
     }
 }

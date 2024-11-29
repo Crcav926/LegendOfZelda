@@ -37,6 +37,9 @@ namespace LegendOfZelda.HUD
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            mapSprite.Draw(spriteBatch, new Rectangle(Constants.MapSpriteX, Constants.MapSpriteY, Constants.MapSpriteWidth, Constants.MapSpriteHeight), Color.White);
+            levelCountSprite.Draw(spriteBatch, new Rectangle(Constants.LevelCountSpriteX, Constants.LevelCountSpriteY, Constants.LevelCountSpriteWidth, Constants.LevelCountSpriteHeight), Color.White);
+
             mapSprite.Draw(spriteBatch, new Rectangle(50,-105,200,88), Color.White);
             levelCountSprite.Draw(spriteBatch, new Rectangle(200,-105,25,18), Color.White);
             //room1Sprite.Draw(spriteBatch, new Rectangle(10, 10, 70, 30), Color.White);

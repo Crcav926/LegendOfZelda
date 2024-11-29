@@ -26,11 +26,13 @@ namespace LegendOfZelda
         }
         public Camera2D()
         {
-            cameraMatrix = Matrix.CreateTranslation(new Vector3(position, 0)) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+            cameraMatrix = Matrix.CreateTranslation(new Vector3(position, 0))
+                * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
         }
         public Matrix getMatrix()
         {
-            cameraMatrix = Matrix.CreateTranslation(new Vector3(position, 0)) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+            cameraMatrix = Matrix.CreateTranslation(new Vector3(position, 0))
+                * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
             return cameraMatrix;
         }
         public void slideLeft()
@@ -38,7 +40,7 @@ namespace LegendOfZelda
             if (!isSliding)
             {
                 isSliding = true;
-                targetPosition.X = (int)position.X + 800;
+                targetPosition.X = (int)position.X + Constants.HorizontalSlideDistance;
             }
         }
         public void slideRight()
@@ -46,7 +48,7 @@ namespace LegendOfZelda
             if (!isSliding)
             {
                 isSliding = true;
-                targetPosition.X = (int)position.X - 800;
+                targetPosition.X = (int)position.X - Constants.HorizontalSlideDistance;
             }
         }
         public void slideUp()
@@ -54,28 +56,26 @@ namespace LegendOfZelda
             if (!isSliding)
             {
                 isSliding = true;
-                targetPosition.Y = (int)position.Y + 480;
+                targetPosition.Y = (int)position.Y + Constants.VerticalSlideDistance;
             }
         }
-        public void slideDown() 
+        public void slideDown()
         {
             if (!isSliding)
             {
                 isSliding = true;
-                targetPosition.Y = (int)position.Y - 480;
+                targetPosition.Y = (int)position.Y - Constants.VerticalSlideDistance;
             }
         }
         public void Update()
         {
             if (isSliding)
             {
-                float threshold = 5f; // Set a threshold, e.g., 1 pixel
-
                 // Smoothly interpolate the position towards the target
-                position = Vector2.Lerp(position, targetPosition, .03f);
+                position = Vector2.Lerp(position, targetPosition, Constants.LerpFactor);
 
                 // Check if the camera is close enough to the target position
-                if (Vector2.Distance(position, targetPosition) < threshold)
+                if (Vector2.Distance(position, targetPosition) < Constants.SlidingThreshold)
                 {
                     position = targetPosition; // Snap to the exact target
                     isSliding = false; // Stop sliding
@@ -94,3 +94,4 @@ namespace LegendOfZelda
         }
     }
 }
+
