@@ -19,7 +19,6 @@ namespace LegendOfZelda
 {
     public class ResetWatchdog
     {
-        private static Game1 myGame;
         //so this variable is the only reason we need all this
         public bool resetCheck = false;
         public ResetWatchdog(){}
