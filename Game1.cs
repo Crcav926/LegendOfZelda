@@ -281,6 +281,7 @@ namespace LegendOfZelda
         }
         public void Reset()
         {
+            HUDMap.Instance.Reset();
             SoundMachine.Instance.StopSound("theme");
             RoomObjectManager.Instance.Clear();
             LevelLoader.Instance.Load("Room1.xml");

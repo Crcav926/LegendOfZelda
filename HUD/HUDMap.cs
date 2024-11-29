@@ -41,7 +41,10 @@ namespace LegendOfZelda.HUD
             dot = hudSF.CreateDot();
 
         }
-
+        public void Reset()
+        {
+            miniMapPos = new Vector2(Constants.miniMapStartX, Constants.miniMapStartY);
+        }
         public void Update(GameTime gameTime)
         {
 
