@@ -64,8 +64,6 @@ namespace LegendOfZelda
 
         //for testing move him when done.
         IEnemy ganon;
-
-        public int texturePack;
         public Menu menu;
 
         public Game1()
@@ -94,25 +92,23 @@ namespace LegendOfZelda
             collisionDetector = new detectionManager(collHandler);
 
        
-            texturePack = 0;
+
 
             base.Initialize();
         }
 
+        
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
             font = Content.Load<SpriteFont>("font");
-            Texture2D menuTex = Content.Load<Texture2D>("menuSheet");
-            menu = new Menu(this);
+          
 
             HUDSpriteFactory.Instance.LoadAllTextures(Content);
             MenuSpriteFactory.Instance.LoadAllTextures(Content);
-            
+            menu = new Menu(this);
 
-            // TODO: Absorb into level loader
-            BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
             // Load the texture for the sprite 
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             texture = Content.Load<Texture2D>("enemySpriteSheet");
@@ -121,6 +117,10 @@ namespace LegendOfZelda
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
+
+            // TODO: Absorb into level loader
+            BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
+           
 
 
             LevelLoader.Instance.LoadAllContent(Content);
@@ -141,19 +141,14 @@ namespace LegendOfZelda
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
-            //I'll keep the theme song loaded here so it doesn't reset on room changes
-            mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
-            mikuSong.IsLooped = true;
-            mikuSong.Volume = .3f;
-            mikuSong.Play();
             hudManager = new HUDManager();
 
 
-            ganon = new Ganon(new Vector2(200,200));    
+            //ganon = new Ganon(new Vector2(200,200));    
         }
 
         protected override void Update(GameTime gameTime)
-        {   
+        {
             if (!paused)
             {
                 blocks = LevelLoader.Instance.getBlocks();
@@ -241,7 +236,7 @@ namespace LegendOfZelda
                 //THIS IS THE MOST JANK PAUSE EVER BUT IT DO WORK
                 Rectangle destinationRectangle = new Rectangle(-(int)Camera2D.Instance.getPosition().X, (int)Camera2D.Instance.getPosition().Y, 1000, 1000);
                 
-                if (!menu.isUp()) //if the menu isn't up and it's paused.
+                if (!Globals.inMenus) //if the menu isn't up and it's paused.
                 {
                     //draw the pause screen
                     _spriteBatch.Draw(blackRectangle, destinationRectangle, Color.White);
@@ -280,6 +275,18 @@ namespace LegendOfZelda
             {
                 blackRectangle.Dispose();
             }
+        }
+        public void reloadTextures()
+        {
+            clearLoads();
+            this.LoadContent();
+        }
+
+        private void clearLoads()
+        {
+            // uh idk what else to clear so i need to ask.
+            controllerK.clearCommands();
+
         }
     }
 }

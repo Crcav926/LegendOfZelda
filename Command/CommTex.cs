@@ -11,14 +11,14 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            int textureChoice = myGame.menu.tex;
+            int textureChoice = Globals.tex;
             if (textureChoice == 0)
             {
-                myGame.menu.tex = 1;
+                Globals.tex = 1;
             }
             else
             {
-                myGame.menu.tex = 0;
+                Globals.tex = 0;
             }
 
         }

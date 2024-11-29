@@ -137,8 +137,7 @@ namespace LegendOfZelda
 
         public void LoadAllTextures(ContentManager content)
         {
-            int tex = Menu.Instance.tex;
-            if (tex == 0)
+            if (Globals.tex == 0)
             {
                 texture = content.Load<Texture2D>("ZeldaTileSheet");
             }

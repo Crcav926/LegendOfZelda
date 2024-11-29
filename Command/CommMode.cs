@@ -12,14 +12,14 @@ namespace LegendOfZelda
         public void Execute()
         {
             //swap the button choice
-            int modeChoice = myGame.menu.mode;
+            int modeChoice = Globals.mode;
             if (modeChoice == 0)
             {
-                myGame.menu.mode = 1;
+                Globals.mode = 1;
             }
             else
             {
-                myGame.menu.mode = 0;
+                Globals.mode = 0;
             }
 
            

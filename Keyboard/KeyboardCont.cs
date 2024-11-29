@@ -52,7 +52,12 @@ namespace LegendOfZelda
         {
             releaseMappings.Add(key, command);
         }
-
+        public void clearCommands()
+        {
+            controllerMappings.Clear();
+            heldDownMappings.Clear();
+            releaseMappings.Clear();
+        }
         public void Update()
         {
             

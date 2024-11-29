@@ -21,7 +21,6 @@ namespace LegendOfZelda
 {
     public class Menu
     {
-        private bool isActive;
         private ISprite sprite;
         private ISprite gameModeButton;
         private ISprite adventureButton;
@@ -30,14 +29,9 @@ namespace LegendOfZelda
         private ISprite defaultButton;
         private ISprite holidayButton;
 
-        public int mode;
-        public int tex;
-
         public Menu(Game1 game)
         {
             Debug.WriteLine("Created Menu");
-            isActive = true;
-            myGame = game;
             sprite = MenuSpriteFactory.Instance.CreateMenu();
             gameModeButton = MenuSpriteFactory.Instance.CreateGameMode();
             adventureButton = MenuSpriteFactory.Instance.CreateAdventure();
@@ -46,16 +40,13 @@ namespace LegendOfZelda
             defaultButton = MenuSpriteFactory.Instance.CreateDefault();
             holidayButton = MenuSpriteFactory.Instance.CreateHoliday();
 
-            //0 is adventure/default 1 is rogue/holiday
-            mode = 0;
-            tex = 0;
 
         }
 
         public void Draw(SpriteBatch s)
         {
             // Draw the menu if its up.
-            if (isActive)
+            if (Globals.inMenus)
             {
                 //draw the background
                 Rectangle destinationRectangle = new Rectangle(0, 0, Constants.OriginalWidth, Constants.OriginalHeight);
@@ -69,7 +60,7 @@ namespace LegendOfZelda
                 Rectangle drHoliday = new Rectangle(578, 260, 137, 58);
                 gameModeButton.Draw(s, drGameMode, Color.White);
                 // this is totally data drivable or something but its literally 3:34 AM rn.
-                if (mode == 0)
+                if (Globals.mode == 0)
                 {
                     adventureButton.Draw(s, drAdventure, Color.White);
                     rogueButton.Draw(s, drRogue, Color.Gray);
@@ -80,7 +71,7 @@ namespace LegendOfZelda
                     rogueButton.Draw(s, drRogue, Color.White);
                 }
                 textureButton.Draw(s, drTexture, Color.White);
-                if (tex == 0)
+                if (Globals.tex == 0)
                 {
                     defaultButton.Draw(s, drDefault, Color.White);
                     holidayButton.Draw(s, drHoliday, Color.Gray);
@@ -96,13 +87,10 @@ namespace LegendOfZelda
         {
             //the menu doesn't super need to update other than the buttons changing.
         }
-        public bool isUp()
-        {
-            return isActive;
-        }
+      
         public void Start()
         {
-            isActive = false;
+            Globals.inMenus = false;
         }
     }
 }

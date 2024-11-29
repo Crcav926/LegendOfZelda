@@ -77,7 +77,6 @@ namespace LegendOfZelda
             soundMachine.addSound("ha", haMod);
             soundMachine.addSound("death", deathMod);
 
-            //I'll keep the theme song loaded here so it doesn't reset on room changes
             SoundEffectInstance mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
             mikuSong.IsLooped = true;
             mikuSong.Volume = .3f;

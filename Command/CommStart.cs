@@ -1,5 +1,21 @@
-﻿using System.Threading;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using ObjectManagementExamples;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using LegendOfZelda.Collision;
+using System.Xml;
+using Microsoft.VisualBasic;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Audio;
+using LegendOfZelda.Sounds;
+using LegendOfZelda.HUD;
+using System.ComponentModel.Design;
 namespace LegendOfZelda
 {
     internal class CommStart : ICommand
@@ -11,10 +27,15 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
-            Debug.WriteLine("Started Game");
-            //UnPause the game and make menu disappear.
-            myGame.setPause(false);
-            myGame.menu.Start();
+            if (Globals.inMenus)
+            {
+                Debug.WriteLine("Started Game");
+                //UnPause the game and make menu disappear.
+                myGame.setPause(false);
+                myGame.menu.Start();
+                myGame.reloadTextures();
+                SoundMachine.Instance.PlaySound("theme");
+            }
 
            
         }
