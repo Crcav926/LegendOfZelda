@@ -61,7 +61,7 @@ namespace LegendOfZelda
         SpriteFont font;
         Texture2D blackRectangle;
 
-
+        //for testing move him when done.
         IEnemy ganon;
 
         public Game1()

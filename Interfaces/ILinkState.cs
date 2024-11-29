@@ -22,6 +22,7 @@ namespace LegendOfZelda
         void ArrowAttack();
         void BombAttack();
         void Idle();
+        void Pickup();
         string getState();
 
 

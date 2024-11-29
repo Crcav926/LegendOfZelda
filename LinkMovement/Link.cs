@@ -46,6 +46,7 @@ namespace LegendOfZelda
         private SoundMachine soundMachine = SoundMachine.Instance;
         private static double test;
         public bool test1 = false;
+        public bool pause = false;
 
         private static Link instance = new Link();
 
@@ -149,6 +150,11 @@ namespace LegendOfZelda
             soundMachine.PlaySound("attack");
             linkState.BombAttack();
         }
+        public void Pickup()
+        {
+            linkState.Pickup();
+
+        }
         public void Update(GameTime gameTime)
         {
             //This updates hitbox
@@ -170,6 +176,17 @@ namespace LegendOfZelda
             {
                 canTakeDamage = true;
                 timeElapsed = 0;
+
+                // I'm ngl, this allows the pickup item animation to play and idk why.
+                if (pause== true)
+                {
+                    test = gameTime.ElapsedGameTime.TotalSeconds;
+                    pause= false;
+                }
+                if ((gameTime.ElapsedGameTime.TotalSeconds - test) > .25)
+                {
+
+                }
             }
             if (currentHealth == 0)
             {

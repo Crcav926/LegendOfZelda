@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
+using System.Threading;
 
 namespace LegendOfZelda.LinkMovement
 {
-    internal class LinkDeathState : ILinkState
+    internal class LinkPickUpState : ILinkState
     {
         private Link link;
-        private string name = "Death";
-        public LinkDeathState(Link link)
+        private string name = "Pickup";
+        public LinkPickUpState(Link link)
         {
             this.link = link;
-            this.link.linkSprite = link.spriteFactory.CreateLinkDeathSprite();
-            SoundMachine.Instance.PlaySound("death");
-            link.test1 = true;
+            this.link.linkSprite = link.spriteFactory.CreateLinkPickupSprite();
+            link.pause = true;
         }
-        //not sure if these need implemented since there's no coming back from this state
-        //unless we add revives or something idk
+        //this is a little jank but it works i guess
         public void ArrowAttack()
         {
             //link.linkState = new LinkArrowAttackState(link);
@@ -41,8 +40,7 @@ namespace LegendOfZelda.LinkMovement
 
         public void Death()
         {
-            //we'll figure something out
-            //throw new NotImplementedException();
+            //link.linkState = new LinkDeathState(link);
         }
 
         public void Draw(SpriteBatch spriteBatch)

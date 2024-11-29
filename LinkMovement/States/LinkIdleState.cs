@@ -56,6 +56,10 @@ namespace LegendOfZelda.LinkMovement
         {
             link.linkState = new LinkBombAttackState(link);
         }
+        public void Pickup()
+        {
+            link.linkState = new LinkPickUpState(link);
+        }
         public void Update(GameTime gameTime)
         {
             // No update required, were standing still.
