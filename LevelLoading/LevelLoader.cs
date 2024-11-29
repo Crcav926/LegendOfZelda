@@ -77,7 +77,6 @@ namespace LegendOfZelda
             soundMachine.addSound("ha", haMod);
             soundMachine.addSound("death", deathMod);
 
-            //I'll keep the theme song loaded here so it doesn't reset on room changes
             SoundEffectInstance mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
             mikuSong.IsLooped = true;
             mikuSong.Volume = .3f;
@@ -117,10 +116,15 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.D2, new LinkAttack2());
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
             cont.RegisterCommand(Keys.R, new CommReset(game, link));
-            //this was for testing but now pressing it breaks the game lol.
-            //cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
+           
             cont.RegisterCommand(Keys.D3, new RotateItems());
+          
+
+            //For menu and pause
             cont.RegisterCommand(Keys.P, new CommPause(game));
+            cont.RegisterCommand(Keys.Enter, new CommStart(game));
+            cont.RegisterCommand(Keys.N, new CommMode(game));
+            cont.RegisterCommand(Keys.M, new CommTex(game));
 
             
             cont.registerHeldDown(Keys.A, new CommMoveHeldDown(link, new Vector2(-1, 0)));

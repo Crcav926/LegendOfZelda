@@ -29,6 +29,7 @@ namespace LegendOfZelda
         public const float MikuSpeedY = 2f;
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
+        //HP HERE
         public const int MikuStartingHealth = 60;
         public const int PointsPerHP = 4;
         public const double MikuInvincibilityTimer = 2.5;
@@ -234,6 +235,10 @@ namespace LegendOfZelda
         public const int dotSize = 9;
         public const int miniMapStartX = 133;
         public const int miniMapStartY = -24;
+
+        //menu
+        public const int MenuWidth = 768;
+        public const int MenuHeight = 432;
 
     }
 }

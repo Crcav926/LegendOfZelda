@@ -21,6 +21,7 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //Debug.WriteLine($"Miku picked up {item.getItemType()} ");
+            _link.Pickup();
             String itemType = item.getItemType();
             //add the item to link's inventory and delete it off the screen
             if (itemType == "Key")

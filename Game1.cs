@@ -15,6 +15,7 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework.Audio;
 using LegendOfZelda.Sounds;
 using LegendOfZelda.HUD;
+using System.ComponentModel.Design;
 
 namespace LegendOfZelda
 {
@@ -61,8 +62,9 @@ namespace LegendOfZelda
         private SpriteFont font;
         private Texture2D blackRectangle;
 
-
+        //for testing move him when done.
         IEnemy ganon;
+        public Menu menu;
 
         public Game1()
         {
@@ -72,6 +74,7 @@ namespace LegendOfZelda
             _graphics.PreferredBackBufferWidth = Constants.ScreenWidth;
             _graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
             paused = false; 
+
         }
         
         protected override void Initialize()
@@ -87,19 +90,27 @@ namespace LegendOfZelda
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
-            
+
+            //reset fix?
+            Globals.inMenus = true;
+
+
             base.Initialize();
         }
 
+        
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Temp load font for fps check.
             font = Content.Load<SpriteFont>("font");
+          
+
+            HUDSpriteFactory.Instance.LoadAllTextures(Content);
+            MenuSpriteFactory.Instance.LoadAllTextures(Content);
+            menu = new Menu(this);
 
             // Load the texture for the sprite 
-
-
             itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
             texture = Content.Load<Texture2D>("enemySpriteSheet");
             Bossture = Content.Load<Texture2D>("bossSpriteSheet");
@@ -107,12 +118,10 @@ namespace LegendOfZelda
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             BlockSpriteFactory.Instance.LoadAllTextures(Content);
-            HUDSpriteFactory.Instance.LoadAllTextures(Content);
-            
 
             // TODO: Absorb into level loader
             BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
-
+           
 
 
             LevelLoader.Instance.LoadAllContent(Content);
@@ -134,10 +143,10 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
 
             //I'll keep the theme song loaded here so it doesn't reset on room changes
-            mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
-            mikuSong.IsLooped = true;
-            mikuSong.Volume = .3f;
-            mikuSong.Play();
+            // mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
+            // mikuSong.IsLooped = true;
+            // mikuSong.Volume = .3f;
+            // mikuSong.Play();
             hudManager = new HUDManager(this);
             pausedHUD = new PausedHUD();
             ganon = new Ganon(new Vector2(200,200));    
@@ -176,10 +185,13 @@ namespace LegendOfZelda
                 // Updates sprites in Item classes
                 //ganon.Update(gameTime);
             }
+            //if we're in menus we should be paused so update it.
+            
             else
             {
                 pausedHUD.Update(gameTime);
             }
+            menu.Update(gameTime);
             hudManager.Update(gameTime);
             //Update the keyboard controller outside because we need it
             controllerK.Update();
@@ -189,13 +201,16 @@ namespace LegendOfZelda
         {
             GraphicsDevice.Clear(Color.Black);
 
-
+            //move the pause rectangle here so it doesn't break game.
+            blackRectangle = new Texture2D(GraphicsDevice, 1, 1);
+            blackRectangle.SetData(new[] { Color.Black });
             // TODO: Add your drawing code here
             // Temp fps check.
             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
             string fpsText = $"FPS: {frameRate:0.00}";
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: Camera2D.Instance.getMatrix());
+            
             if (!paused)
             {
                 foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
@@ -216,6 +231,7 @@ namespace LegendOfZelda
                     statItem.Draw(_spriteBatch);
                 }
                 //ganon.Draw(_spriteBatch);
+                menu.Draw(_spriteBatch);
             }
 
             _spriteBatch.End();
@@ -230,8 +246,21 @@ namespace LegendOfZelda
             if (paused)
             {
                 //THIS IS THE MOST JANK PAUSE EVER BUT IT DO WORK
-                _spriteBatch.DrawString(font, "PAUSED", new Vector2(360, 200), Color.White);
-                pausedHUD.Draw(_spriteBatch);
+                Rectangle destinationRectangle = new Rectangle(-(int)Camera2D.Instance.getPosition().X, (int)Camera2D.Instance.getPosition().Y, 1000, 1000);
+                
+                if (!Globals.inMenus) //if the menu isn't up and it's paused.
+                {
+                    //draw the pause screen
+                    _spriteBatch.Draw(blackRectangle, destinationRectangle, Color.White);
+                    _spriteBatch.DrawString(font, "PAUSED", new Vector2(360, 200), Color.White);
+                    pausedHUD.Draw(_spriteBatch);
+                }
+                else
+                {
+                    //otherwise we are paused becaus we're in menus
+                    menu.Draw(_spriteBatch);
+                }
+
             }
             
             _spriteBatch.End();
@@ -242,7 +271,7 @@ namespace LegendOfZelda
         }
         public void Reset()
         {
-            mikuSong.Stop();
+            SoundMachine.Instance.StopSound("theme");
             RoomObjectManager.Instance.Clear();
             LevelLoader.Instance.Load("Room1.xml");
             blocks = LevelLoader.Instance.getBlocks();
@@ -259,6 +288,22 @@ namespace LegendOfZelda
         public void setPause(bool pauseState)
         {
             paused = pauseState;
+            if (pauseState == false)
+            {
+                blackRectangle.Dispose();
+            }
+        }
+        public void reloadTextures()
+        {
+            clearLoads();
+            this.LoadContent();
+        }
+
+        private void clearLoads()
+        {
+            // uh idk what else to clear so i need to ask.
+            controllerK.clearCommands();
+
         }
     }
 }

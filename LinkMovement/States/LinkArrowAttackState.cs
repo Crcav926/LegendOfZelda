@@ -33,6 +33,10 @@ namespace LegendOfZelda.LinkMovement
         {
             link.linkState = new LinkIdleState(link);
         }
+        public void Pickup()
+        {
+            link.linkState = new LinkPickUpState(link);
+        }
         public void TakeDamage()
         {
             link.linkState = new LinkDamagedState(link);

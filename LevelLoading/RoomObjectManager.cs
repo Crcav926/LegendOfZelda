@@ -40,7 +40,7 @@ namespace LegendOfZelda
         public String GetItemName (char c)
         {
             (int, char) key = (DeathCounter, c);
-            Debug.WriteLine($"Death counter is {DeathCounter}");
+            //Debug.WriteLine($"Death counter is {DeathCounter}");
             return DropDictionary.GetDropName(key);
         }
 
@@ -48,7 +48,7 @@ namespace LegendOfZelda
         public String GetKey()
         {
             string roomNumber = LevelLoader.Instance.room;
-            Debug.WriteLine($"Checking if its a drop room, room: {roomNumber}");
+            //Debug.WriteLine($"Checking if its a drop room, room: {roomNumber}");
             // Attempt to retrieve the key only if it is in one of the specified rooms.
 
                 (string, int) key = (roomNumber, Localcounter);
@@ -69,11 +69,6 @@ namespace LegendOfZelda
         {
             // NOTE TO SELF - DO NOT CHANGE THIS CLASS IF POSSIBLE
             return movers;
-            //foreach (ICollideable p in projectiles)
-            //{
-                //nevermind holy frick no frames
-                //moveList.Add(p);
-            //}
         }
         public List<ICollideable> getStandStills()
         {
@@ -157,12 +152,6 @@ namespace LegendOfZelda
         }
         private void addWalls()
         {
-            // Walls are 100 pixels thick wide and 87 pixels thick tall
-            // Dimensions of the rooms are 800 / 480
-            // Wall topMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 0, 100, 80));
-            // Wall botMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(350, 392, 100, 80));
-            // Wall leftMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(0, 196, 90, 88));
-            // Wall rightMiddle = new Wall(new Microsoft.Xna.Framework.Rectangle(700, 196, 90, 88));
 
         }
         //for reset

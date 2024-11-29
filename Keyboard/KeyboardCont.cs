@@ -33,6 +33,8 @@ namespace LegendOfZelda
             myGame = game;
             //keeps track of keys that were already pressed down to detect transition.
             alrPressed = new List<Keys>();
+
+            
         }
         /*
          * Repeated code for now to be able to call different maps we need to add to, I'm sure we could
@@ -50,7 +52,12 @@ namespace LegendOfZelda
         {
             releaseMappings.Add(key, command);
         }
-
+        public void clearCommands()
+        {
+            controllerMappings.Clear();
+            heldDownMappings.Clear();
+            releaseMappings.Clear();
+        }
         public void Update()
         {
             
