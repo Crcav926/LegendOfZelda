@@ -107,6 +107,7 @@ namespace LegendOfZelda
                 {
                     movers.Add((ICollideable)item);
                 }
+                movers.Add((ICollideable)Link.Instance.sword);
             }
             if (blocks != currentRoom.getStatics())
             {

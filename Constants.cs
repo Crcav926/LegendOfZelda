@@ -11,6 +11,8 @@ namespace LegendOfZelda
         public const int ScreenHeight = 900 + HUDHeight;  // Screen height
         public const int HUDWidth = 0;
         public const int HUDHeight = OriginalHeight / 4;
+        public const int PausedInventoryWidth = OriginalWidth;
+        public const int PausedInventoryHeight = OriginalHeight / 3;
         // Original resolution in which the sprites are scaled to.
         public const int OriginalWidth = 800;
         public const int OriginalHeight = 484;
@@ -195,16 +197,16 @@ namespace LegendOfZelda
         public const int HUDNumberSpriteDimensionX = 25;
         public const int HUDNumberSpriteDimensionY = 20;
         public const int coinsHUDPosX = 300;
-        public const int coinsHUDPosY = -86;
+        public const int coinsHUDPosY = -87;
         public const int keysHUDPosX = 300;
         public const int keysHUDPosY = -54;
         public const int bombsHUDPosX = 300;
         public const int bombsHUDPosY = -34;
         // Sprite 1 HUD values
         public const int HUDSprite1X = 400;
-        public const int HUDSprite1Y = -69;
+        public const int HUDSprite1Y = -70;
         public const int HUDSprite2X = 475;
-        public const int HUDSprite2Y = -69;
+        public const int HUDSprite2Y = -70;
         public const int HUDSpriteWidth = 25;
         public const int HUDSpriteHeight = 40;
 
@@ -217,5 +219,21 @@ namespace LegendOfZelda
 
         public const int FloorSizeX = 600;
         public const int FloorSizeY = 306;
+
+        // Minimap
+        public const int HUDMapX = 55;
+        public const int HUDMapY = -120;
+        public const int HUDMapDimensionX = 192;
+        public const int HUDMapDimensionY = 120;
+
+        public const int HUDMapLevelX = 198;
+        public const int HUDMapLevelY = -120;
+        public const int HUDMapLevelDimensionX = 25;
+        public const int HUDMapLevelDimensionY = 25;
+
+        public const int dotSize = 9;
+        public const int miniMapStartX = 133;
+        public const int miniMapStartY = -24;
+
     }
 }

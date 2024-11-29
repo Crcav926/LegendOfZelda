@@ -79,9 +79,10 @@ namespace LegendOfZelda
             bomb = new Bomb(direction, position);
 
             //temporary access to all items
-            inventory.addItem(sword);
-            //inventory.addItem(boomerang);
-            //inventory.addItem(arrow);
+            
+            //wainventory.addItem(sword); // Don't really need this as Link should permanently have a sword in slot 2.
+            inventory.addItem(boomerang);
+            inventory.addItem(arrow);
             inventory.addItem(fire);
             inventory.addItem(bomb);
 
@@ -208,7 +209,7 @@ namespace LegendOfZelda
             canTakeDamage = true;
 
             inventory.Clear();
-            inventory.addItem(sword);
+            inventory.key2Item = sword;
         }
 
         public void invulnerable()

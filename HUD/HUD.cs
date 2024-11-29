@@ -10,29 +10,32 @@ namespace LegendOfZelda.HUD
     public class HUDManager
     {
 
-        ISprite HUDSprite;
-        InventoryCounter invenCount;
-        Health hp;
-        HUDMap hudMap;
-        IItems key1Item;
-        IItems key2Item;
-        Inventory inven;
-        ISprite sprite1;
-        ISprite sprite2;
-        HUDSpriteFactory hudSF;
-        public HUDManager()
+        private ISprite HUDSprite;
+        private InventoryCounter invenCount;
+        private Health hp;
+        private HUDMap hudMap;
+        private IItems key1Item;
+        private IItems key2Item;
+        private Inventory inven;
+        private ISprite sprite1;
+        private ISprite sprite2;
+        private HUDSpriteFactory hudSF;
+        int pausedOffset;
+        private bool paused;
+        Game1 myGame;
+        Texture2D blackRectangle;
+        public HUDManager(Game1 game)
         {
             hudSF = HUDSpriteFactory.Instance;
             HUDSprite = hudSF.CreateHUD();
             invenCount = new InventoryCounter();
             hp = new Health();
-            hudMap = new HUDMap();
-
+            hudMap = HUDMap.Instance;
             inven = Inventory.Instance;
             // Pull item value from inven.key1Item
             // Grab sprite data from given key1Item value
             // Use sprite data to draw on HUD
-
+            myGame = game;
             key1Item = inven.key1Item;
             key2Item = inven.key2Item;
             if (key1Item != null)
@@ -43,26 +46,20 @@ namespace LegendOfZelda.HUD
             {
                 sprite2 = hudSF.CreateHUDWeaponSprite(key2Item.ToString());
             }
-            for (int i = 0; i < Inventory.Instance.weapons.Count; i++)
-            {
-                Debug.WriteLine(Inventory.Instance.weapons[i]);
-            }
         }
 
-        public void HUDBuilding()
-        {
-            
-
-        }
 
         public void Update(GameTime gameTime)
         {
+            paused = myGame.paused;
+            pausedOffset = paused ? Constants.OriginalHeight : 0;
+
             key1Item = inven.key1Item;
             key2Item = inven.key2Item;
-            sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
-            if (sprite2 != null)
+            sprite2 = hudSF.CreateHUDWeaponSprite(key2Item.ToString());
+            if (sprite1 != null)
             {
-                sprite2 = sprite2 = hudSF.CreateHUDWeaponSprite(key2Item.ToString());
+                sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
             }
             HUDSprite.Update(gameTime);
             hp.Update(gameTime);
@@ -70,17 +67,19 @@ namespace LegendOfZelda.HUD
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
-            invenCount.Draw(spriteBatch);
-            hp.Draw(spriteBatch);
-            hudMap.Draw(spriteBatch);
+            // solid black blackground to avoid flickering peeking into another room.
+            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.Black);
+            HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight + pausedOffset, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
+            invenCount.Draw(spriteBatch, pausedOffset);
+            hp.Draw(spriteBatch, pausedOffset);
+            hudMap.Draw(spriteBatch, pausedOffset);
             if (sprite1 != null)
             {
-                sprite1.Draw(spriteBatch, new Rectangle(Constants.HUDSprite1X, Constants.HUDSprite1Y, Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
+                sprite1.Draw(spriteBatch, new Rectangle(Constants.HUDSprite1X, Constants.HUDSprite1Y + pausedOffset , Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
             }
             if (sprite2 != null)
             {
-                sprite2.Draw(spriteBatch, new Rectangle(Constants.HUDSprite2X, Constants.HUDSprite2Y, Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
+                sprite2.Draw(spriteBatch, new Rectangle(Constants.HUDSprite2X, Constants.HUDSprite2Y + pausedOffset, Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
             }
 
         }

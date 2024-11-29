@@ -50,7 +50,7 @@ namespace LegendOfZelda.HUD
         
 
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, int pausedOffset)
         {
             numCoins = inven.coins;
             numKeys = inven.numKeys;
@@ -60,7 +60,7 @@ namespace LegendOfZelda.HUD
             string numBombsStr = numBombs.ToString();
 
             coinsHUDPosX = Constants.coinsHUDPosX;
-            coinsHUDPosY = Constants.coinsHUDPosY;
+            coinsHUDPosY = Constants.coinsHUDPosY + pausedOffset;
 
             sprite = hudSF.CreateX();
             sprite.Draw(spriteBatch, new Rectangle(coinsHUDPosX, coinsHUDPosY, Constants.HUDNumberSpriteDimensionX, Constants.HUDNumberSpriteDimensionY), Color.White);
@@ -76,7 +76,7 @@ namespace LegendOfZelda.HUD
             }
 
             keysHUDPosX = Constants.keysHUDPosX;
-            keysHUDPosY = Constants.keysHUDPosY;
+            keysHUDPosY = Constants.keysHUDPosY + pausedOffset;
 
             sprite = hudSF.CreateX();
             sprite.Draw(spriteBatch, new Rectangle(keysHUDPosX, keysHUDPosY, Constants.HUDNumberSpriteDimensionX, Constants.HUDNumberSpriteDimensionY), Color.White);
@@ -92,7 +92,7 @@ namespace LegendOfZelda.HUD
             }
 
             bombsHUDPosX = Constants.bombsHUDPosX;
-            bombsHUDPosY = Constants.bombsHUDPosY;
+            bombsHUDPosY = Constants.bombsHUDPosY + pausedOffset;
 
             sprite = hudSF.CreateX();
             sprite.Draw(spriteBatch, new Rectangle(bombsHUDPosX, bombsHUDPosY, Constants.HUDNumberSpriteDimensionX, Constants.HUDNumberSpriteDimensionY), Color.White);

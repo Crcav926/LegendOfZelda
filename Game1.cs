@@ -47,19 +47,19 @@ namespace LegendOfZelda
 
         //private IController controllerK;
         private HUDManager hudManager;
-
+        private PausedHUD pausedHUD;
         private KeyboardCont controllerK;
 
 
         //For collisions
-        detectionManager collisionDetector;
-        CollisionHandler collHandler;
+        private detectionManager collisionDetector;
+        private CollisionHandler collHandler;
 
-        SoundMachine soundMachine = SoundMachine.Instance;
-        SoundEffectInstance mikuSong;
+        private SoundMachine soundMachine = SoundMachine.Instance;
+        private SoundEffectInstance mikuSong;
         public bool paused;
-        SpriteFont font;
-        Texture2D blackRectangle;
+        private SpriteFont font;
+        private Texture2D blackRectangle;
 
 
         IEnemy ganon;
@@ -138,13 +138,15 @@ namespace LegendOfZelda
             mikuSong.IsLooped = true;
             mikuSong.Volume = .3f;
             mikuSong.Play();
-            hudManager = new HUDManager();
-
+            hudManager = new HUDManager(this);
+            pausedHUD = new PausedHUD();
             ganon = new Ganon(new Vector2(200,200));    
         }
 
         protected override void Update(GameTime gameTime)
         {
+
+            
             if (!paused)
             {
                 blocks = LevelLoader.Instance.getBlocks();
@@ -152,7 +154,6 @@ namespace LegendOfZelda
                 // Let the keyboard controller handle input
                 keyboardController.Update();
                 RoomObjectManager.Instance.Update();
-                hudManager.Update(gameTime);
                 // Ensure the sprite is correctly referenced
                 foreach (IController controller in controllerList)
                 {
@@ -175,6 +176,11 @@ namespace LegendOfZelda
                 // Updates sprites in Item classes
                 //ganon.Update(gameTime);
             }
+            else
+            {
+                pausedHUD.Update(gameTime);
+            }
+            hudManager.Update(gameTime);
             //Update the keyboard controller outside because we need it
             controllerK.Update();
         }
@@ -188,11 +194,6 @@ namespace LegendOfZelda
             // Temp fps check.
             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
             string fpsText = $"FPS: {frameRate:0.00}";
-
-
-            Matrix matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
-
-            // Draw the game content with the transform matrix applied
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: Camera2D.Instance.getMatrix());
             if (!paused)
@@ -217,22 +218,26 @@ namespace LegendOfZelda
                 //ganon.Draw(_spriteBatch);
             }
 
-
             _spriteBatch.End();
-            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
-            hudManager.Draw(_spriteBatch);
 
+            Matrix matrix = Matrix.CreateTranslation(0, Constants.HUDHeight, 0) * Matrix.CreateScale(Constants.ScaleX, Constants.ScaleY, 1.0f);
+
+            // Draw the game content with the transform matrix applied
+
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: matrix);
+
+            hudManager.Draw(_spriteBatch);
             if (paused)
             {
                 //THIS IS THE MOST JANK PAUSE EVER BUT IT DO WORK
-                Rectangle destinationRectangle = new Rectangle(-(int)Camera2D.Instance.getPosition().X, (int)Camera2D.Instance.getPosition().Y, 1000, 1000);
-                blackRectangle = new Texture2D(GraphicsDevice, 1, 1);
-                blackRectangle.SetData(new[] { Color.Black });
-                //hudManager.Draw(_spriteBatch, new Rectangle(100, Constants.HUDHeight ,Constants.OriginalWidth, Constants.OriginalHeight / 4));
-                _spriteBatch.Draw(blackRectangle, destinationRectangle, Color.White);
                 _spriteBatch.DrawString(font, "PAUSED", new Vector2(360, 200), Color.White);
+                pausedHUD.Draw(_spriteBatch);
             }
+            
             _spriteBatch.End();
+
+
+
             base.Draw(gameTime);
         }
         public void Reset()
@@ -242,7 +247,7 @@ namespace LegendOfZelda
             LevelLoader.Instance.Load("Room1.xml");
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
-            hudManager = new HUDManager();
+            hudManager = new HUDManager(this);
             Link.Instance.Reset();
             Camera2D.Instance.Reset();
             collHandler = new CollisionHandler();
@@ -254,10 +259,6 @@ namespace LegendOfZelda
         public void setPause(bool pauseState)
         {
             paused = pauseState;
-            if (pauseState == false)
-            {
-                blackRectangle.Dispose();
-            }
         }
     }
 }

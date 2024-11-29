@@ -43,10 +43,12 @@ namespace LegendOfZelda
         }
         public void UpdateInventory()
         {
-            key1Item = weapons[0];
-            if (weapons.Count > 1)
+            // Key 2 should always be sword.
+            key2Item = Link.Instance.sword;
+           
+            if (weapons.Count > 0)
             {
-                key2Item = weapons[1];
+                key1Item = weapons[0];
             }
         }
         public void rotateItems()

@@ -15,11 +15,7 @@ namespace LegendOfZelda.HUD
             link = Link.Instance;
             attackActions = new Dictionary<string, Action>
         {
-            { "LegendOfZelda.Boomerang", link.BoomerangAttack },
-            { "LegendOfZelda.Sword", link.SwordAttack },
-            { "LegendOfZelda.Fire", link.FireAttack } ,
-            { "LegendOfZelda.Bomb", link.BombAttack },
-            { "LegendOfZelda.Arrow", link.ArrowAttack }
+            { "LegendOfZelda.Sword", link.SwordAttack }
         };
         }
 

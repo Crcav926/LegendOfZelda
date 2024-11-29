@@ -63,10 +63,10 @@ namespace LegendOfZelda.HUD
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, int pausedOffset)
         {
             hpHUDPosX = Constants.hpHUDPosX;
-            hpHUDPosY = Constants.hpHUDPosY;
+            hpHUDPosY = Constants.hpHUDPosY + pausedOffset;
 
             for (int i = 0; i < fullHPIconCount; i++)
             {

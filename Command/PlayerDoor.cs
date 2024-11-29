@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
 using System.Threading;
+using LegendOfZelda.HUD;
+using System.Numerics;
 
 namespace LegendOfZelda.Command
 {
@@ -14,11 +16,12 @@ namespace LegendOfZelda.Command
 
         private Door door;
         private Link link;
-
+        private HUDMap hudMap;
         public PlayerDoor(Link l, Door d)
         {
             link = l;
             door = d;
+            hudMap = HUDMap.Instance;
         }
 
         public void Execute()
@@ -43,18 +46,22 @@ namespace LegendOfZelda.Command
                             case 'R':
                                 Camera2D.Instance.slideRight();
                                 link.position.X += 200;
+                                hudMap.miniMapPos.X += 24;
                                 break;
                             case 'L':
                                 Camera2D.Instance.slideLeft();
                                 link.position.X -= 200;
+                                hudMap.miniMapPos.X -= 24;
                                 break;
                             case 'U':
                                 Camera2D.Instance.slideUp();
                                 link.position.Y -= 160;
+                                hudMap.miniMapPos.Y -= 12;
                                 break;
                             case 'D':
                                 Camera2D.Instance.slideDown();
                                 link.position.Y += 185;
+                                hudMap.miniMapPos.Y += 12;
                                 break;
                         }
                         //lemme just clear the dropped items too...

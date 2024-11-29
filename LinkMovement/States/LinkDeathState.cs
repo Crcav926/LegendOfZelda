@@ -43,6 +43,7 @@ namespace LegendOfZelda.LinkMovement
         {
             //we'll figure something out
             //throw new NotImplementedException();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

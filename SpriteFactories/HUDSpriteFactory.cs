@@ -130,6 +130,14 @@ namespace LegendOfZelda
             {
                 new Rectangle(663, 108, 7, 3)
         }
+        },{ "PauseInventory", new List<Rectangle>()
+            {
+                new Rectangle(1, 11, 256, 88)
+            }
+        },{ "Dot", new List<Rectangle>()
+            {
+                new Rectangle(528, 126, 3, 3)
+        }
             }
         };
 
@@ -234,6 +242,17 @@ namespace LegendOfZelda
         public ISprite CreateHUDMapBlock()
         {
             return new Sprite(HUDSpriteSheet, SpriteFrames["MapBlock"]);
+
+        }
+        public ISprite CreatePauseInventory()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["PauseInventory"]);
+
+        }
+
+        public ISprite CreateDot()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["Dot"]);
 
         }
 

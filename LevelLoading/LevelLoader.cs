@@ -122,7 +122,7 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.D3, new RotateItems());
             cont.RegisterCommand(Keys.P, new CommPause(game));
 
-
+            
             cont.registerHeldDown(Keys.A, new CommMoveHeldDown(link, new Vector2(-1, 0)));
             cont.registerHeldDown(Keys.D, new CommMoveHeldDown(link, new Vector2(1, 0)));
             cont.registerHeldDown(Keys.W, new CommMoveHeldDown(link, new Vector2(0, -1)));
