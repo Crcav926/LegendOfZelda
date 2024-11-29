@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using ObjectManagementExamples;
 using System.Collections.Generic;
 using System;
+using System.ComponentModel.Design;
 
 namespace LegendOfZelda
 {
@@ -136,7 +137,15 @@ namespace LegendOfZelda
 
         public void LoadAllTextures(ContentManager content)
         {
-            texture = content.Load<Texture2D>("ZeldaTileSheet");
+            int tex = Menu.Instance.tex;
+            if (tex == 0)
+            {
+                texture = content.Load<Texture2D>("ZeldaTileSheet");
+            }
+            else
+            {
+                texture = content.Load<Texture2D>("holidayTiles");
+            }
         }
 
         public ISprite CreateSprite(String type)

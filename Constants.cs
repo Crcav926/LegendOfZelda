@@ -218,5 +218,8 @@ namespace LegendOfZelda
 
         public const int FloorSizeX = 600;
         public const int FloorSizeY = 306;
+
+        public const int MenuWidth = 768;
+        public const int MenuHeight = 432;
     }
 }

@@ -98,6 +98,30 @@
 /processorParam:Quality=Best
 /build:getTriforce.wav;getTri.wav
 
+#begin holidayEnemies.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:holidayEnemies.png
+
+#begin holidayTiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:holidayTiles.png
+
 #begin HUDSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -139,6 +163,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:LOZ_Link_Die.wav;death.wav
+
+#begin menuSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:menuSheet.png
 
 #begin mikuSong.wav
 /importer:WavImporter
