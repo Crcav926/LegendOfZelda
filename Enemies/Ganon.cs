@@ -11,7 +11,7 @@ namespace LegendOfZelda
     {
         public Vector2 position { get; set; }
         private Vector2 velocity;
-        private List<Fireball> fireballs;
+        private List<GanonFireball> fireballs;
         private float fireballCooldown = 2f;
         private float fireballTimer = 0f;
         private ISprite normalSprite;
@@ -40,7 +40,7 @@ namespace LegendOfZelda
         {
             damageAnimation = new DamageAnimation();
             position = startPosition;
-            fireballs = new List<Fireball>();
+            fireballs = new List<GanonFireball>();
             normalSprite = EnemySpriteFactory.Instance.CreateGanonSprite();
             vulnerableSprite = EnemySpriteFactory.Instance.CreateGanonVulnerableSprite();
             velocity = new Vector2(50f, 50f);
@@ -111,7 +111,7 @@ namespace LegendOfZelda
             }
 
             fireballs.RemoveAll(f => !f.IsActive);
-            foreach (Fireball fireball in fireballs)
+            foreach (GanonFireball fireball in fireballs)
             {
                 fireball.Update(gameTime);
             }
@@ -124,11 +124,11 @@ namespace LegendOfZelda
                 position.Y + Constants.GanonFireballYOffset
             );
 
-            RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(0, -1)));  // Up
-            RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(1, -1))); // Up-Right
-            RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(1, 0)));  // Right
-            RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(1, 1)));  // Down-Right
-            RoomObjectManager.Instance.addProjectile(new Fireball(fireballStartPosition, new Vector2(0, 1)));  // Down
+            RoomObjectManager.Instance.addProjectile(new GanonFireball(fireballStartPosition, new Vector2(0, -1)));  // Up
+            RoomObjectManager.Instance.addProjectile(new GanonFireball(fireballStartPosition, new Vector2(1, -1))); // Up-Right
+            RoomObjectManager.Instance.addProjectile(new GanonFireball(fireballStartPosition, new Vector2(1, 0)));  // Right
+            RoomObjectManager.Instance.addProjectile(new GanonFireball(fireballStartPosition, new Vector2(1, 1)));  // Down-Right
+            RoomObjectManager.Instance.addProjectile(new GanonFireball(fireballStartPosition, new Vector2(0, 1)));  // Down
         }
 
         public void TakeDamage(int damage)
@@ -182,7 +182,7 @@ namespace LegendOfZelda
                 currentSprite.Draw(spriteBatch, destinationRectangle, color);
             }
 
-            foreach (Fireball fireball in fireballs)
+            foreach (GanonFireball fireball in fireballs)
             {
                 fireball.Draw(spriteBatch);
             }
