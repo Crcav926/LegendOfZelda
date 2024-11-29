@@ -212,7 +212,7 @@ namespace LegendOfZelda
                     deathFlag = false;
                     deathFlag2 = true;
                     //maybe not the place we want this but it works
-                    SoundMachine.Instance.StopSound("theme");
+                    soundMachine.StopSound("theme");
                 }
                 if((gameTime.TotalGameTime.TotalSeconds - deathTimer) > Constants.MikuDeathTime && deathFlag2 == true)
                 {
