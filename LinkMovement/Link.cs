@@ -70,7 +70,7 @@ namespace LegendOfZelda
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
             //currentHealth = Constants.MikuStartingHealth;
-            currentHealth = Constants.MikuStartingHealth;
+            currentHealth = 2;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
@@ -215,8 +215,8 @@ namespace LegendOfZelda
                 if((gameTime.TotalGameTime.TotalSeconds - deathTimer) > Constants.MikuDeathTime && deathFlag2 == true)
                 {
                     //not sure if this deathFlag2 is needed, but i'm keeping it until it works.
-                    deathFlag2 = false; 
-                    ResetWatchdog.Instance.ResetGame();
+                    //deathFlag2 = false;
+                    ResetWatchdog.Instance.resetCheck = true;
                 }
             }
         }

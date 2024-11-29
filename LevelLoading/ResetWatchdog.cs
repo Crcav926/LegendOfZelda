@@ -20,24 +20,17 @@ namespace LegendOfZelda
     public class ResetWatchdog
     {
         private static Game1 myGame;
-        public ResetWatchdog(Game1 game)
-        {
-            myGame = game;
-            // instance = new ResetWatchdog(myGame);
-        }
+        //so this variable is the only reason we need all this
+        public bool resetCheck = false;
+        public ResetWatchdog(){}
         //is there a reason we need this private var? why can't we just have the public one?
-        private static ResetWatchdog instance = new ResetWatchdog(myGame);
-
+        private static ResetWatchdog instance = new ResetWatchdog();
         public static ResetWatchdog Instance
         {
             get
             {
                 return instance;
             }
-        }
-        public void ResetGame()
-        {
-            myGame.Reset();
         }
     }
 }

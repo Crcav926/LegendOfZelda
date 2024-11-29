@@ -35,7 +35,7 @@ namespace LegendOfZelda
         public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
         public const int MikuStartingPositionY = 330;
-        public const double MikuDeathTime = 1.5;
+        public const double MikuDeathTime = 3.1;
         // Standard size
         public const int StandardHeight = 16;
         public const int StandardWidth = 16;

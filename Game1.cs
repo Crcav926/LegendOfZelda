@@ -91,7 +91,7 @@ namespace LegendOfZelda
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
             //reset
-            resetWatchdog = new ResetWatchdog(this);
+            resetWatchdog = new ResetWatchdog();
             //reset fix?
             Globals.inMenus = true;
 
@@ -177,6 +177,10 @@ namespace LegendOfZelda
                 foreach (ICollideable mover in RoomObjectManager.Instance.getMovers())
                 {
                     mover.Update(gameTime);
+                    if(ResetWatchdog.Instance.resetCheck == true)
+                    {
+                        break;
+                    }
                 }
                 RoomObjectManager.Instance.addProjectileToMovers(); //if we can remove this somehow, that'd be great.
                 Camera2D.Instance.Update();
@@ -185,6 +189,11 @@ namespace LegendOfZelda
                 // LinkCharacter.Update(gameTime);
                 // Updates sprites in Item classes
                 //ganon.Update(gameTime);
+                if(ResetWatchdog.Instance.resetCheck == true)
+                {
+                    ResetWatchdog.Instance.resetCheck = false;
+                    this.Reset();
+                }
             }
             //if we're in menus we should be paused so update it.
             
