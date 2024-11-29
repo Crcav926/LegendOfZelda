@@ -48,6 +48,8 @@ namespace LegendOfZelda
         private static double deathTimer;
         public bool deathFlag = false;
         private bool deathFlag2 = false;
+        private static double test;
+        public bool pause = false;
 
         private static Link instance = new Link();
 
