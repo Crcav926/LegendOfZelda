@@ -197,4 +197,20 @@
     <ObjectName>Water</ObjectName>
     <Location>600 308</Location>
 </Item>
+<!--ICollideable Types: 3 Dodongos-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Dodongo</ObjectName>
+    <Location>350 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Dodongo</ObjectName>
+    <Location>450 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Dodongo</ObjectName>
+    <Location>400 264</Location>
+</Item>
 </root>

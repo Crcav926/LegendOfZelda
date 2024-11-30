@@ -166,4 +166,56 @@
     <ObjectName>Block</ObjectName>
     <Location>650 352</Location>
 </Item>
+<!--ICollideable Types: 10 Gohmas.-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>500 88</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>100 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>100 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>250 264</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>550 352</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>500 352</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>300 88</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>600 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>400 264</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>300 352</Location>
+</Item>
+
 </root>
