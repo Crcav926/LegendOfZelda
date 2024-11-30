@@ -7,7 +7,7 @@ using System.Diagnostics;
 using LegendOfZelda.Sounds;
 using System.Threading;
 using LegendOfZelda.HUD;
-using System.Numerics;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfZelda.Command
 {
@@ -17,6 +17,7 @@ namespace LegendOfZelda.Command
         private Door door;
         private Link link;
         private HUDMap hudMap;
+        private Vector2 offSet = LevelLoader.Instance.getCurrentRoom().GetOffSet();
         public PlayerDoor(Link l, Door d)
         {
             link = l;
@@ -37,28 +38,35 @@ namespace LegendOfZelda.Command
 
                     if (roomName != "closed")
                     {
-                        LevelLoader.Instance.changeCurrentRoom(roomName);
                         SoundMachine.Instance.PlaySound("throughDoor");
                         String currentDoor = door.doorSprite;
                         Debug.WriteLine($"Current door is {currentDoor}");
                         switch (currentDoor[0])
                         {
                             case 'R':
+                                offSet.X += 1;
+                                LevelLoader.Instance.changeCurrentRoom(offSet);
                                 Camera2D.Instance.slideRight();
                                 link.position.X += 200;
                                 hudMap.miniMapPos.X += 24;
                                 break;
                             case 'L':
+                                offSet.X -= 1;
+                                LevelLoader.Instance.changeCurrentRoom(offSet);
                                 Camera2D.Instance.slideLeft();
                                 link.position.X -= 200;
                                 hudMap.miniMapPos.X -= 24;
                                 break;
                             case 'U':
+                                offSet.Y -= 1;
+                                LevelLoader.Instance.changeCurrentRoom(offSet);
                                 Camera2D.Instance.slideUp();
                                 link.position.Y -= 160;
                                 hudMap.miniMapPos.Y -= 12;
                                 break;
                             case 'D':
+                                offSet.Y += 1;
+                                LevelLoader.Instance.changeCurrentRoom(offSet);
                                 Camera2D.Instance.slideDown();
                                 link.position.Y += 185;
                                 hudMap.miniMapPos.Y += 12;

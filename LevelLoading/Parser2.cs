@@ -41,6 +41,7 @@ namespace LegendOfZelda
         }
         public List<ICollideable> getBlocks() { return blocks; }
         public List<ICollideable> getMovers() { return colliders; }
+        public Vector2 GetOffSet() { return offSet; }
         private void LoadObjects(string fileName)
         {
             //TODO: FOR DEBUGGING ONLY DELETE ONCE XML IS CREATED

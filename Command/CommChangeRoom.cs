@@ -25,12 +25,12 @@ namespace LegendOfZelda
             currIndex++;
             if (currIndex < _rooms.Count)
             {
-                LevelLoader.Instance.changeCurrentRoom(_rooms[currIndex]);
+                // LevelLoader.Instance.changeCurrentRoom(_rooms[currIndex]);
             }
             else
             {
                 currIndex = 0;
-                LevelLoader.Instance.changeCurrentRoom(_rooms[currIndex]);
+                // LevelLoader.Instance.changeCurrentRoom(_rooms[currIndex]);
             }
         }
     }

@@ -117,22 +117,25 @@ namespace LegendOfZelda
             LevelLoader.Instance.LoadAllContent(Content);
 
             LevelLoader.Instance.RegisterAllCommands(controllerK, this);
-
-            List<String> listOfRooms = new List<string>()
+            if (Globals.mode == 0)
+            {
+                List<String> listOfRooms = new List<string>()
             {
                 "Room1.xml", "Room2.xml", "Room3.xml", "Room4.xml", "Room5.xml", "Room6.xml",
                 "Room7.xml", "Room8.xml", "Room9.xml", "Room10.xml", "Room11.xml",
-                "Room12.xml", "Room13.xml", "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml", "Room20.xml"
+                "Room12.xml", "Room13.xml", "Room14.xml", "Room15.xml", "Room16.xml", "Room17.xml", "Room18.xml"
             };
-            foreach (string room in listOfRooms)
-            {
-                LevelLoader.Instance.Load(room);
+                foreach (string room in listOfRooms)
+                {
+                    LevelLoader.Instance.Load(room);
+                }
+                LevelLoader.Instance.Load("Room1.xml");
             }
-            LevelLoader.Instance.Load("Room1.xml");
-            RoomObjectManager.Instance.Update();
-
-            blocks = LevelLoader.Instance.getBlocks();
-            movers = LevelLoader.Instance.getMovers();
+            else
+            {
+                LevelLoader.Instance.LoadFloor(Constants.floorSize);
+                RoomObjectManager.Instance.Update();
+            }
 
             hudManager = new HUDManager(this);
             pausedHUD = PausedHUD.Instance;
@@ -206,7 +209,7 @@ namespace LegendOfZelda
             
             if (!paused)
             {
-                foreach (KeyValuePair<String, Room> entry in LevelLoader.Instance.getRooms())
+                foreach (KeyValuePair<Vector2, Room> entry in LevelLoader.Instance.getRooms())
                 {
                     entry.Value.Draw(_spriteBatch);
                 }

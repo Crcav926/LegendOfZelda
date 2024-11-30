@@ -132,12 +132,6 @@
     <Location>500 352</Location>
 </Item>
 
-<Item>
-    <ObjectType>ClassItems</ObjectType>
-    <ObjectName>Triforce</ObjectName>
-    <Location>375 220</Location>
-</Item>
-
 <!--Note that we may need a way to distinguish types of doors. I'll keep the names as they are now, but the XML file shouldn't store what sprite is needed.-->
 <!--Basically this should just say an Up door exists, not whether its locked or open.-->
 <Item>

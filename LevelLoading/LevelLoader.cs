@@ -25,7 +25,7 @@ namespace LegendOfZelda
         private Link link;
         SoundMachine soundMachine = SoundMachine.Instance;
         private Room currRoom;
-        private Dictionary<String, Room> roomMapping = new Dictionary<string, Room>();
+        private Dictionary<Vector2, Room> roomMapping = new Dictionary<Vector2, Room>();
 
         public LevelLoader() 
         {
@@ -90,17 +90,34 @@ namespace LegendOfZelda
         public void Load(String room)
         {
             this.room = room;
-            Parsing parseIt = new Parsing(room);
+            Parsing2 parseIt = new Parsing2(room);
             statics = parseIt.getBlocks();
             movers = parseIt.getMovers();
             movers.Add(link);
             RoomObjectManager.Instance.addLink(link);
-            currRoom = new Room(statics, movers, room);
+            currRoom = new Room(statics, movers, room, parseIt.GetOffSet());
             // Sorts through each item in the list and parses through.
-            if (!roomMapping.ContainsKey(room))
+            if (!roomMapping.ContainsKey(parseIt.GetOffSet()))
             {
-                roomMapping.Add(room, currRoom);
+                roomMapping.Add(parseIt.GetOffSet(), currRoom);
             }
+        }
+        public void LoadFloor(int i)
+        {
+            roomMapping = FloorGenerator.Instance.MakeFloor(i);
+            statics = roomMapping[new Vector2(0,0)].getStatics();
+            movers = roomMapping[new Vector2(0, 0)].getMovers();
+            foreach (var m in movers)
+            {
+                Debug.WriteLine(m.ToString());
+            }
+            currRoom = roomMapping[new Vector2(0, 0)];
+            RoomObjectManager.Instance.addLink(link);
+            foreach (Vector2 key in roomMapping.Keys)
+            {
+                Debug.WriteLine("This is " + roomMapping[key].getRoomName());
+            }
+            // currRoom = roomMapping[new Vector2(0, 0)];
         }
         private void loadSounds()
         {
@@ -152,13 +169,13 @@ namespace LegendOfZelda
         {
             return room;
         }
-        public Dictionary<String, Room> getRooms()
+        public Dictionary<Vector2, Room> getRooms()
         {
             return roomMapping;
         }
-        public void changeCurrentRoom(String s)
+        public void changeCurrentRoom(Vector2 v)
         {
-            currRoom =  roomMapping[s];
+            currRoom =  roomMapping[v];
         }
         public Room getCurrentRoom()
         {

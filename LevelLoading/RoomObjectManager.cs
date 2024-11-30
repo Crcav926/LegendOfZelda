@@ -23,7 +23,7 @@ namespace LegendOfZelda
         private string room;
         //for the drop table
         private int DeathCounter = 0;
-        public Room currentRoom = new Room(LevelLoader.Instance.getBlocks(), LevelLoader.Instance.getMovers(), "testRoom");
+        public Room currentRoom = new Room(LevelLoader.Instance.getBlocks(), LevelLoader.Instance.getMovers(), "testRoom", new Vector2(0,0));
         public int Localcounter = 0;
 
 

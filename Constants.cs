@@ -108,7 +108,7 @@ namespace LegendOfZelda
         //Dodongo
         public const float DodongoChangeDirectionCooldown = 1f;
         public const float DodongoSpeed = 2f;
-        public const float DodongoSpeed2 = 10f;
+        public const float DodongoSpeed2 = 2.5f;
         public const int DodongoDamage = 3;
         public const int DodongoHp = 10;
         public const int DodongoHitboxWidth1 = 65;
@@ -119,7 +119,7 @@ namespace LegendOfZelda
         public const int DodongoHitboxWidth2 = 105;
         public const int DodongoHitboxHeight2 = 60;
         //Gohma
-        public const int GohmaHp = 10;
+        public const int GohmaHp = 100;
         public const float GohmaSpeed = 10f;
         public const int GohmaHeight = 60;
         public const int GohmaWidth = 170;
@@ -274,5 +274,28 @@ namespace LegendOfZelda
         public const int VerticalSlideDistance = 480;
         public const float SlidingThreshold = 5f;
         public const float LerpFactor = 0.03f;
+
+        // Room Generation
+        public const int roomsCreated = 24;
+        public const int roomDirections = 4;
+
+        // Door info
+        public static readonly Vector2 UpDoor = new Vector2(350, 0);
+        public static readonly Vector2 LeftDoor = new Vector2(0, 198);
+        public static readonly Vector2 RightDoor = new Vector2(700, 198);
+        public static readonly Vector2 DownDoor = new Vector2(350, 396);
+        public static readonly Dictionary<int, Vector2> DoorAreas = new Dictionary<int, Vector2>()
+        {
+            {2, new Vector2(350, 0)},
+            {0, new Vector2(0, 198)},
+            {1, new Vector2(700, 198)},
+            {3, new Vector2(350, 396) }
+        };
+
+        public const string bannedRoom1 = "14";
+        public const string triforceRoom = "18";
+
+        public const int floorSize = 15;
+
     }
 }

@@ -144,7 +144,6 @@ public class Gohma : IEnemy, ICollideable
     public void TakeDamage(int damage)
     {
         hp -= damage;
-
         SoundMachine.Instance.PlaySound("enemyHurt");
 
         if (hp <= 0)
