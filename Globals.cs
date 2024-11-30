@@ -25,5 +25,8 @@ namespace LegendOfZelda
         public static int tex { get; set; } = 0;
         public static int mode { get; set; } = 0;
         public static bool inMenus { get; set; } = true;
+        public static int menuType {get;set;} = 0;
+        public static int gameOverMode { get; set; } = 0;
+        public static int winMode { get; set; } = 0;
     }
 }
