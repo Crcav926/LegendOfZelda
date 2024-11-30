@@ -102,6 +102,29 @@ namespace LegendOfZelda
         public const int GoriyaHeight = 40;
         public const int GoriyaWidth = 45;
         public const float GoriyaProjectileOffset = 10f;
+        //DarkNut
+        public const float DarkNutChangeDirectionCooldown = 1.5f;
+        public const float DarkNutSpeed = 2.5f;
+        //Dodongo
+        public const float DodongoChangeDirectionCooldown = 1f;
+        public const float DodongoSpeed = 2f;
+        public const float DodongoSpeed2 = 10f;
+        public const int DodongoDamage = 3;
+        public const int DodongoHp = 10;
+        public const int DodongoHitboxWidth1 = 65;
+        public const int DodongoHitboxHeight1 = 60;
+        public const int DodongoHeight1 = 60;
+        public const int DodongoWidth1 = 60;
+        public const int DodongoWidth2 = 102;
+        public const int DodongoHitboxWidth2 = 105;
+        public const int DodongoHitboxHeight2 = 60;
+        //Gohma
+        public const int GohmaHp = 10;
+        public const float GohmaSpeed = 10f;
+        public const int GohmaHeight = 60;
+        public const int GohmaWidth = 170;
+        public const int GohmaHitboxWidth = 175;
+        public const int GohmaHitboxHeight = 60;
         //its at this point that I ask if we need all of these hitboxes to be different
         //its easier to change this way at least for different sized objects
         //if we wanna make a REALLY big goriya at least we can just change out the hitbox.
