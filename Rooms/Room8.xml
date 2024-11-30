@@ -46,12 +46,12 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>LeftDoorClosed</ObjectName>
-    <Location>0 196</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>closed</Room>
+    <Location>0 198</Location><LinkLocationX>650</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>closed</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>RightDoorOpen</ObjectName>
-    <Location>700 196</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room10.xml</Room>
+    <Location>700 198</Location><LinkLocationX>105</LinkLocationX><LinkLocationY>215</LinkLocationY><Room>Room10.xml</Room>
 </Item>
 <Item>
     <ObjectType>Door</ObjectType>

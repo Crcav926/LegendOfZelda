@@ -201,7 +201,7 @@ namespace LegendOfZelda
         public static readonly Vector2 top1Position = new Vector2(0, 0);
         public static readonly Vector2 top2Position = new Vector2(450, 0);
         public static readonly Vector2 bot1Position = new Vector2(0, 392);
-        public static readonly Vector2 bot2Position = new Vector2(350, 392);
+        public static readonly Vector2 bot2Position = new Vector2(450, 392);
         public static readonly Vector2 left1Position = new Vector2(0, 0);
         public static readonly Vector2 left2Position = new Vector2(0, 284);
         public static readonly Vector2 right1Position = new Vector2(700, 0);
@@ -211,11 +211,12 @@ namespace LegendOfZelda
         public static readonly Vector2 horizontalWallSize = new Vector2(350, 87);
         public static readonly Vector2 verticalWallSize = new Vector2(100, 196);
         public static readonly Vector2 topMiddlePosition = new Vector2(350, 0);
-        public static readonly Vector2 botMiddlePosition = new Vector2(350, 392);
+        public static readonly Vector2 botMiddlePosition = new Vector2(350, 396);
         public static readonly Vector2 rightMiddlePosition = new Vector2(700, 196);
         public static readonly Vector2 leftMiddlePosition = new Vector2(0, 196);
         public static readonly Vector2 horizontalMiddleSize = new Vector2(100, 65);
         public static readonly Vector2 verticalMiddleSize = new Vector2(80, 88);
+
         // HUD Inventory Counter
         public const int HUDNumberSpriteDimensionX = 25;
         public const int HUDNumberSpriteDimensionY = 20;

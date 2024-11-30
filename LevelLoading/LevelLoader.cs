@@ -90,7 +90,7 @@ namespace LegendOfZelda
         public void Load(String room)
         {
             this.room = room;
-            Parsing2 parseIt = new Parsing2(room);
+            Parsing parseIt = new Parsing(room);
             statics = parseIt.getBlocks();
             movers = parseIt.getMovers();
             movers.Add(link);
