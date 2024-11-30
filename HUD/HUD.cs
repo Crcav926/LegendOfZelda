@@ -80,7 +80,10 @@ namespace LegendOfZelda.HUD
             HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight + pausedOffset, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
             invenCount.Draw(spriteBatch, pausedOffset);
             hp.Draw(spriteBatch, pausedOffset);
-            hudMap.Draw(spriteBatch, pausedOffset);
+            if(Globals.mode == 0)
+            {
+                hudMap.Draw(spriteBatch, pausedOffset);
+            }
             if (sprite1 != null)
             {
                 sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
