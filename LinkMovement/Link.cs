@@ -70,7 +70,7 @@ namespace LegendOfZelda
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
             //currentHealth = Constants.MikuStartingHealth;
-            currentHealth = Constants.MikuStartingHealth;
+            currentHealth = 2;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
@@ -198,6 +198,7 @@ namespace LegendOfZelda
                 // This pair freezes her on death and has her play the animation
                 LevelLoader.Instance.Load("RoomDeath.xml");
                 //currentHealth = 0;
+            }
 
                 //this pair restarts you from room 1 on death
                 //LevelLoader.Instance.Load("Room1.xml");
@@ -207,7 +208,6 @@ namespace LegendOfZelda
                 
                 if(deathFlag == true)
                 {
-                    //RoomObjectManager.Instance.Clear();
                     deathTimer = gameTime.TotalGameTime.TotalSeconds;
                     deathFlag = false;
                     deathFlag2 = true;
@@ -217,10 +217,10 @@ namespace LegendOfZelda
                 if((gameTime.TotalGameTime.TotalSeconds - deathTimer) > Constants.MikuDeathTime && deathFlag2 == true)
                 {
                     //not sure if this deathFlag2 is needed, but i'm keeping it until it works.
-                    //deathFlag2 = false;         
+                    deathFlag2 = false;
+                    currentHealth = Constants.MikuStartingHealth;         
                     ResetWatchdog.Instance.resetCheck = true;
                 }
-            }
         }
         public void Reset()
         {
@@ -244,6 +244,12 @@ namespace LegendOfZelda
             {
                 canTakeDamage = false;
             }
+        }
+        public void win()
+        {
+            //this might actually work and would be really funny
+            deathFlag = true;
+            Globals.winMode = 1;
         }
         public Rectangle getHitbox()
         {

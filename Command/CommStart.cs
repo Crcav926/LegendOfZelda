@@ -27,14 +27,22 @@ namespace LegendOfZelda
         }
         public void Execute()
         {
+            
             if (Globals.inMenus)
             {
-                Debug.WriteLine("Started Game");
-                //UnPause the game and make menu disappear.
-                myGame.setPause(false);
-                myGame.menu.Start();
-                myGame.reloadTextures();
-                SoundMachine.Instance.PlaySound("theme");
+                if(Globals.gameOverMode == 1)
+                {
+                    myGame.Exit();
+                }
+                else
+                {
+                    Debug.WriteLine("Started Game");
+                    //UnPause the game and make menu disappear.
+                    myGame.setPause(false);
+                    myGame.menu.Start();
+                    myGame.reloadTextures();
+                    SoundMachine.Instance.PlaySound("theme");
+                }
             }
 
            

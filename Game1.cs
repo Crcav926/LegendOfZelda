@@ -109,6 +109,7 @@ namespace LegendOfZelda
 
             HUDSpriteFactory.Instance.LoadAllTextures(Content);
             MenuSpriteFactory.Instance.LoadAllTextures(Content);
+            EndScreenSpriteFactory.Instance.LoadAllTextures(Content);
             menu = new Menu(this);
 
             // Load the texture for the sprite 
@@ -192,6 +193,8 @@ namespace LegendOfZelda
                 if(ResetWatchdog.Instance.resetCheck == true)
                 {
                     ResetWatchdog.Instance.resetCheck = false;
+                    Globals.menuType = 1;
+                    Globals.inMenus = true;
                     this.Reset();
                 }
             }
@@ -272,7 +275,6 @@ namespace LegendOfZelda
                 }
 
             }
-            
             _spriteBatch.End();
 
 

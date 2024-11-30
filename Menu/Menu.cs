@@ -21,25 +21,32 @@ namespace LegendOfZelda
 {
     public class Menu
     {
-        private ISprite sprite;
+        private ISprite menuSprite;
+        private ISprite gameOverSprite;
+        private ISprite winSprite;
         private ISprite gameModeButton;
         private ISprite adventureButton;
         private ISprite rogueButton;
         private ISprite textureButton;
         private ISprite defaultButton;
         private ISprite holidayButton;
+        private ISprite quitButton;
+        private ISprite restartButton;
 
         public Menu(Game1 game)
         {
             Debug.WriteLine("Created Menu");
-            sprite = MenuSpriteFactory.Instance.CreateMenu();
+            menuSprite = MenuSpriteFactory.Instance.CreateMenu();
+            gameOverSprite = EndScreenSpriteFactory.Instance.CreateGameOver();
+            winSprite = EndScreenSpriteFactory.Instance.CreateWin();
             gameModeButton = MenuSpriteFactory.Instance.CreateGameMode();
             adventureButton = MenuSpriteFactory.Instance.CreateAdventure();
             rogueButton = MenuSpriteFactory.Instance.CreateRogue();
             textureButton = MenuSpriteFactory.Instance.CreateTexture();
             defaultButton = MenuSpriteFactory.Instance.CreateDefault();
             holidayButton = MenuSpriteFactory.Instance.CreateHoliday();
-
+            quitButton = EndScreenSpriteFactory.Instance.CreateQuit();
+            restartButton = EndScreenSpriteFactory.Instance.CreateRestart();
 
         }
 
@@ -48,38 +55,68 @@ namespace LegendOfZelda
             // Draw the menu if its up.
             if (Globals.inMenus)
             {
-                //draw the background
-                Rectangle destinationRectangle = new Rectangle(0, 0, Constants.OriginalWidth, Constants.OriginalHeight);
-                sprite.Draw(s, destinationRectangle, Color.White);
-                //draw the shading to show which one is selected
-                Rectangle drGameMode = new Rectangle(380, 100, 142, 32);
-                Rectangle drAdventure= new Rectangle(428, 140, 137, 58);
-                Rectangle drRogue = new Rectangle(578, 140, 137, 58);
-                Rectangle drTexture = new Rectangle(380, 220, 101, 37);
-                Rectangle drDefault = new Rectangle(428, 260, 137, 58);
-                Rectangle drHoliday = new Rectangle(578, 260, 137, 58);
-                gameModeButton.Draw(s, drGameMode, Color.White);
-                // this is totally data drivable or something but its literally 3:34 AM rn.
-                if (Globals.mode == 0)
+                if(Globals.menuType == 0)
                 {
-                    adventureButton.Draw(s, drAdventure, Color.White);
-                    rogueButton.Draw(s, drRogue, Color.Gray);
+                    //draw the background
+                    Rectangle destinationRectangle = new Rectangle(0, 0, Constants.OriginalWidth, Constants.OriginalHeight);
+                    menuSprite.Draw(s, destinationRectangle, Color.White);
+                    //draw the shading to show which one is selected
+                    Rectangle drGameMode = new Rectangle(380, 100, 142, 32);
+                    Rectangle drAdventure= new Rectangle(428, 140, 137, 58);
+                    Rectangle drRogue = new Rectangle(578, 140, 137, 58);
+                    Rectangle drTexture = new Rectangle(380, 220, 101, 37);
+                    Rectangle drDefault = new Rectangle(428, 260, 137, 58);
+                    Rectangle drHoliday = new Rectangle(578, 260, 137, 58);
+                    gameModeButton.Draw(s, drGameMode, Color.White);
+                    // this is totally data drivable or something but its literally 3:34 AM rn.
+                    if (Globals.mode == 0)
+                    {
+                        adventureButton.Draw(s, drAdventure, Color.White);
+                        rogueButton.Draw(s, drRogue, Color.Gray);
+                    }
+                    else
+                    {
+                        adventureButton.Draw(s, drAdventure, Color.Gray);
+                        rogueButton.Draw(s, drRogue, Color.White);
+                    }
+                    textureButton.Draw(s, drTexture, Color.White);
+                    if (Globals.tex == 0)
+                    {
+                        defaultButton.Draw(s, drDefault, Color.White);
+                        holidayButton.Draw(s, drHoliday, Color.Gray);
+                    }
+                    else
+                    {
+                        defaultButton.Draw(s, drDefault, Color.Gray);
+                        holidayButton.Draw(s, drHoliday, Color.White);
+                    }
                 }
-                else
+                else if(Globals.menuType == 1)
                 {
-                    adventureButton.Draw(s, drAdventure, Color.Gray);
-                    rogueButton.Draw(s, drRogue, Color.White);
-                }
-                textureButton.Draw(s, drTexture, Color.White);
-                if (Globals.tex == 0)
-                {
-                    defaultButton.Draw(s, drDefault, Color.White);
-                    holidayButton.Draw(s, drHoliday, Color.Gray);
-                }
-                else
-                {
-                    defaultButton.Draw(s, drDefault, Color.Gray);
-                    holidayButton.Draw(s, drHoliday, Color.White);
+                    //draw the background
+                    Rectangle destinationRectangle = new Rectangle(0, 0, Constants.OriginalWidth, Constants.OriginalHeight);
+                    if(Globals.winMode == 1)
+                    {
+                        winSprite.Draw(s, destinationRectangle, Color.White);
+                    }
+                    else
+                    {
+                        gameOverSprite.Draw(s, destinationRectangle, Color.White);
+                    }
+                    //draw the shading to show which one is selected
+                    Rectangle drQuit = new Rectangle(200, 400, 128, 53);
+                    Rectangle drRestart= new Rectangle(350, 400, 128, 53);
+                    // this is totally data drivable or something but its literally 3:34 AM rn.
+                    if (Globals.gameOverMode == 0)
+                    {
+                        restartButton.Draw(s, drRestart, Color.White);
+                        quitButton.Draw(s, drQuit, Color.Gray);
+                    }
+                    else
+                    {
+                        restartButton.Draw(s, drRestart, Color.Gray);
+                        quitButton.Draw(s, drQuit, Color.White);
+                    }
                 }
             }
         }
@@ -91,6 +128,7 @@ namespace LegendOfZelda
         public void Start()
         {
             Globals.inMenus = false;
+            Globals.menuType = 0;
         }
     }
 }

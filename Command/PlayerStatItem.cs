@@ -42,7 +42,7 @@ namespace LegendOfZelda.Command
             }
             if (itemType == "Triforce")
             {
-                _link.Reset();
+                _link.win();
             }
             if (itemType == "HeartRed")
             {

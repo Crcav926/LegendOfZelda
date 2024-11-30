@@ -13,16 +13,29 @@ namespace LegendOfZelda
         {
             //swap the button choice
             int modeChoice = Globals.mode;
-            if (modeChoice == 0)
+            int gameOverModeChoice = Globals.gameOverMode;
+            if(Globals.menuType == 0)
             {
-                Globals.mode = 1;
+                if (modeChoice == 0)
+                {
+                    Globals.mode = 1;
+                }
+                else
+                {
+                    Globals.mode = 0;
+                }
             }
-            else
+            else if(Globals.menuType == 1)
             {
-                Globals.mode = 0;
+                if (gameOverModeChoice == 0)
+                {
+                    Globals.gameOverMode = 1;
+                }
+                else
+                {
+                    Globals.gameOverMode = 0;
+                }
             }
-
-           
         }
     }
 }
