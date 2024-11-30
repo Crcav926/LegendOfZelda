@@ -205,14 +205,5 @@ namespace LegendOfZelda
              };
             return new Sprite(bossSpriteSheet, GanonFrames);
         }
-        public ISprite CreateGanonVulnerableSprite()
-        {
-
-            List<Rectangle> GanonVulnerableFrames = new List<Rectangle>
-            {
-                    new Rectangle(205, 154, 32, 32)
-             };
-            return new Sprite(bossSpriteSheet, GanonVulnerableFrames);
-        }
     }
 }

@@ -102,6 +102,6 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorWall</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
 </Item>
 </root>
