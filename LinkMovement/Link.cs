@@ -69,8 +69,8 @@ namespace LegendOfZelda
             direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
-            //currentHealth = Constants.MikuStartingHealth;
-            currentHealth = 2;
+            currentHealth = Constants.MikuStartingHealth;
+            //currentHealth = 2;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();

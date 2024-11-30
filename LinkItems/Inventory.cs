@@ -52,22 +52,32 @@ namespace LegendOfZelda
             switch (PausedHUD.Instance.weaponIndex)
             {
                 case 0:
-                    key1Item = Link.Instance.boomerang;
-
+                    if (weapons.Contains(Link.Instance.boomerang))
+                    {
+                        key1Item = Link.Instance.boomerang;
+                    }
                     break;
 
                 case 1:
-                    key1Item = Link.Instance.bomb;
-
+                    if (weapons.Contains(Link.Instance.bomb))
+                    {
+                        key1Item = Link.Instance.bomb;
+                    }
                     break;
 
                 case 2:
-                    key1Item = Link.Instance.arrow;
+                    if (weapons.Contains(Link.Instance.arrow))
+                    {
+                        key1Item = Link.Instance.arrow;
+                    }
 
                     break;
 
                 case 3:
-                    key1Item = Link.Instance.fire;
+                    if (weapons.Contains(Link.Instance.fire))
+                    {
+                        key1Item = Link.Instance.fire;
+                    }
 
                     break;
             }
