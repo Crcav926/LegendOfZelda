@@ -23,7 +23,6 @@ namespace LegendOfZelda
         {
             itemSpriteFactory = ItemSpriteFactory.Instance;
             boomerangSprite = itemSpriteFactory.CreateBoomerangSprite();
-            Debug.WriteLine("I exist!");
             exists = false;
         }
         public void Use(Vector2 newDirection, Vector2 newPosition)
