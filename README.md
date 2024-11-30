@@ -1,16 +1,18 @@
 # LegendOfZelda
 
-Current Sprint2 necessary documentation:
+Current Sprint5 necessary documentation:
+Design choices:
+- To avoid redundancies, we chose to not put the map in the pausedHUD screen
+- Items break on collisions with blocks, thus items occasionally require very precise aim to use
+- Roguelike mode currently gives a randomly generated room with a Triforce shard hidden somewhere within. Grabbing the Triforce causes a win
 Known bugs: 
-- Sometimes when a you throw a boomerang, it will spawn way behind the player and instantly collide with a wall, causing weird interactions, same with arrow.
-- Some enemies will linger after death
-- Some enemies do not die
-- There is a very very very small chance that a Goriya can clip into the wall and spin in a circle in perpetuity.
-- Room 14 is otherwise inaccessible and is currently bugged with how LevelLoader works
-- Stalfos is missing a frame
-- Goriya doesn't have a second movement frame when moving up and down
+- Sword can occasionally clip in Miku when she uses it
+- Gonodogo's can be a bit too fast and be unable to pose a massive threat to the player
 
 Controls:
-Use WASD to move, 1 to throw a boomerang, 2 to shoot an arrow, 3 to throw fire, 4 to use the sword, and 5 to place a bomb.
-Use "enter" key to rotate through doors
+Use WASD to move, 1 to use item 1, 2 to use item 2
+Use "p" key to pause and unpause
+Use "enter" key to start the game based on the given option in menu
+Use "m" key to scroll between Adventure mode and Roguelike mode
+Use "n" key to scroll between Regular sprites or Holiday sprites
 Press "q" key to quit game.
