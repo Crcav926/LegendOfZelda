@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LegendOfZelda.HUD;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -43,34 +44,32 @@ namespace LegendOfZelda
         }
         public void UpdateInventory()
         {
-            // Key 2 should always be sword.
+            // Key 2 should always be sword. Sets his item to be a sword permanently.
             key2Item = Link.Instance.sword;
-           
-            if (weapons.Count > 0)
-            {
-                key1Item = weapons[0];
-            }
         }
-        public void rotateItems()
+        public void swap()
         {
-            foreach (IItems weapon in weapons)
+            switch (PausedHUD.Instance.weaponIndex)
             {
-                //Debug.WriteLine($"In inventory {weapon.ToString}");
-            }
-            if (weapons.Count > 1)
-            {
-                List<IItems> temp  = new List<IItems>();
-                temp.Add(weapons[weapons.Count - 1]);
-               
-                for (int i = 0; i < weapons.Count-1; i++)
-                {
-                    temp.Add(weapons[i]);
-                }
-                weapons = temp;
-            }
-            else
-            {
-                Debug.WriteLine("Cannot rotate, you only have 1 item!");
+                case 0:
+                    key1Item = Link.Instance.boomerang;
+
+                    break;
+
+                case 1:
+                    key1Item = Link.Instance.bomb;
+
+                    break;
+
+                case 2:
+                    key1Item = Link.Instance.arrow;
+
+                    break;
+
+                case 3:
+                    key1Item = Link.Instance.fire;
+
+                    break;
             }
         }
         public void addItem(IItems item)
@@ -99,15 +98,15 @@ namespace LegendOfZelda
                 {
                     key1Item = item;
                     weapons.Add(item);
-                    Debug.WriteLine("added to key1");
+                    //Debug.WriteLine("added to key1");
                 } else if (key2Item == null) {
                     key2Item = item;
                     weapons.Add(item);
-                    Debug.WriteLine("Added to key2");
+                    //Debug.WriteLine("Added to key2");
                 } else
                 {
                     weapons.Add(item);
-                    Debug.WriteLine("added to weapons list");
+                    //Debug.WriteLine("added to weapons list");
                 }
                 
             }
@@ -132,7 +131,7 @@ namespace LegendOfZelda
             IItems removedItem = item;
             if (weapons.Remove(item))
             {
-                Debug.WriteLine("Returned " + removedItem.ToString());
+                //Debug.WriteLine("Returned " + removedItem.ToString());
                 return removedItem;
             }
 

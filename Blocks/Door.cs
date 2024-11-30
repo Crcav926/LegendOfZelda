@@ -33,7 +33,7 @@ namespace LegendOfZelda
             this.newPos = newPos;
 
             //determines if the door is locked.
-            Debug.WriteLine(doorType + " " + locked + " " + room);
+            //Debug.WriteLine(doorType + " " + locked + " " + room);
 
             lockedS = locked;
             //determines if the door can be unlocked by a key (for example doors that lock until all enemies are killed)

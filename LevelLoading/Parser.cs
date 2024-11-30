@@ -162,7 +162,6 @@ namespace LegendOfZelda
                 if (locked != null)
                 {
                     lockedDoor = bool.Parse(locked.InnerText);
-                    Debug.WriteLine(locked.InnerText);
                 }
 
                 if (con != null && objectTypeNode != null && objectTypeNode.InnerText == "Block")
@@ -208,7 +207,7 @@ namespace LegendOfZelda
                 }
                 if (con3 != null && objectTypeNode != null && objectTypeNode.InnerText == "Door")
                 {
-                    Debug.WriteLine("populating");
+                    //Debug.WriteLine("populating");
                     // Populates list of non-moving collideable objects
                     blocks.Add((ICollideable)con3.Invoke(new object[] { position, objectName, roomName, newPosition, lockedDoor }));
                 }
