@@ -1,6 +1,7 @@
 # LegendOfZelda
 
 Current Sprint5 necessary documentation:
+
 Design choices:
 - To avoid redundancies, we chose to not put the map in the pausedHUD screen
 - Items break on collisions with blocks, thus items occasionally require very precise aim to use
