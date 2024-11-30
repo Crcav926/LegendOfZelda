@@ -27,8 +27,8 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //Debug.WriteLine($"Door Command Triggered, door lock is {door.lockedS}");
-            
-            if (door.lockedS == false)
+            //Debug.WriteLine($"Texture value is {Globals.tex}");
+            if (door.lockedS == false) 
                 {
                 if (!Camera2D.Instance.isSliding)
                 {
@@ -74,7 +74,8 @@ namespace LegendOfZelda.Command
             {
                 //Debug.WriteLine($"Door Locked Miku has {link.inventory.getNumKeys()} keys");
                 // if link has keys and it's unlockable unlock the door and play the unlock sound
-                if (door.unlockable && link.inventory.getNumKeys() > 0)
+                string doorType = door.doorSprite;
+                if (door.unlockable && link.inventory.getNumKeys() > 0 && !(doorType == "UpDoorWall") && !(doorType== "DownDoorWall") && !(doorType == "LeftDoorWall") && !(doorType == "RightDoorWall"))
                 {
                     SoundMachine.Instance.PlaySound("unlock");
                     //pause the game to play sound and see door change

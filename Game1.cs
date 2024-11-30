@@ -86,7 +86,7 @@ namespace LegendOfZelda
             // Initializes keyboard controller
 
             controllerK = new KeyboardCont(this);
-            // TEMP
+          
             //init the collision stuff
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
@@ -111,22 +111,14 @@ namespace LegendOfZelda
             MenuSpriteFactory.Instance.LoadAllTextures(Content);
             menu = new Menu(this);
 
-            // Load the texture for the sprite 
-            itemTexture = Content.Load<Texture2D>("itemSpriteFinal");
-            texture = Content.Load<Texture2D>("enemySpriteSheet");
-            Bossture = Content.Load<Texture2D>("bossSpriteSheet");
-            BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
-            ItemSpriteFactory.Instance.LoadAllTextures(Content);
-            EnemySpriteFactory.Instance.LoadAllTextures(Content);
-            BlockSpriteFactory.Instance.LoadAllTextures(Content);
-
-            // TODO: Absorb into level loader
-            BackgroundTure = Content.Load<Texture2D>("ZeldaTileSheet");
+    
            
 
-
+            //this loads textures too
             LevelLoader.Instance.LoadAllContent(Content);
+
             LevelLoader.Instance.RegisterAllCommands(controllerK, this);
+
             List<String> listOfRooms = new List<string>()
             {
                 "Room1.xml", "Room2.xml", "Room3.xml", "Room4.xml", "Room5.xml", "Room6.xml",
@@ -143,11 +135,6 @@ namespace LegendOfZelda
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
 
-            //I'll keep the theme song loaded here so it doesn't reset on room changes
-            // mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
-            // mikuSong.IsLooped = true;
-            // mikuSong.Volume = .3f;
-            // mikuSong.Play();
             hudManager = new HUDManager(this);
             pausedHUD = new PausedHUD();
             ganon = new Ganon(new Vector2(200,200));    
@@ -196,7 +183,6 @@ namespace LegendOfZelda
                 }
             }
             //if we're in menus we should be paused so update it.
-            
             else
             {
                 pausedHUD.Update(gameTime);
@@ -283,6 +269,7 @@ namespace LegendOfZelda
         {
             SoundMachine.Instance.StopSound("theme");
             RoomObjectManager.Instance.Clear();
+            LevelLoader.Instance.Reset();
             LevelLoader.Instance.Load("Room1.xml");
             blocks = LevelLoader.Instance.getBlocks();
             movers = LevelLoader.Instance.getMovers();
@@ -313,6 +300,8 @@ namespace LegendOfZelda
         {
             // uh idk what else to clear so i need to ask.
             controllerK.clearCommands();
+            LevelLoader.Instance.clearRooms();
+            SoundMachine.Instance.clearSounds();
 
         }
     }

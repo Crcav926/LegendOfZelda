@@ -28,8 +28,16 @@ namespace LegendOfZelda
 
         public void LoadAllTextures(ContentManager content)
         {
-            bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheet");
-            enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet2");
+            if (Globals.tex == 0)
+            {
+                bossSpriteSheet = content.Load<Texture2D>("bossSpriteSheet");
+                enemySpriteSheet = content.Load<Texture2D>("enemySpriteSheet2");
+            }
+            else
+            {
+                bossSpriteSheet = content.Load<Texture2D>("holidayBosses");
+                enemySpriteSheet = content.Load<Texture2D>("holidayEnemies");
+            }
 
             // More Content.Load calls follow
             //...
@@ -67,9 +75,8 @@ namespace LegendOfZelda
         {
             List<Rectangle> stalfolFrames = new List<Rectangle>
         {
-            new Rectangle(1, 59, 16, 16),
-            // TODO: Find a second frame for the Stafols
-            // new Rectangle(53, 45, 16, 16)
+            new Rectangle(1, 56, 16, 19),
+            new Rectangle(53, 42, 16, 19)
         };
             return new Sprite(enemySpriteSheet, stalfolFrames);
         }
