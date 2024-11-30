@@ -62,8 +62,6 @@ namespace LegendOfZelda
         //Reset Testing
         ResetWatchdog resetWatchdog;
 
-        //for testing move him when done.
-        IEnemy ganon;
         public Menu menu;
 
         public Game1()
@@ -138,7 +136,7 @@ namespace LegendOfZelda
 
             hudManager = new HUDManager(this);
             pausedHUD = PausedHUD.Instance;
-            ganon = new Ganon(new Vector2(200,200));    
+              
         }
 
         protected override void Update(GameTime gameTime)
@@ -176,7 +174,6 @@ namespace LegendOfZelda
                 // Calls link update, which updates his Sprite and Items
                 // LinkCharacter.Update(gameTime);
                 // Updates sprites in Item classes
-                //ganon.Update(gameTime);
                 if(ResetWatchdog.Instance.resetCheck == true)
                 {
                     ResetWatchdog.Instance.resetCheck = false;
@@ -226,7 +223,7 @@ namespace LegendOfZelda
                 {
                     statItem.Draw(_spriteBatch);
                 }
-                //ganon.Draw(_spriteBatch);
+                
                 menu.Draw(_spriteBatch);
             }
 

@@ -233,7 +233,7 @@ public class Dodongo : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
-            SoundMachine.Instance.GetSound("enemyHurt").Play();
+            SoundMachine.Instance.PlaySound("enemyHurt");
             damageAnimation.StartDamageEffect();
             if (hp <= 0)
             {
