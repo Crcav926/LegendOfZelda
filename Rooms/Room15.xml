@@ -70,6 +70,6 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorSecretBombableWall</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room6.xml</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room6.xml</Room>
 </Item>
 </root>
