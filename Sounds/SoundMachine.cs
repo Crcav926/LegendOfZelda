@@ -35,5 +35,9 @@ namespace LegendOfZelda.Sounds
         {
             soundDictionary[name].Stop();
         }
+        public void clearSounds()
+        {
+            soundDictionary.Clear();
+        }
     }
 }

@@ -57,10 +57,13 @@ namespace LegendOfZelda.Command
                 {
                     _link.currentHealth = _link.maxHealth;
                 }
-            
-                //I'm still adding the keys to the inventory because they should probably show up in the HUD?
-                //Debug.WriteLine($"Added {item.getItemType()} to inventory");
+
+            //I'm still adding the keys to the inventory because they should probably show up in the HUD?
+            //Debug.WriteLine($"Added {item.getItemType()} to inventory");
+            if (itemType != "Triforce")
+            {
                 _link.inventory.addItem(item);
+            }
 
                 //doing both to be safe
                 item.makeContact();

@@ -127,7 +127,7 @@ namespace LegendOfZelda.Collision
                         if (o2Type == "Obstacle")
                         {
                             commandInstance = Activator.CreateInstance(commandType, o1);
-                        }else if (o2Type == "Enemy") //if enemy pass in enemy then item
+                        }else if (o2Type == "Enemy" || o2Type == "Door") //if enemy pass in enemy then item
                         {
                             ICollideable[] p = { o2, o1 };
                             commandInstance = Activator.CreateInstance(commandType, p);
@@ -243,10 +243,11 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Projectile", "Obstacle", "top", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "bottom", typeof(ProjectileObstacle));
 
-            // RegisterCollision("Projectile", "Door", "left", typeof(ProjectileObstacle));
-            // RegisterCollision("Projectile", "Door", "right", typeof(ProjectileObstacle));
-            // RegisterCollision("Projectile", "Door", "top", typeof(ProjectileObstacle));
-            // RegisterCollision("Projectile", "Door", "bottom", typeof(ProjectileObstacle));
+            //for the bomb hitting door
+            RegisterCollision("Item", "Door", "left", typeof(ItemDoor));
+            RegisterCollision("Item", "Door", "right", typeof(ItemDoor));
+            RegisterCollision("Item", "Door", "top", typeof(ItemDoor));
+            RegisterCollision("Item", "Door", "bottom", typeof(ItemDoor));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)

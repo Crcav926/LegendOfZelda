@@ -30,7 +30,10 @@ namespace LegendOfZelda
         public LevelLoader() 
         {
         }
-
+        public void clearRooms()
+        {
+            roomMapping.Clear();
+        }
         private static LevelLoader instance = new LevelLoader();
 
         public static LevelLoader Instance

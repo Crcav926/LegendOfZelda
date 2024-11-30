@@ -64,7 +64,8 @@
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorSecretBombableWall</ObjectName>
+	<Locked> true</Locked>
+    <ObjectName>UpDoorWall</ObjectName>
     <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>Room10.xml</Room>
 </Item>
 <Item>
