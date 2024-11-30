@@ -15,24 +15,19 @@ public class Stalfol : IEnemy, ICollideable
 
 {
     private Vector2 velocity;            // Velocity for movement
-    //moved to constants
-    //private float speed = 2f;          // Movement speed
     private Random random = new Random();
-    //private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track direction changes
     private ISprite sprite;
     public Vector2 position { get; set; }
     private Rectangle destinationRectangle;
     private Boolean alive;
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-    private ClassItems droppedKey;
 
     private bool keyStatus;
 
@@ -46,14 +41,9 @@ public class Stalfol : IEnemy, ICollideable
         alive = true;
 
         hp = 2;
-        swordDamage = new Dictionary<string, int>
-        {
-            { "WOOD", 1 },
-            { "WHITE", 2 },
-            { "MAGIC", 2 }
-        };
-        canTakeDamage = true;
 
+        canTakeDamage = true;
+        //see Gel.cs - TJ
         if (hasKey == null)
         {
             keyStatus = false;
@@ -122,20 +112,6 @@ public class Stalfol : IEnemy, ICollideable
         sprite.Update(gameTime);
         // Update position based on velocity
         position += velocity;
-        //angle need caculate
-        //if the skull hits the screen edges and reflect its direction?????
-        //NOTE: I've been updating constants starting at the top of the folder and going down
-        //it is at this point that i'm not replacing this anymore, enemies should never collide with the edge of the screen
-        //we can update these to be wall positions, but i'm not putting original/screen values anymore. - TJ
-        if (position.X <= 0 || position.X >= 800 - destinationRectangle.Width)
-        {
-            velocity.X *= -1; // Reflect on the X axis
-        }
-
-        if (position.Y <= 0 || position.Y >= 600 - destinationRectangle.Height)
-        {
-            velocity.Y *= -1; // Reflect on the Y axis
-        }
     }
 
     public void Draw(SpriteBatch s)
@@ -176,7 +152,7 @@ public class Stalfol : IEnemy, ICollideable
         if ( canTakeDamage)
         {
             Debug.WriteLine($"{damage} damage done to {this.GetType().Name}");
-            SoundMachine.Instance.GetSound("enemyHurt").Play();
+            SoundMachine.Instance.PlaySound("enemyHurt");
             damageAnimation.StartDamageEffect();
             hp -= damage;
 
@@ -213,7 +189,7 @@ public class Stalfol : IEnemy, ICollideable
                 }
                 else
                 {
-                    //for now I'm using Rupees to test drops
+                    //The single letter indicates which DropTable GetItemName will get an item name from.
                     String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                     droppedItem = new ClassItems(position, ItemTobeDroped);
                     HasDroppedItem = true;

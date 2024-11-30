@@ -19,7 +19,7 @@ namespace LegendOfZelda.Command
 
         public void Execute()
         {
-            SoundMachine.Instance.GetSound("moveBlock").Play();
+            SoundMachine.Instance.PlaySound("moveBlock");
             Debug.WriteLine("Collided with pusable on the right");
             _block.moveBlock(new Vector2(-1, 0));
         }

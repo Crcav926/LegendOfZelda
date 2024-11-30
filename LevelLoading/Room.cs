@@ -10,8 +10,8 @@ namespace LegendOfZelda
 {
     public class Room
     {
-        private List<ICollideable> statics;
-        private List<ICollideable> movers;
+        private List<ICollideable> statics = new List<ICollideable>();
+        private List<ICollideable> movers = new List<ICollideable>();
         private String name;
         public Room(List<ICollideable> statics, List<ICollideable> movers, String RoomName) 
         {
@@ -40,6 +40,10 @@ namespace LegendOfZelda
         public List<ICollideable> getStatics()
         {
             return statics;
+        }
+        public String getRoomName()
+        {
+            return name;
         }
     }
 }

@@ -14,8 +14,7 @@ namespace LegendOfZelda
 {
     public class ClassItems :ICollideable, IItems
     {
-        double timePerFrame = 0.05; // Adjustable data
-        double timeElapsed = 0;
+
 
         private Vector2 itemPosition;
         private Rectangle destination;
@@ -92,14 +91,14 @@ namespace LegendOfZelda
         //call this when link picks up the item
         public void makeContact()
         {
-            //Debug.WriteLine("Item made contact");
+            Debug.WriteLine("Item made contact");
             if (itemType == "Triforce" || itemType == "TriforceBlue")
             {
-                SoundMachine.Instance.GetSound("getTri").Play(); ;
+                SoundMachine.Instance.PlaySound("getTri");
             }
             else
             {
-                SoundMachine.Instance.GetSound("getRupee").Play();
+                SoundMachine.Instance.PlaySound("getRupee");
             }
             exists = false;
         }

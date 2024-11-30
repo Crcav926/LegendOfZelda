@@ -2,7 +2,7 @@
 <root>
 	<item>
 		<OffsetX>0</OffsetX>
-		<OffsetY>1</OffsetY>
+		<OffsetY>-1</OffsetY>
 	</item>
 <Item>
     <ObjectType>Floor</ObjectType>
@@ -10,7 +10,7 @@
     <Location>100 88</Location>
 </Item>
 <Item>
-    <ObjectType>Wall</ObjectType>
+    <ObjectType>WallSprite</ObjectType>
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
@@ -80,6 +80,6 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorOpen</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room1.xml</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room1.xml</Room>
 </Item>
 </root>

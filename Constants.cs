@@ -11,27 +11,29 @@ namespace LegendOfZelda
         public const int ScreenHeight = 900 + HUDHeight;  // Screen height
         public const int HUDWidth = 0;
         public const int HUDHeight = OriginalHeight / 4;
+        public const int PausedInventoryWidth = OriginalWidth;
+        public const int PausedInventoryHeight = OriginalHeight / 3;
         // Original resolution in which the sprites are scaled to.
         public const int OriginalWidth = 800;
-        public const int OriginalHeight = 480;
+        public const int OriginalHeight = 484;
         // Scaling calculations
         public const float ScaleX = (float)ScreenWidth / OriginalWidth;
         // Miku 
-
         public const float ScaleY = (float)(ScreenHeight) / (OriginalHeight + HUDHeight);
         // Miku size
-
         public const int MikuHeight = 40;
         public const int MikuWidth = 40;
         public const float MikuSpeedX = 2f;
         public const float MikuSpeedY = 2f;
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
-        public const int MikuStartingHealth = 12;
+        //HP HERE
+        public const int MikuStartingHealth = 60;
         public const int PointsPerHP = 4;
         public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
         public const int MikuStartingPositionY = 330;
+        public const double MikuDeathTime = 3.1;
         // Standard size
         public const int StandardHeight = 16;
         public const int StandardWidth = 16;
@@ -41,12 +43,18 @@ namespace LegendOfZelda
         public const int CollisionPushDistance = 2;
         // Blocks
         public const int BlockWidth = 50;
-        //is this height wrong? doors should be twice as tall as blocks; 42 x 2 =/= 88
-        public const int BlockHeight = 42;
+        public const int BlockHeight = 44;
         // Doors
         //also not sure if this should be 102; i'm just putting in the magic numbers we have.
-        public const int DoorWidth = 102;
+        public const int DoorWidth = 100;
         public const int DoorHeight = 88;
+        // Walls
+        //this is used for the wall sprite, NOT the hitboxes.
+        public const int WallsWidth = 800;
+        public const int WallsHeight = 484;
+        // Floor
+        public const int FloorWidth = 600;
+        public const int FloorHeight = 308;
         // Aquamentus
         public const int AquamentusHeight = 80;
         public const int AquamentusWidth = 80;
@@ -55,7 +63,7 @@ namespace LegendOfZelda
         public const float AquamentusMaxX = 100f;
         public const float AquamentusMinX = 10f;
         public const float AquamentusSpeed = 80f;
-        public const float AquamentusThrowCooldown = 3f;    
+        public const float AquamentusThrowCooldown = 3f;
         public const int AquamentusFireballXOffset = 10;
         public const int AquamentusFireballYOffset = 30;
         //not sure what either of these do, keeping them here.      
@@ -70,6 +78,13 @@ namespace LegendOfZelda
         public const float FireballSpeed = 150f;
         public const int FireballHeight = 24;
         public const int FireballWidth = 48;
+        //Ganon
+        public const int GanonHeight = 80;
+        public const int GanonWidth = 80;
+        public const int GanonFireballXOffset = 10;
+        public const int GanonFireballYOffset = 30;
+        public const int GanonHitboxWidth = 80;
+        public const int GanonHitboxHeight = 80;
         // Gel
         public const float GelJumpSpeed = 50f;
         public const float GelJumpCooldown = 1f;
@@ -183,7 +198,6 @@ namespace LegendOfZelda
         public const int SwordHeight = 40;
         //Wall Constants
         public static readonly Vector2 top1Position = new Vector2(0, 0);
-        public static readonly Vector2 topMiddlePosition = new Vector2(350, 0);
         public static readonly Vector2 top2Position = new Vector2(450, 0);
         public static readonly Vector2 bot1Position = new Vector2(0, 392);
         public static readonly Vector2 bot2Position = new Vector2(350, 392);
@@ -195,21 +209,68 @@ namespace LegendOfZelda
         public static readonly Vector2 middleVerticalSize = new Vector2(90, 88);
         public static readonly Vector2 horizontalWallSize = new Vector2(350, 87);
         public static readonly Vector2 verticalWallSize = new Vector2(100, 196);
-
+        public static readonly Vector2 topMiddlePosition = new Vector2(350, 0);
+        public static readonly Vector2 botMiddlePosition = new Vector2(350, 392);
+        public static readonly Vector2 rightMiddlePosition = new Vector2(700, 196);
+        public static readonly Vector2 leftMiddlePosition = new Vector2(0, 196);
+        public static readonly Vector2 horizontalMiddleSize = new Vector2(100, 65);
+        public static readonly Vector2 verticalMiddleSize = new Vector2(80, 88);
         // HUD Inventory Counter
         public const int HUDNumberSpriteDimensionX = 25;
         public const int HUDNumberSpriteDimensionY = 20;
         public const int coinsHUDPosX = 300;
-        public const int coinsHUDPosY = -86;
+        public const int coinsHUDPosY = -87;
         public const int keysHUDPosX = 300;
         public const int keysHUDPosY = -54;
         public const int bombsHUDPosX = 300;
         public const int bombsHUDPosY = -34;
-
+        // Sprite 1 HUD values
+        public const int HUDSprite1X = 400;
+        public const int HUDSprite1Y = -70;
+        public const int HUDSprite2X = 475;
+        public const int HUDSprite2Y = -70;
+        public const int HUDSpriteWidth = 25;
+        public const int HUDSpriteHeight = 40;
         // HUD Health
         public const int hpHUDPosX = 550;
         public const int hpHUDPosY = -35;
         public const int HUDHPSpriteDimensionX = 25;
         public const int HUDHPSpriteDimensionY = 18;
+        public const int FloorSizeX = 600;
+        public const int FloorSizeY = 306;
+
+        // Minimap
+        public const int HUDMapX = 55;
+        public const int HUDMapY = -120;
+        public const int HUDMapDimensionX = 192;
+        public const int HUDMapDimensionY = 120;
+
+        public const int HUDMapLevelX = 198;
+        public const int HUDMapLevelY = -120;
+        public const int HUDMapLevelDimensionX = 25;
+        public const int HUDMapLevelDimensionY = 25;
+
+        public const int dotSize = 9;
+        public const int miniMapStartX = 133;
+        public const int miniMapStartY = -24;
+
+        //menu
+        public const int MenuWidth = 768;
+        public const int MenuHeight = 432;
+
+        // HUD Map
+        public const int MapSpriteX = 50;
+        public const int MapSpriteY = -105;
+        public const int MapSpriteWidth = 200;
+        public const int MapSpriteHeight = 88;
+        public const int LevelCountSpriteX = 200;
+        public const int LevelCountSpriteY = -105;
+        public const int LevelCountSpriteWidth = 25;
+        public const int LevelCountSpriteHeight = 18;
+        // Camera2D
+        public const int HorizontalSlideDistance = 800;
+        public const int VerticalSlideDistance = 480;
+        public const float SlidingThreshold = 5f;
+        public const float LerpFactor = 0.03f;
     }
 }

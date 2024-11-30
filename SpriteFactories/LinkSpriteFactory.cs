@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using LegendOfZelda.LinkMovement;
 using static System.Formats.Asn1.AsnWriter;
 using System.Data;
+using System.Diagnostics;
 
 
 
@@ -34,8 +35,8 @@ namespace LegendOfZelda
 
         public void LoadAllTextures(ContentManager content)
         {
-            linkSpriteSheet = content.Load<Texture2D>("LinkSpriteSheet");
-             
+            linkSpriteSheet = content.Load<Texture2D>("mikuSpriteSheet");
+
             // More Content.Load calls follow
             //...
         }
@@ -97,7 +98,7 @@ namespace LegendOfZelda
         }
     };
 
-        Dictionary<Vector2,List<Rectangle>> attackSpriteFrames = new Dictionary<Vector2, List<Rectangle>>()
+        Dictionary<Vector2, List<Rectangle>> attackSpriteFrames = new Dictionary<Vector2, List<Rectangle>>()
     {
         { new Vector2(-1, 0), new List<Rectangle>()
             {
@@ -122,6 +123,7 @@ namespace LegendOfZelda
             }
         }
         };
+
 
         List<Rectangle> deathSpriteFrames = new List<Rectangle>()
         {
@@ -165,7 +167,19 @@ namespace LegendOfZelda
             new Rectangle(177, 224, 16, 16),
             //we'll start at 3 rotations
         };
-
+        List<Rectangle> pickupSpriteFrames = new List<Rectangle>()
+        {
+            // alot of duplicates so that she plays the second frame longer.
+            new Rectangle(213, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16),
+        };
 
         // Don't think position should be a factor here, but it is here for simply a lack of time.
         public ISprite CreateLinkStillSprite(Vector2 direction)
@@ -173,7 +187,8 @@ namespace LegendOfZelda
             return new Sprite(linkSpriteSheet, LinkStillFrames[direction]);
         }
 
-        public ISprite CreateLinkAnimatedSprite(Vector2 direction) {
+        public ISprite CreateLinkAnimatedSprite(Vector2 direction)
+        {
             return new Sprite(linkSpriteSheet, LinkSpriteFrames[direction]);
         }
 
@@ -186,14 +201,13 @@ namespace LegendOfZelda
         {
             return new Sprite(linkSpriteSheet, deathSpriteFrames);
         }
+        public ISprite CreateLinkPickupSprite()
+        {
+            Debug.WriteLine("created pickup sprite");
+            return new Sprite(linkSpriteSheet, pickupSpriteFrames);
 
-
+        }
     }
-
-
-
-
-
     // More public ISprite returning methods follow
     // ...
 }

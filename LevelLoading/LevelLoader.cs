@@ -1,5 +1,4 @@
 ﻿using LegendOfZelda.Command;
-using LegendOfZelda.LinkItems;
 using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -22,7 +21,7 @@ namespace LegendOfZelda
     {
         private List<ICollideable> statics = new List<ICollideable>();
         private List<ICollideable> movers = new List<ICollideable>();
-        private String room;
+        public String room;
         private Link link;
         SoundMachine soundMachine = SoundMachine.Instance;
         private Room currRoom;
@@ -31,7 +30,10 @@ namespace LegendOfZelda
         public LevelLoader() 
         {
         }
-
+        public void clearRooms()
+        {
+            roomMapping.Clear();
+        }
         private static LevelLoader instance = new LevelLoader();
 
         public static LevelLoader Instance
@@ -64,6 +66,7 @@ namespace LegendOfZelda
             SoundEffectInstance throughDoor = Content.Load<SoundEffect>("thruDoor").CreateInstance();
             SoundEffectInstance unlock = Content.Load<SoundEffect>("unlock").CreateInstance();
             SoundEffectInstance moveBlock = Content.Load<SoundEffect>("moveBlock").CreateInstance();
+            SoundEffectInstance deathMod = Content.Load<SoundEffect>("death").CreateInstance();
 
             soundMachine.addSound("throughDoor", throughDoor);
             soundMachine.addSound("moveBlock", moveBlock);
@@ -75,12 +78,19 @@ namespace LegendOfZelda
             soundMachine.addSound("attack", attackMod);
             soundMachine.addSound("hurt", hurtMod);
             soundMachine.addSound("ha", haMod);
+            soundMachine.addSound("death", deathMod);
+
+            SoundEffectInstance mikuSong = Content.Load<SoundEffect>("mikuSong").CreateInstance();
+            mikuSong.IsLooped = true;
+            mikuSong.Volume = .3f;
+
+            soundMachine.addSound("theme", mikuSong);
 
         }
         public void Load(String room)
         {
             this.room = room;
-            Parsing parseIt = new Parsing(room);
+            Parsing2 parseIt = new Parsing2(room);
             statics = parseIt.getBlocks();
             movers = parseIt.getMovers();
             movers.Add(link);
@@ -100,18 +110,26 @@ namespace LegendOfZelda
         {
 
             cont.RegisterCommand(Keys.D0, new CommQuit(game));
-            cont.RegisterCommand(Keys.W, new CommLinkMove(link, new Vector2(0, -1)));
-            cont.RegisterCommand(Keys.S, new CommLinkMove(link, new Vector2(0, 1)));
-            cont.RegisterCommand(Keys.A, new CommLinkMove(link, new Vector2(-1, 0)));
-            cont.RegisterCommand(Keys.D, new CommLinkMove(link, new Vector2(1, 0)));
+            cont.RegisterCommand(Keys.W, new CommLinkMove(game,link, new Vector2(0, -1)));
+            cont.RegisterCommand(Keys.S, new CommLinkMove(game, link, new Vector2(0, 1)));
+            cont.RegisterCommand(Keys.A, new CommLinkMove(game, link, new Vector2(-1, 0)));
+            cont.RegisterCommand(Keys.D, new CommLinkMove(game, link, new Vector2(1, 0)));
             cont.RegisterCommand(Keys.E, new CommLinkDamaged(link));
-            cont.RegisterCommand(Keys.D1, new LinkAttack1());
-            cont.RegisterCommand(Keys.D2, new LinkAttack2());
+            cont.RegisterCommand(Keys.D1, new LinkAttack1(game));
+            cont.RegisterCommand(Keys.D2, new LinkAttack2(game));
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
-            cont.RegisterCommand(Keys.R, new CommReset(game));
-            cont.RegisterCommand(Keys.Enter, new CommChangeRoom());
+            cont.RegisterCommand(Keys.R, new CommReset(game, link));
+           
 
+          
 
+            //For menu and pause
+            cont.RegisterCommand(Keys.P, new CommPause(game));
+            cont.RegisterCommand(Keys.Enter, new CommStart(game));
+            cont.RegisterCommand(Keys.N, new CommMode(game));
+            cont.RegisterCommand(Keys.M, new CommTex(game));
+
+            
             cont.registerHeldDown(Keys.A, new CommMoveHeldDown(link, new Vector2(-1, 0)));
             cont.registerHeldDown(Keys.D, new CommMoveHeldDown(link, new Vector2(1, 0)));
             cont.registerHeldDown(Keys.W, new CommMoveHeldDown(link, new Vector2(0, -1)));
@@ -145,6 +163,16 @@ namespace LegendOfZelda
         public Room getCurrentRoom()
         {
             return currRoom;
+        }
+
+        //for reset
+        public void Reset()
+        {
+            statics.Clear();
+            movers.Clear();
+            roomMapping.Clear();
+            currRoom = null;
+            room = null;
         }
     }
 }

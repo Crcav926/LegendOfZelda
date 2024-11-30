@@ -26,9 +26,18 @@ namespace LegendOfZelda.Sounds
             soundDictionary[name] = effect;
         }
 
-        public SoundEffectInstance GetSound(String name)
+        public void PlaySound(String name)
         {
-            return soundDictionary[name];
+            soundDictionary[name].Play();
+        }
+
+        public void StopSound(String name)
+        {
+            soundDictionary[name].Stop();
+        }
+        public void clearSounds()
+        {
+            soundDictionary.Clear();
         }
     }
 }

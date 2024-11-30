@@ -57,6 +57,8 @@ namespace LegendOfZelda.Collision
 
             if (collisionDictionary.TryGetValue(key, out Type commandType))
             {
+                String o1Type = o1.getCollisionType();
+                String o2Type = o2.getCollisionType();
                 // Reflection to instantiate the command and invoke its Execute method
                 MethodInfo executeMethod = commandType.GetMethod("Execute");
                 if (executeMethod != null)
@@ -66,17 +68,17 @@ namespace LegendOfZelda.Collision
                     // we need to be able to pass in the correct object for the command we're trying to make...
                     // this is less messy but is a lot of decision making code need to ask if there's a way to 
                     //make it so that order doesn't matter?
-                    if (o1 is Link)
+                    if (o1Type == "Player")
                     {
-                        if (o2 is Door || o2 is ClassItems || (o2 is Block) || o2 is PushableBlock)
+                        if (o2Type == "Door" || o2Type == "statItem" || (o2Type == "Obstacle") || o2Type == "Pushable")
                         {
                             //convoluted way of seeing if its pushable block
-                            if (o2.getCollisionType() == "Obstacle")
+                            if (o2Type == "Obstacle")
                             {
                                     //if we can't push it treat as normal block
                                     commandInstance = Activator.CreateInstance(commandType, o1);
                             }
-                            else if (o2.getCollisionType() == "Pushable")
+                            else if (o2Type == "Pushable")
                             {
                                 //HAS TO BE o2 IN THE SECOND SLOT; The command doesn't care about link, only the block.
                                 commandInstance = Activator.CreateInstance(commandType, o2);
@@ -89,17 +91,17 @@ namespace LegendOfZelda.Collision
                         }
                         else //Link and enemy link only passed in, Link and wall link only passed in
                         {
-                        normBlock:
+                            //normBlock:
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
                     } else if (o1 is IEnemy)
                     {
                         //enemy and item pass in both
-                        if (o2.getCollisionType() == "Item")
+                        if (o2Type == "Item")
                         {
                             ICollideable[] p = { o1, o2 };
                             commandInstance = Activator.CreateInstance(commandType, p);
-                        } else if (o2 is Link) //enemy and link pass in link
+                        } else if (o2Type == "Player") //enemy and link pass in link
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
@@ -107,9 +109,10 @@ namespace LegendOfZelda.Collision
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
 
-                    } else if (o1.getCollisionType() == "Projectile") {
+                    } else if (o1Type == "Projectile") {
                         //projectiles are movers
-                        if (o2.getCollisionType() == "Player")
+                        
+                        if (o2Type == "Player") 
                         {
                             commandInstance = Activator.CreateInstance(commandType, o2);
                         }
@@ -117,14 +120,14 @@ namespace LegendOfZelda.Collision
                         {
                             commandInstance = Activator.CreateInstance(commandType, o1);
                         }
-                    } else if (o1.getCollisionType() == "Item")
+                    } else if (o1Type == "Item")
                     {
                         //item
                         //item and wall pass in item
-                        if (o2.getCollisionType() == "Obstacle")
+                        if (o2Type == "Obstacle")
                         {
                             commandInstance = Activator.CreateInstance(commandType, o1);
-                        }else if (o2 is IEnemy) //if enemy pass in enemy then item
+                        }else if (o2Type == "Enemy" || o2Type == "Door") //if enemy pass in enemy then item
                         {
                             ICollideable[] p = { o2, o1 };
                             commandInstance = Activator.CreateInstance(commandType, p);
@@ -163,7 +166,7 @@ namespace LegendOfZelda.Collision
 
             Type[] enemyTypes = { typeof(Gohma), typeof(Dodongo), typeof(DarkNut),typeof(Aquamentus), typeof(BladeTrap), typeof(Gel), typeof(Goriya), typeof(Keese), typeof(Stalfol), typeof(Wallmaster), typeof(Zol) };
             Type[] projectileTypes = { typeof(Projectile), typeof(Fireball) }; // add stafol's sword?
-            Type[] obstacleTypes = { typeof(Block), typeof(Wall) }; // add wall and door?
+            Type[] obstacleTypes = { typeof(Block), typeof(collideWall) }; // add wall and door?
 
             // new dictionary that is more compact but im also ignoring items
             RegisterCollision("Player", "Enemy", "left", typeof(PlayerTakeDamage));
@@ -228,11 +231,23 @@ namespace LegendOfZelda.Collision
             RegisterCollision("Projectile", "Player", "right", typeof(PlayerTakeDamage));
             RegisterCollision("Projectile", "Player", "top", typeof(PlayerTakeDamage));
             RegisterCollision("Projectile", "Player", "bottom", typeof(PlayerTakeDamage));
+            //this is the only way player - projectile collisions work.
+            //to remove this would be a massive undertaking - TJ
+            RegisterCollision("Player", "Projectile", "left", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Projectile", "right", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Projectile", "top", typeof(PlayerTakeDamage));
+            RegisterCollision("Player", "Projectile", "bottom", typeof(PlayerTakeDamage));
 
             RegisterCollision("Projectile", "Obstacle", "left", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "right", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "top", typeof(ProjectileObstacle));
             RegisterCollision("Projectile", "Obstacle", "bottom", typeof(ProjectileObstacle));
+
+            //for the bomb hitting door
+            RegisterCollision("Item", "Door", "left", typeof(ItemDoor));
+            RegisterCollision("Item", "Door", "right", typeof(ItemDoor));
+            RegisterCollision("Item", "Door", "top", typeof(ItemDoor));
+            RegisterCollision("Item", "Door", "bottom", typeof(ItemDoor));
 
         }
         private void RegisterCollision(string obj1, string obj2, string direction, Type command)

@@ -15,8 +15,6 @@ public class Wallmaster : IEnemy, ICollideable
 
 {
     private Vector2 targetPosition;  // Target position for the sprite to jump to
-    //private float jumpSpeed = 80f;   // Speed of the jump
-    //private float jumpCooldown = 1f; // Cooldown time in seconds between jumps
     private float jumpTimer = 0f;    // Timer to track the time since the last jump
     private Random random = new Random();
     public Vector2 position { get; set; }
@@ -24,7 +22,6 @@ public class Wallmaster : IEnemy, ICollideable
     private ISprite sprite;
     private Boolean alive;
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = 1.5;
     private double timeElapsed = 0;
@@ -43,14 +40,9 @@ public class Wallmaster : IEnemy, ICollideable
         alive = true;
 
         hp = 3;
-        swordDamage = new Dictionary<string, int>
-        {
-            { "WOOD", 1 },
-            { "WHITE", 2 },
-            { "MAGIC", 3 }
-        };
-        canTakeDamage = true;
 
+        canTakeDamage = true;
+        //see Gel.cs - TJ
         if (hasKey == null)
         {
             keyStatus = false;
@@ -150,7 +142,7 @@ public class Wallmaster : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
-            SoundMachine.Instance.GetSound("enemyHurt").Play();
+            SoundMachine.Instance.PlaySound("enemyHurt");
             damageAnimation.StartDamageEffect();
 
             if (hp <= 0)
@@ -178,7 +170,7 @@ public class Wallmaster : IEnemy, ICollideable
             else
             {
                 Debug.WriteLine("DropItem called: Item drop initialized");
-                //for now I'm using Rupees to test drops
+                //The single letter indicates which DropTable GetItemName will get an item name from.
                 String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                 droppedItem = new ClassItems(position, ItemTobeDroped);
                 HasDroppedItem = true;

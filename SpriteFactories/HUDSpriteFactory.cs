@@ -106,8 +106,45 @@ namespace LegendOfZelda
             {
                 new Rectangle(584, 1, 64, 40)
             }
+        },{ "LegendOfZelda.Boomerang", new List<Rectangle>()
+            {
+                new Rectangle(584, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Sword", new List<Rectangle>()
+            {
+                new Rectangle(555, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Fire", new List<Rectangle>()
+            {
+                new Rectangle(653, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Bomb", new List<Rectangle>()
+            {
+                new Rectangle(604, 137, 8, 16)
+            }
+        },{ "LegendOfZelda.Arrow", new List<Rectangle>()
+            {
+                new Rectangle(633, 137, 8, 16)
+            }
+        },{ "MapBlock", new List<Rectangle>()
+            {
+                new Rectangle(663, 108, 7, 3)
         }
-    };
+        },{ "PauseInventory", new List<Rectangle>()
+            {
+                new Rectangle(1, 11, 256, 88)
+            }
+        },{ "Dot", new List<Rectangle>()
+            {
+                new Rectangle(528, 126, 3, 3)
+        }
+            
+        },{ "RedBorder", new List<Rectangle>()
+            {
+                new Rectangle(519,137,16,16)
+            }
+        }
+        };
 
 
         public ISprite CreateHUD()
@@ -200,6 +237,33 @@ namespace LegendOfZelda
         {
             return new Sprite(HUDSpriteSheet, SpriteFrames["Level"]);
 
+        }
+
+        public ISprite CreateHUDWeaponSprite(String weaponName)
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames[weaponName]);
+
+        }
+        public ISprite CreateHUDMapBlock()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["MapBlock"]);
+
+        }
+        public ISprite CreatePauseInventory()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["PauseInventory"]);
+
+        }
+
+        public ISprite CreateDot()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["Dot"]);
+
+        }
+
+        public ISprite CreateSelectionBorder()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["RedBorder"]);
         }
 
     }

@@ -47,6 +47,7 @@ public class Keese : IEnemy, ICollideable
         alive = true;
         hp = 1;
         canTakeDamage = true;
+        //see Gel.cs about this - TJ
         if (hasKey == null)
         {
             keyStatus = false;
@@ -98,17 +99,6 @@ public class Keese : IEnemy, ICollideable
             canTakeDamage = true;
             timeElapsed = 0;
         }
-
-        // Check for collisions with screen edges and reflect velocity
-        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
-        {
-            velocity.X *= -1; // Reverse X direction
-        }
-
-        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
-        {
-            velocity.Y *= -1; // Reverse Y direction
-        }
         sprite.Update(gameTime);
     }
 
@@ -143,7 +133,7 @@ public class Keese : IEnemy, ICollideable
     {
         hp -= damage;
       
-        SoundMachine.Instance.GetSound("enemyHurt").Play();
+        SoundMachine.Instance.PlaySound("enemyHurt");
 
         if (hp <= 0)
         {
@@ -175,7 +165,7 @@ public class Keese : IEnemy, ICollideable
                 }
                 else
                 {
-                    //for now I'm using Rupees to test drops
+                    //The single letter indicates which DropTable GetItemName will get an item name from.
                     String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('C');
                     droppedItem = new ClassItems(position, ItemTobeDroped);
                     HasDroppedItem = true;

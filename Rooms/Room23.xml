@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--This room has blocks making the floor look like a pyramid.-->
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>WallSprite</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 24 Blocks; Might replace the last 2 blocks with statues just because.-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>150 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>200 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>250 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>300 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>450 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>500 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>550 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>650 88</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>100 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>150 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>200 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>250 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>500 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>550 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>650 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>100 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>150 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>650 176</Location>
+</Item>
+<!--these are the blocks i might make statues-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>200 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>550 308</Location>
+</Item>
+<!--ICollideable Types: 3 DarkNuts-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>DarkNut</ObjectName>
+    <Location>300 132</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>DarkNut</ObjectName>
+    <Location>450 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>DarkNut</ObjectName>
+    <Location>300 308</Location>
+</Item>
+</root>

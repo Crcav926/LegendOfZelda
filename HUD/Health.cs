@@ -1,4 +1,3 @@
-using LegendOfZelda.LinkItems;
 using LegendOfZelda.LinkMovement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,9 +11,6 @@ namespace LegendOfZelda.HUD
 {
     public class Health
     {
-
-        ISprite HUDSprite;
-
         private Inventory inven;
         private HUDSpriteFactory hudSF;
         private Dictionary<char, ISprite> HUDHPSprites;
@@ -64,10 +60,10 @@ namespace LegendOfZelda.HUD
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, int pausedOffset)
         {
             hpHUDPosX = Constants.hpHUDPosX;
-            hpHUDPosY = Constants.hpHUDPosY;
+            hpHUDPosY = Constants.hpHUDPosY + pausedOffset;
 
             for (int i = 0; i < fullHPIconCount; i++)
             {

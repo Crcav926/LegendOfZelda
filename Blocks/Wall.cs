@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace LegendOfZelda
 {
-    internal class Wall: ICollideable
+    internal class collideWall: ICollideable
     {
         Rectangle theWall;
-        public Wall(Rectangle size)
+        public collideWall(Rectangle size)
         {
             theWall = size;
         }

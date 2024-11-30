@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Diagnostics;
+using LegendOfZelda.Sounds;
 
 namespace LegendOfZelda.LinkMovement
 {
@@ -18,6 +19,8 @@ namespace LegendOfZelda.LinkMovement
         {
             this.link = link;
             this.link.linkSprite = link.spriteFactory.CreateLinkDeathSprite();
+            SoundMachine.Instance.PlaySound("death");
+            link.deathFlag = true;
         }
         //not sure if these need implemented since there's no coming back from this state
         //unless we add revives or something idk
@@ -39,7 +42,8 @@ namespace LegendOfZelda.LinkMovement
         public void Death()
         {
             //we'll figure something out
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -78,7 +82,10 @@ namespace LegendOfZelda.LinkMovement
         {
             //link.linkState = new LinkDamagedState(link);
         }
-
+        public void Pickup()
+        {
+            link.linkState = new LinkPickUpState(link);
+        }
         public void Update(GameTime gameTime)
         {
             link.linkSprite.Update(gameTime);

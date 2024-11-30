@@ -2,7 +2,7 @@
 <root>
 	<item>
 		<OffsetX>0</OffsetX>
-		<OffsetY>2</OffsetY>
+		<OffsetY>-2</OffsetY>
 	</item>
 <Item>
     <ObjectType>Floor</ObjectType>
@@ -10,7 +10,7 @@
     <Location>100 88</Location>
 </Item>
 <Item>
-    <ObjectType>Wall</ObjectType>
+    <ObjectType>WallSprite</ObjectType>
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
@@ -64,7 +64,8 @@
 <!--Door type will need to be changed-->
 <Item>
     <ObjectType>Door</ObjectType>
-    <ObjectName>UpDoorSecretBombableWall</ObjectName>
+	<Locked> true</Locked>
+    <ObjectName>UpDoorWall</ObjectName>
     <Location>350 0</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>350</LinkLocationY><Room>Room10.xml</Room>
 </Item>
 <Item>
@@ -80,6 +81,6 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorOpen</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room4.xml</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room4.xml</Room>
 </Item>
 </root>

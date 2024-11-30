@@ -11,16 +11,10 @@ namespace LegendOfZelda;
 public class Goriya : IEnemy, ICollideable
 {
     private Vector2 velocity;            // Velocity for movement
-    //moved to constants
-    //private float speed = 2f;          // Movement speed
     private Vector2 projectileOffset;    // Offset for throwing projectiles
     private List<Projectile> projectiles; // List to keep track of projectiles
     private Random random = new Random();
-    //moved to constants
-    //private float throwCooldown = 2f;    // Time between throws
     private float throwTimer = 0f;       // Timer to track when to throw a projectile
-    //moved to constants
-    //private float directionChangeCooldown = 2f;  // Time between direction changes
     private float directionChangeTimer = 0f;     // Timer to track when to change direction
     private ISprite sprite;
     public Vector2 position { get; set; }
@@ -28,14 +22,12 @@ public class Goriya : IEnemy, ICollideable
     private Boolean alive;
 
     private int hp;
-    private readonly Dictionary<string, int> swordDamage;
     public Boolean canTakeDamage { get; private set; }
     private double invincibilityTimer = .5;
     private double timeElapsed = 0;
 
     public bool HasDroppedItem { get; set; } = false;
     private ClassItems droppedItem;
-    private ClassItems droppedKey;
 
     private bool keyStatus;
     DamageAnimation damageAnimation;
@@ -45,27 +37,12 @@ public class Goriya : IEnemy, ICollideable
         this.sprite = EnemySpriteFactory.Instance.CreateUpGoriyaSprite();
         projectiles = new List<Projectile>();
         this.position = Position;
-        //destinationRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, 60, 60);
         alive = true;
         ChangeDirection();
-        swordDamage = new Dictionary<string, int>();
-        String type = "Red";
-        if (type == "Red")
-        {
-            swordDamage["WOOD"] = 1;
-            swordDamage["WHITE"] = 2;
-            swordDamage["MAGIC"] = 3;
-            hp = 3;
-        }
-        else if (type == "Blue")
-        {
-            swordDamage["WOOD"] = 1;
-            swordDamage["WHITE"] = 2;
-            swordDamage["MAGIC"] = 3;
-            hp = 5;
-        }
-        canTakeDamage = true;
 
+        hp = 3;
+        canTakeDamage = true;
+        //see my message in Gel.cs about this - TJ
         if (hasKey == null)
         {
             keyStatus = false;
@@ -146,30 +123,9 @@ public class Goriya : IEnemy, ICollideable
             timeElapsed = 0;
         }
 
-        // Update and remove inactive projectiles
-        projectiles.RemoveAll(p => !p.IsActive);
-
-        foreach (Projectile projectile in projectiles)
-        {
-            projectile.Update(gameTime);
-        }
-
         sprite.Update(gameTime);
         // Move Goriya
         position += velocity;
-
-        // Check if Goriya hits the screen edges and reflect direction
-        //not sure if this should use original or screen width/height.
-        //Because of the walls, the goriyas will never hit the edge of the screen, so perhaps a better check is needed - TJ
-        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
-        {
-            velocity.X *= -1; // Reflect on the X axis
-        }
-
-        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
-        {
-            velocity.Y *= -1; // Reflect on the Y axis
-        }
         damageAnimation.Update(gameTime);
     }
 
@@ -183,7 +139,7 @@ public class Goriya : IEnemy, ICollideable
 
             // Create a new projectile at Goriya's position
             Vector2 projectileStartPosition = new Vector2(position.X + projectileOffset.X, position.Y + projectileOffset.Y);
-            projectiles.Add(new Projectile(projectileStartPosition, direction, EnemySpriteFactory.Instance.CreateGoriyaProjectileSprite()));
+            RoomObjectManager.Instance.addProjectile(new Projectile(projectileStartPosition, direction, EnemySpriteFactory.Instance.CreateGoriyaProjectileSprite()));
         }
     }
 
@@ -196,11 +152,6 @@ public class Goriya : IEnemy, ICollideable
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, Constants.GoriyaWidth, Constants.GoriyaHeight);
 
             sprite.Draw(s, destinationRectangle, color);
-            // Draw all the projectiles
-            foreach (Projectile projectile in projectiles)
-            {
-                projectile.Draw(s);
-            }
         }
 
         if (HasDroppedItem)
@@ -231,7 +182,7 @@ public class Goriya : IEnemy, ICollideable
         if (canTakeDamage)
         {
             hp -= damage;
-            SoundMachine.Instance.GetSound("enemyHurt").Play();
+            SoundMachine.Instance.PlaySound("enemyHurt");
             damageAnimation.StartDamageEffect();
             if (hp <= 0)
             {
@@ -268,7 +219,7 @@ public class Goriya : IEnemy, ICollideable
                 }
                 else
                 {
-                    //for now I'm using Rupees to test drops
+                    //The single letter indicates which DropTable GetItemName will get an item name from.
                     String ItemTobeDroped = RoomObjectManager.Instance.GetItemName('B');
                     droppedItem = new ClassItems(position, ItemTobeDroped);
                     HasDroppedItem = true;

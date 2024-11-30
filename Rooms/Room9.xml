@@ -2,19 +2,20 @@
 <root>
 	<item>
 		<OffsetX>-2</OffsetX>
-		<OffsetY>3</OffsetY>
+		<OffsetY>-3</OffsetY>
 	</item>
 <!--Note the different floor for this room-->
+
 <Item>
-    <ObjectType>Floor</ObjectType>
-    <ObjectName>FloorVoid</ObjectName>
-    <Location>100 88</Location>
-</Item>
-<Item>
-    <ObjectType>Wall</ObjectType>
+    <ObjectType>WallSprite</ObjectType>
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
+	<Item>
+		<ObjectType>ICollideable</ObjectType>
+		<ObjectName>Gel</ObjectName>
+		<Location>350 176</Location>
+	</Item>
 <!--Not sure how to code this just yet, but we need 2 fire, 1 old man, and some text.-->
 <!--Door type will need to be changed-->
 <Item>
@@ -35,6 +36,6 @@
 <Item>
     <ObjectType>Door</ObjectType>
     <ObjectName>DownDoorWall</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>closed</Room>
 </Item>
 </root>

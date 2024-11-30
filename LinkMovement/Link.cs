@@ -1,5 +1,4 @@
 ﻿using LegendOfZelda.HUD;
-using LegendOfZelda.LinkItems;
 using LegendOfZelda.LinkMovement;
 using LegendOfZelda.Sounds;
 using Microsoft.Xna.Framework;
@@ -8,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Reflection;
+using System.Threading;
 using System.Timers;
 
 namespace LegendOfZelda
@@ -44,6 +45,11 @@ namespace LegendOfZelda
         public Inventory inventory;
 
         private SoundMachine soundMachine = SoundMachine.Instance;
+        private static double deathTimer;
+        public bool deathFlag = false;
+        private bool deathFlag2 = false;
+        private static double test;
+        public bool pause = false;
 
         private static Link instance = new Link();
 
@@ -63,7 +69,8 @@ namespace LegendOfZelda
             direction = new Vector2(0, 1); // Fix magic num later - personally i think this is fine
             // Sets link to be Idle initially
             maxHealth = Constants.MikuStartingHealth;
-            currentHealth = Constants.MikuStartingHealth;
+            //currentHealth = Constants.MikuStartingHealth;
+            currentHealth = 2;
             linkSprite = spriteFactory.CreateLinkStillSprite(direction);
             linkState = new LinkIdleState(this);
             damageAnimation = new DamageAnimation();
@@ -76,10 +83,11 @@ namespace LegendOfZelda
             bomb = new Bomb(direction, position);
 
             //temporary access to all items
+            
+            //wainventory.addItem(sword); // Don't really need this as Link should permanently have a sword in slot 2.
             inventory.addItem(boomerang);
             inventory.addItem(arrow);
             inventory.addItem(fire);
-            inventory.addItem(sword);
             inventory.addItem(bomb);
 
             
@@ -109,7 +117,7 @@ namespace LegendOfZelda
         {
             if (canTakeDamage)
             {
-                soundMachine.GetSound("hurt").Play();
+                soundMachine.PlaySound("hurt");
                 linkState.TakeDamage();
                 currentHealth -= 2;
             }
@@ -117,33 +125,39 @@ namespace LegendOfZelda
             if (currentHealth <= 0)
             {
                 linkState.Death();
+                //test1 = true;
             }
         }
 
         public void BoomerangAttack()
         {
-            soundMachine.GetSound("ha").Play();
+            soundMachine.PlaySound("ha");
             linkState.BoomerangAttack();
         }
         public void SwordAttack() 
         {
-            soundMachine.GetSound("ha").Play();
+            soundMachine.PlaySound("ha");
             linkState.SwordAttack();
         }
         public void FireAttack() 
         {
-            soundMachine.GetSound("attack").Play();
+            soundMachine.PlaySound("attack");
             linkState.FireAttack();
         }
         public void ArrowAttack()
         {
-            soundMachine.GetSound("ha").Play();
+            soundMachine.PlaySound("ha");
             linkState.ArrowAttack();
         }
         public void BombAttack()
         {
-            soundMachine.GetSound("attack").Play();
+            soundMachine.PlaySound("attack");
             linkState.BombAttack();
+        }
+        public void Pickup()
+        {
+            linkState.Pickup();
+
         }
         public void Update(GameTime gameTime)
         {
@@ -159,36 +173,83 @@ namespace LegendOfZelda
             sword.Update(gameTime);
             bomb.Update(gameTime);
 
-
+            inventory.UpdateInventory();
 
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             if (timeElapsed > Constants.MikuInvincibilityTimer)
             {
                 canTakeDamage = true;
                 timeElapsed = 0;
+
+                // I'm ngl, this allows the pickup item animation to play and idk why.
+                if (pause== true)
+                {
+                    test = gameTime.ElapsedGameTime.TotalSeconds;
+                    pause= false;
+                }
+                if ((gameTime.ElapsedGameTime.TotalSeconds - test) > .25)
+                {
+
+                }
             }
-            if (currentHealth == 0)
+            if (currentHealth <= 0)
             {
                 // TODO: CHANGE LATER WHEN GAME OVER SCREEN CREATED
                 // This pair freezes her on death and has her play the animation
                 LevelLoader.Instance.Load("RoomDeath.xml");
-                currentHealth = 0;
+                //currentHealth = 0;
+            }
 
                 //this pair restarts you from room 1 on death
                 //LevelLoader.Instance.Load("Room1.xml");
                 //currentHealth = 10;
 
                 //always needed
-                RoomObjectManager.Instance.staticItems.Clear();
-
-            }
+                
+                if(deathFlag == true)
+                {
+                    deathTimer = gameTime.TotalGameTime.TotalSeconds;
+                    deathFlag = false;
+                    deathFlag2 = true;
+                    //maybe not the place we want this but it works
+                    soundMachine.StopSound("theme");
+                }
+                if((gameTime.TotalGameTime.TotalSeconds - deathTimer) > Constants.MikuDeathTime && deathFlag2 == true)
+                {
+                    //not sure if this deathFlag2 is needed, but i'm keeping it until it works.
+                    deathFlag2 = false;
+                    currentHealth = Constants.MikuStartingHealth;         
+                    ResetWatchdog.Instance.resetCheck = true;
+                }
         }
+        public void Reset()
+        {
+            currentHealth = Constants.MikuStartingHealth;
+            position = new Vector2(Constants.MikuStartingPositionX, Constants.MikuStartingPositionY);
+            direction = new Vector2(0, 1); // Adjust if needed
+            linkSprite = spriteFactory.CreateLinkStillSprite(direction);
+            linkState = new LinkIdleState(this);
+            damageAnimation = new DamageAnimation();
+            timeElapsed = 0;
+            canTakeDamage = true;
+
+            inventory.Clear();
+            inventory.key2Item = sword;
+            //inventory.addItem(bomb);
+        }
+
         public void invulnerable()
         {
             if (canTakeDamage)
             {
                 canTakeDamage = false;
             }
+        }
+        public void win()
+        {
+            //this might actually work and would be really funny
+            deathFlag = true;
+            Globals.winMode = 1;
         }
         public Rectangle getHitbox()
         {

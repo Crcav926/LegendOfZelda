@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using ObjectManagementExamples;
 using System.Collections.Generic;
 using System;
+using System.ComponentModel.Design;
 
 namespace LegendOfZelda
 {
@@ -12,9 +13,6 @@ namespace LegendOfZelda
     {
         public static Dictionary<String, List<Rectangle>> frames = new Dictionary<String, List<Rectangle>>()
             {
-            {
-            "Floor", new List<Rectangle> { new Rectangle(984, 11, 16, 16) }
-            },
             {
             "Block", new List<Rectangle>{ new Rectangle(1001, 11, 16, 16) }
             },
@@ -108,6 +106,15 @@ namespace LegendOfZelda
             {
             "DownDoorSecretBombableWall", new List<Rectangle>{ new Rectangle(947, 110, 32, 32) }
             },
+            {
+            "Wall", new List<Rectangle>() { new Rectangle(521, 11, 256, 176) }
+            },
+            {
+            "Floor1", new List<Rectangle>() { new Rectangle(1, 192, 192, 112) }
+            },
+            {
+            "ItemRoom", new List<Rectangle>() { new Rectangle(421, 1009, 256, 160) }
+            }
 
 
         };
@@ -130,7 +137,14 @@ namespace LegendOfZelda
 
         public void LoadAllTextures(ContentManager content)
         {
-            texture = content.Load<Texture2D>("ZeldaTileSheet");
+            if (Globals.tex == 0)
+            {
+                texture = content.Load<Texture2D>("ZeldaTileSheet");
+            }
+            else
+            {
+                texture = content.Load<Texture2D>("holidayTiles");
+            }
         }
 
         public ISprite CreateSprite(String type)

@@ -23,6 +23,7 @@ namespace LegendOfZelda
         private int vectorToInt;
         public bool exists { get; set; }
         // private ISprite itemSprite;
+        
 
         public Sword( Vector2 swordDirection, Vector2 linkPosition)
         {
@@ -50,7 +51,6 @@ namespace LegendOfZelda
         }
         public void Update(GameTime gameTime)
         {
-
             itemPosition = origin + offSet;
             swordSprite.Update(gameTime);
             destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.SwordWidth, Constants.SwordHeight);

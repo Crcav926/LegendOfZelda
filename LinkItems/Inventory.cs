@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LegendOfZelda.HUD;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -30,21 +31,64 @@ namespace LegendOfZelda
         public int numBombs;
         public IItems key1Item;
         public IItems key2Item;
+    
         public Inventory() 
         { 
             items = new List<IItems>();
             weapons= new List<IItems>();
             
-            numKeys = 0;
+            numKeys = 10;
             hasMap = false;
             coins= 0;
             numBombs = 0;
         }
+        public void UpdateInventory()
+        {
+            // Key 2 should always be sword. Sets his item to be a sword permanently.
+            key2Item = Link.Instance.sword;
+        }
+        public void swap()
+        {
+            switch (PausedHUD.Instance.weaponIndex)
+            {
+                case 0:
+                    key1Item = Link.Instance.boomerang;
+
+                    break;
+
+                case 1:
+                    key1Item = Link.Instance.bomb;
+
+                    break;
+
+                case 2:
+                    key1Item = Link.Instance.arrow;
+
+                    break;
+
+                case 3:
+                    key1Item = Link.Instance.fire;
+
+                    break;
+            }
+        }
         public void addItem(IItems item)
         {
             //add item to inventory
+            //All of the ground items are class items because of how the parser,xml, and collsion works.
             if (item is ClassItems)
             {
+                ClassItems temp = (ClassItems)item;
+                String itemName = temp.getItemType();
+                //these are currently the 2 weapons we can pick up.
+                if (itemName == "CreateBoomerangSprite")
+                {
+                    weapons.Add(Link.Instance.boomerang);
+                }
+                if (itemName == "Bow")
+                {
+                    weapons.Add(Link.Instance.arrow);
+                }
                 items.Add(item);
                 Debug.WriteLine("Added to static items list");
             }
@@ -54,15 +98,15 @@ namespace LegendOfZelda
                 {
                     key1Item = item;
                     weapons.Add(item);
-                    Debug.WriteLine("added to key1");
+                    //Debug.WriteLine("added to key1");
                 } else if (key2Item == null) {
                     key2Item = item;
                     weapons.Add(item);
-                    Debug.WriteLine("Added to key2");
+                    //Debug.WriteLine("Added to key2");
                 } else
                 {
                     weapons.Add(item);
-                    Debug.WriteLine("added to weapons list");
+                    //Debug.WriteLine("added to weapons list");
                 }
                 
             }
@@ -87,7 +131,7 @@ namespace LegendOfZelda
             IItems removedItem = item;
             if (weapons.Remove(item))
             {
-                Debug.WriteLine("Returned " + removedItem.ToString());
+                //Debug.WriteLine("Returned " + removedItem.ToString());
                 return removedItem;
             }
 
@@ -123,6 +167,19 @@ namespace LegendOfZelda
         public void addBomb()
         {
             numBombs++;
+        }
+
+        //for reset
+        public void Clear()
+        {
+            items.Clear();
+            weapons.Clear();
+            numKeys = 0;
+            hasMap = false;
+            coins = 0;
+            numBombs = 0;
+            key1Item = null;
+            key2Item = null;
         }
 
     }

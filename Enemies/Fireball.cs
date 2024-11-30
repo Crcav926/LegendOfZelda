@@ -11,7 +11,6 @@ public class Fireball : ICollideable, IProjectile
 {
     private Vector2 position;
     private Vector2 velocity;
-    private float speed = 150f;
     public bool IsActive { get; private set; } = true;  // Track whether the fireball is active
     //private float growthRate = 0.02f;
     //private float maxScale = 5.0f;
@@ -87,5 +86,6 @@ public class Fireball : ICollideable, IProjectile
     public void deleteSelf()
     {
         IsActive = false;
+        RoomObjectManager.Instance.removeProjectileFromMovers(this);
     }
 }

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--Basically a big U formed with blocks; the upper part of the U faces left.-->
+<Item>
+    <ObjectType>Floor</ObjectType>
+    <ObjectName>Floor1</ObjectName>
+    <Location>100 88</Location>
+</Item>
+<Item>
+    <ObjectType>WallSprite</ObjectType>
+    <ObjectName>Wall</ObjectName>
+    <Location>0 0</Location>
+</Item>
+<!--Object Types: 23 Blocks-->
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>150 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>200 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>250 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>300 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>350 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>400 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>450 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>500 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>550 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 132</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 176</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 220</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 264</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>150 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>200 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>250 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>300 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>350 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>400 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>450 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>500 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>550 308</Location>
+</Item>
+<Item>
+    <ObjectType>Block</ObjectType>
+    <ObjectName>Block</ObjectName>
+    <Location>600 308</Location>
+</Item>
+<!--ICollideable Types: 6 Gohmas.-->
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>500 88</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>100 176</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>100 220</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>250 264</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>550 352</Location>
+</Item>
+<Item>
+    <ObjectType>ICollideable</ObjectType>
+    <ObjectName>Gohma</ObjectName>
+    <Location>500 352</Location>
+</Item>
+</root>

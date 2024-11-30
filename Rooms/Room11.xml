@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+	<item>
+		<OffsetX>0</OffsetX>
+		<OffsetY>-4</OffsetY>
+	</item>
 <Item>
     <ObjectType>Floor</ObjectType>
     <ObjectName>Floor1</ObjectName>
     <Location>100 88</Location>
 </Item>
 <Item>
-    <ObjectType>Wall</ObjectType>
+    <ObjectType>WallSprite</ObjectType>
     <ObjectName>Wall</ObjectName>
     <Location>0 0</Location>
 </Item>
@@ -289,6 +293,6 @@
     <ObjectType>Door</ObjectType>
 	<Locked>false</Locked>
     <ObjectName>DownDoorOpen</ObjectName>
-    <Location>350 392</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room10.xml</Room>
+    <Location>350 396</Location><LinkLocationX>370</LinkLocationX><LinkLocationY>90</LinkLocationY><Room>Room10.xml</Room>
 </Item>
 </root>

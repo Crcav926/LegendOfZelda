@@ -32,24 +32,16 @@ namespace LegendOfZelda
             this.room = room;
             this.newPos = newPos;
 
-            //determines if the door is locked
-            if (locked == null)
-            {
-                lockedS = false;
-            }else if (locked)
-            {
-                lockedS = true;
-            }
-            else
-            {
-                lockedS = false;
-            }
+            //determines if the door is locked.
+            //Debug.WriteLine(doorType + " " + locked + " " + room);
+
+            lockedS = locked;
             //determines if the door can be unlocked by a key (for example doors that lock until all enemies are killed)
             unlockable = true;
         }
         public Rectangle getHitbox()
         {
-            return destinationRectangle;
+            return new Rectangle((int)position.X, (int)position.Y, Constants.DoorWidth-20, Constants.DoorHeight-20);
         }
         public void Update(GameTime gameTime) 
         {

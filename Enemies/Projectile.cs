@@ -5,7 +5,7 @@ using LegendOfZelda;
 using System;
 
 //This projectile is for Goriya
-public class Projectile : ICollideable
+public class Projectile : ICollideable, IProjectile
 {
     private Vector2 position;
     private Vector2 velocity;
@@ -70,6 +70,10 @@ public class Projectile : ICollideable
         return "Projectile";
     }
 
-
+    public void deleteSelf()
+    {
+        IsActive = false;
+        RoomObjectManager.Instance.removeProjectileFromMovers(this);
+    }
 
 }

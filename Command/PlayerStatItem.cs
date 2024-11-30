@@ -21,6 +21,7 @@ namespace LegendOfZelda.Command
         public void Execute()
         {
             //Debug.WriteLine($"Miku picked up {item.getItemType()} ");
+            _link.Pickup();
             String itemType = item.getItemType();
             //add the item to link's inventory and delete it off the screen
             if (itemType == "Key")
@@ -31,7 +32,7 @@ namespace LegendOfZelda.Command
             {
                 _link.inventory.setMap(true);
             }
-            if (itemType == "OrangeRupee" || itemType == "BlueRupee" )
+            if (itemType == "OrangeRupee" || itemType == "BlueRupee")
             {
                 _link.inventory.addCoins(1);
             }
@@ -39,26 +40,35 @@ namespace LegendOfZelda.Command
             {
                 _link.inventory.addBomb();
             }
+            if (itemType == "Triforce")
+            {
+                _link.win();
+            }
             if (itemType == "HeartRed")
             {
-                Debug.WriteLine($"Health was {_link.currentHealth}");
-                if(!(_link.currentHealth == _link.maxHealth))
+               Debug.WriteLine($"Health was {_link.currentHealth}");
+               if (!(_link.currentHealth == _link.maxHealth))
+               {
+                  _link.currentHealth += 2;
+               }
+                  Debug.WriteLine($"Health now is {_link.currentHealth}");
+            }
+                if (itemType == "Fairy")
                 {
-                    _link.currentHealth += 2 ;
+                    _link.currentHealth = _link.maxHealth;
                 }
-                Debug.WriteLine($"Health now is {_link.currentHealth}");
-            }
-            if (itemType == "Fairy")
-            {
-                _link.currentHealth = _link.maxHealth;
-            }
+
             //I'm still adding the keys to the inventory because they should probably show up in the HUD?
             //Debug.WriteLine($"Added {item.getItemType()} to inventory");
-            _link.inventory.addItem(item);
+            if (itemType != "Triforce")
+            {
+                _link.inventory.addItem(item);
+            }
 
-            //doing both to be safe
-            item.makeContact();
-            RoomObjectManager.Instance.staticItems.Remove(item);
+                //doing both to be safe
+                item.makeContact();
+                RoomObjectManager.Instance.staticItems.Remove(item);
+            
         }
     }
 }

@@ -48,7 +48,7 @@ namespace LegendOfZelda
         public static Dictionary<(string, int), string> DropkeyDictionary = new Dictionary<(string, int), string>()
         {
             //ALL THE NUMBER OF DEATHS IS 1 LESS TO WORK AND IDK WHY LMAO BUT IT WORKS
-            {("Room2.xml", 2), "Key"},
+            {("Room1.xml", 2), "Key"},
             //{(3, 5), "Key"},
             {("Room5.xml", 4), "Key"},
             //{(11, 2), "Key"},
@@ -68,7 +68,7 @@ namespace LegendOfZelda
             }
             else
             {
-                Debug.WriteLine($"Death Counter not reached yet count: {RoomObjectManager.Instance.Localcounter}");
+                //Debug.WriteLine($"Death Counter not reached yet count: {RoomObjectManager.Instance.Localcounter}");
                 return null;
             }
         }
