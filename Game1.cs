@@ -137,7 +137,7 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
 
             hudManager = new HUDManager(this);
-            pausedHUD = new PausedHUD();
+            pausedHUD = PausedHUD.Instance;
             ganon = new Ganon(new Vector2(200,200));    
         }
 
@@ -200,9 +200,6 @@ namespace LegendOfZelda
         {
             GraphicsDevice.Clear(Color.Black);
 
-            //move the pause rectangle here so it doesn't break game.
-            blackRectangle = new Texture2D(GraphicsDevice, 1, 1);
-            blackRectangle.SetData(new[] { Color.Black });
             // TODO: Add your drawing code here
             // Temp fps check.
             double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
@@ -245,17 +242,14 @@ namespace LegendOfZelda
             if (paused)
             {
                 //THIS IS THE MOST JANK PAUSE EVER BUT IT DO WORK
-                Rectangle destinationRectangle = new Rectangle(-(int)Camera2D.Instance.getPosition().X, (int)Camera2D.Instance.getPosition().Y, 1000, 1000);
-                
+
+                pausedHUD.Draw(_spriteBatch);
                 if (!Globals.inMenus) //if the menu isn't up and it's paused.
                 {
                     //draw the pause screen
-                    _spriteBatch.Draw(blackRectangle, destinationRectangle, Color.White);
-                    _spriteBatch.DrawString(font, "PAUSED", new Vector2(360, 200), Color.White);
                     pausedHUD.Draw(_spriteBatch);
-                }
-                else
-                {
+                } else {
+                
                     //otherwise we are paused becaus we're in menus
                     menu.Draw(_spriteBatch);
                 }
@@ -288,10 +282,6 @@ namespace LegendOfZelda
         public void setPause(bool pauseState)
         {
             paused = pauseState;
-            if (pauseState == false)
-            {
-                blackRectangle.Dispose();
-            }
         }
         public void reloadTextures()
         {

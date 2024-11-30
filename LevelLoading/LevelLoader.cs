@@ -110,17 +110,17 @@ namespace LegendOfZelda
         {
 
             cont.RegisterCommand(Keys.D0, new CommQuit(game));
-            cont.RegisterCommand(Keys.W, new CommLinkMove(link, new Vector2(0, -1)));
-            cont.RegisterCommand(Keys.S, new CommLinkMove(link, new Vector2(0, 1)));
-            cont.RegisterCommand(Keys.A, new CommLinkMove(link, new Vector2(-1, 0)));
-            cont.RegisterCommand(Keys.D, new CommLinkMove(link, new Vector2(1, 0)));
+            cont.RegisterCommand(Keys.W, new CommLinkMove(game,link, new Vector2(0, -1)));
+            cont.RegisterCommand(Keys.S, new CommLinkMove(game, link, new Vector2(0, 1)));
+            cont.RegisterCommand(Keys.A, new CommLinkMove(game, link, new Vector2(-1, 0)));
+            cont.RegisterCommand(Keys.D, new CommLinkMove(game, link, new Vector2(1, 0)));
             cont.RegisterCommand(Keys.E, new CommLinkDamaged(link));
-            cont.RegisterCommand(Keys.D1, new LinkAttack1());
-            cont.RegisterCommand(Keys.D2, new LinkAttack2());
+            cont.RegisterCommand(Keys.D1, new LinkAttack1(game));
+            cont.RegisterCommand(Keys.D2, new LinkAttack2(game));
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
             cont.RegisterCommand(Keys.R, new CommReset(game, link));
            
-            cont.RegisterCommand(Keys.D3, new RotateItems());
+
           
 
             //For menu and pause

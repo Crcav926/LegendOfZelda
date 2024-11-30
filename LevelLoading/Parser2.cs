@@ -137,7 +137,7 @@ namespace LegendOfZelda
                     }
                     else if (con != null && objectType == "Door")
                     {
-                        Debug.WriteLine("populating");
+                        //Debug.WriteLine("populating");
                         // Populates list of non-moving collideable objects
                         blocks.Add((ICollideable)con.Invoke(new object[] { position, objectName, roomName, newPosition, lockedDoor }));
                     }

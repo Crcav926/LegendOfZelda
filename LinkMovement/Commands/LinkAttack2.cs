@@ -9,7 +9,7 @@ namespace LegendOfZelda.HUD
         Link link;
         Dictionary<string, Action> attackActions;
         Inventory inven;
-        public LinkAttack2()
+        public LinkAttack2(Game1 game)
         {
             inven = Inventory.Instance;
             link = Link.Instance;
@@ -28,7 +28,7 @@ namespace LegendOfZelda.HUD
             if (inven.key2Item != null)
             {
                 string key = inven.key2Item.ToString();
-                Debug.WriteLine("KEY 2 ITEM IS " + inven.key2Item);
+                //Debug.WriteLine("KEY 2 ITEM IS " + inven.key2Item);
 
 
                 if (attackActions.ContainsKey(key))
@@ -36,10 +36,6 @@ namespace LegendOfZelda.HUD
                     // Invokes the player attack based on key.
                     attackActions[key].Invoke();
                     attackActions[key].Invoke();
-                }
-                else
-                {
-                    Debug.WriteLine($"Attack '{key}' not found or inventory item is missing.");
                 }
 
             }

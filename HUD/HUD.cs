@@ -22,9 +22,11 @@ namespace LegendOfZelda.HUD
         private HUDSpriteFactory hudSF;
         int pausedOffset;
         private bool paused;
-        Game1 myGame;
+        private Game1 myGame;
+        private PausedHUD pausedHUD;
         public HUDManager(Game1 game)
         {
+            pausedHUD = PausedHUD.Instance;
             hudSF = HUDSpriteFactory.Instance;
             HUDSprite = hudSF.CreateHUD();
             invenCount = new InventoryCounter();
@@ -36,15 +38,15 @@ namespace LegendOfZelda.HUD
             // Use sprite data to draw on HUD
             myGame = game;
             key1Item = inven.key1Item;
-            key2Item = inven.key2Item;
+
             if (key1Item != null)
             {
+                //Debug.WriteLine(key1Item.ToString());
                 sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
             }
-            if (key2Item != null)
-            {
-                sprite2 = hudSF.CreateHUDWeaponSprite(key2Item.ToString());
-            }
+            
+                
+            
         }
 
 
@@ -56,17 +58,24 @@ namespace LegendOfZelda.HUD
             key1Item = inven.key1Item;
             key2Item = inven.key2Item;
             sprite2 = hudSF.CreateHUDWeaponSprite(key2Item.ToString());
-            if (sprite1 != null)
+            if (sprite1 != null && key1Item != null)
             {
                 sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
             }
             HUDSprite.Update(gameTime);
             hp.Update(gameTime);
             hudMap.Update(gameTime);
+            pausedHUD.Update(gameTime);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             // solid black blackground to avoid flickering peeking into another room.
+
+            if (paused)
+            {
+                pausedHUD.Draw(spriteBatch);
+            }
+
             HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.Black);
             HUDSprite.Draw(spriteBatch, new Rectangle(0, -Constants.HUDHeight + pausedOffset, Constants.OriginalWidth, Constants.OriginalHeight / 4), Color.White);
             invenCount.Draw(spriteBatch, pausedOffset);
@@ -74,7 +83,8 @@ namespace LegendOfZelda.HUD
             hudMap.Draw(spriteBatch, pausedOffset);
             if (sprite1 != null)
             {
-                sprite1.Draw(spriteBatch, new Rectangle(Constants.HUDSprite1X, Constants.HUDSprite1Y + pausedOffset , Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
+                sprite1 = hudSF.CreateHUDWeaponSprite(key1Item.ToString());
+                sprite1.Draw(spriteBatch, new Rectangle(Constants.HUDSprite1X, Constants.HUDSprite1Y + pausedOffset, Constants.HUDSpriteWidth, Constants.HUDSpriteHeight), Color.White);
             }
             if (sprite2 != null)
             {

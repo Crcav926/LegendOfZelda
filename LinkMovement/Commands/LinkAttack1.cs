@@ -9,8 +9,11 @@ namespace LegendOfZelda.HUD
         Link link;
         Dictionary<string, Action> attackActions;
         Inventory inven;
-        public LinkAttack1()
+        Game1 myGame;
+        PausedHUD pauseHUD;
+        public LinkAttack1(Game1 game)
         {
+            myGame = game;
             inven = Inventory.Instance;
             link = Link.Instance;
             attackActions = new Dictionary<string, Action>
@@ -23,30 +26,32 @@ namespace LegendOfZelda.HUD
         };
         }
 
-        
+
 
         public void Execute()
         {
             // HOTFIX - Call attack twice, one to change the state and one to throw the boomerang
             // Formerly would just change states than instantly change back
-
-            if (inven.key1Item != null)
+            if (!myGame.paused)
             {
-                string key = inven.key1Item.ToString();
-                Debug.WriteLine("KEY 1 ITEM IS " + inven.key1Item);
+                if (inven.key1Item != null)
+                {
+                    string key = inven.key1Item.ToString();
+                    //Debug.WriteLine("KEY 1 ITEM IS " + inven.key1Item);
 
 
-                if (attackActions.ContainsKey(key))
-                {
-                    // Invokes the player attack based on key.
-                    attackActions[key].Invoke();
-                    attackActions[key].Invoke();
+                    if (attackActions.ContainsKey(key))
+                    {
+                        // Invokes the player attack based on key.
+                        attackActions[key].Invoke();
+                        attackActions[key].Invoke();
+                    }
                 }
-                else
-                {
-                    Debug.WriteLine($"Attack '{key}' not found or inventory item is missing.");
-                }
+            } else
+            {
+                inven.swap();
             }
+
         }
     }
 }

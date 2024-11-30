@@ -111,7 +111,7 @@ namespace LegendOfZelda
             {
                 foreach (Keys key in pressedKeys)
                 {
-                    if (key == Keys.P)
+                    if (key == Keys.P || key == Keys.A || key == Keys.D || key == Keys.D1)
                     {
                         //and its transitioning and not being held
                         if (!alrPressed.Contains(key))

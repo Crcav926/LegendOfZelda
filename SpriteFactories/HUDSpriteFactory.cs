@@ -138,7 +138,12 @@ namespace LegendOfZelda
             {
                 new Rectangle(528, 126, 3, 3)
         }
+            
+        },{ "RedBorder", new List<Rectangle>()
+            {
+                new Rectangle(519,137,16,16)
             }
+        }
         };
 
 
@@ -254,6 +259,11 @@ namespace LegendOfZelda
         {
             return new Sprite(HUDSpriteSheet, SpriteFrames["Dot"]);
 
+        }
+
+        public ISprite CreateSelectionBorder()
+        {
+            return new Sprite(HUDSpriteSheet, SpriteFrames["RedBorder"]);
         }
 
     }
