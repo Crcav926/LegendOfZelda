@@ -46,7 +46,7 @@ namespace LegendOfZelda
         }
         public void Update(GameTime gameTime)
         {
-
+            
             timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
             bombSprite.Update(gameTime);
             explosionSprite.Update(gameTime);
@@ -75,13 +75,15 @@ namespace LegendOfZelda
         {
             if (exists)
             {
-                destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);
+                
                 if (!isLingering)
                 {
+                    destination = new Rectangle((int)itemPosition.X, (int)itemPosition.Y, Constants.MikuWidth, Constants.MikuHeight);
                     bombSprite.Draw(spriteBatch, destination, Color.White);
                 }
                 else
                 {
+                    destination = new Rectangle((int)(itemPosition.X - Constants.BombOffsetX / Constants.BombExplosionSize), (int)(itemPosition.Y - Constants.BombOffsetY / Constants.BombExplosionSize), Constants.MikuWidth *Constants.BombExplosionSize, Constants.MikuHeight* Constants.BombExplosionSize);
                     explosionSprite.Draw(spriteBatch, destination, Color.White);
                 }
                 

@@ -28,7 +28,7 @@ namespace LegendOfZelda
         public const int MikuMaxDamageCycles = 6;
         public const double MikuColorChangeInterval = 0.05;
         //HP HERE
-        public const int MikuStartingHealth = 5 * 4;
+        public const int MikuStartingHealth = 8 * 4;
         public const int PointsPerHP = 4;
         public const double MikuInvincibilityTimer = 2.5;
         public const int MikuStartingPositionX = 370;
@@ -172,6 +172,7 @@ namespace LegendOfZelda
         public const int ArrowSpeed = 3;
         public static readonly Vector2 ArrowMaxDistance = new Vector2(150, 150);
         // Bombs
+        public const int BombExplosionSize = 2; //Multiplier
         public const double BombStillTime = 2;
         public const double BombLingerTime = .5;
         public const float BombOffsetX = 50;

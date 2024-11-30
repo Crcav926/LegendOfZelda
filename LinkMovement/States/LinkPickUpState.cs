@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using System.Diagnostics;
 using LegendOfZelda.Sounds;
 using System.Threading;
+using System.ComponentModel;
 
 namespace LegendOfZelda.LinkMovement
 {

@@ -269,6 +269,10 @@ namespace LegendOfZelda
             movers = LevelLoader.Instance.getMovers();
             hudManager = new HUDManager(this);
             Link.Instance.Reset();
+            Link.Instance.inventory.addItem(Link.Instance.boomerang);
+            Link.Instance.inventory.addItem(Link.Instance.arrow);
+            Link.Instance.inventory.addItem(Link.Instance.fire);
+            Link.Instance.inventory.addItem(Link.Instance.bomb);
             Camera2D.Instance.Reset();
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
