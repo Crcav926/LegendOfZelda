@@ -14,8 +14,15 @@ Known bugs:
 Controls:
 
 Use WASD to move, 1 to use item 1, 2 to use item 2
+
 Use "p" key to pause and unpause
+
 Use "enter" key to start the game based on the given option in menu
+
 Use "m" key to scroll between Adventure mode and Roguelike mode
+
 Use "n" key to scroll between Regular sprites or Holiday sprites
+
 Press "q" key to quit game.
+
+Mega Doc for project: https://docs.google.com/document/d/1mwh6e7ZDjMvqw_jqallWTyMIIvhqjFJC3m3pPEGqAO4/edit?usp=sharing
