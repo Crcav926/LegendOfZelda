@@ -134,6 +134,8 @@ namespace LegendOfZelda
             cont.RegisterCommand(Keys.E, new CommLinkDamaged(link));
             cont.RegisterCommand(Keys.D1, new LinkAttack1(game));
             cont.RegisterCommand(Keys.D2, new LinkAttack2(game));
+            cont.RegisterCommand(Keys.OemOpenBrackets, new LinkAttack1(game));
+            cont.RegisterCommand(Keys.OemCloseBrackets, new LinkAttack2(game));
             cont.RegisterCommand(Keys.Q, new CommQuit(game));
             cont.RegisterCommand(Keys.R, new CommReset(game, link));
            

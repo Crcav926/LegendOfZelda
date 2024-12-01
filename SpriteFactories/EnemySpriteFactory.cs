@@ -126,14 +126,14 @@ namespace LegendOfZelda
         {
             List<Rectangle> keeseFrames = new List<Rectangle>
         {
-            new Rectangle(298, 104, 49, 17),
-            new Rectangle(298, 122, 49, 17),
-            new Rectangle(348, 104, 49, 17),
-            new Rectangle(348, 122, 49, 17),
-            new Rectangle(398, 104, 49, 17),
-            new Rectangle(398, 122, 49, 17),
-            new Rectangle(448, 104, 49, 17),
-            new Rectangle(448, 122, 49, 17),
+            new Rectangle(298, 104, 48, 17),
+            //new Rectangle(298, 122, 49, 17),
+            new Rectangle(348, 104, 48, 17),
+            //new Rectangle(348, 122, 49, 17),
+            new Rectangle(398, 104, 48, 17),
+            //new Rectangle(398, 122, 49, 17),
+            new Rectangle(448, 104, 48, 17),
+            //new Rectangle(448, 122, 49, 17),
         };
             return new Sprite(bossSpriteSheet, keeseFrames);
         }
@@ -174,7 +174,7 @@ namespace LegendOfZelda
             List<Rectangle> downFrames = new List<Rectangle>
             {
                  new Rectangle(19, 90, 16, 16),
-                new Rectangle(19, 107, 16, 16),
+                 new Rectangle(19, 107, 16, 16),
             };
             return new Sprite(enemySpriteSheet, downFrames);
         }
