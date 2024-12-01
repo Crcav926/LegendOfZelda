@@ -174,7 +174,7 @@ namespace LegendOfZelda
         // Bombs
         public const int BombExplosionSize = 2; //Multiplier
         public const double BombStillTime = 2;
-        public const double BombLingerTime = .5;
+        public const double BombLingerTime = 1.5;
         public const float BombOffsetX = 50;
         public const float BombOffsetY = 50;
         public const double ExplosionFrameDuration = .5;

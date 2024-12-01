@@ -29,11 +29,11 @@ public class Projectile : ICollideable, IProjectile
         // Update position based on velocity
         position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         sprite.Update(gameTime);
-        // Mark as inactive if it goes off-screen
-        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
-        {
-            IsActive = false;
-        }
+        // Mark as inactive if it goes off-screen -> This doesn't work b/c of the camera. Also theoretically projectiles shouldn't be able to escape screen anyway.
+        //if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
+        //{
+           // IsActive = false;
+        //}
     }
 
     public void Draw(SpriteBatch spriteBatch)

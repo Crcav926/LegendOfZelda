@@ -41,12 +41,12 @@ public class Fireball : ICollideable, IProjectile
         //    IsActive = false;
         //}
 
-        // Mark fireball as inactive if it goes off-screen
+        // Mark fireball as inactive if it goes off-screen// Mark as inactive if it goes off-screen -> This doesn't work b/c of the camera. Also theoretically projectiles shouldn't be able to escape screen anyway.
         //NOTE: not sure if this should use original width/height or screen width/height. Testing needed. - TJ
-        if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
-        {
-            IsActive = false;
-        }
+        //if (position.X < 0 || position.X > Constants.OriginalWidth || position.Y < 0 || position.Y > Constants.OriginalHeight)
+        //{
+            //IsActive = false;
+        //}
     }
 
     public void Draw(SpriteBatch spriteBatch)
