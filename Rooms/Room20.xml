@@ -197,20 +197,20 @@
     <ObjectName>Water</ObjectName>
     <Location>600 308</Location>
 </Item>
-<!--ICollideable Types: 3 Dodongos-->
+<!--ICollideable Types: 3 DarkNuts-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Dodongo</ObjectName>
-    <Location>350 220</Location>
+    <ObjectName>DarkNut</ObjectName>
+    <Location>300 88</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Dodongo</ObjectName>
+    <ObjectName>DarkNut</ObjectName>
     <Location>450 220</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>Dodongo</ObjectName>
-    <Location>400 264</Location>
+    <ObjectName>DarkNut</ObjectName>
+    <Location>400 88</Location>
 </Item>
 </root>

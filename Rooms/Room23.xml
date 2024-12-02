@@ -133,20 +133,20 @@
     <ObjectName>Block</ObjectName>
     <Location>550 308</Location>
 </Item>
-<!--ICollideable Types: 3 DarkNuts-->
+<!--ICollideable Types: 3 Dodongos-->
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>DarkNut</ObjectName>
-    <Location>300 132</Location>
+    <ObjectName>Dodongo</ObjectName>
+    <Location>350 220</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>DarkNut</ObjectName>
+    <ObjectName>Dodongo</ObjectName>
     <Location>450 220</Location>
 </Item>
 <Item>
     <ObjectType>ICollideable</ObjectType>
-    <ObjectName>DarkNut</ObjectName>
-    <Location>300 308</Location>
+    <ObjectName>Dodongo</ObjectName>
+    <Location>400 264</Location>
 </Item>
 </root>
