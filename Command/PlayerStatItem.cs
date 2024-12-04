@@ -29,6 +29,7 @@ namespace LegendOfZelda.Command
             }
             if (itemType == "Map")
             {
+                Globals.hasMap = true;
                 _link.inventory.setMap(true);
             }
             if (itemType == "OrangeRupee" || itemType == "BlueRupee")

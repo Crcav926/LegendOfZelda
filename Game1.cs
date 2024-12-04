@@ -279,6 +279,7 @@ namespace LegendOfZelda
             Camera2D.Instance.Reset();
             collHandler = new CollisionHandler();
             collisionDetector = new detectionManager(collHandler);
+            Globals.hasMap = false;
             Initialize();
         }
 

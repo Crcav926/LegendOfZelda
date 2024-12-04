@@ -52,12 +52,13 @@ namespace LegendOfZelda.HUD
 
         public void Draw(SpriteBatch spriteBatch , int pausedOffset)
         {
-            
-            mapSprite.Draw(spriteBatch, new Rectangle(Constants.HUDMapX, Constants.HUDMapY + pausedOffset, Constants.HUDMapDimensionX, Constants.HUDMapDimensionY), Color.White);
-            levelCountSprite.Draw(spriteBatch, new Rectangle(Constants.HUDMapLevelX, Constants.HUDMapLevelY + pausedOffset, Constants.HUDMapLevelDimensionX, Constants.HUDMapLevelDimensionY), Color.White);
-            dot.Draw(spriteBatch, new Rectangle((int)miniMapPos.X, (int)miniMapPos.Y + pausedOffset, Constants.dotSize,Constants.dotSize), Color.White);
-            //room1Sprite.Draw(spriteBatch, new Rectangle(10, 10, 70, 30), Color.White);
-
+            if (Globals.hasMap)
+            {
+                mapSprite.Draw(spriteBatch, new Rectangle(Constants.HUDMapX, Constants.HUDMapY + pausedOffset, Constants.HUDMapDimensionX, Constants.HUDMapDimensionY), Color.White);
+                levelCountSprite.Draw(spriteBatch, new Rectangle(Constants.HUDMapLevelX, Constants.HUDMapLevelY + pausedOffset, Constants.HUDMapLevelDimensionX, Constants.HUDMapLevelDimensionY), Color.White);
+                dot.Draw(spriteBatch, new Rectangle((int)miniMapPos.X, (int)miniMapPos.Y + pausedOffset, Constants.dotSize, Constants.dotSize), Color.White);
+                //room1Sprite.Draw(spriteBatch, new Rectangle(10, 10, 70, 30), Color.White);
+            }
         }
     }
 }
