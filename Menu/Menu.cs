@@ -58,7 +58,7 @@ namespace LegendOfZelda
                 if(Globals.menuType == 0)
                 {
                     //draw the background
-                    Rectangle destinationRectangle = new Rectangle(0, 0, Constants.OriginalWidth, Constants.OriginalHeight);
+                    Rectangle destinationRectangle = new Rectangle(0, -200, Constants.OriginalWidth, Constants.OriginalHeight+200);
                     menuSprite.Draw(s, destinationRectangle, Color.White);
                     //draw the shading to show which one is selected
                     Rectangle drGameMode = new Rectangle(380, 100, 142, 32);

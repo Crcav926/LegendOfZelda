@@ -226,8 +226,6 @@ namespace LegendOfZelda
                 {
                     statItem.Draw(_spriteBatch);
                 }
-                
-                menu.Draw(_spriteBatch);
             }
 
             _spriteBatch.End();
@@ -255,6 +253,7 @@ namespace LegendOfZelda
                 }
 
             }
+            menu.Draw(_spriteBatch);
             _spriteBatch.End();
 
 
