@@ -296,6 +296,7 @@ namespace LegendOfZelda
 
         private void clearLoads()
         {
+            //
             // uh idk what else to clear so i need to ask.
             controllerK.clearCommands();
             LevelLoader.Instance.clearRooms();
