@@ -40,7 +40,7 @@ namespace LegendOfZelda
             numKeys = 10;
             hasMap = false;
             coins= 0;
-            numBombs = 0;
+            numBombs = 3;
         }
         public void UpdateInventory()
         {

@@ -146,19 +146,6 @@ public class Dodongo : IEnemy, ICollideable
         sprite.Update(gameTime);
         // Move Goriya
         position += velocity;
-
-        // Check if Goriya hits the screen edges and reflect direction
-        //not sure if this should use original or screen width/height.
-        //Because of the walls, the goriyas will never hit the edge of the screen, so perhaps a better check is needed - TJ
-        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
-        {
-            velocity.X *= -1; // Reflect on the X axis
-        }
-
-        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
-        {
-            velocity.Y *= -1; // Reflect on the Y axis
-        }
         damageAnimation.Update(gameTime);
     }
 

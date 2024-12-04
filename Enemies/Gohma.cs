@@ -100,17 +100,6 @@ public class Gohma : IEnemy, ICollideable
             canTakeDamage = true;
             timeElapsed = 0;
         }
-
-        // Check for collisions with screen edges and reflect velocity
-        if (position.X <= 0 || position.X >= Constants.OriginalWidth - destinationRectangle.Width)
-        {
-            velocity.X *= -1; // Reverse X direction
-        }
-
-        if (position.Y <= 0 || position.Y >= Constants.OriginalHeight - destinationRectangle.Height)
-        {
-            velocity.Y *= -1; // Reverse Y direction
-        }
         sprite.Update(gameTime);
     }
 
